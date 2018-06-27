@@ -99,7 +99,6 @@ public class Login extends AppCompatActivity {
                 // App code
                 Log.d("dfsdfsdfgsdg",loginResult.toString());
                 setFacebookData(loginResult);
-
             }
 
             @Override
