@@ -32,5 +32,6 @@ dependencies {
     compile 'com.adefruandta.spinningwheel:spinningwheel:0.1.0'
     implementation 'com.facebook.android:facebook-login:[4,5)'
     compile 'com.gelitenight.waveview:waveview:1.0.0'
+    compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1@aar'
 
 }

@@ -74,7 +74,7 @@ public class ViewAllKitty extends Fragment {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(false);
-        Util.showPgDialog(dialog);
+       // Util.showPgDialog(dialog);
 
 
 //        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
