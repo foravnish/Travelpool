@@ -89,8 +89,8 @@ public class Profile extends Fragment {
         waveView.setRotation(180);
         waveView.setShapeType(WaveView.ShapeType.SQUARE);
         waveView.setWaveColor(
-                Color.parseColor("#FFE0B2"),
-                Color.parseColor("#FFCC80"));
+                Color.parseColor("#FFF49B59"),
+                Color.parseColor("#FFF49B59"));
         WaveHelper mWaveHelper;
         mWaveHelper = new WaveHelper(waveView);
         mWaveHelper.start();

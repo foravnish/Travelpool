@@ -94,7 +94,7 @@
                 android:orientation="horizontal"
                 android:weightSum="2"
                 android:padding="12dp"
-                android:background="#fff6e5"
+                android:background="#ecd6c7"
                 android:layout_marginTop="10dp"
                 >
 
@@ -176,7 +176,7 @@
                 android:orientation="horizontal"
                 android:weightSum="2"
                 android:padding="12dp"
-                android:background="#fff6e5">
+                android:background="#ecd6c7">
 
 
                 <TextView
@@ -254,7 +254,7 @@
                 android:orientation="horizontal"
                 android:weightSum="2"
                 android:padding="12dp"
-                android:background="#fff6e5">
+                android:background="#ecd6c7">
 
 
                 <TextView
