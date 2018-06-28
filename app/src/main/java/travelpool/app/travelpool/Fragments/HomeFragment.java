@@ -152,30 +152,6 @@ public class HomeFragment extends Fragment {
                             viewPager2.setAdapter(mCustomPagerAdapter2);
                             indicator2.setViewPager(viewPager2);
                             mCustomPagerAdapter2.notifyDataSetChanged();
-                            //viewPager2.setPageTransformer(true, new RotateUpTransformer());
-                            //mCustomPagerAdapter2.addData(AllBaner);
-
-
-//                            final Handler handler = new Handler();
-//                            final Runnable Update = new Runnable() {
-//                                public void run() {
-//                                    if (currentPage == AllBaner.size()) {
-//                                        currentPage = 0;
-//                                    }
-//                                    viewPager2.setCurrentItem(currentPage++);
-//                                }
-//                            };
-//
-//                            timer = new Timer(); // This will create a new Thread
-//                            timer .schedule(new TimerTask() { // task to be scheduled
-//
-//                                @Override
-//                                public void run() {
-//                                    handler.post(Update);
-//                                }
-//                            }, DELAY_MS, PERIOD_MS);
-
-
 
 
 
