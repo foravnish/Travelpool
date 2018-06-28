@@ -3,36 +3,24 @@ package travelpool.app.travelpool.Fragments;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -40,17 +28,15 @@ import java.util.HashMap;
 import java.util.List;
 
 import travelpool.app.travelpool.R;
-import travelpool.app.travelpool.Utils.Api;
 import travelpool.app.travelpool.Utils.AppController;
-import travelpool.app.travelpool.Utils.Util;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyKitty extends Fragment {
+public class Transcation extends Fragment {
 
 
-    public MyKitty() {
+    public Transcation() {
         // Required empty public constructor
     }
     List<HashMap<String,String>> AllProducts ;
@@ -60,13 +46,14 @@ public class MyKitty extends Fragment {
     JSONObject jsonObject1;
     ImageView imageNoListing;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_my_kitty, container, false);
-        getActivity().setTitle("My Kitty");
+        View view= inflater.inflate(R.layout.fragment_transcation, container, false);
+
+        getActivity().setTitle("My Transactions");
+
         AllProducts = new ArrayList<>();
         expListView = (GridView) view.findViewById(R.id.lvExp);
         imageNoListing = (ImageView) view.findViewById(R.id.imageNoListing);
@@ -75,21 +62,17 @@ public class MyKitty extends Fragment {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(false);
-      //  Util.showPgDialog(dialog);
+        // Util.showPgDialog(dialog);
 
 
 //        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
 //                Api.searchCompany+"?keyword="+"4"+"&cityId=1", null, new Response.Listener<JSONObject>() {
-//
 //            @Override
 //            public void onResponse(JSONObject response) {
 //                Log.d("Respose123", response.toString());
 //
 //                Util.cancelPgDialog(dialog);
 //                try {
-//                    // Parsing json object response
-//                    // response will be a json object
-////                    String name = response.getString("name");
 //
 //                    if (response.getString("status").equalsIgnoreCase("success")){
 //
@@ -108,7 +91,6 @@ public class MyKitty extends Fragment {
 //                                Log.d("fdsgvfdh",jsonObject1.optString("ratingUser"));
 //                                Log.d("fdsgvfdh",jsonObject1.optString("rating"));
 //                            }
-//
 //
 //                            map=new HashMap();
 //                            map.put("id",jsonObject.optString("id"));
@@ -152,25 +134,6 @@ public class MyKitty extends Fragment {
 //                            AllProducts.add(map);
 //
 //
-////                            expListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-////                                @Override
-////                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-////
-////
-////                                    try {
-////                                        Intent intent=new Intent(getActivity(),ProfileAct.class);
-////                                        intent.putExtra("data",jsonArray.get(i).toString());
-////                                        startActivity(intent);
-////                                    } catch (JSONException e) {
-////                                        e.printStackTrace();
-////                                    }
-////
-////
-////
-////                                }
-////                            });
-//
-//
 //                        }
 //                    }
 //                    else{
@@ -197,7 +160,6 @@ public class MyKitty extends Fragment {
 //                VolleyLog.d("Respose", "Error: " + error.getMessage());
 //                Toast.makeText(getActivity(),
 //                        "Error! Please Connect to the internet", Toast.LENGTH_SHORT).show();
-//                // hide the progress dialog
 //                Util.cancelPgDialog(dialog);
 //
 //            }
@@ -207,10 +169,7 @@ public class MyKitty extends Fragment {
 //        jsonObjReq.setShouldCache(false);
 //        AppController.getInstance().addToRequestQueue(jsonObjReq);
 
-
-
         return view;
-
     }
 
     public class Viewholder{
@@ -220,10 +179,7 @@ public class MyKitty extends Fragment {
 
         NetworkImageView imgaeView;
         CardView cardView;
-        ImageView callNow1;
-        //  ShimmerTextView offersText;
-//        Shimmer shimmer;
-        ImageView img1,img2,img3,img4,img5;
+
 
         LinearLayout footer_layout;
 
@@ -237,9 +193,6 @@ public class MyKitty extends Fragment {
         Adapter() {
             inflater = (LayoutInflater) getActivity().getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-//            if (inflater == null) {
-//                throw new AssertionError("LayoutInflater not found.");
-//            }
         }
 
         @Override
@@ -261,28 +214,22 @@ public class MyKitty extends Fragment {
         public View getView(final int position, View convertView, ViewGroup parent) {
 
 
-            convertView=inflater.inflate(R.layout.list_my_kitty,parent,false);
+            convertView=inflater.inflate(R.layout.list_transcation,parent,false);
 
             final Viewholder viewholder=new Viewholder();
 
             viewholder.name=convertView.findViewById(R.id.name);
             viewholder.address=convertView.findViewById(R.id.address);
-            //viewholder.imgFav=convertView.findViewById(R.id.imgFav);
-//            viewholder.stars=convertView.findViewById(R.id.stars);
             viewholder.liner=convertView.findViewById(R.id.liner);
             viewholder.totlareview=convertView.findViewById(R.id.totlareview);
 
             viewholder.area=convertView.findViewById(R.id.area);
-//            viewholder.callNow1=convertView.findViewById(R.id.callNow1);
             viewholder.imgaeView=convertView.findViewById(R.id.imgaeView);
             viewholder.linerLayoutOffer=convertView.findViewById(R.id.linerLayoutOffer);
             viewholder.cardView=convertView.findViewById(R.id.cardView);
-            // viewholder.offersText=convertView.findViewById(R.id.offersText);
             viewholder.subcatListing=convertView.findViewById(R.id.subcatListing);
             viewholder.distance=convertView.findViewById(R.id.distance);
 
-
-//
 
             viewholder.name.setText(AllProducts.get(position).get("company_name"));
             viewholder.name.setText(AllProducts.get(position).get("company_name"));
@@ -295,7 +242,7 @@ public class MyKitty extends Fragment {
 
 
 
-//
+
 //            Typeface face=Typeface.createFromAsset(getActivity().getAssets(), "muli_semibold.ttf");
 //            Typeface face2=Typeface.createFromAsset(getActivity().getAssets(), "muli.ttf");
 //            viewholder.name.setTypeface(face);
@@ -304,11 +251,12 @@ public class MyKitty extends Fragment {
 //            viewholder.area.setTypeface(face2);
 //            viewholder.subcatListing.setTypeface(face2);
 //            viewholder.distance.setTypeface(face2);
-//
+
 
             return convertView;
         }
     }
+
 
 
 }

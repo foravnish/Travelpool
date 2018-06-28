@@ -89,6 +89,7 @@ public class HomeFragment extends Fragment {
         dialog.setCancelable(false);
           Util.showPgDialog(dialog);
 
+          getActivity().setTitle("Travel Pool");
         // Set listener for rotation event
         wheelView.setOnRotationListener(new SpinningWheelView.OnRotationListener<String>() {
             // Call once when start rotation

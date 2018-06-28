@@ -21,6 +21,8 @@ import android.widget.TextView;
 import travelpool.app.travelpool.Fragments.HomeFragment;
 import travelpool.app.travelpool.Fragments.MyKitty;
 import travelpool.app.travelpool.Fragments.Profile;
+import travelpool.app.travelpool.Fragments.TermsCondition;
+import travelpool.app.travelpool.Fragments.Transcation;
 import travelpool.app.travelpool.Fragments.ViewAllKitty;
 import travelpool.app.travelpool.R;
 import travelpool.app.travelpool.Utils.MyPrefrences;
@@ -125,6 +127,20 @@ public class HomeAct extends AppCompatActivity
             FragmentManager manager = getSupportFragmentManager();
             FragmentTransaction ft = manager.beginTransaction();
             ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+
+          } else if (id == R.id.nav_transcation) {
+
+                    Fragment fragment = new Transcation();
+                    FragmentManager manager = getSupportFragmentManager();
+                    FragmentTransaction ft = manager.beginTransaction();
+                    ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+
+          } else if (id == R.id.nav_tremCondition) {
+
+                    Fragment fragment = new TermsCondition();
+                    FragmentManager manager = getSupportFragmentManager();
+                    FragmentTransaction ft = manager.beginTransaction();
+                    ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 
 
         } else if (id == R.id.nav_logout) {
