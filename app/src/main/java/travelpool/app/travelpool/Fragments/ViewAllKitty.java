@@ -8,12 +8,15 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -58,7 +61,7 @@ public class ViewAllKitty extends Fragment {
     Dialog dialog;
     JSONObject jsonObject1;
     ImageView imageNoListing;
-
+    JSONArray jsonArray;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,112 +77,100 @@ public class ViewAllKitty extends Fragment {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(false);
-       // Util.showPgDialog(dialog);
+        Util.showPgDialog(dialog);
 
 
-//        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-//                Api.searchCompany+"?keyword="+"4"+"&cityId=1", null, new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                Log.d("Respose123", response.toString());
-//
-//                Util.cancelPgDialog(dialog);
-//                try {
-//
-//                    if (response.getString("status").equalsIgnoreCase("success")){
-//
-//                        expListView.setVisibility(View.VISIBLE);
-//                        imageNoListing.setVisibility(View.GONE);
-//
-//                        final JSONArray jsonArray=response.getJSONArray("message");
-//                        for (int i=0;i<jsonArray.length();i++){
-//                            JSONObject jsonObject=jsonArray.getJSONObject(i);
-//
-//                            JSONArray jsonArray1=jsonObject.getJSONArray("rating");
-//                            JSONArray jsonArray2=jsonObject.getJSONArray("payment_mode");
-//
-//                            for (int j=0;j<jsonArray1.length();j++){
-//                                jsonObject1=jsonArray1.getJSONObject(j);
-//                                Log.d("fdsgvfdh",jsonObject1.optString("ratingUser"));
-//                                Log.d("fdsgvfdh",jsonObject1.optString("rating"));
-//                            }
-//
-//                            map=new HashMap();
-//                            map.put("id",jsonObject.optString("id"));
-//                            map.put("cat_id",jsonObject.optString("cat_id"));
-//                            map.put("company_name",jsonObject.optString("company_name"));
-//                            map.put("address",jsonObject.optString("address"));
-//                            map.put("c1_fname",jsonObject.optString("c1_fname"));
-//                            map.put("c1_mname",jsonObject.optString("c1_mname"));
-//                            map.put("c1_lname",jsonObject.optString("c1_lname"));
-//                            map.put("c1_email",jsonObject.optString("c1_email"));
-//                            map.put("c1_mobile1",jsonObject.optString("c1_mobile1"));
-//                            map.put("c1_mobile2",jsonObject.optString("c1_mobile2"));
-//                            map.put("website",jsonObject.optString("website"));
-//                            map.put("totlauser",jsonObject1.optString("ratingUser"));
-//                            map.put("rating",jsonObject1.optString("rating"));
-//                            map.put("liking",jsonObject.optString("liking"));
-//                            map.put("locationName",jsonObject.optString("locationName"));
-//                            map.put("logo",jsonObject.optString("logo"));
-//                            map.put("companyLogo",jsonObject.optString("companyLogo"));
-//                            map.put("premium",jsonObject.optString("premium"));
-//                            map.put("offer",jsonObject.optString("offer"));
-//                            map.put("pincode",jsonObject.optString("pincode"));
-//                            map.put("distance",jsonObject.optString("distance"));
-//
-//                            map.put("latitude",jsonObject.optString("latitude"));
-//                            map.put("longitude",jsonObject.optString("longitude"));
-//
-//                            map.put("payment_mode",jsonObject.optString("payment_mode"));
-//                            map.put("closing_time",jsonObject.optString("closing_time"));
-//                            map.put("closing_time2",jsonObject.optString("closing_time2"));
-//                            map.put("opening_time",jsonObject.optString("opening_time"));
-//                            map.put("opening_time2",jsonObject.optString("opening_time2"));
-//                            map.put("min_order_amnt",jsonObject.optString("min_order_amnt"));
-//                            map.put("min_order_qty",jsonObject.optString("min_order_qty"));
-//                            map.put("closing_days",jsonObject.optString("closing_days"));
-//
-//
-//
-//                            Adapter adapter=new Adapter();
-//                            expListView.setAdapter(adapter);
-//                            AllProducts.add(map);
-//
-//
-//                        }
-//                    }
-//                    else{
-//                        expListView.setVisibility(View.GONE);
-//                        imageNoListing.setVisibility(View.VISIBLE);
-//                        //Toast.makeText(getActivity(), "No Record Found...", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(getActivity(),
-//                            "Error: " + e.getMessage(),
-//                            Toast.LENGTH_LONG).show();
-//                    Util.cancelPgDialog(dialog);
-//                }
-//
-//            }
-//        }, new Response.ErrorListener() {
-//
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                VolleyLog.d("Respose", "Error: " + error.getMessage());
-//                Toast.makeText(getActivity(),
-//                        "Error! Please Connect to the internet", Toast.LENGTH_SHORT).show();
-//                Util.cancelPgDialog(dialog);
-//
-//            }
-//        });
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                Api.ViewKitty, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("ResposeKitty", response.toString());
+
+                Util.cancelPgDialog(dialog);
+                try {
+
+                    if (response.getString("status").equalsIgnoreCase("success")){
+
+                        expListView.setVisibility(View.VISIBLE);
+                        imageNoListing.setVisibility(View.GONE);
+
+                        jsonArray=response.getJSONArray("data");
+                        for (int i=0;i<jsonArray.length();i++){
+                            JSONObject jsonObject=jsonArray.getJSONObject(i);
+
+                            map=new HashMap();
+                            map.put("id",jsonObject.optString("id"));
+                            map.put("package_id",jsonObject.optString("package_id"));
+                            map.put("name",jsonObject.optString("name"));
+                            map.put("no_of_month",jsonObject.optString("no_of_month"));
+                            map.put("per_month_installment",jsonObject.optString("per_month_installment"));
+                            map.put("no_of_max_members",jsonObject.optString("no_of_max_members"));
+                            map.put("term_and_cond",jsonObject.optString("term_and_cond"));
+                            map.put("lucky_draw_date",jsonObject.optString("lucky_draw_date"));
+                            map.put("payment_due_date",jsonObject.optString("payment_due_date"));
+                            map.put("penality_after_due_date",jsonObject.optString("penality_after_due_date"));
+                            map.put("package_name",jsonObject.optString("package_name"));
 
 
-//        jsonObjReq.setShouldCache(false);
-//        AppController.getInstance().addToRequestQueue(jsonObjReq);
+                            Adapter adapter=new Adapter();
+                            expListView.setAdapter(adapter);
+                            AllProducts.add(map);
+
+
+                        }
+                    }
+                    else{
+                        expListView.setVisibility(View.GONE);
+                        imageNoListing.setVisibility(View.VISIBLE);
+                        //Toast.makeText(getActivity(), "No Record Found...", Toast.LENGTH_SHORT).show();
+                    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(),
+                            "Error: " + e.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                    Util.cancelPgDialog(dialog);
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("Respose", "Error: " + error.getMessage());
+                Toast.makeText(getActivity(),
+                        "Error! Please Connect to the internet", Toast.LENGTH_SHORT).show();
+                Util.cancelPgDialog(dialog);
+
+            }
+        });
+
+
+        jsonObjReq.setShouldCache(false);
+        AppController.getInstance().addToRequestQueue(jsonObjReq);
+
+
+        expListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Fragment fragment = new ListingDetails();
+                Bundle bundle=new Bundle();
+                try {
+                    bundle.putString("data", String.valueOf(jsonArray.get(i)));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                bundle.putString("name", AllProducts.get(i).get("name"));
+                FragmentManager manager = getFragmentManager();
+                FragmentTransaction ft = manager.beginTransaction();
+                fragment.setArguments(bundle);
+                ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+            }
+        });
 
         return view;
 
@@ -187,15 +178,10 @@ public class ViewAllKitty extends Fragment {
 
     public class Viewholder{
         ImageView imgFav,stars;
-        TextView address,name,totlareview,area,subcatListing,distance;
+        TextView penality_after,payment_due_date,lucky_draw_date,term_and_cond,instal,member,months,packageName,name;
         LinearLayout liner,linerLayoutOffer;
 
         NetworkImageView imgaeView;
-        CardView cardView;
-
-
-        LinearLayout footer_layout;
-
     }
     class Adapter extends BaseAdapter {
 
@@ -227,31 +213,31 @@ public class ViewAllKitty extends Fragment {
         public View getView(final int position, View convertView, ViewGroup parent) {
 
 
-            convertView=inflater.inflate(R.layout.list_lsiting,parent,false);
+            convertView=inflater.inflate(R.layout.lsiting_all_kitty,parent,false);
 
             final Viewholder viewholder=new Viewholder();
 
             viewholder.name=convertView.findViewById(R.id.name);
-            viewholder.address=convertView.findViewById(R.id.address);
-            viewholder.liner=convertView.findViewById(R.id.liner);
-            viewholder.totlareview=convertView.findViewById(R.id.totlareview);
-
-            viewholder.area=convertView.findViewById(R.id.area);
-            viewholder.imgaeView=convertView.findViewById(R.id.imgaeView);
-            viewholder.linerLayoutOffer=convertView.findViewById(R.id.linerLayoutOffer);
-            viewholder.cardView=convertView.findViewById(R.id.cardView);
-            viewholder.subcatListing=convertView.findViewById(R.id.subcatListing);
-            viewholder.distance=convertView.findViewById(R.id.distance);
+            viewholder.packageName=convertView.findViewById(R.id.packageName);
+            viewholder.months=convertView.findViewById(R.id.months);
+            viewholder.member=convertView.findViewById(R.id.member);
+            viewholder.instal=convertView.findViewById(R.id.instal);
+            viewholder.term_and_cond=convertView.findViewById(R.id.term_and_cond);
+            viewholder.lucky_draw_date=convertView.findViewById(R.id.lucky_draw_date);
+            viewholder.payment_due_date=convertView.findViewById(R.id.payment_due_date);
+            viewholder.penality_after=convertView.findViewById(R.id.penality_after);
 
 
-            viewholder.name.setText(AllProducts.get(position).get("company_name"));
-            viewholder.name.setText(AllProducts.get(position).get("company_name"));
-            viewholder.address.setText(AllProducts.get(position).get("address"));
-            viewholder.totlareview.setText(AllProducts.get(position).get("totlauser")+" Reviews");
-            viewholder.area.setText(AllProducts.get(position).get("locationName"));
-            viewholder.subcatListing.setText(AllProducts.get(position).get("keywords"));
-            ImageLoader imageLoader = AppController.getInstance().getImageLoader();
-            viewholder.imgaeView.setImageUrl(AllProducts.get(position).get("logo"),imageLoader);
+            viewholder.name.setText(AllProducts.get(position).get("name"));
+            viewholder.packageName.setText(AllProducts.get(position).get("package_name"));
+            viewholder.months.setText(AllProducts.get(position).get("no_of_month")+" Months");
+            viewholder.member.setText(AllProducts.get(position).get("no_of_max_members")+" Members");
+            viewholder.instal.setText("₹ "+AllProducts.get(position).get("per_month_installment")+" Per Month");
+            viewholder.term_and_cond.setText(AllProducts.get(position).get("term_and_cond"));
+            viewholder.lucky_draw_date.setText("Lucky Draw Date: "+AllProducts.get(position).get("lucky_draw_date"));
+            viewholder.payment_due_date.setText("Payment Due Date : "+AllProducts.get(position).get("payment_due_date"));
+            viewholder.penality_after.setText("After due Date : "+AllProducts.get(position).get("penality_after_due_date"));
+
 
 
 
