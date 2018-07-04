@@ -116,8 +116,6 @@ public class ViewAllKitty extends Fragment {
                             Adapter adapter=new Adapter();
                             expListView.setAdapter(adapter);
                             AllProducts.add(map);
-
-
                         }
                     }
                     else{

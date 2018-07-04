@@ -47,7 +47,7 @@ import travelpool.app.travelpool.Utils.Util;
 public class Registration extends AppCompatActivity {
 
     Button btnSubReg;
-    EditText editTextname,editmobile,editPassword,editPasswordCon,editEmail,editAddress,editCity,editState,editPincode;
+    EditText editTextname,editmobile,editPassword,editPasswordCon,editEmail,editAddress,editCity,editState,editPincode,editapasport,editpanNo,aadharNo;
     TextView editTextdob,skipNow;
     //Spinner editLocation;
     Dialog dialog;
@@ -80,6 +80,10 @@ public class Registration extends AppCompatActivity {
         editCity=findViewById(R.id.editCity);
         editState=findViewById(R.id.editState);
         editPincode=findViewById(R.id.editPincode);
+
+        aadharNo=findViewById(R.id.aadharNo);
+        editpanNo=findViewById(R.id.editpanNo);
+        editapasport=findViewById(R.id.editapasport);
 
         dialog=new Dialog(Registration.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -371,6 +375,8 @@ public class Registration extends AppCompatActivity {
 //                String ip = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
 //                Log.d("dfgdfgdfhdhfd",ip);
 
+
+
                 Map<String, String>  params = new HashMap<String, String>();
                 params.put("name", editTextname.getText().toString());
                 params.put("email",editEmail.getText().toString());
@@ -380,6 +386,10 @@ public class Registration extends AppCompatActivity {
                 params.put("city",editCity.getText().toString());
                 params.put("state",editState.getText().toString());
                 params.put("pincode",editPincode.getText().toString());
+
+                params.put("aadharNo",aadharNo.getText().toString());
+                params.put("panNo",editpanNo.getText().toString());
+                params.put("passportNo",editapasport.getText().toString());
 
                 return params;
             }
@@ -410,6 +420,7 @@ public class Registration extends AppCompatActivity {
 
         else if (editmobile.getText().toString().length()!=10){
             editmobile.setError("Oops! Enter Valid Mobile No.");
+            editmobile.requestFocus();
             return false;
         }
 
@@ -448,6 +459,19 @@ public class Registration extends AppCompatActivity {
         {
             editPincode.setError("Oops! Pincode blank");
             editPincode.requestFocus();
+            return false;
+        }
+
+        else if (TextUtils.isEmpty(aadharNo.getText().toString()))
+        {
+            aadharNo.setError("Oops! Aadhar Card blank");
+            aadharNo.requestFocus();
+            return false;
+        }
+        else if (TextUtils.isEmpty(editpanNo.getText().toString()))
+        {
+            editpanNo.setError("Oops!Pan Card blank");
+            editpanNo.requestFocus();
             return false;
         }
 
