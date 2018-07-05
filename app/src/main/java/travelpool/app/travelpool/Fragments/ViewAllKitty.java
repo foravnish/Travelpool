@@ -80,7 +80,6 @@ public class ViewAllKitty extends Fragment {
         Util.showPgDialog(dialog);
 
 
-
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                 Api.ViewKitty, null, new Response.Listener<JSONObject>() {
             @Override
