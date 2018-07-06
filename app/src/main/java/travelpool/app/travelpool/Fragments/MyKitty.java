@@ -243,15 +243,46 @@ public class MyKitty extends Fragment {
                 Log.e("MyKitty", "Response: " + response);
                 //parse your response here
 
+//                try {
+//                    JSONObject jsonObject=new JSONObject(response);
+//                    if (jsonObject.getString("status").equalsIgnoreCase("success")){
+//
+//                        Toast.makeText(getApplicationContext(), ""+jsonObject.optString("msg") ,Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                    else{
+//                        Toast.makeText(getApplicationContext(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+
                 try {
                     JSONObject jsonObject=new JSONObject(response);
                     if (jsonObject.getString("status").equalsIgnoreCase("success")){
 
-                        Toast.makeText(getApplicationContext(), ""+jsonObject.optString("msg") ,Toast.LENGTH_SHORT).show();
+                        expListView.setVisibility(View.VISIBLE);
+                        imageNoListing.setVisibility(View.GONE);
 
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
+                        final JSONArray jsonArray=jsonObject.getJSONArray("data");
+                        for (int i=0;i<jsonArray.length();i++){
+                            JSONObject jsonObject1=jsonArray.getJSONObject(i);
+
+
+                            map=new HashMap();
+                            map.put("id",jsonObject1.optString("id"));
+                            map.put("kitty_id",jsonObject1.optString("kitty_id"));
+                            map.put("join_date",jsonObject1.optString("join_date"));
+
+                            Adapter adapter=new Adapter();
+                            expListView.setAdapter(adapter);
+                            AllProducts.add(map);
+
+
+//
+
+                        }
                     }
 
                 } catch (JSONException e) {
@@ -301,7 +332,7 @@ public class MyKitty extends Fragment {
 
     public class Viewholder{
         ImageView imgFav,stars;
-        TextView address,name,totlareview,area,subcatListing,distance;
+        TextView packageName,name,totlareview,area,subcatListing,distance;
         LinearLayout liner,linerLayoutOffer;
 
         NetworkImageView imgaeView;
@@ -352,34 +383,14 @@ public class MyKitty extends Fragment {
             final Viewholder viewholder=new Viewholder();
 
             viewholder.name=convertView.findViewById(R.id.name);
-            viewholder.address=convertView.findViewById(R.id.address);
-            //viewholder.imgFav=convertView.findViewById(R.id.imgFav);
-//            viewholder.stars=convertView.findViewById(R.id.stars);
-            viewholder.liner=convertView.findViewById(R.id.liner);
-            viewholder.totlareview=convertView.findViewById(R.id.totlareview);
+            viewholder.packageName=convertView.findViewById(R.id.packageName);
 
-            viewholder.area=convertView.findViewById(R.id.area);
-//            viewholder.callNow1=convertView.findViewById(R.id.callNow1);
-            viewholder.imgaeView=convertView.findViewById(R.id.imgaeView);
-            viewholder.linerLayoutOffer=convertView.findViewById(R.id.linerLayoutOffer);
-            viewholder.cardView=convertView.findViewById(R.id.cardView);
-            // viewholder.offersText=convertView.findViewById(R.id.offersText);
-            viewholder.subcatListing=convertView.findViewById(R.id.subcatListing);
-            viewholder.distance=convertView.findViewById(R.id.distance);
 
 
 //
 
-            viewholder.name.setText(AllProducts.get(position).get("company_name"));
-            viewholder.name.setText(AllProducts.get(position).get("company_name"));
-            viewholder.address.setText(AllProducts.get(position).get("address"));
-            viewholder.totlareview.setText(AllProducts.get(position).get("totlauser")+" Reviews");
-            viewholder.area.setText(AllProducts.get(position).get("locationName"));
-            viewholder.subcatListing.setText(AllProducts.get(position).get("keywords"));
-            ImageLoader imageLoader = AppController.getInstance().getImageLoader();
-            viewholder.imgaeView.setImageUrl(AllProducts.get(position).get("logo"),imageLoader);
-
-
+            viewholder.name.setText(AllProducts.get(position).get("kitty_id"));
+            viewholder.packageName.setText(AllProducts.get(position).get("join_date"));
 
 //
 //            Typeface face=Typeface.createFromAsset(getActivity().getAssets(), "muli_semibold.ttf");
