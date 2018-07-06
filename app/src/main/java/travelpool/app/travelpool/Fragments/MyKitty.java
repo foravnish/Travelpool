@@ -23,13 +23,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,11 +43,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import travelpool.app.travelpool.Activity.PayNow;
 import travelpool.app.travelpool.R;
 import travelpool.app.travelpool.Utils.Api;
 import travelpool.app.travelpool.Utils.AppController;
+import travelpool.app.travelpool.Utils.MyPrefrences;
 import travelpool.app.travelpool.Utils.Util;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,6 +86,9 @@ public class MyKitty extends Fragment {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(false);
       //  Util.showPgDialog(dialog);
+
+
+        submitData();
 
 
 //        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
@@ -212,6 +225,79 @@ public class MyKitty extends Fragment {
         return view;
 
     }
+
+
+
+
+    private void submitData() {
+
+        Util.showPgDialog(dialog);
+
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                Api.my_kitty, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Util.cancelPgDialog(dialog);
+                Log.e("MyKitty", "Response: " + response);
+                //parse your response here
+
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+                    if (jsonObject.getString("status").equalsIgnoreCase("success")){
+
+                        Toast.makeText(getApplicationContext(), ""+jsonObject.optString("msg") ,Toast.LENGTH_SHORT).show();
+
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Util.cancelPgDialog(dialog);
+                Log.e("fdgdfgdfgd", "Login Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),"Please Connect to the Internet or Wrong Password", Toast.LENGTH_LONG).show();
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Log.e("fgdfgdfgdf","Inside getParams");
+
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<>();
+                params.put("userid",  MyPrefrences.getUserID(getActivity()));
+              //  params.put("kitty_id",  id.toString());
+
+                return params;
+            }
+
+//                        @Override
+//                        public Map<String, String> getHeaders() throws AuthFailureError {
+//                            Log.e("fdgdfgdfgdfg","Inside getHeaders()");
+//                            Map<String,String> headers=new HashMap<>();
+//                            headers.put("Content-Type","application/x-www-form-urlencoded");
+//                            return headers;
+//                        }
+        };
+        // Adding request to request queue
+        queue.add(strReq);
+
+
+
+
+    }
+
 
     public class Viewholder{
         ImageView imgFav,stars;

@@ -14,6 +14,7 @@ public class Api {
     public static String profile=BASEURL+"profile.php";
     public static String ViewKitty=BASEURL+"ViewKitty.php";
     public static String join_kitty=BASEURL+"join_kitty.php";
+    public static String my_kitty=BASEURL+"my_kitty.php";
 
 
 }
