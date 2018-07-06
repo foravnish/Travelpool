@@ -153,7 +153,7 @@ public class Login extends AppCompatActivity {
                                 @Override
                                 public void onResponse(String response) {
                                     // response
-                                    Log.d("Response", response);
+                                    Log.d("ResponseLogin", response);
                                     Util.cancelPgDialog(dialog);
                                     try {
                                         JSONObject jsonObject=new JSONObject(response);

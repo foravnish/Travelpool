@@ -82,7 +82,7 @@ public class PayNow extends AppCompatActivity {
 
         Util.showPgDialog(dialog);
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, Api.Login,
+        StringRequest postRequest = new StringRequest(Request.Method.POST, Api.join_kitty,
                 new Response.Listener<String>()
                 {
                     @Override
@@ -125,8 +125,8 @@ public class PayNow extends AppCompatActivity {
             protected Map<String, String> getParams()
             {
                 Map<String, String>  params = new HashMap<String, String>();
-                params.put("userid", MyPrefrences.getUserID(getApplicationContext()));
-                params.put("id", id.toString());
+                params.put("userid ", MyPrefrences.getUserID(getApplicationContext()));
+                params.put("kitty_id ", id.toString());
 
                 return params;
             }
