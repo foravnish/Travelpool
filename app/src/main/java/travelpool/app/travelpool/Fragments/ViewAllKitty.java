@@ -122,8 +122,6 @@ public class ViewAllKitty extends Fragment {
                         //Toast.makeText(getActivity(), "No Record Found...", Toast.LENGTH_SHORT).show();
                     }
 
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getActivity(),
@@ -144,7 +142,6 @@ public class ViewAllKitty extends Fragment {
 
             }
         });
-
 
         jsonObjReq.setShouldCache(false);
         AppController.getInstance().addToRequestQueue(jsonObjReq);
@@ -169,7 +166,6 @@ public class ViewAllKitty extends Fragment {
         });
 
         return view;
-
     }
 
     public class Viewholder{
