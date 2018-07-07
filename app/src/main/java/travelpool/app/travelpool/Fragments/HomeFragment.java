@@ -48,6 +48,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import travelpool.app.travelpool.R;
+import travelpool.app.travelpool.Utils.Api;
 import travelpool.app.travelpool.Utils.AppController;
 import travelpool.app.travelpool.Utils.Const;
 import travelpool.app.travelpool.Utils.Util;
@@ -117,7 +118,7 @@ public class HomeFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq2 = new JsonObjectRequest(Request.Method.GET,
-                "http://bizzcityinfo.com/Api/index.php/main/homeBannerImage?cityId=1", null, new Response.Listener<JSONObject>() {
+                Api.package_list, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -130,24 +131,13 @@ public class HomeFragment extends Fragment {
                     HashMap<String,String> hashMap = null;
                     if (response.getString("status").equalsIgnoreCase("success")){
                         AllBaner.clear();
-                        JSONArray jsonArray=response.getJSONArray("message");
+                        JSONArray jsonArray=response.getJSONArray("PackageList");
                         for (int i=0;i<jsonArray.length();i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-//                            hashMap = new HashMap<>();
-//                            hashMap.put("id",jsonObject.optString("id"));
-//                            hashMap.put("cat_id",jsonObject.optString("cat_id"));
-//                            hashMap.put("eventName",jsonObject.optString("eventName"));
-//                            hashMap.put("photo",jsonObject.optString("photo"));
-//
-//                            viewPager2.setAdapter(mCustomPagerAdapter2);
-//                            indicator.setViewPager(viewPager2);
-//                            mCustomPagerAdapter2.notifyDataSetChanged();
 
+                                AllBaner.add(new Const(jsonObject.optString("id"), jsonObject.optString("Name"), jsonObject.optString("Cost"), jsonObject.optString("Image"), jsonObject.optString("Banner"), jsonObject.optString("Description"), jsonObject.optString("TC"),null,null,null));
 
-                            if (jsonObject.optString("cat_id").equalsIgnoreCase("Home")) {
-                                AllBaner.add(new Const(jsonObject.optString("id"), jsonObject.optString("cat_id"), jsonObject.optString("subcategory"), jsonObject.optString("image"), jsonObject.optString("meta_keywords"), jsonObject.optString("meta_description"), jsonObject.optString("meta_title"),null,null,null));
-                            }
 
                             mCustomPagerAdapter2=new CustomPagerAdapter2(getActivity());
                             viewPager2.setAdapter(mCustomPagerAdapter2);
@@ -302,34 +292,34 @@ public class HomeFragment extends Fragment {
 
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
-            imageView.setImageUrl(AllBaner.get(position).getPhoto().toString().replace(" ","%20"),imageLoader);
+            imageView.setImageUrl(AllBaner.get(position).getDate().toString().replace(" ","%20"),imageLoader);
 
 
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (AllBaner.get(position).getOrgby().toString().isEmpty() ) {
-
-                        //  Toast.makeText(getActivity(), "blank", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-//                        Toast.makeText(getActivity(), AllBaner.get(position).getOrgby().toString(), Toast.LENGTH_SHORT).show();
-
+//            imageView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    if (AllBaner.get(position).getDate().toString().isEmpty() ) {
 //
-//                        Intent intent=new Intent(getActivity(), WebViewOpen.class);
-//                        intent.putExtra("link",AllBaner.get(position).getOrgby().toString());
-//                        startActivity(intent);
-
-//                        Fragment fragment=new WebViewOpen();
-//                        Bundle bundle=new Bundle();
-//                        bundle.putString("link",AllBaner.get(position).getOrgby().toString());
-//                        FragmentManager manager=getActivity().getSupportFragmentManager();
-//                        FragmentTransaction ft=manager.beginTransaction();
-//                        fragment.setArguments(bundle);
-//                        ft.replace(R.id.content_frame,fragment).addToBackStack(null).commit();
-                    }
-                }
-            });
+//                        //  Toast.makeText(getActivity(), "blank", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else{
+////                        Toast.makeText(getActivity(), AllBaner.get(position).getOrgby().toString(), Toast.LENGTH_SHORT).show();
+//
+////
+////                        Intent intent=new Intent(getActivity(), WebViewOpen.class);
+////                        intent.putExtra("link",AllBaner.get(position).getOrgby().toString());
+////                        startActivity(intent);
+//
+////                        Fragment fragment=new WebViewOpen();
+////                        Bundle bundle=new Bundle();
+////                        bundle.putString("link",AllBaner.get(position).getOrgby().toString());
+////                        FragmentManager manager=getActivity().getSupportFragmentManager();
+////                        FragmentTransaction ft=manager.beginTransaction();
+////                        fragment.setArguments(bundle);
+////                        ft.replace(R.id.content_frame,fragment).addToBackStack(null).commit();
+//                    }
+//                }
+//            });
 
             container.addView(itemView);
 
