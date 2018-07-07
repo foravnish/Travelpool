@@ -111,7 +111,6 @@ public class ViewAllKitty extends Fragment {
                             map.put("penality_after_due_date",jsonObject.optString("penality_after_due_date"));
                             map.put("package_name",jsonObject.optString("package_name"));
 
-
                             Adapter adapter=new Adapter();
                             expListView.setAdapter(adapter);
                             AllProducts.add(map);

@@ -88,137 +88,7 @@ public class MyKitty extends Fragment {
       //  Util.showPgDialog(dialog);
 
 
-        submitData();
-
-
-//        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-//                Api.searchCompany+"?keyword="+"4"+"&cityId=1", null, new Response.Listener<JSONObject>() {
-//
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                Log.d("Respose123", response.toString());
-//
-//                Util.cancelPgDialog(dialog);
-//                try {
-//                    // Parsing json object response
-//                    // response will be a json object
-////                    String name = response.getString("name");
-//
-//                    if (response.getString("status").equalsIgnoreCase("success")){
-//
-//                        expListView.setVisibility(View.VISIBLE);
-//                        imageNoListing.setVisibility(View.GONE);
-//
-//                        final JSONArray jsonArray=response.getJSONArray("message");
-//                        for (int i=0;i<jsonArray.length();i++){
-//                            JSONObject jsonObject=jsonArray.getJSONObject(i);
-//
-//                            JSONArray jsonArray1=jsonObject.getJSONArray("rating");
-//                            JSONArray jsonArray2=jsonObject.getJSONArray("payment_mode");
-//
-//                            for (int j=0;j<jsonArray1.length();j++){
-//                                jsonObject1=jsonArray1.getJSONObject(j);
-//                                Log.d("fdsgvfdh",jsonObject1.optString("ratingUser"));
-//                                Log.d("fdsgvfdh",jsonObject1.optString("rating"));
-//                            }
-//
-//
-//                            map=new HashMap();
-//                            map.put("id",jsonObject.optString("id"));
-//                            map.put("cat_id",jsonObject.optString("cat_id"));
-//                            map.put("company_name",jsonObject.optString("company_name"));
-//                            map.put("address",jsonObject.optString("address"));
-//                            map.put("c1_fname",jsonObject.optString("c1_fname"));
-//                            map.put("c1_mname",jsonObject.optString("c1_mname"));
-//                            map.put("c1_lname",jsonObject.optString("c1_lname"));
-//                            map.put("c1_email",jsonObject.optString("c1_email"));
-//                            map.put("c1_mobile1",jsonObject.optString("c1_mobile1"));
-//                            map.put("c1_mobile2",jsonObject.optString("c1_mobile2"));
-//                            map.put("website",jsonObject.optString("website"));
-//                            map.put("totlauser",jsonObject1.optString("ratingUser"));
-//                            map.put("rating",jsonObject1.optString("rating"));
-//                            map.put("liking",jsonObject.optString("liking"));
-//                            map.put("locationName",jsonObject.optString("locationName"));
-//                            map.put("logo",jsonObject.optString("logo"));
-//                            map.put("companyLogo",jsonObject.optString("companyLogo"));
-//                            map.put("premium",jsonObject.optString("premium"));
-//                            map.put("offer",jsonObject.optString("offer"));
-//                            map.put("pincode",jsonObject.optString("pincode"));
-//                            map.put("distance",jsonObject.optString("distance"));
-//
-//                            map.put("latitude",jsonObject.optString("latitude"));
-//                            map.put("longitude",jsonObject.optString("longitude"));
-//
-//                            map.put("payment_mode",jsonObject.optString("payment_mode"));
-//                            map.put("closing_time",jsonObject.optString("closing_time"));
-//                            map.put("closing_time2",jsonObject.optString("closing_time2"));
-//                            map.put("opening_time",jsonObject.optString("opening_time"));
-//                            map.put("opening_time2",jsonObject.optString("opening_time2"));
-//                            map.put("min_order_amnt",jsonObject.optString("min_order_amnt"));
-//                            map.put("min_order_qty",jsonObject.optString("min_order_qty"));
-//                            map.put("closing_days",jsonObject.optString("closing_days"));
-//
-//
-//
-//                            Adapter adapter=new Adapter();
-//                            expListView.setAdapter(adapter);
-//                            AllProducts.add(map);
-//
-//
-////                            expListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-////                                @Override
-////                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-////
-////
-////                                    try {
-////                                        Intent intent=new Intent(getActivity(),ProfileAct.class);
-////                                        intent.putExtra("data",jsonArray.get(i).toString());
-////                                        startActivity(intent);
-////                                    } catch (JSONException e) {
-////                                        e.printStackTrace();
-////                                    }
-////
-////
-////
-////                                }
-////                            });
-//
-//
-//                        }
-//                    }
-//                    else{
-//                        expListView.setVisibility(View.GONE);
-//                        imageNoListing.setVisibility(View.VISIBLE);
-//                        //Toast.makeText(getActivity(), "No Record Found...", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(getActivity(),
-//                            "Error: " + e.getMessage(),
-//                            Toast.LENGTH_LONG).show();
-//                    Util.cancelPgDialog(dialog);
-//                }
-//
-//            }
-//        }, new Response.ErrorListener() {
-//
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                VolleyLog.d("Respose", "Error: " + error.getMessage());
-//                Toast.makeText(getActivity(),
-//                        "Error! Please Connect to the internet", Toast.LENGTH_SHORT).show();
-//                // hide the progress dialog
-//                Util.cancelPgDialog(dialog);
-//
-//            }
-//        });
-
-
-//        jsonObjReq.setShouldCache(false);
-//        AppController.getInstance().addToRequestQueue(jsonObjReq);
+        ReceiveData();
 
 
 
@@ -229,7 +99,7 @@ public class MyKitty extends Fragment {
 
 
 
-    private void submitData() {
+    private void ReceiveData() {
 
         Util.showPgDialog(dialog);
 
@@ -241,22 +111,6 @@ public class MyKitty extends Fragment {
             public void onResponse(String response) {
                 Util.cancelPgDialog(dialog);
                 Log.e("MyKitty", "Response: " + response);
-                //parse your response here
-
-//                try {
-//                    JSONObject jsonObject=new JSONObject(response);
-//                    if (jsonObject.getString("status").equalsIgnoreCase("success")){
-//
-//                        Toast.makeText(getApplicationContext(), ""+jsonObject.optString("msg") ,Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                    else{
-//                        Toast.makeText(getApplicationContext(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
 
                 try {
                     JSONObject jsonObject=new JSONObject(response);
@@ -269,7 +123,6 @@ public class MyKitty extends Fragment {
                         for (int i=0;i<jsonArray.length();i++){
                             JSONObject jsonObject1=jsonArray.getJSONObject(i);
 
-
                             map=new HashMap();
                             map.put("id",jsonObject1.optString("id"));
                             map.put("kitty_id",jsonObject1.optString("kitty_id"));
@@ -279,18 +132,17 @@ public class MyKitty extends Fragment {
                             expListView.setAdapter(adapter);
                             AllProducts.add(map);
 
-
-//
-
                         }
+                    }
+                    else{
+
+                        expListView.setVisibility(View.GONE);
+                        imageNoListing.setVisibility(View.VISIBLE);
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
-
             }
         }, new Response.ErrorListener() {
             @Override
