@@ -108,7 +108,6 @@ public class HomeAct extends AppCompatActivity
 
         if (id == R.id.nav_Home) {
 
-
             Fragment fragment = new HomeFragment();
             FragmentManager manager = getSupportFragmentManager();
             FragmentTransaction ft = manager.beginTransaction();

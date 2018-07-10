@@ -8,7 +8,10 @@ public class Api {
 
 
     public static String BASEURL="http://transportfare.in/mobile-api/";
+    public static String gethashCode="http://transportfare.in/getHashCode.php";
 //    public static String BASEURL="http://www.transportfare.in/api/";
+
+
     public static String Login=BASEURL+"login.php";
     public static String user_login=BASEURL+"login.php";
 //    public static String signup=BASEURL+"signup.php";

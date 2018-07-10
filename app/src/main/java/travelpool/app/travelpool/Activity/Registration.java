@@ -32,6 +32,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -337,13 +338,11 @@ public class Registration extends AppCompatActivity {
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    if (jsonObject.getString("status").equalsIgnoreCase("FALSE")) {
-                        Util.errorDialog(Registration.this,jsonObject.getString("message"));
-                        Log.d("fsdfsdfsdfs","true");
-                    }
-                    else {
 
-                        Log.d("fsdfsdfsdfs","false");
+
+                    if (jsonObject.optString("status").equals("success")){
+
+                        Log.d("fsdfsdfsdfs","true");
 
                         Toast.makeText(getApplicationContext(), "Registration Successfully...", Toast.LENGTH_SHORT).show();
 
@@ -353,12 +352,14 @@ public class Registration extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                         Toast.makeText(getApplicationContext(), "Please Login...", Toast.LENGTH_SHORT).show();
+
+                    }
+                    else if (jsonObject.optString("status").equals("FALSE")){
+                        Util.errorDialog(Registration.this,jsonObject.getString("message"));
+                        Log.d("fsdfsdfsdfs","false");
                     }
 
 
-//                    else{
-//                        Util.errorDialog(Registration.this,jsonObject.getString("message"));
-//                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();

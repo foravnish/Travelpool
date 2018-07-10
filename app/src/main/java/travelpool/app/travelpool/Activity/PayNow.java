@@ -254,13 +254,14 @@ public class PayNow extends AppCompatActivity {
 
         double amount = 0;
         try {
-            amount = 1;
-//            amount = Double.parseDouble(total_value.toString());
+//            amount = 1;
+            amount = Double.parseDouble(total_value.toString());
             Log.d("sdfsdfsddsgdf",total_value.toString());
             // Log.d("fgdfgdfhdhdh", String.valueOf(Double.parseDouble(totlPrice.getText().toString())));
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
      //   Log.d("sdfsfsdfgsgsd", Getseter.preferences.getString("mobile",""));
 
@@ -413,7 +414,7 @@ public class PayNow extends AppCompatActivity {
             String merchantHash = "";
             try {
                 //TODO Below url is just for testing purpose, merchant needs to replace this with their server side hash generation url
-                URL url = new URL("hashkey file");
+                URL url = new URL(Api.gethashCode);
 
                 String postParam = postParams[0];
 

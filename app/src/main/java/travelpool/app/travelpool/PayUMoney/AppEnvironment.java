@@ -10,7 +10,7 @@ public enum AppEnvironment {
         @Override
         public String merchant_Key() {
 
-            return "wVk4epFK";
+            return "ucoGUCU5";
 
 
         }
@@ -18,14 +18,14 @@ public enum AppEnvironment {
         @Override
         public String merchant_ID() {
 
-            return "5704414";
+            return "5826073";
 
         }
 
         @Override
         public String salt() {
 
-            return "vTEa7Xs76H";
+            return "z0bBxPTIsG";
 
         }
 
