@@ -103,7 +103,7 @@ public class PayNow extends AppCompatActivity {
 
                     }
                     else{
-                        Toast.makeText(getApplicationContext(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),jsonObject.optString("msg") , Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
@@ -133,6 +133,7 @@ public class PayNow extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("userid",  MyPrefrences.getUserID(getApplicationContext()));
                 params.put("kitty_id",  id.toString());
+
 
                 return params;
             }

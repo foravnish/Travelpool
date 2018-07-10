@@ -196,26 +196,30 @@ public class Login extends AppCompatActivity {
                     JSONObject jsonObject=new JSONObject(response);
 //                    if (jsonObject.getString("status").equalsIgnoreCase("success")){
 
-                        JSONObject jsonObject1=jsonObject.getJSONObject("json_data");
+                    if (jsonObject.optString("status").equals("FALSE")){
+                        Toast.makeText(getApplicationContext(), "Wrong User Name or  Password", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        JSONObject jsonObject1 = jsonObject.getJSONObject("json_data");
 
 
-                            //  Toast.makeText(getApplicationContext(), "Login Successfully...", Toast.LENGTH_SHORT).show();
+                        //  Toast.makeText(getApplicationContext(), "Login Successfully...", Toast.LENGTH_SHORT).show();
 
-                            MyPrefrences.setUserLogin(getApplicationContext(), true);
-                            MyPrefrences.setUserID(getApplicationContext(), jsonObject1.optString("id").toString());
-                            MyPrefrences.setUSENAME(getApplicationContext(), jsonObject1.optString("name").toString());
-                            MyPrefrences.setEMAILID(getApplicationContext(),jsonObject1.optString("email").toString());
+                        MyPrefrences.setUserLogin(getApplicationContext(), true);
+                        MyPrefrences.setUserID(getApplicationContext(), jsonObject1.optString("userid").toString());
+                        MyPrefrences.setUSENAME(getApplicationContext(), jsonObject1.optString("name").toString());
+                        MyPrefrences.setEMAILID(getApplicationContext(), jsonObject1.optString("email").toString());
 //                                                MyPrefrences.setEMAILID(getApplicationContext(),jsonObject1.optString("address").toString());
-                            MyPrefrences.setMobile(getApplicationContext(),mobile.getText().toString());
-                            //MyPrefrences.setImage(getApplicationContext(),jsonObject1.optString("state").toString());
-                            //MyPrefrences.setImage(getApplicationContext(),jsonObject1.optString("pincode").toString());
+                        MyPrefrences.setMobile(getApplicationContext(), mobile.getText().toString());
+                        //MyPrefrences.setImage(getApplicationContext(),jsonObject1.optString("state").toString());
+                        //MyPrefrences.setImage(getApplicationContext(),jsonObject1.optString("pincode").toString());
 
-                       // }
-                        Intent intent=new Intent(Login.this,HomeAct.class);
-                        intent.putExtra("userType","agent");
+                        // }
+                        Intent intent = new Intent(Login.this, HomeAct.class);
+                        intent.putExtra("userType", "agent");
                         startActivity(intent);
                         finish();
-
+                    }
 //                    else{
 //                        Toast.makeText(getApplicationContext(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
 //                    }
@@ -377,9 +381,9 @@ public class Login extends AppCompatActivity {
                         finish();
 //                    }
                     }
-//                    else{
-//                        Toast.makeText(getApplicationContext(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
-//                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
