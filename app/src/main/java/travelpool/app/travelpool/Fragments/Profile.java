@@ -24,11 +24,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.gelitenight.waveview.library.WaveView;
 
 import org.json.JSONArray;
@@ -58,7 +61,7 @@ public class Profile extends Fragment {
         // Required empty public constructor
     }
 
-    TextView tve_name,tve_mobile,tve_user_id,tve_email,tve_addres,tve_city,tve_state,tve_pincode;
+    TextView tve_name,tve_mobile,tve_user_id,tve_email,tve_addres,tve_city,tve_state,tve_pincode,tve_aadharNo,tve_panNo;
     Button changeProfile;
     Dialog dialog;
     @Override
@@ -77,6 +80,8 @@ public class Profile extends Fragment {
         tve_city=view.findViewById(R.id.tve_city);
         tve_state=view.findViewById(R.id.tve_state);
         tve_pincode=view.findViewById(R.id.tve_pincode);
+        tve_aadharNo=view.findViewById(R.id.tve_aadharNo);
+        tve_panNo=view.findViewById(R.id.tve_panNo);
 
         dialog=new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -112,71 +117,153 @@ public class Profile extends Fragment {
     private void getProfile() {
 
         Util.showPgDialog(dialog);
+//
+//        StringRequest postRequest = new StringRequest(Request.Method.POST, Api.profile,
+//                new Response.Listener<String>()
+//                {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        // response
+//                        Log.d("Responseprofile", response);
+//                        Util.cancelPgDialog(dialog);
+//                        try {
+//                            JSONObject jsonObject=new JSONObject(response);
+//                            if (jsonObject.getString("status").equalsIgnoreCase("success")){
+//
+//                                JSONArray jsonArray=jsonObject.getJSONArray("login");
+//                                for (int i=0;i<jsonArray.length();i++) {
+//                                    JSONObject jsonObject1 = jsonArray.optJSONObject(i);
+//
+//
+//                                    tve_name.setText(jsonObject1.optString("name").toUpperCase());
+//                                    tve_mobile.setText(jsonObject1.optString("mobile").toString());
+//                                    tve_user_id.setText(jsonObject1.optString("id").toString());
+//                                    tve_email.setText(jsonObject1.optString("email").toString());
+//                                    tve_addres.setText(jsonObject1.optString("address").toString());
+//                                    tve_city.setText(jsonObject1.optString("city").toString());
+//                                    tve_state.setText(jsonObject1.optString("state").toString());
+//                                    tve_pincode.setText(jsonObject1.optString("pincode").toString());
+//                                   // tve_aadharNo.setText(jsonObject1.optString("pincode").toString());
+//                                    //tve_panNo.setText(jsonObject1.optString("pincode").toString());
+//
+//
+//                                }
+//
+//                            }
+//                            else{
+//                                Toast.makeText(getActivity(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
+//                            }
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                    }
+//                },
+//                new Response.ErrorListener()
+//                {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        // error
+//                        Toast.makeText(getActivity(), "Error! Please connect to the Internet.", Toast.LENGTH_SHORT).show();
+//                        Util.cancelPgDialog(dialog);
+//                    }
+//                }
+//        ) {
+//            @Override
+//            protected Map<String, String> getParams()
+//            {
+//                Map<String, String>  params = new HashMap<String, String>();
+//                params.put("id", MyPrefrences.getUserID(getActivity()));
+//
+//
+//                Log.d("sfsdfsdfsdfs",MyPrefrences.getUserID(getActivity()));
+//
+//                return params;
+//            }
+//        };
+//        postRequest.setRetryPolicy(new DefaultRetryPolicy(27000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//        postRequest.setShouldCache(false);
+//
+//        AppController.getInstance().addToRequestQueue(postRequest);
+//
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, Api.profile,
-                new Response.Listener<String>()
-                {
-                    @Override
-                    public void onResponse(String response) {
-                        // response
-                        Log.d("Responseprofile", response);
-                        Util.cancelPgDialog(dialog);
-                        try {
-                            JSONObject jsonObject=new JSONObject(response);
-                            if (jsonObject.getString("status").equalsIgnoreCase("success")){
-
-                                JSONArray jsonArray=jsonObject.getJSONArray("login");
-                                for (int i=0;i<jsonArray.length();i++) {
-                                    JSONObject jsonObject1 = jsonArray.optJSONObject(i);
 
 
-                                    tve_name.setText(jsonObject1.optString("name").toUpperCase());
-                                    tve_mobile.setText(jsonObject1.optString("mobile").toString());
-                                    tve_user_id.setText(jsonObject1.optString("id").toString());
-                                    tve_email.setText(jsonObject1.optString("email").toString());
-                                    tve_addres.setText(jsonObject1.optString("address").toString());
-                                    tve_city.setText(jsonObject1.optString("city").toString());
-                                    tve_state.setText(jsonObject1.optString("state").toString());
-                                    tve_pincode.setText(jsonObject1.optString("pincode").toString());
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                Api.profile, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Util.cancelPgDialog(dialog);
+                Log.e("Responseprofile", "" + response);
 
 
-                                }
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+                    if (jsonObject.getString("status").equalsIgnoreCase("success")){
 
-                            }
-                            else{
-                                Toast.makeText(getActivity(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
-                            }
+                        JSONArray jsonArray=jsonObject.getJSONArray("login");
+                        for (int i=0;i<jsonArray.length();i++) {
+                            JSONObject jsonObject1 = jsonArray.optJSONObject(i);
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
+                            tve_name.setText(jsonObject1.optString("name").toUpperCase());
+                            tve_mobile.setText(jsonObject1.optString("mobile").toString());
+                            tve_user_id.setText(jsonObject1.optString("id").toString());
+                            tve_email.setText(jsonObject1.optString("email").toString());
+                            tve_addres.setText(jsonObject1.optString("address").toString());
+                            tve_city.setText(jsonObject1.optString("city").toString());
+                            tve_state.setText(jsonObject1.optString("state").toString());
+                            tve_pincode.setText(jsonObject1.optString("pincode").toString());
+                            tve_aadharNo.setText(jsonObject1.optString("aadhar_no").toString());
+                            tve_panNo.setText(jsonObject1.optString("pan_no").toString());
+
+
                         }
 
                     }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // error
-                        Toast.makeText(getActivity(), "Error! Please connect to the Internet.", Toast.LENGTH_SHORT).show();
-                        Util.cancelPgDialog(dialog);
+                    else{
+                        Toast.makeText(getActivity(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
                     }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-        ) {
+
+
+
+
+            }
+        }, new Response.ErrorListener() {
             @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String>  params = new HashMap<String, String>();
+            public void onErrorResponse(VolleyError error) {
+                Util.cancelPgDialog(dialog);
+                Log.e("fdgdfgdfgd", "Login Error: " + error.getMessage());
+                Toast.makeText(getActivity(),"Please Connect to the Internet or Wrong Password", Toast.LENGTH_LONG).show();
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Log.e("fgdfgdfgdf","Inside getParams");
+
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<>();
                 params.put("id", MyPrefrences.getUserID(getActivity()));
+                params.put("user_type", MyPrefrences.getUserType(getActivity()).toLowerCase());
 
 
+                Log.d("sfsdfsdfsdfs",MyPrefrences.getUserID(getActivity()));
                 return params;
             }
-        };
-        postRequest.setRetryPolicy(new DefaultRetryPolicy(27000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        postRequest.setShouldCache(false);
 
-        AppController.getInstance().addToRequestQueue(postRequest);
+
+        };
+        queue.add(strReq);
+
+
+
     }
 
     public class WaveHelper {

@@ -127,7 +127,6 @@ public class HomeFragment extends Fragment {
 
             }
 
-
         });
 
         // If true: user can rotate by touch

@@ -367,7 +367,7 @@ public class Login extends AppCompatActivity {
                         //  Toast.makeText(getApplicationContext(), "Login Successfully...", Toast.LENGTH_SHORT).show();
 
                         MyPrefrences.setUserLogin(getApplicationContext(), true);
-                        MyPrefrences.setUserID(getApplicationContext(), jsonObject1.optString("id").toString());
+                        MyPrefrences.setUserID(getApplicationContext(), jsonObject1.optString("Userid").toString());
                         MyPrefrences.setUSENAME(getApplicationContext(), jsonObject1.optString("name").toString());
                         MyPrefrences.setEMAILID(getApplicationContext(), jsonObject1.optString("email").toString());
 //                                                MyPrefrences.setEMAILID(getApplicationContext(),jsonObject1.optString("address").toString());
