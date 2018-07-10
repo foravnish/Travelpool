@@ -288,7 +288,7 @@ public class PayNow extends AppCompatActivity {
         builder.setAmount(amount)
                 .setTxnId(txnId)
                 .setPhone(phone)
-                .setProductName("Spinof  "+package_name)
+                .setProductName("TravelPool  "+package_name)
                 .setFirstName(MyPrefrences.getUSENAME(getApplicationContext()))
                 .setEmail(email)
                 .setsUrl(appEnvironment.surl())
