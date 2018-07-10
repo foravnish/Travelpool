@@ -262,8 +262,6 @@ public class Profile extends Fragment {
         };
         queue.add(strReq);
 
-
-
     }
 
     public class WaveHelper {
