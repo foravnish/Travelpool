@@ -150,23 +150,25 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                int selectedId = radioGroup.getCheckedRadioButtonId();
-                final RadioButton radioButton = (RadioButton) findViewById(selectedId);
+//                int selectedId = radioGroup.getCheckedRadioButtonId();
+//                final RadioButton radioButton = (RadioButton) findViewById(selectedId);
 
                 //Toast.makeText(getApplicationContext(), ""+radioButton.getText().toString(), Toast.LENGTH_SHORT).show();
 
                 if(validate()){
 
 
-                    if (radioButton.getText().toString().equals("User Login")){
-                        loginDataUser();
-                        Log.d("dfsdfsdfsdfs","user");
-                    }
-                    else if (radioButton.getText().toString().equals("Agent Login")){
-                        loginDataAgent();
-                        Log.d("dfsdfsdfsdfs","agent");
+                    loginDataUser();
 
-                    }
+//                    if (radioButton.getText().toString().equals("User Login")){
+//                        loginDataUser();
+//                        Log.d("dfsdfsdfsdfs","user");
+//                    }
+//                    else if (radioButton.getText().toString().equals("Agent Login")){
+//                        loginDataAgent();
+//                        Log.d("dfsdfsdfsdfs","agent");
+//
+//                    }
 
 
                 }
@@ -177,164 +179,164 @@ public class Login extends AppCompatActivity {
 
     }
 
-    private void loginDataAgent() {
-
-        Util.showPgDialog(dialog);
-
-
-        RequestQueue queue = Volley.newRequestQueue(Login.this);
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                Api.Login, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Util.cancelPgDialog(dialog);
-                Log.e("dfsjfdfsdfgd", "Login Response: " + response);
-                //parse your response here
-
-
-                try {
-                    JSONObject jsonObject=new JSONObject(response);
-//                    if (jsonObject.getString("status").equalsIgnoreCase("success")){
-
-                    if (jsonObject.optString("status").equals("FALSE")){
-                        Toast.makeText(getApplicationContext(), "Wrong User Name or  Password", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        JSONObject jsonObject1 = jsonObject.getJSONObject("json_data");
-
-
-                        //  Toast.makeText(getApplicationContext(), "Login Successfully...", Toast.LENGTH_SHORT).show();
-
-                        MyPrefrences.setUserLogin(getApplicationContext(), true);
-                        MyPrefrences.setUserID(getApplicationContext(), jsonObject1.optString("userid").toString());
-                        MyPrefrences.setUSENAME(getApplicationContext(), jsonObject1.optString("name").toString());
-                        MyPrefrences.setEMAILID(getApplicationContext(), jsonObject1.optString("email").toString());
-//                                                MyPrefrences.setEMAILID(getApplicationContext(),jsonObject1.optString("address").toString());
-                        MyPrefrences.setMobile(getApplicationContext(), mobile.getText().toString());
-                        //MyPrefrences.setImage(getApplicationContext(),jsonObject1.optString("state").toString());
-                        //MyPrefrences.setImage(getApplicationContext(),jsonObject1.optString("pincode").toString());
-
-                        // }
-                        Intent intent = new Intent(Login.this, HomeAct.class);
-                        intent.putExtra("userType", "agent");
-                        startActivity(intent);
-                        finish();
-                    }
-//                    else{
-//                        Toast.makeText(getApplicationContext(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
-//                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Util.cancelPgDialog(dialog);
-                Log.e("fdgdfgdfgd", "Login Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),"Please Connect to the Internet or Wrong Password", Toast.LENGTH_LONG).show();
-            }
-        }){
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Log.e("fgdfgdfgdf","Inside getParams");
-
-                // Posting parameters to login url
-                Map<String, String> params = new HashMap<>();
-                params.put("username", mobile.getText().toString());
-                params.put("password", password.getText().toString());
-
-                return params;
-            }
-
-//                        @Override
-//                        public Map<String, String> getHeaders() throws AuthFailureError {
-//                            Log.e("fdgdfgdfgdfg","Inside getHeaders()");
-//                            Map<String,String> headers=new HashMap<>();
-//                            headers.put("Content-Type","application/x-www-form-urlencoded");
-//                            return headers;
-//                        }
-        };
-        // Adding request to request queue
-        queue.add(strReq);
-
-
-//        StringRequest postRequest = new StringRequest(Request.Method.POST, Api.Login,
-//                new Response.Listener<String>()
-//                {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        // response
-//                        Log.d("ResponseLoginAgent", response);
-//                        Util.cancelPgDialog(dialog);
-//                        try {
-//                            JSONObject jsonObject=new JSONObject(response);
-//                            if (jsonObject.getString("status").equalsIgnoreCase("success")){
+//    private void loginDataAgent() {
 //
-//                                JSONArray jsonArray=jsonObject.getJSONArray("login");
-//                                for (int i=0;i<jsonArray.length();i++) {
-//                                    JSONObject jsonObject1 = jsonArray.optJSONObject(i);
+//        Util.showPgDialog(dialog);
 //
 //
-//                                    //  Toast.makeText(getApplicationContext(), "Login Successfully...", Toast.LENGTH_SHORT).show();
-//
-//                                    MyPrefrences.setUserLogin(getApplicationContext(), true);
-//                                    MyPrefrences.setUserID(getApplicationContext(), jsonObject1.optString("id").toString());
-//                                    MyPrefrences.setUSENAME(getApplicationContext(), jsonObject1.optString("name").toString());
-//                                    MyPrefrences.setEMAILID(getApplicationContext(),jsonObject1.optString("email").toString());
-////                                                MyPrefrences.setEMAILID(getApplicationContext(),jsonObject1.optString("address").toString());
-//                                    MyPrefrences.setMobile(getApplicationContext(),mobile.getText().toString());
-//                                    //MyPrefrences.setImage(getApplicationContext(),jsonObject1.optString("state").toString());
-//                                    //MyPrefrences.setImage(getApplicationContext(),jsonObject1.optString("pincode").toString());
-//
-//                                }
-//                                Intent intent=new Intent(Login.this,HomeAct.class);
-//                                startActivity(intent);
-//                                finish();
-//                            }
-//                            else{
-//                                Toast.makeText(getApplicationContext(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
-//                            }
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//
-//                    }
-//                },
-//                new Response.ErrorListener()
-//                {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        // error
-//                        Toast.makeText(Login.this, "Error! Please connect to the Internet.", Toast.LENGTH_SHORT).show();
-//                        Util.cancelPgDialog(dialog);
-//                    }
-//                }
-//        ) {
+//        RequestQueue queue = Volley.newRequestQueue(Login.this);
+//        StringRequest strReq = new StringRequest(Request.Method.POST,
+//                Api.Login, new Response.Listener<String>() {
 //            @Override
-//            protected Map<String, String> getParams()
-//            {
-//                Map<String, String>  params = new HashMap<String, String>();
+//            public void onResponse(String response) {
+//                Util.cancelPgDialog(dialog);
+//                Log.e("dfsjfdfsdfgd", "Login Response: " + response);
+//                //parse your response here
+//
+//
+//                try {
+//                    JSONObject jsonObject=new JSONObject(response);
+////                    if (jsonObject.getString("status").equalsIgnoreCase("success")){
+//
+//                    if (jsonObject.optString("status").equals("FALSE")){
+//                        Toast.makeText(getApplicationContext(), "Wrong User Name or  Password", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else {
+//                        JSONObject jsonObject1 = jsonObject.getJSONObject("json_data");
+//
+//
+//                        //  Toast.makeText(getApplicationContext(), "Login Successfully...", Toast.LENGTH_SHORT).show();
+//
+//                        MyPrefrences.setUserLogin(getApplicationContext(), true);
+//                        MyPrefrences.setUserID(getApplicationContext(), jsonObject1.optString("userid").toString());
+//                        MyPrefrences.setUSENAME(getApplicationContext(), jsonObject1.optString("name").toString());
+//                        MyPrefrences.setEMAILID(getApplicationContext(), jsonObject1.optString("email").toString());
+////                                                MyPrefrences.setEMAILID(getApplicationContext(),jsonObject1.optString("address").toString());
+//                        MyPrefrences.setMobile(getApplicationContext(), mobile.getText().toString());
+//                        //MyPrefrences.setImage(getApplicationContext(),jsonObject1.optString("state").toString());
+//                        //MyPrefrences.setImage(getApplicationContext(),jsonObject1.optString("pincode").toString());
+//
+//                        // }
+//                        Intent intent = new Intent(Login.this, HomeAct.class);
+//                        intent.putExtra("userType", "agent");
+//                        startActivity(intent);
+//                        finish();
+//                    }
+////                    else{
+////                        Toast.makeText(getApplicationContext(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
+////                    }
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//
+//
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Util.cancelPgDialog(dialog);
+//                Log.e("fdgdfgdfgd", "Login Error: " + error.getMessage());
+//                Toast.makeText(getApplicationContext(),"Please Connect to the Internet or Wrong Password", Toast.LENGTH_LONG).show();
+//            }
+//        }){
+//
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Log.e("fgdfgdfgdf","Inside getParams");
+//
+//                // Posting parameters to login url
+//                Map<String, String> params = new HashMap<>();
 //                params.put("username", mobile.getText().toString());
 //                params.put("password", password.getText().toString());
 //
 //                return params;
 //            }
-//        };
-//        postRequest.setRetryPolicy(new DefaultRetryPolicy(27000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-//        postRequest.setShouldCache(false);
 //
-//        AppController.getInstance().addToRequestQueue(postRequest);
-
-
-    }
+////                        @Override
+////                        public Map<String, String> getHeaders() throws AuthFailureError {
+////                            Log.e("fdgdfgdfgdfg","Inside getHeaders()");
+////                            Map<String,String> headers=new HashMap<>();
+////                            headers.put("Content-Type","application/x-www-form-urlencoded");
+////                            return headers;
+////                        }
+//        };
+//        // Adding request to request queue
+//        queue.add(strReq);
+//
+//
+////        StringRequest postRequest = new StringRequest(Request.Method.POST, Api.Login,
+////                new Response.Listener<String>()
+////                {
+////                    @Override
+////                    public void onResponse(String response) {
+////                        // response
+////                        Log.d("ResponseLoginAgent", response);
+////                        Util.cancelPgDialog(dialog);
+////                        try {
+////                            JSONObject jsonObject=new JSONObject(response);
+////                            if (jsonObject.getString("status").equalsIgnoreCase("success")){
+////
+////                                JSONArray jsonArray=jsonObject.getJSONArray("login");
+////                                for (int i=0;i<jsonArray.length();i++) {
+////                                    JSONObject jsonObject1 = jsonArray.optJSONObject(i);
+////
+////
+////                                    //  Toast.makeText(getApplicationContext(), "Login Successfully...", Toast.LENGTH_SHORT).show();
+////
+////                                    MyPrefrences.setUserLogin(getApplicationContext(), true);
+////                                    MyPrefrences.setUserID(getApplicationContext(), jsonObject1.optString("id").toString());
+////                                    MyPrefrences.setUSENAME(getApplicationContext(), jsonObject1.optString("name").toString());
+////                                    MyPrefrences.setEMAILID(getApplicationContext(),jsonObject1.optString("email").toString());
+//////                                                MyPrefrences.setEMAILID(getApplicationContext(),jsonObject1.optString("address").toString());
+////                                    MyPrefrences.setMobile(getApplicationContext(),mobile.getText().toString());
+////                                    //MyPrefrences.setImage(getApplicationContext(),jsonObject1.optString("state").toString());
+////                                    //MyPrefrences.setImage(getApplicationContext(),jsonObject1.optString("pincode").toString());
+////
+////                                }
+////                                Intent intent=new Intent(Login.this,HomeAct.class);
+////                                startActivity(intent);
+////                                finish();
+////                            }
+////                            else{
+////                                Toast.makeText(getApplicationContext(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
+////                            }
+////
+////                        } catch (JSONException e) {
+////                            e.printStackTrace();
+////                        }
+////
+////                    }
+////                },
+////                new Response.ErrorListener()
+////                {
+////                    @Override
+////                    public void onErrorResponse(VolleyError error) {
+////                        // error
+////                        Toast.makeText(Login.this, "Error! Please connect to the Internet.", Toast.LENGTH_SHORT).show();
+////                        Util.cancelPgDialog(dialog);
+////                    }
+////                }
+////        ) {
+////            @Override
+////            protected Map<String, String> getParams()
+////            {
+////                Map<String, String>  params = new HashMap<String, String>();
+////                params.put("username", mobile.getText().toString());
+////                params.put("password", password.getText().toString());
+////
+////                return params;
+////            }
+////        };
+////        postRequest.setRetryPolicy(new DefaultRetryPolicy(27000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+////        postRequest.setShouldCache(false);
+////
+////        AppController.getInstance().addToRequestQueue(postRequest);
+//
+//
+//    }
 
 
     private void loginDataUser() {
@@ -349,7 +351,6 @@ public class Login extends AppCompatActivity {
             public void onResponse(String response) {
                 Util.cancelPgDialog(dialog);
                 Log.e("dfsjfdfsdfgd", "Login Response: " + response);
-                //parse your response here
 
 
                 try {
@@ -373,13 +374,14 @@ public class Login extends AppCompatActivity {
                         MyPrefrences.setMobile(getApplicationContext(), mobile.getText().toString());
                         //MyPrefrences.setImage(getApplicationContext(),jsonObject1.optString("state").toString());
                         //MyPrefrences.setImage(getApplicationContext(),jsonObject1.optString("pincode").toString());
+                        MyPrefrences.setUserType(getApplicationContext(),jsonObject1.optString("type").toString());
 
 
                         Intent intent = new Intent(Login.this, HomeAct.class);
                         intent.putExtra("userType","user");
                         startActivity(intent);
                         finish();
-//                    }
+
                     }
                     else{
                         Toast.makeText(getApplicationContext(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();

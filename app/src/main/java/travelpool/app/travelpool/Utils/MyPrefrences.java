@@ -206,14 +206,14 @@ public class MyPrefrences {
 
 
 
-    public static void setCityName(Context context, String is) {
+    public static void setUserType(Context context, String is) {
         CityName = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = CityName.edit();
         editor.putString(CITYNAME, is);
         editor.commit();
     }
 
-    public static String getCityName(Context context) {
+    public static String getUserType(Context context) {
         CityName = PreferenceManager.getDefaultSharedPreferences(context);
         return CityName.getString(CITYNAME,"");
     }

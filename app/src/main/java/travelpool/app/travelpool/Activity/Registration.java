@@ -336,21 +336,29 @@ public class Registration extends AppCompatActivity {
 
 
                 try {
-                    JSONObject jsonObject=new JSONObject(response);
-                    if (jsonObject.getString("status").equalsIgnoreCase("1")){
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.getString("status").equalsIgnoreCase("FALSE")) {
+                        Util.errorDialog(Registration.this,jsonObject.getString("message"));
+                        Log.d("fsdfsdfsdfs","true");
+                    }
+                    else {
 
-                        Toast.makeText(getApplicationContext(),"Registration Successfully..." , Toast.LENGTH_SHORT).show();
+                        Log.d("fsdfsdfsdfs","false");
+
+                        Toast.makeText(getApplicationContext(), "Registration Successfully...", Toast.LENGTH_SHORT).show();
 
                         smsAPI();
 
                         Intent intent = new Intent(Registration.this, Login.class);
                         startActivity(intent);
                         finish();
-                        Toast.makeText(getApplicationContext(),"Please Login..." , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Please Login...", Toast.LENGTH_SHORT).show();
                     }
-                    else{
-                        Util.errorDialog(Registration.this,jsonObject.getString("message"));
-                    }
+
+
+//                    else{
+//                        Util.errorDialog(Registration.this,jsonObject.getString("message"));
+//                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
