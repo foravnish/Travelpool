@@ -13,6 +13,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
+import travelpool.app.travelpool.PayUMoney.AppEnvironment;
+
 
 public class AppController extends Application {
 
@@ -20,7 +22,7 @@ public class AppController extends Application {
     private static AppController mInstance;
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
-
+    AppEnvironment appEnvironment;
     
     public static synchronized AppController getInstance() {
         return mInstance;
@@ -30,8 +32,14 @@ public class AppController extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
-
+        appEnvironment = AppEnvironment.SANDBOX;
     }
+
+    public AppEnvironment getAppEnvironment() {
+        return appEnvironment;
+    }
+
+
 
     public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
