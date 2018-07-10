@@ -64,4 +64,17 @@
         android:layout_gravity="center"
         android:text="Play"/>
     </LinearLayout>
+
+
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/lvExp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:visibility="visible"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentTop="true"
+        android:verticalSpacing="3dp"/>
+
+
 </LinearLayout>

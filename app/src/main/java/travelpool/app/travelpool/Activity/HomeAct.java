@@ -21,6 +21,8 @@ import android.widget.TextView;
 import travelpool.app.travelpool.Fragments.HomeFragment;
 import travelpool.app.travelpool.Fragments.MyKitty;
 import travelpool.app.travelpool.Fragments.Profile;
+import travelpool.app.travelpool.Fragments.TermsCondition;
+import travelpool.app.travelpool.Fragments.Transcation;
 import travelpool.app.travelpool.Fragments.ViewAllKitty;
 import travelpool.app.travelpool.R;
 import travelpool.app.travelpool.Utils.MyPrefrences;
@@ -37,7 +39,6 @@ public class HomeAct extends AppCompatActivity
 
         setTitle("Travel Pool");
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -50,7 +51,15 @@ public class HomeAct extends AppCompatActivity
 
         TextView name=(TextView)header.findViewById(R.id.name);
         TextView mobile=(TextView)header.findViewById(R.id.mobile);
-        name.setText(MyPrefrences.getUSENAME(getApplicationContext()).toUpperCase());
+        name.setText(MyPrefrences.getUSENAME(getApplicationContext()).toUpperCase()+" ("+MyPrefrences.getUserType(getApplicationContext())+")");
+
+//        if (getIntent().getStringExtra("userType").equals("user")){
+//            name.setText(MyPrefrences.getUSENAME(getApplicationContext()).toUpperCase()+"  (User)");
+//        }
+//        else if (getIntent().getStringExtra("userType").equals("agent")){
+//            name.setText(MyPrefrences.getUSENAME(getApplicationContext()).toUpperCase()+"  (Agent)");
+//        }
+
         mobile.setText(MyPrefrences.getMobile(getApplicationContext()));
 
         Fragment fragment = new HomeFragment();
@@ -99,7 +108,6 @@ public class HomeAct extends AppCompatActivity
 
         if (id == R.id.nav_Home) {
 
-
             Fragment fragment = new HomeFragment();
             FragmentManager manager = getSupportFragmentManager();
             FragmentTransaction ft = manager.beginTransaction();
@@ -125,6 +133,20 @@ public class HomeAct extends AppCompatActivity
             FragmentManager manager = getSupportFragmentManager();
             FragmentTransaction ft = manager.beginTransaction();
             ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+
+          } else if (id == R.id.nav_transcation) {
+
+                    Fragment fragment = new Transcation();
+                    FragmentManager manager = getSupportFragmentManager();
+                    FragmentTransaction ft = manager.beginTransaction();
+                    ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+
+          } else if (id == R.id.nav_tremCondition) {
+
+                    Fragment fragment = new TermsCondition();
+                    FragmentManager manager = getSupportFragmentManager();
+                    FragmentTransaction ft = manager.beginTransaction();
+                    ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 
 
         } else if (id == R.id.nav_logout) {

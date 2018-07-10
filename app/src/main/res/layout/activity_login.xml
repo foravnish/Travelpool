@@ -20,6 +20,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="0"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:orientation="vertical">
 
                 <TextView
@@ -85,11 +87,56 @@
                     android:textColorHint="@color/white"
                     android:textSize="18sp" />
 
+                <LinearLayout
+                    android:id="@+id/layRadio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:visibility="gone"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/password"
+                    android:gravity="center">
+
+                    <RadioGroup
+                        android:id="@+id/radioGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:weightSum="2">
+
+
+                        <RadioButton
+                            android:id="@+id/radio1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:checked="true"
+                            android:textColor="#fff"
+                            android:buttonTint="@color/orange"
+                            android:text="User Login"/>
+
+                        <RadioButton
+                            android:id="@+id/radio2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="#fff"
+                            android:buttonTint="@color/orange"
+                            android:text="Agent Login"/>
+                    </RadioGroup>
+                </LinearLayout>
+
+
+
                 <Button
                     android:id="@+id/btnLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/password"
+                    android:layout_below="@+id/layRadio"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="25dp"
@@ -178,6 +225,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
+            android:visibility="gone"
             android:layout_marginBottom="30dp" />
 
         <TextView

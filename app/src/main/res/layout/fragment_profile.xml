@@ -8,8 +8,6 @@
 
 
 
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -22,7 +20,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 >
 
                 <com.gelitenight.waveview.library.WaveView
@@ -312,6 +309,85 @@
 
                 <TextView
                     android:id="@+id/tve_pincode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tve_city"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/tv_pincode"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/muli_bold"
+                    android:text=" "
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:padding="12dp"
+                android:background="#ecd6c7">
+
+
+                <TextView
+                    android:id="@+id/tv_aadhar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_city"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/muli_semibold"
+                    android:gravity="right"
+                    android:text="Aadhar No"
+                    android:textColor="@color/md_grey_700"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tve_aadharNo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tve_city"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/tv_state"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/muli_bold"
+                    android:text=" "
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:padding="12dp"
+                android:background="#fff">
+
+
+                <TextView
+                    android:id="@+id/tv_panNo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_city"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/muli_semibold"
+                    android:gravity="right"
+                    android:text="Pan Card No"
+                    android:textColor="@color/md_grey_700"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tve_panNo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tve_city"

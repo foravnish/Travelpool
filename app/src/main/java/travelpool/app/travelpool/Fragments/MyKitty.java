@@ -23,13 +23,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,11 +43,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import travelpool.app.travelpool.Activity.PayNow;
 import travelpool.app.travelpool.R;
 import travelpool.app.travelpool.Utils.Api;
 import travelpool.app.travelpool.Utils.AppController;
+import travelpool.app.travelpool.Utils.MyPrefrences;
 import travelpool.app.travelpool.Utils.Util;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -78,134 +88,7 @@ public class MyKitty extends Fragment {
       //  Util.showPgDialog(dialog);
 
 
-//        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-//                Api.searchCompany+"?keyword="+"4"+"&cityId=1", null, new Response.Listener<JSONObject>() {
-//
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                Log.d("Respose123", response.toString());
-//
-//                Util.cancelPgDialog(dialog);
-//                try {
-//                    // Parsing json object response
-//                    // response will be a json object
-////                    String name = response.getString("name");
-//
-//                    if (response.getString("status").equalsIgnoreCase("success")){
-//
-//                        expListView.setVisibility(View.VISIBLE);
-//                        imageNoListing.setVisibility(View.GONE);
-//
-//                        final JSONArray jsonArray=response.getJSONArray("message");
-//                        for (int i=0;i<jsonArray.length();i++){
-//                            JSONObject jsonObject=jsonArray.getJSONObject(i);
-//
-//                            JSONArray jsonArray1=jsonObject.getJSONArray("rating");
-//                            JSONArray jsonArray2=jsonObject.getJSONArray("payment_mode");
-//
-//                            for (int j=0;j<jsonArray1.length();j++){
-//                                jsonObject1=jsonArray1.getJSONObject(j);
-//                                Log.d("fdsgvfdh",jsonObject1.optString("ratingUser"));
-//                                Log.d("fdsgvfdh",jsonObject1.optString("rating"));
-//                            }
-//
-//
-//                            map=new HashMap();
-//                            map.put("id",jsonObject.optString("id"));
-//                            map.put("cat_id",jsonObject.optString("cat_id"));
-//                            map.put("company_name",jsonObject.optString("company_name"));
-//                            map.put("address",jsonObject.optString("address"));
-//                            map.put("c1_fname",jsonObject.optString("c1_fname"));
-//                            map.put("c1_mname",jsonObject.optString("c1_mname"));
-//                            map.put("c1_lname",jsonObject.optString("c1_lname"));
-//                            map.put("c1_email",jsonObject.optString("c1_email"));
-//                            map.put("c1_mobile1",jsonObject.optString("c1_mobile1"));
-//                            map.put("c1_mobile2",jsonObject.optString("c1_mobile2"));
-//                            map.put("website",jsonObject.optString("website"));
-//                            map.put("totlauser",jsonObject1.optString("ratingUser"));
-//                            map.put("rating",jsonObject1.optString("rating"));
-//                            map.put("liking",jsonObject.optString("liking"));
-//                            map.put("locationName",jsonObject.optString("locationName"));
-//                            map.put("logo",jsonObject.optString("logo"));
-//                            map.put("companyLogo",jsonObject.optString("companyLogo"));
-//                            map.put("premium",jsonObject.optString("premium"));
-//                            map.put("offer",jsonObject.optString("offer"));
-//                            map.put("pincode",jsonObject.optString("pincode"));
-//                            map.put("distance",jsonObject.optString("distance"));
-//
-//                            map.put("latitude",jsonObject.optString("latitude"));
-//                            map.put("longitude",jsonObject.optString("longitude"));
-//
-//                            map.put("payment_mode",jsonObject.optString("payment_mode"));
-//                            map.put("closing_time",jsonObject.optString("closing_time"));
-//                            map.put("closing_time2",jsonObject.optString("closing_time2"));
-//                            map.put("opening_time",jsonObject.optString("opening_time"));
-//                            map.put("opening_time2",jsonObject.optString("opening_time2"));
-//                            map.put("min_order_amnt",jsonObject.optString("min_order_amnt"));
-//                            map.put("min_order_qty",jsonObject.optString("min_order_qty"));
-//                            map.put("closing_days",jsonObject.optString("closing_days"));
-//
-//
-//
-//                            Adapter adapter=new Adapter();
-//                            expListView.setAdapter(adapter);
-//                            AllProducts.add(map);
-//
-//
-////                            expListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-////                                @Override
-////                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-////
-////
-////                                    try {
-////                                        Intent intent=new Intent(getActivity(),ProfileAct.class);
-////                                        intent.putExtra("data",jsonArray.get(i).toString());
-////                                        startActivity(intent);
-////                                    } catch (JSONException e) {
-////                                        e.printStackTrace();
-////                                    }
-////
-////
-////
-////                                }
-////                            });
-//
-//
-//                        }
-//                    }
-//                    else{
-//                        expListView.setVisibility(View.GONE);
-//                        imageNoListing.setVisibility(View.VISIBLE);
-//                        //Toast.makeText(getActivity(), "No Record Found...", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(getActivity(),
-//                            "Error: " + e.getMessage(),
-//                            Toast.LENGTH_LONG).show();
-//                    Util.cancelPgDialog(dialog);
-//                }
-//
-//            }
-//        }, new Response.ErrorListener() {
-//
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                VolleyLog.d("Respose", "Error: " + error.getMessage());
-//                Toast.makeText(getActivity(),
-//                        "Error! Please Connect to the internet", Toast.LENGTH_SHORT).show();
-//                // hide the progress dialog
-//                Util.cancelPgDialog(dialog);
-//
-//            }
-//        });
-
-
-//        jsonObjReq.setShouldCache(false);
-//        AppController.getInstance().addToRequestQueue(jsonObjReq);
+        ReceiveData();
 
 
 
@@ -213,9 +96,95 @@ public class MyKitty extends Fragment {
 
     }
 
+
+
+
+    private void ReceiveData() {
+
+        Util.showPgDialog(dialog);
+
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                Api.my_kitty, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Util.cancelPgDialog(dialog);
+                Log.e("MyKitty", "Response: " + response);
+
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+                    if (jsonObject.getString("status").equalsIgnoreCase("success")){
+
+                        expListView.setVisibility(View.VISIBLE);
+                        imageNoListing.setVisibility(View.GONE);
+
+                        final JSONArray jsonArray=jsonObject.getJSONArray("data");
+                        for (int i=0;i<jsonArray.length();i++){
+                            JSONObject jsonObject1=jsonArray.getJSONObject(i);
+
+                            map=new HashMap();
+                            map.put("id",jsonObject1.optString("id"));
+                            map.put("kitty_id",jsonObject1.optString("kitty_id"));
+                            map.put("join_date",jsonObject1.optString("join_date"));
+
+                            Adapter adapter=new Adapter();
+                            expListView.setAdapter(adapter);
+                            AllProducts.add(map);
+
+                        }
+                    }
+                    else{
+
+                        expListView.setVisibility(View.GONE);
+                        imageNoListing.setVisibility(View.VISIBLE);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Util.cancelPgDialog(dialog);
+                Log.e("fdgdfgdfgd", "Login Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),"Please Connect to the Internet or Wrong Password", Toast.LENGTH_LONG).show();
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Log.e("fgdfgdfgdf","Inside getParams");
+
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<>();
+                params.put("userid",  MyPrefrences.getUserID(getActivity()));
+              //  params.put("kitty_id",  id.toString());
+
+                return params;
+            }
+
+//                        @Override
+//                        public Map<String, String> getHeaders() throws AuthFailureError {
+//                            Log.e("fdgdfgdfgdfg","Inside getHeaders()");
+//                            Map<String,String> headers=new HashMap<>();
+//                            headers.put("Content-Type","application/x-www-form-urlencoded");
+//                            return headers;
+//                        }
+        };
+        // Adding request to request queue
+        queue.add(strReq);
+
+
+
+
+    }
+
+
     public class Viewholder{
         ImageView imgFav,stars;
-        TextView address,name,totlareview,area,subcatListing,distance;
+        TextView packageName,name,totlareview,area,subcatListing,distance;
         LinearLayout liner,linerLayoutOffer;
 
         NetworkImageView imgaeView;
@@ -261,39 +230,19 @@ public class MyKitty extends Fragment {
         public View getView(final int position, View convertView, ViewGroup parent) {
 
 
-            convertView=inflater.inflate(R.layout.list_lsiting,parent,false);
+            convertView=inflater.inflate(R.layout.list_my_kitty,parent,false);
 
             final Viewholder viewholder=new Viewholder();
 
             viewholder.name=convertView.findViewById(R.id.name);
-            viewholder.address=convertView.findViewById(R.id.address);
-            //viewholder.imgFav=convertView.findViewById(R.id.imgFav);
-//            viewholder.stars=convertView.findViewById(R.id.stars);
-            viewholder.liner=convertView.findViewById(R.id.liner);
-            viewholder.totlareview=convertView.findViewById(R.id.totlareview);
+            viewholder.packageName=convertView.findViewById(R.id.packageName);
 
-            viewholder.area=convertView.findViewById(R.id.area);
-//            viewholder.callNow1=convertView.findViewById(R.id.callNow1);
-            viewholder.imgaeView=convertView.findViewById(R.id.imgaeView);
-            viewholder.linerLayoutOffer=convertView.findViewById(R.id.linerLayoutOffer);
-            viewholder.cardView=convertView.findViewById(R.id.cardView);
-            // viewholder.offersText=convertView.findViewById(R.id.offersText);
-            viewholder.subcatListing=convertView.findViewById(R.id.subcatListing);
-            viewholder.distance=convertView.findViewById(R.id.distance);
 
 
 //
 
-            viewholder.name.setText(AllProducts.get(position).get("company_name"));
-            viewholder.name.setText(AllProducts.get(position).get("company_name"));
-            viewholder.address.setText(AllProducts.get(position).get("address"));
-            viewholder.totlareview.setText(AllProducts.get(position).get("totlauser")+" Reviews");
-            viewholder.area.setText(AllProducts.get(position).get("locationName"));
-            viewholder.subcatListing.setText(AllProducts.get(position).get("keywords"));
-            ImageLoader imageLoader = AppController.getInstance().getImageLoader();
-            viewholder.imgaeView.setImageUrl(AllProducts.get(position).get("logo"),imageLoader);
-
-
+            viewholder.name.setText(AllProducts.get(position).get("kitty_id"));
+            viewholder.packageName.setText(AllProducts.get(position).get("join_date"));
 
 //
 //            Typeface face=Typeface.createFromAsset(getActivity().getAssets(), "muli_semibold.ttf");

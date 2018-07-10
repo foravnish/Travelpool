@@ -23,11 +23,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,13 +46,14 @@ import java.util.Map;
 import travelpool.app.travelpool.R;
 import travelpool.app.travelpool.Utils.Api;
 import travelpool.app.travelpool.Utils.AppController;
+import travelpool.app.travelpool.Utils.MyPrefrences;
 import travelpool.app.travelpool.Utils.Util;
 
 
 public class Registration extends AppCompatActivity {
 
     Button btnSubReg;
-    EditText editTextname,editmobile,editPassword,editPasswordCon,editEmail,editAddress,editCity,editState,editPincode;
+    EditText editTextname,editmobile,editPassword,editPasswordCon,editEmail,editAddress,editCity,editState,editPincode,editapasport,editpanNo,aadharNo;
     TextView editTextdob,skipNow;
     //Spinner editLocation;
     Dialog dialog;
@@ -80,6 +86,10 @@ public class Registration extends AppCompatActivity {
         editCity=findViewById(R.id.editCity);
         editState=findViewById(R.id.editState);
         editPincode=findViewById(R.id.editPincode);
+
+        aadharNo=findViewById(R.id.aadharNo);
+        editpanNo=findViewById(R.id.editpanNo);
+        editapasport=findViewById(R.id.editapasport);
 
         dialog=new Dialog(Registration.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -123,14 +133,17 @@ public class Registration extends AppCompatActivity {
         btnSubReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             //   Log.d("sdfvdgdfghfg",gender.getSelectedItem().toString());
+
+
+//                smsAPI();
+
+
                 if(validate()){
 
 //                    otpAPi(editmobile.getText().toString());
 
-
-
                     submitRegistration();
+
                 }
             }
         });
@@ -313,81 +326,182 @@ public class Registration extends AppCompatActivity {
     private void submitRegistration() {
 
         Util.showPgDialog(dialog);
-
-        StringRequest postRequest = new StringRequest(Request.Method.POST, Api.signup,
-                new Response.Listener<String>()
-                {
-
-                    @Override
-                    public void onResponse(String response) {
-                        // response
-                        Log.d("ResponseRegis", response);
-                        Util.cancelPgDialog(dialog);
-                        try {
-                            JSONObject jsonObject=new JSONObject(response);
-                            if (jsonObject.getString("status").equalsIgnoreCase("1")){
-
-                                Toast.makeText(getApplicationContext(),"Registration Successfully..." , Toast.LENGTH_SHORT).show();
-
-                                Intent intent = new Intent(Registration.this, Login.class);
-                                startActivity(intent);
-                                finish();
-                                Toast.makeText(getApplicationContext(),"Please Login..." , Toast.LENGTH_SHORT).show();
-
-                            }
-                            else{
-                                Util.errorDialog(Registration.this,jsonObject.getString("msg"));
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // error
-                        Toast.makeText(Registration.this, "Error! Please connect to the Internet.", Toast.LENGTH_SHORT).show();
-                        Util.cancelPgDialog(dialog);
-                    }
-                }
-        ) {
+        RequestQueue queue = Volley.newRequestQueue(Registration.this);
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                Api.signup, new Response.Listener<String>() {
             @Override
-            protected Map<String, String> getParams()
-            {
-//                TelephonyManager manager = (TelephonyManager)getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-//                String carrierName = manager.getNetworkOperatorName();
-//                Log.d("dsfsdfgsdgdfgdf",carrierName);
-//
-//                String reqString = Build.MANUFACTURER
-//                        + " " + Build.MODEL + " " + Build.VERSION.RELEASE
-//                        + " " + Build.VERSION_CODES.class.getFields()[Build.VERSION.SDK_INT].getName();
-//                Log.d("dfdsgvdgdfgd",reqString);
-//
-//                WifiManager wm = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
-//                String ip = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
-//                Log.d("dfgdfgdfhdhfd",ip);
+            public void onResponse(String response) {
+                Util.cancelPgDialog(dialog);
+                Log.e("dfsjfdfsdfgd", "Login Response: " + response);
+                //parse your response here
 
-                Map<String, String>  params = new HashMap<String, String>();
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+
+
+                    if (jsonObject.optString("status").equals("success")){
+
+                        Log.d("fsdfsdfsdfs","true");
+
+                        Toast.makeText(getApplicationContext(), "Registration Successfully...", Toast.LENGTH_SHORT).show();
+
+                        smsAPI();
+
+                        Intent intent = new Intent(Registration.this, Login.class);
+                        startActivity(intent);
+                        finish();
+                        Toast.makeText(getApplicationContext(), "Please Login...", Toast.LENGTH_SHORT).show();
+
+                    }
+                    else if (jsonObject.optString("status").equals("FALSE")){
+                        Util.errorDialog(Registration.this,jsonObject.getString("message"));
+                        Log.d("fsdfsdfsdfs","false");
+                    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Util.cancelPgDialog(dialog);
+                Log.e("fdgdfgdfgd", "Login Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),"Please Connect to the Internet or Wrong Password", Toast.LENGTH_LONG).show();
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Log.e("fgdfgdfgdf","Inside getParams");
+
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<>();
                 params.put("name", editTextname.getText().toString());
                 params.put("email",editEmail.getText().toString());
-                params.put("mobileno",editmobile.getText().toString());
+                params.put("mobile",editmobile.getText().toString());
                 params.put("password",editPassword.getText().toString());
                 params.put("address",editAddress.getText().toString());
                 params.put("city",editCity.getText().toString());
                 params.put("state",editState.getText().toString());
                 params.put("pincode",editPincode.getText().toString());
 
+                params.put("aadhar_no",aadharNo.getText().toString());
+                params.put("pan_no",editpanNo.getText().toString());
+                params.put("status","1");
                 return params;
             }
-        };
-        postRequest.setRetryPolicy(new DefaultRetryPolicy(27000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        postRequest.setShouldCache(false);
 
-        AppController.getInstance().addToRequestQueue(postRequest);
+//                        @Override
+//                        public Map<String, String> getHeaders() throws AuthFailureError {
+//                            Log.e("fdgdfgdfgdfg","Inside getHeaders()");
+//                            Map<String,String> headers=new HashMap<>();
+//                            headers.put("Content-Type","application/x-www-form-urlencoded");
+//                            return headers;
+//                        }
+        };
+        // Adding request to request queue
+        queue.add(strReq);
+
+
+
+
+
+//        StringRequest postRequest = new StringRequest(Request.Method.POST, Api.signup,
+//                new Response.Listener<String>()
+//                {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        // response
+//                        Log.d("ResponseRegis", response);
+//                        Util.cancelPgDialog(dialog);
+//                        try {
+//                            JSONObject jsonObject=new JSONObject(response);
+//                            if (jsonObject.getString("status").equalsIgnoreCase("1")){
+//
+//                                Toast.makeText(getApplicationContext(),"Registration Successfully..." , Toast.LENGTH_SHORT).show();
+//
+//                                Intent intent = new Intent(Registration.this, Login.class);
+//                                startActivity(intent);
+//                                finish();
+//                                Toast.makeText(getApplicationContext(),"Please Login..." , Toast.LENGTH_SHORT).show();
+//                            }
+//                            else{
+//                                Util.errorDialog(Registration.this,jsonObject.getString("message"));
+//                            }
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                    }
+//                },
+//                new Response.ErrorListener()
+//                {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        // error
+//                        Toast.makeText(Registration.this, "Error! Please connect to the Internet.", Toast.LENGTH_SHORT).show();
+//                        Util.cancelPgDialog(dialog);
+//                    }
+//                }
+//        ) {
+//            @Override
+//            protected Map<String, String> getParams()
+//            {
+////
+//                Map<String, String>  params = new HashMap<String, String>();
+//                params.put("name", editTextname.getText().toString());
+//                params.put("email",editEmail.getText().toString());
+//                params.put("mobile",editmobile.getText().toString());
+//                params.put("password",editPassword.getText().toString());
+//                params.put("address",editAddress.getText().toString());
+//                params.put("city",editCity.getText().toString());
+//                params.put("state",editState.getText().toString());
+//                params.put("pincode",editPincode.getText().toString());
+//
+//                params.put("aadhar_no",aadharNo.getText().toString());
+//                params.put("pan_no",editpanNo.getText().toString());
+//                params.put("status","1");
+////                params.put("passportNo",editapasport.getText().toString());
+//
+//                return params;
+//            }
+//        };
+//        postRequest.setRetryPolicy(new DefaultRetryPolicy(27000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//        postRequest.setShouldCache(false);
+//
+//        AppController.getInstance().addToRequestQueue(postRequest);
+
+
+
+    }
+
+    private void smsAPI() {
+
+
+//        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, "http://103.27.87.89/send.php?usr=4866&pwd=trpool@travel&ph="+editmobile.getText().toString()+"&sndr=TRPOOL&text=TEST%20MSG", null, new Response.Listener<JSONObject>() {
+            JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, "http://103.27.87.89/send.php?usr=4866&pwd=trpool@travel&ph="+editmobile.getText().toString()+"&sndr=TRPOOL&text=Congratulation!%20You%20have%20Successfully%20Registered%20with%20TRAVEL%20POOL,%20Please%20Login%20to%20access", null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                Log.d("asdfsafsdfsdf",response.toString());
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        AppController.getInstance().addToRequestQueue(request);
+
 
     }
 
@@ -410,6 +524,7 @@ public class Registration extends AppCompatActivity {
 
         else if (editmobile.getText().toString().length()!=10){
             editmobile.setError("Oops! Enter Valid Mobile No.");
+            editmobile.requestFocus();
             return false;
         }
 
@@ -448,6 +563,19 @@ public class Registration extends AppCompatActivity {
         {
             editPincode.setError("Oops! Pincode blank");
             editPincode.requestFocus();
+            return false;
+        }
+
+        else if (TextUtils.isEmpty(aadharNo.getText().toString()))
+        {
+            aadharNo.setError("Oops! Aadhar Card blank");
+            aadharNo.requestFocus();
+            return false;
+        }
+        else if (TextUtils.isEmpty(editpanNo.getText().toString()))
+        {
+            editpanNo.setError("Oops!Pan Card blank");
+            editpanNo.requestFocus();
             return false;
         }
 
