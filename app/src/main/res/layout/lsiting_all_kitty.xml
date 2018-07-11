@@ -30,8 +30,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="10dp">
+                    android:orientation="vertical">
 
 
                     <TextView
@@ -41,9 +40,16 @@
                         android:fontFamily="@font/muli_bold"
                         android:singleLine="true"
                         android:text="Loading..."
-                        android:textColor="#012b72"
+                        android:gravity="center"
+                        android:textColor="@color/orange"
                         android:textSize="18sp" />
 
+
+                    <com.android.volley.toolbox.NetworkImageView
+                        android:id="@+id/banerImg"
+                        android:layout_width="match_parent"
+                        android:scaleType="fitXY"
+                        android:layout_height="170dp" />
                     <TextView
                         android:id="@+id/packageName"
                         android:layout_width="match_parent"
@@ -51,90 +57,8 @@
                         android:fontFamily="@font/muli_bold"
                         android:singleLine="true"
                         android:text="Loading..."
-                        android:textColor="#012b72"
+                        android:textColor="@color/orange"
                         android:textSize="16sp" />
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-
-                    <TextView
-                        android:id="@+id/months"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/muli"
-                        android:text="Loading"
-                        android:layout_weight="1"
-                        android:textColor="#111111"
-                        android:textSize="13sp" />
-                    <TextView
-                        android:id="@+id/member"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/muli"
-                        android:text="Loading"
-                        android:layout_weight="1"
-                        android:textColor="#111111"
-                        android:textSize="13sp" />
-
-                    </LinearLayout>
-
-
-
-                        <TextView
-                            android:id="@+id/instal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/muli_bold"
-                            android:text="vasundhara"
-                            android:textColor="#111111" />
-
-
-                    <TextView
-                        android:id="@+id/penality_after"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/muli"
-                        android:text="Loading"
-                        android:textStyle="bold"
-                        android:textColor="#111111"
-                        android:textSize="13sp" />
-
-
-                    <TextView
-                        android:id="@+id/lucky_draw_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/muli"
-                        android:text="Loading"
-                        android:textStyle="bold"
-                        android:textColor="#111111"
-                        android:textSize="13sp" />
-
-
-                    <TextView
-                        android:id="@+id/payment_due_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/muli"
-                        android:text="Loading"
-                        android:textStyle="bold"
-                        android:textColor="#111111"
-                        android:textSize="13sp" />
-
-
-                    <TextView
-                        android:id="@+id/term_and_cond"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/muli"
-                        android:text="loading"
-                        android:textColor="@color/green"
-                        android:textSize="12dp" />
 
 
                 </LinearLayout>

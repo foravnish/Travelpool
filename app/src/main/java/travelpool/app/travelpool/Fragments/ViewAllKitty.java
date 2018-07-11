@@ -110,6 +110,7 @@ public class ViewAllKitty extends Fragment {
                             map.put("payment_due_date",jsonObject.optString("payment_due_date"));
                             map.put("penality_after_due_date",jsonObject.optString("penality_after_due_date"));
                             map.put("package_name",jsonObject.optString("package_name"));
+                            map.put("banner",jsonObject.optString("banner"));
 
                             Adapter adapter=new Adapter();
                             expListView.setAdapter(adapter);
@@ -173,7 +174,7 @@ public class ViewAllKitty extends Fragment {
         TextView penality_after,payment_due_date,lucky_draw_date,term_and_cond,instal,member,months,packageName,name;
         LinearLayout liner,linerLayoutOffer;
 
-        NetworkImageView imgaeView;
+        NetworkImageView banerImg;
     }
     class Adapter extends BaseAdapter {
 
@@ -211,24 +212,30 @@ public class ViewAllKitty extends Fragment {
 
             viewholder.name=convertView.findViewById(R.id.name);
             viewholder.packageName=convertView.findViewById(R.id.packageName);
-            viewholder.months=convertView.findViewById(R.id.months);
-            viewholder.member=convertView.findViewById(R.id.member);
-            viewholder.instal=convertView.findViewById(R.id.instal);
-            viewholder.term_and_cond=convertView.findViewById(R.id.term_and_cond);
-            viewholder.lucky_draw_date=convertView.findViewById(R.id.lucky_draw_date);
-            viewholder.payment_due_date=convertView.findViewById(R.id.payment_due_date);
-            viewholder.penality_after=convertView.findViewById(R.id.penality_after);
+//            viewholder.months=convertView.findViewById(R.id.months);
+//            viewholder.member=convertView.findViewById(R.id.member);
+//            viewholder.instal=convertView.findViewById(R.id.instal);
+//            viewholder.term_and_cond=convertView.findViewById(R.id.term_and_cond);
+//            viewholder.lucky_draw_date=convertView.findViewById(R.id.lucky_draw_date);
+//            viewholder.payment_due_date=convertView.findViewById(R.id.payment_due_date);
+//            viewholder.penality_after=convertView.findViewById(R.id.penality_after);
+            viewholder.banerImg=convertView.findViewById(R.id.banerImg);
 
 
             viewholder.name.setText(AllProducts.get(position).get("name"));
-            viewholder.packageName.setText(AllProducts.get(position).get("package_name"));
-            viewholder.months.setText(AllProducts.get(position).get("no_of_month")+" Months");
-            viewholder.member.setText(AllProducts.get(position).get("no_of_max_members")+" Members");
-            viewholder.instal.setText("₹ "+AllProducts.get(position).get("per_month_installment")+" Per Month");
-            viewholder.term_and_cond.setText(AllProducts.get(position).get("term_and_cond"));
-            viewholder.lucky_draw_date.setText("Lucky Draw Date: "+AllProducts.get(position).get("lucky_draw_date"));
-            viewholder.payment_due_date.setText("Payment Due Date : "+AllProducts.get(position).get("payment_due_date"));
-            viewholder.penality_after.setText("After due Date : "+AllProducts.get(position).get("penality_after_due_date"));
+            viewholder.packageName.setText("Package Name: "+AllProducts.get(position).get("package_name"));
+
+            ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+            viewholder.banerImg.setImageUrl(AllProducts.get(position).get("banner").toString().replace(" ","%20"),imageLoader);
+
+
+//            viewholder.months.setText(AllProducts.get(position).get("no_of_month")+" Months");
+//            viewholder.member.setText(AllProducts.get(position).get("no_of_max_members")+" Members");
+//            viewholder.instal.setText("₹ "+AllProducts.get(position).get("per_month_installment")+" Per Month");
+//            viewholder.term_and_cond.setText(AllProducts.get(position).get("term_and_cond"));
+//            viewholder.lucky_draw_date.setText("Lucky Draw Date: "+AllProducts.get(position).get("lucky_draw_date"));
+//            viewholder.payment_due_date.setText("Payment Due Date : "+AllProducts.get(position).get("payment_due_date"));
+//            viewholder.penality_after.setText("After due Date : "+AllProducts.get(position).get("penality_after_due_date"));
 
 
 

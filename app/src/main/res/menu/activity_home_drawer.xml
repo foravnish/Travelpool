@@ -23,6 +23,7 @@
         <item
             android:id="@+id/nav_transcation"
             android:icon="@drawable/transaction"
+            android:visible="false"
             android:title="Transaction History" />
 
         <item

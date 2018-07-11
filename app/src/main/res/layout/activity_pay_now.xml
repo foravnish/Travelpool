@@ -42,6 +42,32 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <RelativeLayout
+                    android:id="@+id/relative1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.android.volley.toolbox.NetworkImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:scaleType="fitXY"
+                        android:focusable="true"
+                        android:adjustViewBounds="true"/>
+
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,14 +75,6 @@
                 android:padding="10dp">
 
 
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:background="@drawable/sidemenu"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/name"
@@ -68,7 +86,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:textStyle="bold"
-                        android:textColor="#fff"
+                        android:textColor="#111"
                         android:textSize="22sp" />
 
                     <TextView
@@ -81,9 +99,9 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:textStyle="bold"
-                        android:textColor="#fff"
+                        android:textColor="#111"
                         android:textSize="20sp" />
-                </LinearLayout>
+
 
 
 

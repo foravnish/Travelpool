@@ -22,6 +22,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.payumoney.core.PayUmoneyConfig;
@@ -65,7 +67,7 @@ public class PayNow extends AppCompatActivity {
     private PayUmoneySdkInitializer.PaymentParam mPaymentParams;
     private AppPreference mAppPreference;
     String merKey,merId,salt;
-
+    NetworkImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +80,7 @@ public class PayNow extends AppCompatActivity {
         name=findViewById(R.id.name);
         packageName=findViewById(R.id.packageName);
         payNow=findViewById(R.id.payNow);
+        imageView=findViewById(R.id.imageView);
 
         dialog=new Dialog(PayNow.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -89,12 +92,14 @@ public class PayNow extends AppCompatActivity {
         merId=AppEnvironment.SANDBOX.merchant_ID();
         salt=AppEnvironment.SANDBOX.salt();
 
-
         try {
             jsonObject=new JSONObject(getIntent().getStringExtra("data"));
 
             name.setText(jsonObject.optString("name"));
             packageName.setText(jsonObject.optString("package_name"));
+
+            ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+            imageView.setImageUrl(jsonObject.optString("banner").toString().replace(" ","%20"),imageLoader);
 
             instal.setText("Per Month ₹ : "+jsonObject.optString("per_month_installment"));
 

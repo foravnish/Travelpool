@@ -50,6 +50,7 @@ import java.util.Map;
 
 import travelpool.app.travelpool.Activity.PayNow;
 import travelpool.app.travelpool.R;
+import travelpool.app.travelpool.Utils.AppController;
 import travelpool.app.travelpool.Utils.Util;
 
 import static android.text.Html.fromHtml;
@@ -122,6 +123,7 @@ public class ListingDetails extends Fragment {
         payment_due_date=view.findViewById(R.id.payment_due_date);
         penality_after=view.findViewById(R.id.penality_after);
         joinNow=view.findViewById(R.id.joinNow);
+        imageView=view.findViewById(R.id.imageView);
 
 
         try {
@@ -136,6 +138,9 @@ public class ListingDetails extends Fragment {
             lucky_draw_date.setText("Lucky Draw Date: "+jsonObject.optString("lucky_draw_date"));
             payment_due_date.setText("Payment Due Date: "+jsonObject.optString("payment_due_date"));
             penality_after.setText("After Due Date: "+jsonObject.optString("penality_after_due_date"));
+
+            ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+            imageView.setImageUrl(jsonObject.optString("banner").toString().replace(" ","%20"),imageLoader);
 
         } catch (JSONException e) {
             e.printStackTrace();
