@@ -114,7 +114,6 @@ public class PayNow extends AppCompatActivity {
 
 
 //                submitData(jsonObject.optString("id"));
-
                 launchPayUMoneyFlow("", jsonObject.optString("per_month_installment"));
 
             }
@@ -175,6 +174,8 @@ public class PayNow extends AppCompatActivity {
                 params.put("kitty_id",  id.toString());
 
 
+                Log.d("fsfsdfsdfsdfsf",MyPrefrences.getUserID(getApplicationContext()));
+                Log.d("fsfsdfsdfsdfsf",id.toString());
                 return params;
             }
 

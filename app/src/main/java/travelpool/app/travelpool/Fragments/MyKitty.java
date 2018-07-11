@@ -126,7 +126,14 @@ public class MyKitty extends Fragment {
                             map=new HashMap();
                             map.put("id",jsonObject1.optString("id"));
                             map.put("kitty_id",jsonObject1.optString("kitty_id"));
-                            map.put("join_date",jsonObject1.optString("join_date"));
+                            map.put("name",jsonObject1.optString("name"));
+                            map.put("package_name",jsonObject1.optString("package_name"));
+                            map.put("p_m_i",jsonObject1.optString("p_m_i"));
+                            map.put("m_m",jsonObject1.optString("m_m"));
+                            map.put("tc",jsonObject1.optString("tc"));
+                            map.put("lucky_d_d",jsonObject1.optString("lucky_d_d"));
+                            map.put("image",jsonObject1.optString("image"));
+                            map.put("banner",jsonObject1.optString("banner"));
 
                             Adapter adapter=new Adapter();
                             expListView.setAdapter(adapter);
@@ -165,13 +172,6 @@ public class MyKitty extends Fragment {
                 return params;
             }
 
-//                        @Override
-//                        public Map<String, String> getHeaders() throws AuthFailureError {
-//                            Log.e("fdgdfgdfgdfg","Inside getHeaders()");
-//                            Map<String,String> headers=new HashMap<>();
-//                            headers.put("Content-Type","application/x-www-form-urlencoded");
-//                            return headers;
-//                        }
         };
         // Adding request to request queue
         queue.add(strReq);
@@ -184,7 +184,7 @@ public class MyKitty extends Fragment {
 
     public class Viewholder{
         ImageView imgFav,stars;
-        TextView packageName,name,totlareview,area,subcatListing,distance;
+        TextView packageName,name,term_and_cond,lucky_draw_date,instal,distance;
         LinearLayout liner,linerLayoutOffer;
 
         NetworkImageView imgaeView;
@@ -195,6 +195,7 @@ public class MyKitty extends Fragment {
         ImageView img1,img2,img3,img4,img5;
 
         LinearLayout footer_layout;
+        NetworkImageView banerImg;
 
     }
     class Adapter extends BaseAdapter {
@@ -236,15 +237,24 @@ public class MyKitty extends Fragment {
 
             viewholder.name=convertView.findViewById(R.id.name);
             viewholder.packageName=convertView.findViewById(R.id.packageName);
+            viewholder.term_and_cond=convertView.findViewById(R.id.term_and_cond);
+            viewholder.lucky_draw_date=convertView.findViewById(R.id.lucky_draw_date);
+            viewholder.instal=convertView.findViewById(R.id.instal);
+            viewholder.banerImg=convertView.findViewById(R.id.banerImg);
 
 
 
-//
+            viewholder.name.setText(AllProducts.get(position).get("name"));
+            viewholder.packageName.setText(AllProducts.get(position).get("package_name"));
+            viewholder.term_and_cond.setText(AllProducts.get(position).get("tc"));
+            viewholder.lucky_draw_date.setText("Lucky Draw Date: "+AllProducts.get(position).get("lucky_d_d"));
+            viewholder.instal.setText(" Per Month ₹ : "+AllProducts.get(position).get("p_m_i"));
 
-            viewholder.name.setText(AllProducts.get(position).get("kitty_id"));
-            viewholder.packageName.setText(AllProducts.get(position).get("join_date"));
 
-//
+            ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+            viewholder.banerImg.setImageUrl(AllProducts.get(position).get("banner").toString().replace(" ","%20"),imageLoader);
+
+
 //            Typeface face=Typeface.createFromAsset(getActivity().getAssets(), "muli_semibold.ttf");
 //            Typeface face2=Typeface.createFromAsset(getActivity().getAssets(), "muli.ttf");
 //            viewholder.name.setTypeface(face);
