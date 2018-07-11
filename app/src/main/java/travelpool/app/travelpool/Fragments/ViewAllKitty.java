@@ -223,7 +223,7 @@ public class ViewAllKitty extends Fragment {
 
 
             viewholder.name.setText(AllProducts.get(position).get("name"));
-            viewholder.packageName.setText("Package Name: "+AllProducts.get(position).get("package_name"));
+            viewholder.packageName.setText(AllProducts.get(position).get("package_name"));
 
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
             viewholder.banerImg.setImageUrl(AllProducts.get(position).get("banner").toString().replace(" ","%20"),imageLoader);
@@ -236,9 +236,6 @@ public class ViewAllKitty extends Fragment {
 //            viewholder.lucky_draw_date.setText("Lucky Draw Date: "+AllProducts.get(position).get("lucky_draw_date"));
 //            viewholder.payment_due_date.setText("Payment Due Date : "+AllProducts.get(position).get("payment_due_date"));
 //            viewholder.penality_after.setText("After due Date : "+AllProducts.get(position).get("penality_after_due_date"));
-
-
-
 
 
 //            Typeface face=Typeface.createFromAsset(getActivity().getAssets(), "muli_semibold.ttf");
