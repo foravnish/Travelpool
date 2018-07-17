@@ -153,7 +153,7 @@ public class PayNow extends AppCompatActivity {
                     }
                     else  if (jsonObject.getString("status").equalsIgnoreCase("Error")){
 
-                        //launchPayUMoneyFlow("", price);
+                        launchPayUMoneyFlow("", price);
 
                         Log.d("sdfsfsdfsdfsds","yes");
                     }
