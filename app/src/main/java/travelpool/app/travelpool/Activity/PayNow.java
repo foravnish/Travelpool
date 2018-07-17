@@ -140,31 +140,27 @@ public class PayNow extends AppCompatActivity {
                     JSONObject jsonObject=new JSONObject(response);
                     if (jsonObject.getString("status").equalsIgnoreCase("Success")){
 
-                        if (jsonObject.getString("stattus kitty").equalsIgnoreCase("NO")){
-                            launchPayUMoneyFlow("", price);
-                        }
-                        else if (jsonObject.getString("stattus kitty").equalsIgnoreCase("YES")){
 
-                            Util.errorDialog(PayNow.this,"You have Already Joined this Kitty, Please select another Kitty!");
-                        }
+
+                            //launchPayUMoneyFlow("", price);
+                            Util.errorDialog(PayNow.this,"You have Already Joined this Kitty, Please Select another Kitty!");
+                            Log.d("sdfsfsdfsdfsds","no");
+
 
 
                         //Toast.makeText(getApplicationContext(), ""+jsonObject.optString("msg") ,Toast.LENGTH_SHORT).show();
 
                     }
-                    else{
-                        //Toast.makeText(getApplicationContext(),jsonObject.optString("msg") , Toast.LENGTH_SHORT).show();
+                    else  if (jsonObject.getString("status").equalsIgnoreCase("Error")){
+
+                        //launchPayUMoneyFlow("", price);
+
+                        Log.d("sdfsfsdfsdfsds","yes");
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
-
-
-
-
             }
         }, new Response.ErrorListener() {
             @Override
