@@ -113,89 +113,11 @@ public class PayNow extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                checkKittyJoinOrNot(jsonObject.optString("id"),jsonObject.optString("per_month_installment"));
-//                launchPayUMoneyFlow("", jsonObject.optString("per_month_installment"));
+//                submitData(jsonObject.optString("id"));
+                launchPayUMoneyFlow("", jsonObject.optString("per_month_installment"));
 
             }
         });
-    }
-
-    private void checkKittyJoinOrNot(final String id, final String value) {
-
-        Util.showPgDialog(dialog);
-
-
-        RequestQueue queue = Volley.newRequestQueue(PayNow.this);
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                Api.kitty_status, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Util.cancelPgDialog(dialog);
-                Log.e("dfsjfdfsdfgd", "join Response: " + response);
-                //parse your response here
-
-                try {
-                    JSONObject jsonObject=new JSONObject(response);
-
-
-                    if (jsonObject.optString("stattus kitty").equalsIgnoreCase("NO")){
-                        Util.errorDialog(PayNow.this,"U Have Allready Join this Kitty");
-                    }
-                    else if (jsonObject.optString("stattus kitty").equalsIgnoreCase("YES")){
-                        launchPayUMoneyFlow("", value);
-                    }
-                     //   launchPayUMoneyFlow("", jsonObject.optString("per_month_installment"));
-
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-
-
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Util.cancelPgDialog(dialog);
-                Log.e("fdgdfgdfgd", "Login Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),"Please Connect to the Internet or Wrong Password", Toast.LENGTH_LONG).show();
-            }
-        }){
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Log.e("fgdfgdfgdf","Inside getParams");
-
-                // Posting parameters to login url
-                Map<String, String> params = new HashMap<>();
-                params.put("userid",  MyPrefrences.getUserID(getApplicationContext()));
-                params.put("kitty_id",  id.toString());
-
-
-                Log.d("fsfsdfsdfsdfsf",MyPrefrences.getUserID(getApplicationContext()));
-                Log.d("fsfsdfsdfsdfsf",id.toString());
-                return params;
-            }
-
-//                        @Override
-//                        public Map<String, String> getHeaders() throws AuthFailureError {
-//                            Log.e("fdgdfgdfgdfg","Inside getHeaders()");
-//                            Map<String,String> headers=new HashMap<>();
-//                            headers.put("Content-Type","application/x-www-form-urlencoded");
-//                            return headers;
-//                        }
-        };
-        // Adding request to request queue
-        queue.add(strReq);
-
-
-
-
     }
 
     private void submitData(final String id) {
@@ -209,7 +131,7 @@ public class PayNow extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Util.cancelPgDialog(dialog);
-                Log.e("dfsjfdfsdfgd", "join Response: " + response);
+                Log.e("dfsjfdfsdfgd", "Login Response: " + response);
                 //parse your response here
 
                 try {
@@ -270,6 +192,55 @@ public class PayNow extends AppCompatActivity {
 
 
 
+//        StringRequest postRequest = new StringRequest(Request.Method.POST, Api.join_kitty,
+//                new Response.Listener<String>()
+//                {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        // response
+//                        Log.d("ResponseKitty", response);
+//                        Util.cancelPgDialog(dialog);
+//                        try {
+//                            JSONObject jsonObject=new JSONObject(response);
+//                            if (jsonObject.getString("status").equalsIgnoreCase("1")){
+//
+//                                Toast.makeText(getApplicationContext(), ""+jsonObject.optString("msg") ,Toast.LENGTH_SHORT).show();
+//
+//                            }
+//                            else{
+//                                Toast.makeText(getApplicationContext(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
+//                            }
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                    }
+//                },
+//                new Response.ErrorListener()
+//                {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        // error
+//                        Toast.makeText(PayNow.this, "Error! Please connect to the Internet.", Toast.LENGTH_SHORT).show();
+//                        Util.cancelPgDialog(dialog);
+//                    }
+//                }
+//        ) {
+//            @Override
+//            protected Map<String, String> getParams()
+//            {
+//                Map<String, String>  params = new HashMap<String, String>();
+//                params.put("userid ", MyPrefrences.getUserID(getApplicationContext()));
+//                params.put("kitty_id ", id.toString());
+////                params.put("kitty_id ", "8");
+//                return params;
+//            }
+//        };
+//        postRequest.setRetryPolicy(new DefaultRetryPolicy(27000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//        postRequest.setShouldCache(false);
+//
+//        AppController.getInstance().addToRequestQueue(postRequest);
 
     }
 

@@ -344,7 +344,9 @@ public class Registration extends AppCompatActivity {
 
                         Log.d("fsdfsdfsdfs","true");
 
-                        Toast.makeText(getApplicationContext(), "Registration Successfully...", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Registration Successfully...", Toast.LENGTH_SHORT).show();
+                        Util.errorDialog(Registration.this,"Registration Successfully...");
+
 
                         smsAPI();
 
