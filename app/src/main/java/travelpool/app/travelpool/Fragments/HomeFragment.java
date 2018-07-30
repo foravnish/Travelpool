@@ -53,6 +53,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import travelpool.app.travelpool.Activity.WebViewOpen;
 import travelpool.app.travelpool.R;
 import travelpool.app.travelpool.Utils.Api;
 import travelpool.app.travelpool.Utils.AppController;
@@ -231,7 +232,7 @@ public class HomeFragment extends Fragment {
 
         // Banner
         JsonObjectRequest jsonObjReq2 = new JsonObjectRequest(Request.Method.GET,
-                Api.package_list, null, new Response.Listener<JSONObject>() {
+                Api.bannerList, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -244,12 +245,12 @@ public class HomeFragment extends Fragment {
                     HashMap<String,String> hashMap = null;
                     if (response.getString("status").equalsIgnoreCase("success")){
                         AllBaner.clear();
-                        JSONArray jsonArray=response.getJSONArray("PackageList");
+                        JSONArray jsonArray=response.getJSONArray("message");
                         for (int i=0;i<jsonArray.length();i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
 
 
-                                AllBaner.add(new Const(jsonObject.optString("id"), jsonObject.optString("Name"), jsonObject.optString("Cost"), jsonObject.optString("Image"), jsonObject.optString("Banner"), jsonObject.optString("Description"), jsonObject.optString("TC"),null,null,null));
+                                AllBaner.add(new Const(jsonObject.optString("id"), jsonObject.optString("image"), jsonObject.optString("url"), null, null, null, null,null,null,null));
 
 
                             mCustomPagerAdapter2=new CustomPagerAdapter2(getActivity());
@@ -405,34 +406,28 @@ public class HomeFragment extends Fragment {
 
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
-            imageView.setImageUrl(AllBaner.get(position).getPhoto().toString().replace(" ","%20"),imageLoader);
+            imageView.setImageUrl(AllBaner.get(position).getCatid().toString().replace(" ","%20"),imageLoader);
 
 
-//            imageView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    if (AllBaner.get(position).getDate().toString().isEmpty() ) {
-//
-//                        //  Toast.makeText(getActivity(), "blank", Toast.LENGTH_SHORT).show();
-//                    }
-//                    else{
-////                        Toast.makeText(getActivity(), AllBaner.get(position).getOrgby().toString(), Toast.LENGTH_SHORT).show();
-//
-////
-////                        Intent intent=new Intent(getActivity(), WebViewOpen.class);
-////                        intent.putExtra("link",AllBaner.get(position).getOrgby().toString());
-////                        startActivity(intent);
-//
-////                        Fragment fragment=new WebViewOpen();
-////                        Bundle bundle=new Bundle();
-////                        bundle.putString("link",AllBaner.get(position).getOrgby().toString());
-////                        FragmentManager manager=getActivity().getSupportFragmentManager();
-////                        FragmentTransaction ft=manager.beginTransaction();
-////                        fragment.setArguments(bundle);
-////                        ft.replace(R.id.content_frame,fragment).addToBackStack(null).commit();
-//                    }
-//                }
-//            });
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (AllBaner.get(position).getEventName().toString().isEmpty() ) {
+
+                        //  Toast.makeText(getActivity(), "blank", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), AllBaner.get(position).getOrgby().toString(), Toast.LENGTH_SHORT).show();
+
+
+                        Intent intent=new Intent(getActivity(), WebViewOpen.class);
+                        intent.putExtra("link",AllBaner.get(position).getEventName().toString());
+                        startActivity(intent);
+
+
+                    }
+                }
+            });
 
             container.addView(itemView);
 

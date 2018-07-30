@@ -56,6 +56,7 @@
             android:name=".Activity.Login"
             android:screenOrientation="portrait" />
         <activity android:name=".Activity.PayNow" android:screenOrientation="portrait" ></activity>
+        <activity android:name=".Activity.WebViewOpen"></activity>
     </application>
 
 </manifest>

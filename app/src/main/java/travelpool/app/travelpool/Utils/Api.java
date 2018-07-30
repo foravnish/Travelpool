@@ -23,7 +23,8 @@ public class Api {
     public static String join_kitty=BASEURL+"join_kitty";
     public static String kitty_status=BASEURL+"kitty_status";
     public static String myKitty=BASEURL+"myKitty";
-    public static String package_list=BASEURL+"package_list";
+//    public static String package_list=BASEURL+"package_list";
+    public static String bannerList=BASEURL+"bannerList";
 
 
 }
