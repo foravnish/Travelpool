@@ -51,7 +51,13 @@ public class HomeAct extends AppCompatActivity
 
         TextView name=(TextView)header.findViewById(R.id.name);
         TextView mobile=(TextView)header.findViewById(R.id.mobile);
-        name.setText(MyPrefrences.getUSENAME(getApplicationContext()).toUpperCase()+" ("+MyPrefrences.getUserType(getApplicationContext())+")");
+        if (MyPrefrences.getUserType(getApplicationContext()).equalsIgnoreCase("No")){
+            name.setText(MyPrefrences.getUSENAME(getApplicationContext()).toUpperCase()+" ("+"User"+")");
+        }
+        else{
+            name.setText(MyPrefrences.getUSENAME(getApplicationContext()).toUpperCase()+" ("+"Agent"+")");
+        }
+
 
 //        if (getIntent().getStringExtra("userType").equals("user")){
 //            name.setText(MyPrefrences.getUSENAME(getApplicationContext()).toUpperCase()+"  (User)");

@@ -106,7 +106,7 @@ public class MyKitty extends Fragment {
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                Api.my_kitty, new Response.Listener<String>() {
+                Api.myKitty, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Util.cancelPgDialog(dialog);
@@ -119,7 +119,7 @@ public class MyKitty extends Fragment {
                         expListView.setVisibility(View.VISIBLE);
                         imageNoListing.setVisibility(View.GONE);
 
-                        final JSONArray jsonArray=jsonObject.getJSONArray("data");
+                        final JSONArray jsonArray=jsonObject.getJSONArray("message");
                         for (int i=0;i<jsonArray.length();i++){
                             JSONObject jsonObject1=jsonArray.getJSONObject(i);
 

@@ -146,7 +146,7 @@ public class HomeFragment extends Fragment {
 
                         expListView.setVisibility(View.VISIBLE);
 
-                        jsonArray=response.getJSONArray("data");
+                        jsonArray=response.getJSONArray("message");
                         for (int i=0;i<jsonArray.length();i++){
                             JSONObject jsonObject=jsonArray.getJSONObject(i);
 
@@ -161,12 +161,21 @@ public class HomeFragment extends Fragment {
                             map.put("lucky_draw_date",jsonObject.optString("lucky_draw_date"));
                             map.put("payment_due_date",jsonObject.optString("payment_due_date"));
                             map.put("penality_after_due_date",jsonObject.optString("penality_after_due_date"));
-                            map.put("package_name",jsonObject.optString("package_name"));
-                            map.put("banner",jsonObject.optString("banner"));
+                            map.put("banner", jsonObject.optString("banner"));
+                            JSONArray jsonArray2=jsonObject.getJSONArray("package_details");
 
-                            Adapter adapter=new Adapter();
-                            expListView.setAdapter(adapter);
-                            AllProducts.add(map);
+
+                            for (int j=0;j<jsonArray2.length();j++) {
+
+                                JSONObject jsonObject2=jsonArray2.getJSONObject(j);
+
+                                map.put("package_name", jsonObject2.optString("name"));
+
+
+                                Adapter adapter = new Adapter();
+                                expListView.setAdapter(adapter);
+                                AllProducts.add(map);
+                            }
                         }
                     }
                     else{

@@ -356,7 +356,7 @@ public class Registration extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Please Login...", Toast.LENGTH_SHORT).show();
 
                     }
-                    else if (jsonObject.optString("status").equals("FALSE")){
+                    else if (jsonObject.optString("status").equals("failure")){
                         Util.errorDialog(Registration.this,jsonObject.getString("message"));
                         Log.d("fsdfsdfsdfs","false");
                     }
@@ -395,7 +395,7 @@ public class Registration extends AppCompatActivity {
 
                 params.put("aadhar_no",aadharNo.getText().toString());
                 params.put("pan_no",editpanNo.getText().toString());
-                params.put("status","1");
+               // params.put("status","1");
                 return params;
             }
 

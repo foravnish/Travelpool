@@ -192,7 +192,7 @@ public class Profile extends Fragment {
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                Api.profile, new Response.Listener<String>() {
+                Api.userbyid+"/"+MyPrefrences.getUserID(getActivity()), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Util.cancelPgDialog(dialog);
@@ -203,9 +203,9 @@ public class Profile extends Fragment {
                     JSONObject jsonObject=new JSONObject(response);
                     if (jsonObject.getString("status").equalsIgnoreCase("success")){
 
-                        JSONArray jsonArray=jsonObject.getJSONArray("login");
-                        for (int i=0;i<jsonArray.length();i++) {
-                            JSONObject jsonObject1 = jsonArray.optJSONObject(i);
+                        JSONArray jsonArray=jsonObject.getJSONArray("message");
+                      //  for (int i=0;i<jsonArray.length();i++) {
+                            JSONObject jsonObject1 = jsonArray.optJSONObject(0);
 
 
                             tve_name.setText(jsonObject1.optString("name").toUpperCase());
@@ -220,7 +220,7 @@ public class Profile extends Fragment {
                             tve_panNo.setText(jsonObject1.optString("pan_no").toString());
 
 
-                        }
+                       // }
 
                     }
                     else{

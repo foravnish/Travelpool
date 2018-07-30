@@ -110,7 +110,7 @@ public class ProfileEdit extends Fragment {
 
         Util.showPgDialog(dialog);
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, Api.profile,
+        StringRequest postRequest = new StringRequest(Request.Method.POST, Api.userbyid+"/"+MyPrefrences.getUserID(getActivity()),
                 new Response.Listener<String>()
                 {
                     @Override

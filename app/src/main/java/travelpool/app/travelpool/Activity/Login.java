@@ -346,7 +346,7 @@ public class Login extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(Login.this);
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                Api.user_login, new Response.Listener<String>() {
+                Api.userlogin, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Util.cancelPgDialog(dialog);
@@ -359,7 +359,7 @@ public class Login extends AppCompatActivity {
 
                     if (jsonObject.optString("status").equals("success")) {
 
-                        JSONArray jsonArray=jsonObject.getJSONArray("data");
+                        JSONArray jsonArray=jsonObject.getJSONArray("message");
 
                         JSONObject jsonObject1 = jsonArray.getJSONObject(0);
 
@@ -367,14 +367,14 @@ public class Login extends AppCompatActivity {
                         //  Toast.makeText(getApplicationContext(), "Login Successfully...", Toast.LENGTH_SHORT).show();
 
                         MyPrefrences.setUserLogin(getApplicationContext(), true);
-                        MyPrefrences.setUserID(getApplicationContext(), jsonObject1.optString("Userid").toString());
+                        MyPrefrences.setUserID(getApplicationContext(), jsonObject1.optString("id").toString());
                         MyPrefrences.setUSENAME(getApplicationContext(), jsonObject1.optString("name").toString());
                         MyPrefrences.setEMAILID(getApplicationContext(), jsonObject1.optString("email").toString());
 //                                                MyPrefrences.setEMAILID(getApplicationContext(),jsonObject1.optString("address").toString());
-                        MyPrefrences.setMobile(getApplicationContext(), mobile.getText().toString());
+                        MyPrefrences.setMobile(getApplicationContext(), jsonObject1.optString("mobile").toString());
                         //MyPrefrences.setImage(getApplicationContext(),jsonObject1.optString("state").toString());
                         //MyPrefrences.setImage(getApplicationContext(),jsonObject1.optString("pincode").toString());
-                        MyPrefrences.setUserType(getApplicationContext(),jsonObject1.optString("type").toString());
+                        MyPrefrences.setUserType(getApplicationContext(),jsonObject1.optString("agent_id").toString());
 
 
                         Intent intent = new Intent(Login.this, HomeAct.class);
@@ -411,7 +411,7 @@ public class Login extends AppCompatActivity {
 
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<>();
-                params.put("username", mobile.getText().toString());
+                params.put("mobile", mobile.getText().toString());
                 params.put("password", password.getText().toString());
 
                 return params;
