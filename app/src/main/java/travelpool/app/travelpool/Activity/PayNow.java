@@ -114,7 +114,6 @@ public class PayNow extends AppCompatActivity {
 
 
 //                submitData(jsonObject.optString("id"));
-
                 checkJoinOrNot(jsonObject.optString("id"),jsonObject.optString("per_month_installment"));
 
 //                launchPayUMoneyFlow("", jsonObject.optString("per_month_installment"));
@@ -128,8 +127,8 @@ public class PayNow extends AppCompatActivity {
         Util.showPgDialog(dialog);
 
         RequestQueue queue = Volley.newRequestQueue(PayNow.this);
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                Api.kitty_status, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.GET,
+                Api.myKittyStatus+"/"+MyPrefrences.getUserID(getApplicationContext())+"/"+id.toString(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Util.cancelPgDialog(dialog);
@@ -138,12 +137,12 @@ public class PayNow extends AppCompatActivity {
 
                 try {
                     JSONObject jsonObject=new JSONObject(response);
-                    if (jsonObject.getString("status").equalsIgnoreCase("Success")){
+                    if (jsonObject.getString("status").equalsIgnoreCase("success")){
 
 
 
-                            //launchPayUMoneyFlow("", price);
-                            Util.errorDialog(PayNow.this,"You have Already Joined this Kitty, Please Select another Kitty!");
+                            launchPayUMoneyFlow("", price);
+//                            Util.errorDialog(PayNow.this,"You have Already Joined this Kitty, Please Select another Kitty!");
                             Log.d("sdfsfsdfsdfsds","no");
 
 
@@ -151,10 +150,10 @@ public class PayNow extends AppCompatActivity {
                         //Toast.makeText(getApplicationContext(), ""+jsonObject.optString("msg") ,Toast.LENGTH_SHORT).show();
 
                     }
-                    else  if (jsonObject.getString("status").equalsIgnoreCase("Error")){
+                    else  if (jsonObject.getString("status").equalsIgnoreCase("failure")){
 
-                        launchPayUMoneyFlow("", price);
-
+                      //  launchPayUMoneyFlow("", price);
+                        Util.errorDialog(PayNow.this,"You have Already Joined this Kitty, Please Select another Kitty!");
                         Log.d("sdfsfsdfsdfsds","yes");
                     }
 
@@ -177,8 +176,8 @@ public class PayNow extends AppCompatActivity {
 
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<>();
-                params.put("userid",  MyPrefrences.getUserID(getApplicationContext()));
-                params.put("kitty_id",  id.toString());
+//                params.put("userid",  MyPrefrences.getUserID(getApplicationContext()));
+//                params.put("kitty_id",  id.toString());
 
 
                 Log.d("fsfsdfsdfsdfsf",MyPrefrences.getUserID(getApplicationContext()));
@@ -201,13 +200,11 @@ public class PayNow extends AppCompatActivity {
 
 
     private void submitData(final String id) {
-
         Util.showPgDialog(dialog);
-
 
         RequestQueue queue = Volley.newRequestQueue(PayNow.this);
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                Api.join_kitty, new Response.Listener<String>() {
+                Api.joinKitty, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Util.cancelPgDialog(dialog);
@@ -216,23 +213,19 @@ public class PayNow extends AppCompatActivity {
 
                 try {
                     JSONObject jsonObject=new JSONObject(response);
-                    if (jsonObject.getString("status").equalsIgnoreCase("1")){
+                    if (jsonObject.getString("status").equalsIgnoreCase("success")){
 
-                        Toast.makeText(getApplicationContext(), ""+jsonObject.optString("msg") ,Toast.LENGTH_SHORT).show();
-
+                        Util.errorDialog(PayNow.this,jsonObject.getString("message"));
+//                        Toast.makeText(getApplicationContext(), ""+jsonObject.optString("message") ,Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        Toast.makeText(getApplicationContext(),jsonObject.optString("msg") , Toast.LENGTH_SHORT).show();
+                        Util.errorDialog(PayNow.this,jsonObject.getString("message"));
+                        //Toast.makeText(getApplicationContext(),jsonObject.optString("message") , Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
-
-
-
 
             }
         }, new Response.ErrorListener() {

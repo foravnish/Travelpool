@@ -35,6 +35,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -105,12 +106,12 @@ public class MyKitty extends Fragment {
 
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                Api.myKitty, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.GET,
+                Api.myKitty+"/"+MyPrefrences.getUserID(getActivity()), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Util.cancelPgDialog(dialog);
-                Log.e("MyKitty", "Response: " + response);
+                Log.e("MyKittyResponse", "Response: " + response);
 
                 try {
                     JSONObject jsonObject=new JSONObject(response);
@@ -120,20 +121,40 @@ public class MyKitty extends Fragment {
                         imageNoListing.setVisibility(View.GONE);
 
                         final JSONArray jsonArray=jsonObject.getJSONArray("message");
+
+                        map=new HashMap();
+
                         for (int i=0;i<jsonArray.length();i++){
                             JSONObject jsonObject1=jsonArray.getJSONObject(i);
 
-                            map=new HashMap();
+                            JSONArray jsonArrayKitty=jsonObject1.getJSONArray("kitty_details");
+
+                                JSONObject jsonObjectKitty=jsonArrayKitty.getJSONObject(0);
+
+                                map.put("name",jsonObjectKitty.optString("name"));
+                                map.put("tc",jsonObjectKitty.optString("term_and_cond"));
+
+                                map.put("p_m_i",jsonObjectKitty.optString("per_month_installment"));
+                                map.put("m_m",jsonObjectKitty.optString("payment_due_date"));
+                                map.put("lucky_d_d",jsonObjectKitty.optString("lucky_draw_date"));
+
+
+
                             map.put("id",jsonObject1.optString("id"));
                             map.put("kitty_id",jsonObject1.optString("kitty_id"));
-                            map.put("name",jsonObject1.optString("name"));
-                            map.put("package_name",jsonObject1.optString("package_name"));
-                            map.put("p_m_i",jsonObject1.optString("p_m_i"));
-                            map.put("m_m",jsonObject1.optString("m_m"));
-                            map.put("tc",jsonObject1.optString("tc"));
-                            map.put("lucky_d_d",jsonObject1.optString("lucky_d_d"));
-                            map.put("image",jsonObject1.optString("image"));
-                            map.put("banner",jsonObject1.optString("banner"));
+
+                            JSONArray jsonArrayPack=jsonObject1.getJSONArray("package_details");
+
+                                JSONObject jsonObjectPack=jsonArrayPack.getJSONObject(0);
+
+                                map.put("package_name",jsonObjectPack.optString("name"));
+                                map.put("tc",jsonObjectPack.optString("term_and_cond"));
+                                map.put("banner",jsonObjectPack.optString("banner"));
+
+
+
+
+
 
                             Adapter adapter=new Adapter();
                             expListView.setAdapter(adapter);
@@ -175,8 +196,6 @@ public class MyKitty extends Fragment {
         };
         // Adding request to request queue
         queue.add(strReq);
-
-
 
 
     }
@@ -252,7 +271,7 @@ public class MyKitty extends Fragment {
 
 
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
-            viewholder.banerImg.setImageUrl(AllProducts.get(position).get("banner").toString().replace(" ","%20"),imageLoader);
+            viewholder.banerImg.setImageUrl(""+AllProducts.get(position).get("banner").toString().replace(" ","%20"),imageLoader);
 
 
 //            Typeface face=Typeface.createFromAsset(getActivity().getAssets(), "muli_semibold.ttf");

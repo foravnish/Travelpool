@@ -385,7 +385,7 @@ public class Login extends AppCompatActivity {
                     }
                     else{
                        // Toast.makeText(getApplicationContext(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
-                        Util.errorDialog(Login.this,jsonObject.getString("msg"));
+                        Util.errorDialog(Login.this,jsonObject.getString("message"));
                     }
 
                 } catch (JSONException e) {

@@ -347,7 +347,6 @@ public class Registration extends AppCompatActivity {
 //                        Toast.makeText(getApplicationContext(), "Registration Successfully...", Toast.LENGTH_SHORT).show();
                         Util.errorDialog(Registration.this,"Registration Successfully...");
 
-
                         smsAPI();
 
                         Intent intent = new Intent(Registration.this, Login.class);
