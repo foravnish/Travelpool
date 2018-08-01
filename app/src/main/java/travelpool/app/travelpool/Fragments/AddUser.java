@@ -76,8 +76,8 @@ public class AddUser extends Fragment {
         View view= inflater.inflate(R.layout.fragment_add_user, container, false);
 
 
-        editPassword=view.findViewById(R.id.editPassword);
-        editPasswordCon=view.findViewById(R.id.editPasswordCon);
+       // editPassword=view.findViewById(R.id.editPassword);
+        //editPasswordCon=view.findViewById(R.id.editPasswordCon);
         editmobile=view.findViewById(R.id.editmobile);
         editTextname=view.findViewById(R.id.editTextname);
 
@@ -146,17 +146,17 @@ public class AddUser extends Fragment {
             return false;
         }
 
-        else if (TextUtils.isEmpty(editPassword.getText().toString()))
-        {
-            editPassword.setError("Oops! Password blank");
-            editPassword.requestFocus();
-            return false;
-        }
+//        else if (TextUtils.isEmpty(editPassword.getText().toString()))
+//        {
+//            editPassword.setError("Oops! Password blank");
+//            editPassword.requestFocus();
+//            return false;
+//        }
 
-        else if (!editPassword.getText().toString().equals(editPasswordCon.getText().toString())){
-            Toast.makeText(getActivity(), "Both Password should be match", Toast.LENGTH_SHORT).show();
-            return false;
-        }
+//        else if (!editPassword.getText().toString().equals(editPasswordCon.getText().toString())){
+//            Toast.makeText(getActivity(), "Both Password should be match", Toast.LENGTH_SHORT).show();
+//            return false;
+//        }
 
         else if (TextUtils.isEmpty(editAddress.getText().toString()))
         {
@@ -263,7 +263,7 @@ public class AddUser extends Fragment {
                 params.put("name", editTextname.getText().toString());
                 params.put("email",editEmail.getText().toString());
                 params.put("mobile",editmobile.getText().toString());
-                params.put("password",editPassword.getText().toString());
+                params.put("password","123456");
                 params.put("address",editAddress.getText().toString());
                 params.put("city",editCity.getText().toString());
                 params.put("state",editState.getText().toString());
