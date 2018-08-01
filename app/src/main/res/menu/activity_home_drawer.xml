@@ -20,6 +20,19 @@
             android:id="@+id/nav_view_kitty"
             android:icon="@drawable/viewkitty"
             android:title="All Kitty" />
+
+        <item
+            android:id="@+id/nav_view_add_user"
+            android:icon="@drawable/viewkitty"
+            android:visible="false"
+            android:title="Add User" />
+        <item
+            android:id="@+id/nav_view_show_user"
+            android:icon="@drawable/viewkitty"
+            android:visible="false"
+            android:title="Show User" />
+
+
         <item
             android:id="@+id/nav_transcation"
             android:icon="@drawable/transaction"

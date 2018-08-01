@@ -394,6 +394,7 @@ public class Registration extends AppCompatActivity {
 
                 params.put("aadhar_no",aadharNo.getText().toString());
                 params.put("pan_no",editpanNo.getText().toString());
+                params.put("type","user");
                // params.put("status","1");
                 return params;
             }

@@ -150,25 +150,25 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-//                int selectedId = radioGroup.getCheckedRadioButtonId();
-//                final RadioButton radioButton = (RadioButton) findViewById(selectedId);
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                final RadioButton radioButton = (RadioButton) findViewById(selectedId);
 
                 //Toast.makeText(getApplicationContext(), ""+radioButton.getText().toString(), Toast.LENGTH_SHORT).show();
 
                 if(validate()){
 
 
-                    loginDataUser();
+//                    loginDataUser();
 
-//                    if (radioButton.getText().toString().equals("User Login")){
-//                        loginDataUser();
-//                        Log.d("dfsdfsdfsdfs","user");
-//                    }
-//                    else if (radioButton.getText().toString().equals("Agent Login")){
-//                        loginDataAgent();
-//                        Log.d("dfsdfsdfsdfs","agent");
-//
-//                    }
+                    if (radioButton.getText().toString().equals("User Login")){
+                        loginDataUser("user");
+                        Log.d("dfsdfsdfsdfs","user");
+                    }
+                    else if (radioButton.getText().toString().equals("Agent Login")){
+                        loginDataUser("agent");
+                        Log.d("dfsdfsdfsdfs","agent");
+
+                    }
 
 
                 }
@@ -339,7 +339,7 @@ public class Login extends AppCompatActivity {
 //    }
 
 
-    private void loginDataUser() {
+    private void loginDataUser(final String  type) {
 
         Util.showPgDialog(dialog);
 
@@ -374,13 +374,24 @@ public class Login extends AppCompatActivity {
                         MyPrefrences.setMobile(getApplicationContext(), jsonObject1.optString("mobile").toString());
                         //MyPrefrences.setImage(getApplicationContext(),jsonObject1.optString("state").toString());
                         //MyPrefrences.setImage(getApplicationContext(),jsonObject1.optString("pincode").toString());
-                        MyPrefrences.setUserType(getApplicationContext(),jsonObject1.optString("agent_id").toString());
 
 
-                        Intent intent = new Intent(Login.this, HomeAct.class);
-                        intent.putExtra("userType","user");
-                        startActivity(intent);
-                        finish();
+
+                        if (type.equalsIgnoreCase("user")) {
+                            Intent intent = new Intent(Login.this, HomeAct.class);
+                            intent.putExtra("userType", "user");
+                            startActivity(intent);
+                            finish();
+                            MyPrefrences.setUserType(getApplicationContext(),"user");
+                        }
+                        else if (type.equalsIgnoreCase("agent")) {
+                            Intent intent = new Intent(Login.this, HomeAct.class);
+                            intent.putExtra("userType", "agent");
+                            startActivity(intent);
+                            finish();
+                            MyPrefrences.setUserType(getApplicationContext(),"agent");
+
+                        }
 
                     }
                     else{
@@ -413,6 +424,7 @@ public class Login extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("mobile", mobile.getText().toString());
                 params.put("password", password.getText().toString());
+                params.put("type", type);
 
                 return params;
             }

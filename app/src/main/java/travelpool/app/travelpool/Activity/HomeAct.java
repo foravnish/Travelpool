@@ -18,9 +18,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import travelpool.app.travelpool.Fragments.AddUser;
 import travelpool.app.travelpool.Fragments.HomeFragment;
 import travelpool.app.travelpool.Fragments.MyKitty;
 import travelpool.app.travelpool.Fragments.Profile;
+import travelpool.app.travelpool.Fragments.ShowUser;
 import travelpool.app.travelpool.Fragments.TermsCondition;
 import travelpool.app.travelpool.Fragments.Transcation;
 import travelpool.app.travelpool.Fragments.ViewAllKitty;
@@ -51,20 +53,31 @@ public class HomeAct extends AppCompatActivity
 
         TextView name=(TextView)header.findViewById(R.id.name);
         TextView mobile=(TextView)header.findViewById(R.id.mobile);
-        if (MyPrefrences.getUserType(getApplicationContext()).equalsIgnoreCase("No")){
-            name.setText(MyPrefrences.getUSENAME(getApplicationContext()).toUpperCase()+" ("+"User"+")");
-        }
-        else{
-            name.setText(MyPrefrences.getUSENAME(getApplicationContext()).toUpperCase()+" ("+"Agent"+")");
+
+//        if (MyPrefrences.getUserType(getApplicationContext()).equalsIgnoreCase("No")){
+//            name.setText(MyPrefrences.getUSENAME(getApplicationContext()).toUpperCase()+" ("+"User"+")");
+//        }
+//        else{
+//            name.setText(MyPrefrences.getUSENAME(getApplicationContext()).toUpperCase()+" ("+"Agent"+")");
+//        }
+
+        Menu menu = navigationView.getMenu();
+        MenuItem nav_add = menu.findItem(R.id.nav_view_add_user);
+        MenuItem nav_show = menu.findItem(R.id.nav_view_show_user);
+
+        if (getIntent().getStringExtra("userType").equals("user")){
+            name.setText(MyPrefrences.getUSENAME(getApplicationContext()).toUpperCase()+"  (User)");
+            nav_add.setVisible(false);
+            nav_show.setVisible(false);
+
         }
 
+        else if (getIntent().getStringExtra("userType").equals("agent")){
+            name.setText(MyPrefrences.getUSENAME(getApplicationContext()).toUpperCase()+"  (Agent)");
+            nav_add.setVisible(true);
+            nav_show.setVisible(true);
+        }
 
-//        if (getIntent().getStringExtra("userType").equals("user")){
-//            name.setText(MyPrefrences.getUSENAME(getApplicationContext()).toUpperCase()+"  (User)");
-//        }
-//        else if (getIntent().getStringExtra("userType").equals("agent")){
-//            name.setText(MyPrefrences.getUSENAME(getApplicationContext()).toUpperCase()+"  (Agent)");
-//        }
 
         mobile.setText(MyPrefrences.getMobile(getApplicationContext()));
 
@@ -128,6 +141,20 @@ public class HomeAct extends AppCompatActivity
         } else if (id == R.id.nav_my_kitty) {
 
             Fragment fragment = new MyKitty();
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction ft = manager.beginTransaction();
+            ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+
+        } else if (id == R.id.nav_view_add_user) {
+
+            Fragment fragment = new AddUser();
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction ft = manager.beginTransaction();
+            ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+
+        } else if (id == R.id.nav_view_show_user) {
+
+            Fragment fragment = new ShowUser();
             FragmentManager manager = getSupportFragmentManager();
             FragmentTransaction ft = manager.beginTransaction();
             ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();

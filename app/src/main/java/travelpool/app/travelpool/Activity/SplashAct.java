@@ -27,6 +27,7 @@ public class SplashAct extends AppCompatActivity {
 
                     if (MyPrefrences.getUserLogin(SplashAct.this)==true){
                         Intent intent=new Intent(SplashAct.this,HomeAct.class);
+                        intent.putExtra("userType", MyPrefrences.getUserType(getApplicationContext()));
                         startActivity(intent);
                         finish();
                     }
