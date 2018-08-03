@@ -188,8 +188,6 @@ public class Profile extends Fragment {
 //        AppController.getInstance().addToRequestQueue(postRequest);
 //
 
-
-
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 Api.userbyid+"/"+MyPrefrences.getUserID(getActivity()), new Response.Listener<String>() {
