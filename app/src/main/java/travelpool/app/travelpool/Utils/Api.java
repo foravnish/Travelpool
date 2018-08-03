@@ -25,6 +25,7 @@ public class Api {
     public static String myKitty=BASEURL+"myKitty";
 //    public static String package_list=BASEURL+"package_list";
     public static String bannerList=BASEURL+"bannerList";
+    public static String usersByAgentId=BASEURL+"usersByAgentId";
 
 
 }

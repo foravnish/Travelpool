@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -222,9 +224,15 @@ public class AddUser extends Fragment {
 
 //                        Log.d("fsdfsdfsdfs","true");
 //
-////                        Toast.makeText(getApplicationContext(), "Registration Successfully...", Toast.LENGTH_SHORT).show();
-//                        Util.errorDialog(Registration.this,"Registration Successfully...");
+//                        Toast.makeText(getApplicationContext(), "Registration Successfully...", Toast.LENGTH_SHORT).show();
+//                        Util.errorDialog(getActivity(),"Registration Successfully...");
 //
+
+                        Fragment fragment = new ShowUser();
+                        FragmentManager manager = getFragmentManager();
+                        FragmentTransaction ft = manager.beginTransaction();
+                        ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+
                         smsAPI();
 //
 //                        Intent intent = new Intent(getActivity(), Login.class);
@@ -271,7 +279,7 @@ public class AddUser extends Fragment {
 
                 params.put("aadhar_no",aadharNo.getText().toString());
                 params.put("pan_no",editpanNo.getText().toString());
-                params.put("type", MyPrefrences.getUserID(getActivity()));
+                params.put("agent_id", MyPrefrences.getUserID(getActivity()));
                 // params.put("status","1");
                 return params;
             }
