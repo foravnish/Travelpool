@@ -110,6 +110,8 @@ public class ViewAllKitty extends Fragment {
                             map.put("payment_due_date",jsonObject.optString("payment_due_date"));
                             map.put("penality_after_due_date",jsonObject.optString("penality_after_due_date"));
                             map.put("banner", jsonObject.optString("banner"));
+                            map.put("image", jsonObject.optString("image"));
+                            map.put("purchased_kitty", jsonObject.optString("purchased_kitty"));
                             JSONArray jsonArray2=jsonObject.getJSONArray("package_details");
 
 
@@ -118,6 +120,7 @@ public class ViewAllKitty extends Fragment {
                                 JSONObject jsonObject2=jsonArray2.getJSONObject(j);
 
                                 map.put("package_name", jsonObject2.optString("name"));
+                                map.put("description", jsonObject2.optString("description"));
 
 
                                 Adapter adapter = new Adapter();
@@ -180,10 +183,10 @@ public class ViewAllKitty extends Fragment {
 
     public class Viewholder{
         ImageView imgFav,stars;
-        TextView penality_after,payment_due_date,lucky_draw_date,term_and_cond,instal,member,months,packageName,name;
+        TextView totalMember,EmiPrice,termCondition,purchased,desreption,NoOfMember,months,packageName,name;
         LinearLayout liner,linerLayoutOffer;
 
-        NetworkImageView banerImg;
+        NetworkImageView banerImg,banerImg2;
     }
     class Adapter extends BaseAdapter {
 
@@ -221,6 +224,12 @@ public class ViewAllKitty extends Fragment {
 
             viewholder.name=convertView.findViewById(R.id.name);
             viewholder.packageName=convertView.findViewById(R.id.packageName);
+            viewholder.EmiPrice=convertView.findViewById(R.id.EmiPrice);
+            viewholder.totalMember=convertView.findViewById(R.id.totalMember);
+            viewholder.termCondition=convertView.findViewById(R.id.termCondition);
+            viewholder.purchased=convertView.findViewById(R.id.purchased);
+            viewholder.desreption=convertView.findViewById(R.id.desreption);
+            viewholder.NoOfMember=convertView.findViewById(R.id.NoOfMember);
 //            viewholder.months=convertView.findViewById(R.id.months);
 //            viewholder.member=convertView.findViewById(R.id.member);
 //            viewholder.instal=convertView.findViewById(R.id.instal);
@@ -229,13 +238,21 @@ public class ViewAllKitty extends Fragment {
 //            viewholder.payment_due_date=convertView.findViewById(R.id.payment_due_date);
 //            viewholder.penality_after=convertView.findViewById(R.id.penality_after);
             viewholder.banerImg=convertView.findViewById(R.id.banerImg);
+            viewholder.banerImg2=convertView.findViewById(R.id.banerImg2);
 
 
             viewholder.name.setText(AllProducts.get(position).get("name"));
             viewholder.packageName.setText(AllProducts.get(position).get("package_name"));
+            viewholder.EmiPrice.setText("Per Months\n₹ "+AllProducts.get(position).get("per_month_installment"));
+            viewholder.totalMember.setText("Months of Kitty "+AllProducts.get(position).get("no_of_month"));
+            viewholder.termCondition.setText(AllProducts.get(position).get("term_and_cond"));
+            viewholder.purchased.setText("Member Purchased "+AllProducts.get(position).get("purchased_kitty"));
+            viewholder.desreption.setText(AllProducts.get(position).get("description"));
+            viewholder.NoOfMember.setText("Total Members "+AllProducts.get(position).get("no_of_max_members"));
 
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
             viewholder.banerImg.setImageUrl(AllProducts.get(position).get("banner").toString().replace(" ","%20"),imageLoader);
+            viewholder.banerImg2.setImageUrl(AllProducts.get(position).get("image").toString().replace(" ","%20"),imageLoader);
 
 
 //            viewholder.months.setText(AllProducts.get(position).get("no_of_month")+" Months");
