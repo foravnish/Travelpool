@@ -188,9 +188,12 @@ public class Profile extends Fragment {
 //        AppController.getInstance().addToRequestQueue(postRequest);
 //
 
+        Log.d("sdfsdfsdfsdfs",MyPrefrences.getUserType(getActivity()));
+
+
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                Api.userbyid+"/"+MyPrefrences.getUserID(getActivity()), new Response.Listener<String>() {
+                Api.userbyid+"/"+MyPrefrences.getUserID(getActivity())+"/"+MyPrefrences.getUserType(getActivity()), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Util.cancelPgDialog(dialog);
@@ -208,7 +211,7 @@ public class Profile extends Fragment {
 
                             tve_name.setText(jsonObject1.optString("name").toUpperCase());
                             tve_mobile.setText(jsonObject1.optString("mobile").toString());
-                            tve_user_id.setText(jsonObject1.optString("id").toString());
+                            tve_user_id.setText(jsonObject1.optString("id").toString()+" ("+MyPrefrences.getUserType(getActivity()).toUpperCase()+")");
                             tve_email.setText(jsonObject1.optString("email").toString());
                             tve_addres.setText(jsonObject1.optString("address").toString());
                             tve_city.setText(jsonObject1.optString("city").toString());
