@@ -39,12 +39,14 @@
                     android:layout_width="0dp"
                     android:layout_height="125dp"
                     android:scaleType="fitXY"
+                    android:layout_marginRight="2dp"
                     android:layout_weight="1"/>
 
                 <com.android.volley.toolbox.NetworkImageView
                     android:id="@+id/banerImg2"
                     android:layout_width="0dp"
                     android:layout_height="125dp"
+                    android:layout_marginLeft="2dp"
                     android:scaleType="fitXY"
                     android:layout_weight="1"/>
             </LinearLayout>

@@ -96,7 +96,10 @@ public class PayNow extends AppCompatActivity {
             jsonObject=new JSONObject(getIntent().getStringExtra("data"));
 
             name.setText(jsonObject.optString("name"));
-            packageName.setText(jsonObject.optString("package_name"));
+
+            JSONArray jsonArray2=jsonObject.getJSONArray("package_details");
+            JSONObject jsonObject2=jsonArray2.getJSONObject(0);
+            packageName.setText(jsonObject2.optString("name"));
 
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
             imageView.setImageUrl(jsonObject.optString("banner").toString().replace(" ","%20"),imageLoader);

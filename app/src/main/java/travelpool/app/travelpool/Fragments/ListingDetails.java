@@ -64,10 +64,10 @@ public class ListingDetails extends Fragment {
     public ListingDetails() {
         // Required empty public constructor
     }
-    TextView penality_after,payment_due_date,lucky_draw_date,term_and_cond,instal,member,months,packageName,name;
+    TextView penality_after,payment_due_date,lucky_draw_date,term_and_cond,instal,instal2,member,months,packageName,name,kittyName;
 
     TextView closingday,timing,min_distance,min_order,textPmt,isTiming;
-    Button joinNow;
+    TextView joinNow;
     List<String> subCat =new ArrayList<>();
     //MaterialRatingBar rating;
     ListView listview;
@@ -118,26 +118,34 @@ public class ListingDetails extends Fragment {
 
         member=view.findViewById(R.id.member);
         instal=view.findViewById(R.id.instal);
+        instal2=view.findViewById(R.id.instal2);
         term_and_cond=view.findViewById(R.id.term_and_cond);
         lucky_draw_date=view.findViewById(R.id.lucky_draw_date);
         payment_due_date=view.findViewById(R.id.payment_due_date);
         penality_after=view.findViewById(R.id.penality_after);
         joinNow=view.findViewById(R.id.joinNow);
         imageView=view.findViewById(R.id.imageView);
+        kittyName=view.findViewById(R.id.kittyName);
 
 
         try {
             JSONObject jsonObject=new JSONObject(getArguments().getString("data"));
 
             name.setText(jsonObject.optString("name"));
-            packageName.setText(jsonObject.optString("package_name"));
+            kittyName.setText(jsonObject.optString("name"));
+
             months.setText("Total Months: "+jsonObject.optString("no_of_month"));
             member.setText("Total Members: "+jsonObject.optString("no_of_max_members"));
             instal.setText("Per Month ₹ : "+jsonObject.optString("per_month_installment"));
+            instal2.setText("Per Month ₹ : "+jsonObject.optString("per_month_installment"));
             term_and_cond.setText(jsonObject.optString("term_and_cond"));
             lucky_draw_date.setText("Lucky Draw Date: "+jsonObject.optString("lucky_draw_date"));
             payment_due_date.setText("Payment Due Date: "+jsonObject.optString("payment_due_date"));
             penality_after.setText("After Due Date: "+jsonObject.optString("penality_after_due_date"));
+
+            JSONArray jsonArray2=jsonObject.getJSONArray("package_details");
+            JSONObject jsonObject2=jsonArray2.getJSONObject(0);
+            packageName.setText(jsonObject2.optString("name"));
 
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
             imageView.setImageUrl(jsonObject.optString("banner").toString().replace(" ","%20"),imageLoader);
