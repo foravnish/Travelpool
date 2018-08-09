@@ -568,6 +568,7 @@ public class HomeFragment extends Fragment {
 //            viewholder.distance.setTypeface(face2);
 
 
+
             return convertView;
         }
     }
