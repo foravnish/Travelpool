@@ -40,6 +40,8 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
+import com.eftimoff.viewpagertransformers.ForegroundToBackgroundTransformer;
+import com.eftimoff.viewpagertransformers.ZoomInTransformer;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import org.json.JSONArray;
@@ -84,6 +86,22 @@ public class HomeFragment extends Fragment {
     JSONArray jsonArray;
 
     String[] value={"Abc","Xyx","ijk","lmn","poi","uud","jis","yys","usu","puf","etf"};
+
+
+    int position;
+    private static int NUM_PAGES=0;
+    private Handler handler=new Handler();
+    private Runnable runnale=new Runnable(){
+        public void run(){
+            viewPager2.setCurrentItem(position,true);
+            if(position>=NUM_PAGES ) position=0;
+            else position++;
+            // Move to the next page after 10s
+            handler.postDelayed(runnale, 3000);
+        }
+    };
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -99,6 +117,8 @@ public class HomeFragment extends Fragment {
         viewPager2 = (ViewPager) view.findViewById(R.id.slider2);
         indicator2 = (CirclePageIndicator)view.findViewById(R.id.indicat2);
 
+        viewPager2.setPageTransformer(true, new ZoomInTransformer());
+
         dialog=new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -108,6 +128,7 @@ public class HomeFragment extends Fragment {
         AllProducts = new ArrayList<>();
         expListView = (GridView) view.findViewById(R.id.lvExp);
 
+        position=0;
 
           getActivity().setTitle("Travel Pool");
         // Set listener for rotation event
@@ -252,6 +273,7 @@ public class HomeFragment extends Fragment {
                         for (int i=0;i<jsonArray.length();i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
 
+                            NUM_PAGES=jsonArray.length();
 
                                 AllBaner.add(new Const(jsonObject.optString("id"), jsonObject.optString("image"), jsonObject.optString("url"), null, null, null, null,null,null,null));
 
@@ -264,23 +286,23 @@ public class HomeFragment extends Fragment {
 
 
                         }
-                        final Handler handler = new Handler();
-
-                        final Runnable update = new Runnable() {
-
-                            public void run() {
-                                if (currentPage == AllBaner.size()) {
-                                    currentPage = 0;
-                                }
-                                viewPager2.setCurrentItem(currentPage++);
-                            }
-                        };
-                        new Timer().schedule(new TimerTask() {
-                            @Override
-                            public void run() {
-                                handler.post(update);
-                            }
-                        }, 100, 5000);
+//                        final Handler handler = new Handler();
+//
+//                        final Runnable update = new Runnable() {
+//
+//                            public void run() {
+//                                if (currentPage == AllBaner.size()) {
+//                                    currentPage = 0;
+//                                }
+//                                viewPager2.setCurrentItem(currentPage++);
+//                            }
+//                        };
+//                        new Timer().schedule(new TimerTask() {
+//                            @Override
+//                            public void run() {
+//                                handler.post(update);
+//                            }
+//                        }, 100, 5000);
 
 
                     }
@@ -551,6 +573,16 @@ public class HomeFragment extends Fragment {
     }
 
 
+    public void onPause(){
+        super.onPause();
+        if(handler!=null)
+            handler.removeCallbacks(runnale);
+    }
+    public void onResume(){
+        super.onResume();
+        // Start auto screen slideshow after 1s
+        handler.postDelayed(runnale, 3000);
+    }
 
 
 }

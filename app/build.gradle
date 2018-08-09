@@ -35,4 +35,7 @@ dependencies {
     compile 'com.github.JakeWharton:ViewPagerIndicator:2.4.1@aar'
     compile 'com.payumoney.sdkui:plug-n-play:1.4.0'
 
+    compile 'com.eftimoff:android-viewpager-transformers:1.0.1@aar'
+
+
 }
