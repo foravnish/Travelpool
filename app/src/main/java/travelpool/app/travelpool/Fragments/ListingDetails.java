@@ -148,7 +148,7 @@ public class ListingDetails extends Fragment {
             packageName.setText(jsonObject2.optString("name"));
 
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
-            imageView.setImageUrl(jsonObject.optString("banner").toString().replace(" ","%20"),imageLoader);
+            imageView.setImageUrl(jsonObject2.optString("banner").toString().replace(" ","%20"),imageLoader);
 
         } catch (JSONException e) {
             e.printStackTrace();
