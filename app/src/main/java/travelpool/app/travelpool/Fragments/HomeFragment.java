@@ -533,7 +533,7 @@ public class HomeFragment extends Fragment {
 
             viewholder.name.setText(AllProducts.get(position).get("name"));
             viewholder.packageName.setText(AllProducts.get(position).get("package_name"));
-            viewholder.EmiPrice.setText("Per Months ₹ "+AllProducts.get(position).get("per_month_installment"));
+            viewholder.EmiPrice.setText("₹ "+AllProducts.get(position).get("per_month_installment"));
             viewholder.totalMember.setText("Months of Kitty "+AllProducts.get(position).get("no_of_month"));
             viewholder.termCondition.setText(AllProducts.get(position).get("term_and_cond"));
             viewholder.purchased.setText("Member Purchased "+AllProducts.get(position).get("purchased_kitty"));
