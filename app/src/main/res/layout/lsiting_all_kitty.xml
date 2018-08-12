@@ -105,15 +105,15 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/muli_bold"
                         android:singleLine="true"
-                        android:text="Per Months"
+                        android:text="Per Month"
                         android:gravity="right"
                         android:layout_alignParentRight="true"
                         android:layout_gravity="right"
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="5dp"
                         android:textStyle="bold"
-                        android:textColor="@color/grayText"
-                        android:textSize="16sp" />
+                        android:textColor="#f2b885"
+                        android:textSize="10sp" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -146,7 +146,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_marginLeft="5dp"
                         android:textStyle="bold"
-                        android:textColor="@color/grayText"
+                        android:textColor="@color/black"
                         android:textSize="20sp" />
                 </RelativeLayout>
 
@@ -181,7 +181,7 @@
                     android:singleLine="true"
                     android:text="Loading..."
                     android:layout_marginLeft="5dp"
-                    android:textColor="@color/green"
+                    android:textColor="#f3b37a"
                     android:textSize="14sp" />
                 <TextView
                     android:id="@+id/termCondition"
@@ -190,6 +190,7 @@
                     android:fontFamily="@font/muli_bold"
                     android:text="Loading..."
                     android:maxLines="2"
+                    android:textStyle="bold"
                     android:layout_marginLeft="5dp"
                     android:textColor="@color/red"
                     android:textSize="14sp" />
@@ -201,10 +202,10 @@
 
             <LinearLayout
                 android:layout_width="120dp"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="85dp"
                 android:background="@drawable/redius2"
                 android:elevation="3dp"
                 android:gravity="center_vertical"
