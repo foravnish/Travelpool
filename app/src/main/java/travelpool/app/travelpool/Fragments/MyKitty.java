@@ -105,16 +105,17 @@ public class MyKitty extends Fragment {
         Util.showPgDialog(dialog);
 
 
-        RequestQueue queue = Volley.newRequestQueue(getActivity());
-        StringRequest strReq = new StringRequest(Request.Method.GET,
-                Api.myKitty+"/"+MyPrefrences.getUserID(getActivity()), new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Util.cancelPgDialog(dialog);
-                Log.e("MyKittyResponse", "Response: " + response);
 
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                Api.myKitty+"/"+MyPrefrences.getUserID(getActivity()), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                Log.d("MyKittyResponse", jsonObject.toString());
+
+                Util.cancelPgDialog(dialog);
                 try {
-                    JSONObject jsonObject=new JSONObject(response);
+                   // JSONObject jsonObject=new JSONObject(response);
                     if (jsonObject.getString("status").equalsIgnoreCase("success")){
 
                         expListView.setVisibility(View.VISIBLE);
@@ -129,14 +130,14 @@ public class MyKitty extends Fragment {
 
                             JSONArray jsonArrayKitty=jsonObject1.getJSONArray("kitty_details");
 
-                                JSONObject jsonObjectKitty=jsonArrayKitty.getJSONObject(0);
+                            JSONObject jsonObjectKitty=jsonArrayKitty.getJSONObject(0);
 
-                                map.put("name",jsonObjectKitty.optString("name"));
-                                map.put("tc",jsonObjectKitty.optString("term_and_cond"));
+                            map.put("name",jsonObjectKitty.optString("name"));
+                            map.put("tc",jsonObjectKitty.optString("term_and_cond"));
 
-                                map.put("p_m_i",jsonObjectKitty.optString("per_month_installment"));
-                                map.put("m_m",jsonObjectKitty.optString("payment_due_date"));
-                                map.put("lucky_d_d",jsonObjectKitty.optString("lucky_draw_date"));
+                            map.put("p_m_i",jsonObjectKitty.optString("per_month_installment"));
+                            map.put("m_m",jsonObjectKitty.optString("payment_due_date"));
+                            map.put("lucky_d_d",jsonObjectKitty.optString("lucky_draw_date"));
 
 
 
@@ -145,11 +146,11 @@ public class MyKitty extends Fragment {
 
                             JSONArray jsonArrayPack=jsonObject1.getJSONArray("package_details");
 
-                                JSONObject jsonObjectPack=jsonArrayPack.getJSONObject(0);
+                            JSONObject jsonObjectPack=jsonArrayPack.getJSONObject(0);
 
-                                map.put("package_name",jsonObjectPack.optString("name"));
-                                map.put("tc",jsonObjectPack.optString("term_and_cond"));
-                                map.put("banner",jsonObjectPack.optString("banner"));
+                            map.put("package_name",jsonObjectPack.optString("name"));
+                            map.put("tc",jsonObjectPack.optString("term_and_cond"));
+                            map.put("banner",jsonObjectPack.optString("banner"));
 
 
 
@@ -171,31 +172,118 @@ public class MyKitty extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
             }
         }, new Response.ErrorListener() {
+
             @Override
             public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("ResposeConnect", "Error: " + error.getMessage());
+                Toast.makeText(getActivity(),
+                        "Error! Please Connect to the internet", Toast.LENGTH_SHORT).show();
                 Util.cancelPgDialog(dialog);
-                Log.e("fdgdfgdfgd", "Login Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),"Please Connect to the Internet or Wrong Password", Toast.LENGTH_LONG).show();
+
             }
-        }){
+        });
 
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Log.e("fgdfgdfgdf","Inside getParams");
+        jsonObjReq.setShouldCache(false);
+        AppController.getInstance().addToRequestQueue(jsonObjReq);
 
-                // Posting parameters to login url
-                Map<String, String> params = new HashMap<>();
-                params.put("userid",  MyPrefrences.getUserID(getActivity()));
-              //  params.put("kitty_id",  id.toString());
 
-                return params;
-            }
 
-        };
-        // Adding request to request queue
-        queue.add(strReq);
+
+
+//        RequestQueue queue = Volley.newRequestQueue(getActivity());
+//        StringRequest strReq = new StringRequest(Request.Method.GET,
+//                Api.myKitty+"/"+MyPrefrences.getUserID(getActivity()), new Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                Util.cancelPgDialog(dialog);
+//                Log.e("MyKittyResponse", "Response: " + response);
+//
+//                try {
+//                    JSONObject jsonObject=new JSONObject(response);
+//                    if (jsonObject.getString("status").equalsIgnoreCase("success")){
+//
+//                        expListView.setVisibility(View.VISIBLE);
+//                        imageNoListing.setVisibility(View.GONE);
+//
+//                        final JSONArray jsonArray=jsonObject.getJSONArray("message");
+//
+//                        map=new HashMap();
+//
+//                        for (int i=0;i<jsonArray.length();i++){
+//                            JSONObject jsonObject1=jsonArray.getJSONObject(i);
+//
+//                            JSONArray jsonArrayKitty=jsonObject1.getJSONArray("kitty_details");
+//
+//                                JSONObject jsonObjectKitty=jsonArrayKitty.getJSONObject(0);
+//
+//                                map.put("name",jsonObjectKitty.optString("name"));
+//                                map.put("tc",jsonObjectKitty.optString("term_and_cond"));
+//
+//                                map.put("p_m_i",jsonObjectKitty.optString("per_month_installment"));
+//                                map.put("m_m",jsonObjectKitty.optString("payment_due_date"));
+//                                map.put("lucky_d_d",jsonObjectKitty.optString("lucky_draw_date"));
+//
+//
+//
+//                            map.put("id",jsonObject1.optString("id"));
+//                            map.put("kitty_id",jsonObject1.optString("kitty_id"));
+//
+//                            JSONArray jsonArrayPack=jsonObject1.getJSONArray("package_details");
+//
+//                                JSONObject jsonObjectPack=jsonArrayPack.getJSONObject(0);
+//
+//                                map.put("package_name",jsonObjectPack.optString("name"));
+//                                map.put("tc",jsonObjectPack.optString("term_and_cond"));
+//                                map.put("banner",jsonObjectPack.optString("banner"));
+//
+//
+//
+//
+//
+//
+//                            Adapter adapter=new Adapter();
+//                            expListView.setAdapter(adapter);
+//                            AllProducts.add(map);
+//
+//                        }
+//                    }
+//                    else{
+//
+//                        expListView.setVisibility(View.GONE);
+//                        imageNoListing.setVisibility(View.VISIBLE);
+//                    }
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Util.cancelPgDialog(dialog);
+//                Log.e("fdgdfgdfgd", "Login Error: " + error.getMessage());
+//                Toast.makeText(getApplicationContext(),"Please Connect to the Internet or Wrong Password", Toast.LENGTH_LONG).show();
+//            }
+//        }){
+//
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Log.e("fgdfgdfgdf","Inside getParams");
+//
+//                // Posting parameters to login url
+//                Map<String, String> params = new HashMap<>();
+//                params.put("userid",  MyPrefrences.getUserID(getActivity()));
+//              //  params.put("kitty_id",  id.toString());
+//
+//                return params;
+//            }
+//
+//        };
+//        // Adding request to request queue
+//        queue.add(strReq);
 
 
     }
