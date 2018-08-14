@@ -62,7 +62,8 @@ public class PayNow extends AppCompatActivity {
     TextView instal,name,packageName;
     Button payNow;
     Dialog dialog;
-    JSONObject jsonObject;
+    JSONObject jsonObject1;
+    JSONObject jsonObject2;
 
     private PayUmoneySdkInitializer.PaymentParam mPaymentParams;
     private AppPreference mAppPreference;
@@ -93,18 +94,18 @@ public class PayNow extends AppCompatActivity {
         salt=AppEnvironment.SANDBOX.salt();
 
         try {
-            jsonObject=new JSONObject(getIntent().getStringExtra("data"));
+            jsonObject1=new JSONObject(getIntent().getStringExtra("data"));
 
-            name.setText(jsonObject.optString("name"));
+            name.setText(jsonObject1.optString("name"));
 
-            JSONArray jsonArray2=jsonObject.getJSONArray("package_details");
-            JSONObject jsonObject2=jsonArray2.getJSONObject(0);
+            JSONArray jsonArray2=jsonObject1.getJSONArray("package_details");
+            jsonObject2=jsonArray2.getJSONObject(0);
             packageName.setText(jsonObject2.optString("name"));
 
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
-            imageView.setImageUrl(jsonObject.optString("banner").toString().replace(" ","%20"),imageLoader);
+            imageView.setImageUrl(jsonObject1.optString("banner").toString().replace(" ","%20"),imageLoader);
 
-            instal.setText("Per Month ₹ : "+jsonObject.optString("per_month_installment"));
+            instal.setText("Per Month ₹ : "+jsonObject1.optString("per_month_installment"));
 
 
         } catch (JSONException e) {
@@ -117,7 +118,7 @@ public class PayNow extends AppCompatActivity {
 
 
 //                submitData(jsonObject.optString("id"));
-                checkJoinOrNot(jsonObject.optString("id"),jsonObject.optString("per_month_installment"));
+                checkJoinOrNot(jsonObject1.optString("id"),jsonObject1.optString("per_month_installment"));
 
 //                launchPayUMoneyFlow("", jsonObject.optString("per_month_installment"));
 
@@ -144,6 +145,7 @@ public class PayNow extends AppCompatActivity {
 
 
 
+                        //submitData(jsonObject1.optString("id"),jsonObject1.optString("name"),jsonObject2.optString("id"),jsonObject2.optString("name"),jsonObject1.optString("per_month_installment"));
                             launchPayUMoneyFlow("", price);
 //                            Util.errorDialog(PayNow.this,"You have Already Joined this Kitty, Please Select another Kitty!");
                             Log.d("sdfsfsdfsdfsds","no");
@@ -202,17 +204,18 @@ public class PayNow extends AppCompatActivity {
     }
 
 
-    private void submitData(final String id) {
+    private void submitData(final String id,final String K_name,final String P_id,final String P_name,final String amount) {
         Util.showPgDialog(dialog);
 
         RequestQueue queue = Volley.newRequestQueue(PayNow.this);
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                Api.joinKitty, new Response.Listener<String>() {
+                Api.purchaseKitty, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Util.cancelPgDialog(dialog);
-                Log.e("dfsjfdfsdfgd", "Login Response: " + response);
+                Log.e("fgfdgdfgdfgdfgfhfh", "Purchase Response: " + response);
                 //parse your response here
+
 
                 try {
                     JSONObject jsonObject=new JSONObject(response);
@@ -246,12 +249,29 @@ public class PayNow extends AppCompatActivity {
 
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<>();
-                params.put("userid",  MyPrefrences.getUserID(getApplicationContext()));
+                params.put("user_id",  MyPrefrences.getUserID(getApplicationContext()));
+                params.put("user_name",  MyPrefrences.getUSENAME(getApplicationContext()));
+                params.put("user_type",  MyPrefrences.getUserType(getApplicationContext()));
+                params.put("kitty_name",  K_name.toLowerCase());
                 params.put("kitty_id",  id.toString());
+                params.put("package_id",  P_id.toString());
+                params.put("package_name",  P_name.toString());
+
+                params.put("payment_id",  "aa");
+                params.put("transaction_id",  "aa");
+                params.put("response", "aa");
+                params.put("pay_amount",  "aa");
+                params.put("pay_amount",  "aa");
+                params.put("payment_status", amount.toString());
 
 
-                Log.d("fsfsdfsdfsdfsf",MyPrefrences.getUserID(getApplicationContext()));
-                Log.d("fsfsdfsdfsdfsf",id.toString());
+                Log.d("fsfsdfsdfsdfsf1",MyPrefrences.getUserID(getApplicationContext()));
+                Log.d("fsfsdfsdfsdfsf2",K_name.toString());
+                Log.d("fsfsdfsdfsdfsf3",id.toString());
+                Log.d("fsfsdfsdfsdfsf4",P_id.toString());
+                Log.d("fsfsdfsdfsdfsf5",P_name.toString());
+                Log.d("fsfsdfsdfsdfsf6",amount.toString());
+
                 return params;
             }
 
@@ -556,7 +576,7 @@ public class PayNow extends AppCompatActivity {
 
                   //  placeOrder();
 
-                    submitData(jsonObject.optString("id"));
+                    submitData(jsonObject1.optString("id"),jsonObject1.optString("name"),jsonObject2.optString("id"),jsonObject2.optString("name"),jsonObject1.optString("per_month_installment"));
 
 
                 } else {

@@ -20,7 +20,8 @@ public class Api {
     public static String signup=BASEURL+"userregistration";
     public static String userbyid=BASEURL+"userbyid";
     public static String ViewKitty=BASEURL+"ViewKitty";
-    public static String joinKitty=BASEURL+"joinKitty";
+//    public static String joinKitty=BASEURL+"joinKitty";
+    public static String purchaseKitty=BASEURL+"purchaseKitty";
     public static String myKittyStatus=BASEURL+"myKittyStatus";
     public static String myKitty=BASEURL+"myKitty";
 //    public static String package_list=BASEURL+"package_list";
