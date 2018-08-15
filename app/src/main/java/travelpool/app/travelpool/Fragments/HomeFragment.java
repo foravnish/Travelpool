@@ -473,7 +473,7 @@ public class HomeFragment extends Fragment {
 
     public class Viewholder{
         ImageView imgFav,stars;
-        TextView totalMember,EmiPrice,termCondition,purchased,purchased2,desreption,NoOfMember,months,packageName,name;
+        TextView totalMember,EmiPrice,termCondition,purchased,purchased2,desreption,NoOfMember,months,packageName,name,remain;
         LinearLayout liner,linerLayoutOffer;
 
         NetworkImageView banerImg,banerImg2;
@@ -521,6 +521,7 @@ public class HomeFragment extends Fragment {
             viewholder.purchased2=convertView.findViewById(R.id.purchased2);
             viewholder.desreption=convertView.findViewById(R.id.desreption);
             viewholder.NoOfMember=convertView.findViewById(R.id.NoOfMember);
+            viewholder.remain=convertView.findViewById(R.id.remain);
 //            viewholder.months=convertView.findViewById(R.id.months);
 //            viewholder.member=convertView.findViewById(R.id.member);
 //            viewholder.instal=convertView.findViewById(R.id.instal);
@@ -541,6 +542,7 @@ public class HomeFragment extends Fragment {
             viewholder.purchased2.setText("Lucky Draw Date "+AllProducts.get(position).get("lucky_draw_date"));
             viewholder.desreption.setText(AllProducts.get(position).get("description"));
             viewholder.NoOfMember.setText("Total Members "+AllProducts.get(position).get("no_of_max_members"));
+            viewholder.remain.setText("25");
 
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
             viewholder.banerImg.setImageUrl(AllProducts.get(position).get("banner").toString().replace(" ","%20"),imageLoader);
