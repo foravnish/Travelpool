@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Fragments.TranscationDetails">
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="name"
+            android:layout_marginTop="10dp"
+            android:textColor="#666"
+            android:textStyle="bold"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:id="@+id/kittyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="name"
+            android:textColor="#666"
+            android:textStyle="bold"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:id="@+id/packName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="name"
+            android:textColor="#666"
+            android:textStyle="bold"
+            android:textSize="16dp"/>
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="#999">
+
+        </View>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Invoice Summary"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/orange"
+            android:textStyle="bold"
+            android:textSize="16dp"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment Id"
+                android:layout_marginTop="10dp"
+                android:textColor="#777"
+                android:layout_alignParentLeft="true"
+                android:textSize="12dp"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Purchase Date"
+                android:layout_marginTop="10dp"
+                android:textColor="#777"
+                android:layout_alignParentRight="true"
+                android:textSize="12dp"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/orderNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment Id"
+                android:layout_marginTop="5dp"
+                android:textColor="#333"
+                android:textStyle="bold"
+                android:layout_alignParentLeft="true"
+                android:textSize="16dp"/>
+
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Purchase Date"
+                android:layout_marginTop="5dp"
+                android:textColor="#777"
+                android:layout_alignParentRight="true"
+                android:textSize="16dp"/>
+
+
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Transaction Id"
+                android:layout_marginTop="10dp"
+                android:textColor="#777"
+                android:layout_alignParentLeft="true"
+                android:textSize="12dp"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Package Id"
+                android:layout_marginTop="10dp"
+                android:textColor="#777"
+                android:layout_alignParentRight="true"
+                android:textSize="12dp"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/txnNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment Id"
+                android:layout_marginTop="5dp"
+                android:textColor="#333"
+                android:textStyle="bold"
+                android:layout_alignParentLeft="true"
+                android:textSize="16dp"/>
+
+
+            <TextView
+                android:id="@+id/PackId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Purchase Date"
+                android:layout_marginTop="5dp"
+                android:textColor="#777"
+                android:layout_alignParentRight="true"
+                android:textSize="16dp"/>
+
+
+        </RelativeLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="40dp"
+            android:background="#999">
+
+        </View>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Amount Paid"
+                android:layout_marginTop="5dp"
+                android:textColor="#333"
+                android:textStyle="bold"
+                android:layout_alignParentLeft="true"
+                android:textSize="16dp"/>
+
+
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment Id"
+                android:layout_marginTop="5dp"
+                android:textColor="#333"
+                android:textStyle="bold"
+                android:layout_alignParentRight="true"
+                android:textSize="16dp"/>
+
+
+        </RelativeLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="#999">
+
+        </View>
+
+    </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

@@ -102,17 +102,9 @@ public class ShowUser extends Fragment {
 
                             map=new HashMap();
                             map.put("id",jsonObject.optString("id"));
-                            map.put("agent_id",jsonObject.optString("agent_id"));
                             map.put("name",jsonObject.optString("name"));
                             map.put("mobile",jsonObject.optString("mobile"));
-                            map.put("pan_no",jsonObject.optString("pan_no"));
-                            map.put("aadhar_no",jsonObject.optString("aadhar_no"));
-                            map.put("email",jsonObject.optString("email"));
-                            map.put("address",jsonObject.optString("address"));
-                            map.put("city",jsonObject.optString("city"));
-                            map.put("state",jsonObject.optString("state"));
-                            map.put("pincode", jsonObject.optString("pincode"));
-                            map.put("created_date", jsonObject.optString("created_date"));
+                            map.put("created_date",jsonObject.optString("created_date"));
 
                             Adapter adapter = new Adapter();
                             expListView.setAdapter(adapter);
@@ -150,23 +142,22 @@ public class ShowUser extends Fragment {
         AppController.getInstance().addToRequestQueue(jsonObjReq);
 
 
-//        expListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Fragment fragment = new ListingDetails();
-//                Bundle bundle=new Bundle();
-//                try {
-//                    bundle.putString("data", String.valueOf(jsonArray.get(i)));
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                bundle.putString("name", AllProducts.get(i).get("name"));
-//                FragmentManager manager = getFragmentManager();
-//                FragmentTransaction ft = manager.beginTransaction();
-//                fragment.setArguments(bundle);
-//                ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
-//            }
-//        });
+        expListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Fragment fragment = new UserListDetail();
+                Bundle bundle=new Bundle();
+                try {
+                    bundle.putString("jsonArray", String.valueOf(jsonArray.get(i)));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                FragmentManager manager = getFragmentManager();
+                FragmentTransaction ft = manager.beginTransaction();
+                fragment.setArguments(bundle);
+                ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+            }
+        });
 
 
         return view;
@@ -175,7 +166,7 @@ public class ShowUser extends Fragment {
 
     public class Viewholder{
         ImageView imgFav,stars;
-        TextView penality_after,email,address,city,pincode,date,mobile,packageName,name;
+        TextView name1,name2,price,date;
         LinearLayout liner,linerLayoutOffer;
 
         NetworkImageView banerImg;
@@ -214,22 +205,18 @@ public class ShowUser extends Fragment {
 
             final Viewholder viewholder=new Viewholder();
 
-            viewholder.name=convertView.findViewById(R.id.name);
-            viewholder.mobile=convertView.findViewById(R.id.mobile);
+            viewholder.name1=convertView.findViewById(R.id.name1);
+            viewholder.name2=convertView.findViewById(R.id.name2);
             viewholder.date=convertView.findViewById(R.id.date);
-            viewholder.pincode=convertView.findViewById(R.id.pincode);
-            viewholder.city=convertView.findViewById(R.id.city);
-            viewholder.address=convertView.findViewById(R.id.address);
-            viewholder.email=convertView.findViewById(R.id.email);
 
+            viewholder.name1.setText(AllProducts.get(position).get("name").toUpperCase());
+            viewholder.name2.setText(AllProducts.get(position).get("mobile"));
 
-            viewholder.name.setText(AllProducts.get(position).get("name"));
-            viewholder.mobile.setText(AllProducts.get(position).get("mobile"));
-            viewholder.date.setText(AllProducts.get(position).get("created_date"));
-            viewholder.pincode.setText(AllProducts.get(position).get("pincode"));
-            viewholder.city.setText(AllProducts.get(position).get("city")+" , "+AllProducts.get(position).get("state"));
-            viewholder.address.setText(AllProducts.get(position).get("address"));
-            viewholder.email.setText(AllProducts.get(position).get("email"));
+            String year=AllProducts.get(position).get("created_date").substring(0,4);
+            String month=AllProducts.get(position).get("created_date").substring(5,7);
+            String day=AllProducts.get(position).get("created_date").substring(8,10);
+            viewholder.date.setText(day+"-"+month+"-"+year);
+
 
 
 

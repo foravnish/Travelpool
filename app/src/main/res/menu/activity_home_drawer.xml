@@ -26,6 +26,13 @@
             android:icon="@drawable/viewkitty"
             android:visible="false"
             android:title="Add User" />
+
+        <item
+            android:id="@+id/nav_view_user_list"
+            android:icon="@drawable/viewkitty"
+            android:visible="false"
+            android:title="Add User" />
+
         <item
             android:id="@+id/nav_view_show_user"
             android:icon="@drawable/viewkitty"

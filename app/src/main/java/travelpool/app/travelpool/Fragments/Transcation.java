@@ -7,12 +7,15 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -57,6 +60,7 @@ public class Transcation extends Fragment {
     Dialog dialog;
     JSONObject jsonObject1;
     ImageView imageNoListing;
+    JSONArray jsonArray;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,13 +95,20 @@ public class Transcation extends Fragment {
                         expListView.setVisibility(View.VISIBLE);
                         imageNoListing.setVisibility(View.GONE);
 
-                        final JSONArray jsonArray=response.getJSONArray("message");
+                        jsonArray=response.getJSONArray("message");
                         for (int i=0;i<jsonArray.length();i++){
                             JSONObject jsonObject=jsonArray.getJSONObject(i);
 
 
                             map=new HashMap();
                             map.put("id",jsonObject.optString("id"));
+                            map.put("package_name",jsonObject.optString("package_name"));
+                            map.put("kitty_name",jsonObject.optString("kitty_name"));
+                            map.put("pay_amount",jsonObject.optString("pay_amount"));
+                            map.put("purchase_date",jsonObject.optString("purchase_date"));
+
+
+
                             Adapter adapter=new Adapter();
                             expListView.setAdapter(adapter);
                             AllProducts.add(map);
@@ -138,12 +149,35 @@ public class Transcation extends Fragment {
         jsonObjReq.setShouldCache(false);
         AppController.getInstance().addToRequestQueue(jsonObjReq);
 
+
+
+        expListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+                Fragment fragment = new TranscationDetails();
+                Bundle bundle=new Bundle();
+                try {
+                    bundle.putString("jsonArray",jsonArray.get(i).toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                FragmentManager manager = getFragmentManager();
+                FragmentTransaction ft = manager.beginTransaction();
+                fragment.setArguments(bundle);
+                ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+
+
+            }
+        });
+
         return view;
     }
 
     public class Viewholder{
         ImageView imgFav,stars;
-        TextView address,name,totlareview,area,subcatListing,distance;
+        TextView name1,name2,price,date;
         LinearLayout liner,linerLayoutOffer;
 
         NetworkImageView imgaeView;
@@ -187,27 +221,19 @@ public class Transcation extends Fragment {
 
             final Viewholder viewholder=new Viewholder();
 
-            viewholder.name=convertView.findViewById(R.id.name);
-            viewholder.address=convertView.findViewById(R.id.address);
-            viewholder.liner=convertView.findViewById(R.id.liner);
-            viewholder.totlareview=convertView.findViewById(R.id.totlareview);
+            viewholder.name1=convertView.findViewById(R.id.name1);
+            viewholder.name2=convertView.findViewById(R.id.name2);
+            viewholder.price=convertView.findViewById(R.id.price);
+            viewholder.date=convertView.findViewById(R.id.date);
 
-            viewholder.area=convertView.findViewById(R.id.area);
-            viewholder.imgaeView=convertView.findViewById(R.id.imgaeView);
-            viewholder.linerLayoutOffer=convertView.findViewById(R.id.linerLayoutOffer);
-            viewholder.cardView=convertView.findViewById(R.id.cardView);
-            viewholder.subcatListing=convertView.findViewById(R.id.subcatListing);
-            viewholder.distance=convertView.findViewById(R.id.distance);
+            viewholder.name1.setText(AllProducts.get(position).get("package_name"));
+            viewholder.name2.setText(AllProducts.get(position).get("kitty_name"));
 
-
-            viewholder.name.setText(AllProducts.get(position).get("company_name"));
-            viewholder.name.setText(AllProducts.get(position).get("company_name"));
-            viewholder.address.setText(AllProducts.get(position).get("address"));
-            viewholder.totlareview.setText(AllProducts.get(position).get("totlauser")+" Reviews");
-            viewholder.area.setText(AllProducts.get(position).get("locationName"));
-            viewholder.subcatListing.setText(AllProducts.get(position).get("keywords"));
-            ImageLoader imageLoader = AppController.getInstance().getImageLoader();
-            viewholder.imgaeView.setImageUrl(AllProducts.get(position).get("logo"),imageLoader);
+            String year=AllProducts.get(position).get("purchase_date").substring(0,4);
+            String month=AllProducts.get(position).get("purchase_date").substring(5,7);
+            String day=AllProducts.get(position).get("purchase_date").substring(8,10);
+            viewholder.date.setText(day+"-"+month+"-"+year);
+            viewholder.price.setText("₹ "+AllProducts.get(position).get("pay_amount"));
 
 
 
