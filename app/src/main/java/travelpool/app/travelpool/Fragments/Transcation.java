@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +18,18 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -28,7 +37,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import travelpool.app.travelpool.R;
+import travelpool.app.travelpool.Utils.Api;
 import travelpool.app.travelpool.Utils.AppController;
+import travelpool.app.travelpool.Utils.MyPrefrences;
+import travelpool.app.travelpool.Utils.Util;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,112 +74,69 @@ public class Transcation extends Fragment {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(false);
-        // Util.showPgDialog(dialog);
+         Util.showPgDialog(dialog);
 
 
-//        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-//                Api.searchCompany+"?keyword="+"4"+"&cityId=1", null, new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                Log.d("Respose123", response.toString());
-//
-//                Util.cancelPgDialog(dialog);
-//                try {
-//
-//                    if (response.getString("status").equalsIgnoreCase("success")){
-//
-//                        expListView.setVisibility(View.VISIBLE);
-//                        imageNoListing.setVisibility(View.GONE);
-//
-//                        final JSONArray jsonArray=response.getJSONArray("message");
-//                        for (int i=0;i<jsonArray.length();i++){
-//                            JSONObject jsonObject=jsonArray.getJSONObject(i);
-//
-//                            JSONArray jsonArray1=jsonObject.getJSONArray("rating");
-//                            JSONArray jsonArray2=jsonObject.getJSONArray("payment_mode");
-//
-//                            for (int j=0;j<jsonArray1.length();j++){
-//                                jsonObject1=jsonArray1.getJSONObject(j);
-//                                Log.d("fdsgvfdh",jsonObject1.optString("ratingUser"));
-//                                Log.d("fdsgvfdh",jsonObject1.optString("rating"));
-//                            }
-//
-//                            map=new HashMap();
-//                            map.put("id",jsonObject.optString("id"));
-//                            map.put("cat_id",jsonObject.optString("cat_id"));
-//                            map.put("company_name",jsonObject.optString("company_name"));
-//                            map.put("address",jsonObject.optString("address"));
-//                            map.put("c1_fname",jsonObject.optString("c1_fname"));
-//                            map.put("c1_mname",jsonObject.optString("c1_mname"));
-//                            map.put("c1_lname",jsonObject.optString("c1_lname"));
-//                            map.put("c1_email",jsonObject.optString("c1_email"));
-//                            map.put("c1_mobile1",jsonObject.optString("c1_mobile1"));
-//                            map.put("c1_mobile2",jsonObject.optString("c1_mobile2"));
-//                            map.put("website",jsonObject.optString("website"));
-//                            map.put("totlauser",jsonObject1.optString("ratingUser"));
-//                            map.put("rating",jsonObject1.optString("rating"));
-//                            map.put("liking",jsonObject.optString("liking"));
-//                            map.put("locationName",jsonObject.optString("locationName"));
-//                            map.put("logo",jsonObject.optString("logo"));
-//                            map.put("companyLogo",jsonObject.optString("companyLogo"));
-//                            map.put("premium",jsonObject.optString("premium"));
-//                            map.put("offer",jsonObject.optString("offer"));
-//                            map.put("pincode",jsonObject.optString("pincode"));
-//                            map.put("distance",jsonObject.optString("distance"));
-//
-//                            map.put("latitude",jsonObject.optString("latitude"));
-//                            map.put("longitude",jsonObject.optString("longitude"));
-//
-//                            map.put("payment_mode",jsonObject.optString("payment_mode"));
-//                            map.put("closing_time",jsonObject.optString("closing_time"));
-//                            map.put("closing_time2",jsonObject.optString("closing_time2"));
-//                            map.put("opening_time",jsonObject.optString("opening_time"));
-//                            map.put("opening_time2",jsonObject.optString("opening_time2"));
-//                            map.put("min_order_amnt",jsonObject.optString("min_order_amnt"));
-//                            map.put("min_order_qty",jsonObject.optString("min_order_qty"));
-//                            map.put("closing_days",jsonObject.optString("closing_days"));
-//
-//
-//
-//                            Adapter adapter=new Adapter();
-//                            expListView.setAdapter(adapter);
-//                            AllProducts.add(map);
-//
-//
-//                        }
-//                    }
-//                    else{
-//                        expListView.setVisibility(View.GONE);
-//                        imageNoListing.setVisibility(View.VISIBLE);
-//                        //Toast.makeText(getActivity(), "No Record Found...", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(getActivity(),
-//                            "Error: " + e.getMessage(),
-//                            Toast.LENGTH_LONG).show();
-//                    Util.cancelPgDialog(dialog);
-//                }
-//
-//            }
-//        }, new Response.ErrorListener() {
-//
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                VolleyLog.d("Respose", "Error: " + error.getMessage());
-//                Toast.makeText(getActivity(),
-//                        "Error! Please Connect to the internet", Toast.LENGTH_SHORT).show();
-//                Util.cancelPgDialog(dialog);
-//
-//            }
-//        });
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                Api.myTranscations+"/"+ MyPrefrences.getUserID(getActivity()), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("ResposeTranscation", response.toString());
+
+                Util.cancelPgDialog(dialog);
+                try {
+
+                    if (response.getString("status").equalsIgnoreCase("success")){
+
+                        expListView.setVisibility(View.VISIBLE);
+                        imageNoListing.setVisibility(View.GONE);
+
+                        final JSONArray jsonArray=response.getJSONArray("message");
+                        for (int i=0;i<jsonArray.length();i++){
+                            JSONObject jsonObject=jsonArray.getJSONObject(i);
 
 
-//        jsonObjReq.setShouldCache(false);
-//        AppController.getInstance().addToRequestQueue(jsonObjReq);
+                            map=new HashMap();
+                            map.put("id",jsonObject.optString("id"));
+                            Adapter adapter=new Adapter();
+                            expListView.setAdapter(adapter);
+                            AllProducts.add(map);
+
+
+                        }
+                    }
+                    else{
+                        expListView.setVisibility(View.GONE);
+                        imageNoListing.setVisibility(View.VISIBLE);
+                        //Toast.makeText(getActivity(), "No Record Found...", Toast.LENGTH_SHORT).show();
+                    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(),
+                            "Error: " + e.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                    Util.cancelPgDialog(dialog);
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("Respose", "Error: " + error.getMessage());
+                Toast.makeText(getActivity(),
+                        "Error! Please Connect to the internet", Toast.LENGTH_SHORT).show();
+                Util.cancelPgDialog(dialog);
+
+            }
+        });
+
+
+        jsonObjReq.setShouldCache(false);
+        AppController.getInstance().addToRequestQueue(jsonObjReq);
 
         return view;
     }

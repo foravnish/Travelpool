@@ -260,9 +260,8 @@ public class PayNow extends AppCompatActivity {
                 params.put("payment_id",  "aa");
                 params.put("transaction_id",  "aa");
                 params.put("response", "aa");
-                params.put("pay_amount",  "aa");
-                params.put("pay_amount",  "aa");
-                params.put("payment_status", amount.toString());
+                params.put("pay_amount",  amount.toString());
+                params.put("payment_status", "success");
 
 
                 Log.d("fsfsdfsdfsdfsf1",MyPrefrences.getUserID(getApplicationContext()));
