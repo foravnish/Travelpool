@@ -21,98 +21,191 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/liner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="5">
 
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="310dp">
 
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2">
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:weightSum="2">
+
 
                     <com.android.volley.toolbox.NetworkImageView
                         android:id="@+id/banerImg"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_height="125dp"
                         android:scaleType="fitXY"
-                        android:layout_height="wrap_content" />
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="1"/>
 
-
+                    <com.android.volley.toolbox.NetworkImageView
+                        android:id="@+id/banerImg2"
+                        android:layout_width="0dp"
+                        android:layout_height="125dp"
+                        android:layout_marginLeft="2dp"
+                        android:scaleType="fitXY"
+                        android:layout_weight="1"/>
                 </LinearLayout>
 
+
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="3"
-                    android:padding="10dp">
+                    android:id="@+id/postImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="190dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="100dp"
+                    android:background="@drawable/redius"
+                    android:elevation="3dp"
+                    android:scaleType="centerCrop"
+                    android:orientation="vertical">
 
 
-                    <TextView
-                        android:id="@+id/name"
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/muli_bold"
-                        android:singleLine="true"
-                        android:text="Loading..."
-                        android:textColor="#012b72"
-                        android:textSize="18sp" />
+                        >
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/muli_bold"
+                            android:singleLine="true"
+                            android:layout_gravity="left"
+                            android:text="Loading..."
+                            android:textStyle="bold"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="left"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
 
-                    <TextView
-                        android:id="@+id/packageName"
+                    </RelativeLayout>
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/muli_bold"
-                        android:singleLine="true"
-                        android:text="Loading..."
-                        android:textColor="#012b72"
-                        android:textSize="16sp" />
+                        android:orientation="horizontal"
+                        >
+                        <TextView
+                            android:id="@+id/packageName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/muli_bold"
+                            android:singleLine="true"
+                            android:text="Loading..."
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/grayText"
+                            android:textSize="14sp" />
 
 
 
+                    </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/instal"
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/muli_bold"
-                        android:text="vasundhara"
-                        android:textColor="#111111" />
+                        android:orientation="horizontal">
 
 
+                        <TextView
+                            android:id="@+id/totalMember"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/muli_bold"
+                            android:singleLine="true"
+                            android:text="Loading..."
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/grayText"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
 
 
                     <TextView
                         android:id="@+id/lucky_draw_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/muli"
-                        android:text="Loading"
-                        android:textStyle="bold"
-                        android:textColor="#111111"
-                        android:textSize="13sp" />
-
-
-
-
-                    <TextView
-                        android:id="@+id/term_and_cond"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/muli"
-                        android:text="loading"
-                        android:textColor="@color/green"
-                        android:textSize="12dp" />
+                        android:fontFamily="@font/muli_bold"
+                        android:singleLine="true"
+                        android:text="Loading..."
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/grayText"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/dueDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/muli_bold"
+                        android:singleLine="true"
+                        android:text="Loading..."
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/gray4"
+                        android:textSize="14sp" />
 
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="6.5"
+                            android:background="#444">
+
+                            <TextView
+                                android:id="@+id/instal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text=""
+                                android:textColor="@color/white"
+                                android:textSize="18dp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="3.5"
+                            android:background="@color/red">
+
+                            <TextView
+                                android:id="@+id/joinNow"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="Renew Kitty"
+                                android:textColor="@color/white"
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </LinearLayout>
                 </LinearLayout>
 
 
-            </LinearLayout>
+
+            </RelativeLayout>
+
+
 
 
         </LinearLayout>

@@ -9,6 +9,8 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -70,7 +72,7 @@ public class MyKitty extends Fragment {
     Dialog dialog;
     JSONObject jsonObject1;
     ImageView imageNoListing;
-
+    JSONArray jsonArray;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -121,7 +123,7 @@ public class MyKitty extends Fragment {
                         expListView.setVisibility(View.VISIBLE);
                         imageNoListing.setVisibility(View.GONE);
 
-                        final JSONArray jsonArray=jsonObject.getJSONArray("message");
+                        jsonArray=jsonObject.getJSONArray("message");
 
                         map=new HashMap();
 
@@ -136,13 +138,15 @@ public class MyKitty extends Fragment {
                             map.put("tc",jsonObjectKitty.optString("term_and_cond"));
 
                             map.put("p_m_i",jsonObjectKitty.optString("per_month_installment"));
-                            map.put("m_m",jsonObjectKitty.optString("payment_due_date"));
+                            map.put("payment_due_date",jsonObjectKitty.optString("payment_due_date"));
                             map.put("lucky_d_d",jsonObjectKitty.optString("lucky_draw_date"));
+                            map.put("no_of_max_members",jsonObjectKitty.optString("no_of_max_members"));
 
 
 
                             map.put("id",jsonObject1.optString("id"));
                             map.put("kitty_id",jsonObject1.optString("kitty_id"));
+                            map.put("this_month_renual",jsonObject1.optString("this_month_renual"));
 
                             JSONArray jsonArrayPack=jsonObject1.getJSONArray("package_details");
 
@@ -151,6 +155,7 @@ public class MyKitty extends Fragment {
                             map.put("package_name",jsonObjectPack.optString("name"));
                             map.put("tc",jsonObjectPack.optString("term_and_cond"));
                             map.put("banner",jsonObjectPack.optString("banner"));
+                            map.put("image",jsonObjectPack.optString("image"));
 
 
 
@@ -188,6 +193,25 @@ public class MyKitty extends Fragment {
 
         jsonObjReq.setShouldCache(false);
         AppController.getInstance().addToRequestQueue(jsonObjReq);
+
+
+
+        expListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Fragment fragment = new MyKittyListing();
+                Bundle bundle=new Bundle();
+                try {
+                    bundle.putString("data", String.valueOf(jsonArray.get(i)));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                FragmentManager manager = getFragmentManager();
+                FragmentTransaction ft = manager.beginTransaction();
+                fragment.setArguments(bundle);
+                ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+            }
+        });
 
 
 
@@ -291,7 +315,7 @@ public class MyKitty extends Fragment {
 
     public class Viewholder{
         ImageView imgFav,stars;
-        TextView packageName,name,term_and_cond,lucky_draw_date,instal,distance;
+        TextView packageName,name,term_and_cond,lucky_draw_date,instal,dueDate,totalMember,joinNow;
         LinearLayout liner,linerLayoutOffer;
 
         NetworkImageView imgaeView;
@@ -302,7 +326,7 @@ public class MyKitty extends Fragment {
         ImageView img1,img2,img3,img4,img5;
 
         LinearLayout footer_layout;
-        NetworkImageView banerImg;
+        NetworkImageView banerImg,banerImg2;
 
     }
     class Adapter extends BaseAdapter {
@@ -344,24 +368,45 @@ public class MyKitty extends Fragment {
 
             viewholder.name=convertView.findViewById(R.id.name);
             viewholder.packageName=convertView.findViewById(R.id.packageName);
-            viewholder.term_and_cond=convertView.findViewById(R.id.term_and_cond);
+//            viewholder.term_and_cond=convertView.findViewById(R.id.term_and_cond);
+            viewholder.dueDate=convertView.findViewById(R.id.dueDate);
             viewholder.lucky_draw_date=convertView.findViewById(R.id.lucky_draw_date);
             viewholder.instal=convertView.findViewById(R.id.instal);
             viewholder.banerImg=convertView.findViewById(R.id.banerImg);
+            viewholder.banerImg2=convertView.findViewById(R.id.banerImg2);
+            viewholder.totalMember=convertView.findViewById(R.id.totalMember);
+            viewholder.joinNow=convertView.findViewById(R.id.joinNow);
 
 
 
             viewholder.name.setText(AllProducts.get(position).get("name"));
             viewholder.packageName.setText(AllProducts.get(position).get("package_name"));
-            viewholder.term_and_cond.setText(AllProducts.get(position).get("tc"));
+//            viewholder.term_and_cond.setText(AllProducts.get(position).get("tc"));
+            viewholder.dueDate.setText("Due Date :"+AllProducts.get(position).get("payment_due_date"));
+            viewholder.totalMember.setText("Total Members "+AllProducts.get(position).get("no_of_max_members"));
             viewholder.lucky_draw_date.setText("Lucky Draw Date: "+AllProducts.get(position).get("lucky_d_d"));
             viewholder.instal.setText(" Per Month ₹ : "+AllProducts.get(position).get("p_m_i"));
 
 
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
             viewholder.banerImg.setImageUrl(""+AllProducts.get(position).get("banner").toString().replace(" ","%20"),imageLoader);
+            viewholder.banerImg2.setImageUrl(""+AllProducts.get(position).get("image").toString().replace(" ","%20"),imageLoader);
 
+            if (AllProducts.get(position).get("this_month_renual").equals("Yes")){
+                viewholder.joinNow.setText("Renewed");
+            }
+            else{
+                viewholder.joinNow.setText("Renew Kitty");
+            }
 
+//            viewholder.joinNow.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Intent intent=new Intent(getActivity(), PayNow.class);
+//                    intent.putExtra("data",getArguments().getString("data"));
+//                    startActivity(intent);
+//                }
+//            });
 //            Typeface face=Typeface.createFromAsset(getActivity().getAssets(), "muli_semibold.ttf");
 //            Typeface face2=Typeface.createFromAsset(getActivity().getAssets(), "muli.ttf");
 //            viewholder.name.setTypeface(face);
