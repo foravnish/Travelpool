@@ -105,7 +105,7 @@ public class ListingDetails extends Fragment {
     boolean flag2=true;
     boolean flag3=true;
     boolean flag4=true;
-
+    JSONObject jsonObject;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -147,7 +147,7 @@ public class ListingDetails extends Fragment {
 
 
         try {
-            JSONObject jsonObject=new JSONObject(getArguments().getString("data"));
+            jsonObject=new JSONObject(getArguments().getString("data"));
 
            // name.setText(jsonObject.optString("name"));
             kittyName.setText(jsonObject.optString("name"));
@@ -161,7 +161,12 @@ public class ListingDetails extends Fragment {
             payment_due_date.setText("Payment Due Date: "+jsonObject.optString("payment_due_date"));
             penality_after.setText("After Due Date: "+jsonObject.optString("penality_after_due_date"));
             purchased.setText("Joined Entries "+jsonObject.optString("purchased_kitty"));
-            remain.setText("45");
+
+            int totalMember= Integer.parseInt(jsonObject.optString("no_of_max_members"));
+            int joined= Integer.parseInt(jsonObject.optString("purchased_kitty"));
+
+            int remainval=totalMember-joined;
+            remain.setText(""+remainval);
 
             JSONArray jsonArray2=jsonObject.getJSONArray("package_details");
             JSONObject jsonObject2=jsonArray2.getJSONObject(0);
@@ -186,6 +191,7 @@ public class ListingDetails extends Fragment {
             public void onClick(View view) {
                 Intent intent=new Intent(getActivity(), PayNow.class);
                 intent.putExtra("data",getArguments().getString("data"));
+                intent.putExtra("pay_amount",jsonObject.optString("per_month_installment"));
                 startActivity(intent);
             }
         });

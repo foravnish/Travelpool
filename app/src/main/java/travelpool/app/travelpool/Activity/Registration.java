@@ -1,13 +1,20 @@
 package travelpool.app.travelpool.Activity;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.net.wifi.WifiManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -17,6 +24,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -33,19 +41,32 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonObject;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.MultipartBuilder;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.RequestBody;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+import travelpool.app.travelpool.CameraAct.ImagePickerActivity;
 import travelpool.app.travelpool.R;
 import travelpool.app.travelpool.Utils.Api;
 import travelpool.app.travelpool.Utils.AppController;
+import travelpool.app.travelpool.Utils.JSONParser;
 import travelpool.app.travelpool.Utils.MyPrefrences;
 import travelpool.app.travelpool.Utils.Util;
 
@@ -64,7 +85,11 @@ public class Registration extends AppCompatActivity {
     TextView loginNow;
     Spinner gender;
     String[] cat ={"Male","Female"};
-
+    CircleImageView regiImage;
+    private static final int REQUEST_PICK_IMAGE = 1002;
+    Bitmap imageBitmap;
+    File f=null;
+    CheckBox checkBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,12 +115,32 @@ public class Registration extends AppCompatActivity {
         aadharNo=findViewById(R.id.aadharNo);
         editpanNo=findViewById(R.id.editpanNo);
         editapasport=findViewById(R.id.editapasport);
+        regiImage=findViewById(R.id.regiImage);
+        checkBox=findViewById(R.id.checkBox);
+
 
         dialog=new Dialog(Registration.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setCancelable(false);
         DataLoc=new ArrayList<>();
+
+
+
+        regiImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("fsdfsdfsdf","main");
+                if(isPermissionGranted()){
+                    Log.d("fsdfsdfdfdfsdf","true");
+                    pickImage();
+                }else{
+                    Log.d("fsdfsdfdfdfsdf","false");
+                    ActivityCompat.requestPermissions(Registration.this, new String[]{Manifest.permission.CAMERA}, 1);
+                }
+
+            }
+        });
 
 
 
@@ -134,16 +179,37 @@ public class Registration extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
 //                smsAPI();
 
-
-                if(validate()){
+                if (checkBox.isChecked()) {
+                    if (validate()) {
 
 //                    otpAPi(editmobile.getText().toString());
 
-                    submitRegistration();
+//                    submitRegistration();
 
+                        String path = null;
+                        String filename = null;
+
+                        try {
+                            path = f.toString();
+                            filename = path.substring(path.lastIndexOf("/") + 1);
+                            Log.d("dsfdfsdfsfs", filename);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        if (filename == null) {
+                            Util.errorDialog(Registration.this, "Please Select Image");
+                        } else {
+                            //Toast.makeText(AddProduct.this, "yes", Toast.LENGTH_SHORT).show();
+                            PostData(path, filename);
+
+                        }
+
+                    }
+                }
+                else{
+                    Util.errorDialog(Registration.this, "Please check to read to all Terms & Conditions");
                 }
             }
         });
@@ -152,12 +218,6 @@ public class Registration extends AppCompatActivity {
 //        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.simple_spinner_item2, cat);
 //        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //        gender.setAdapter(dataAdapter);
-
-
-
-
-
-
 
 
 
@@ -585,6 +645,256 @@ public class Registration extends AppCompatActivity {
 
     }
 
+
+
+
+    public boolean isPermissionGranted() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+
+    }
+
+    public void pickImage() {
+        startActivityForResult(new Intent(this, ImagePickerActivity.class), REQUEST_PICK_IMAGE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (permissions[0].equals(Manifest.permission.CAMERA) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            pickImage();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case REQUEST_PICK_IMAGE:
+                    String imagePath = data.getStringExtra("image_path");
+
+                    setImage(imagePath);
+                    break;
+            }
+        } else {
+            System.out.println("Failed to load image");
+        }
+    }
+
+    private void setImage(String imagePath) {
+
+        regiImage.setImageBitmap(getImageFromStorage(imagePath));
+    }
+
+    private Bitmap getImageFromStorage(String path) {
+        try {
+            f = new File(path);
+            // First decode with inJustDecodeBounds=true to check dimensions
+            final BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = false;
+            // Calculate inSampleSize
+            options.inSampleSize = calculateInSampleSize(options, 512, 512);
+
+            Log.d("sdfasafsdfsdfsdfsdf",f.toString());
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f), null, options);
+            return b;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private int calculateInSampleSize(
+            BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) > reqHeight
+                    && (halfWidth / inSampleSize) > reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
+    }
+
+    private void PostData(String filePath,String fileName) {
+
+        try {
+            Log.d("sdfsdfasdfsdfsdf1",filePath);
+            Log.d("sdfsdfasdfsdfsdf2",fileName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        new AddProductData(filePath,fileName).execute();
+
+    }
+
+
+    private class AddProductData extends AsyncTask<String, String, JSONObject> {
+        JSONParser jsonParser = new JSONParser();
+
+        private static final String TAG_STATUS = "status";
+        private static final String TAG_MESSAGE = "msg";
+
+        String val, path, fName, min, kmsDone, mobile, emailID, brand;
+        HashMap<String, String> params = new HashMap<>();
+
+        //EditText descreption,ageOfProd,headline,min,kmsDone,mobile,emailID;
+        AddProductData(String path,String fName) {
+            this.val = val;
+            this.path = path;
+            this.fName = fName;
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+            Util.showPgDialog(dialog);
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... args) {
+            JSONObject jsonObject = null;
+            try {
+
+                jsonObject = uploadImageFile(Registration.this, val,path, fName);
+
+                if (jsonObject != null) {
+
+                    return jsonObject;
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        protected void onPostExecute(JSONObject json) {
+            String message = "";
+            String data = "";
+
+//            if (progress.isShowing())
+//                progress.dismiss();
+
+            Util.cancelPgDialog(dialog);
+            if (json != null) {
+
+
+                if (json.optString("status").equalsIgnoreCase("success")) {
+
+                    smsAPI();
+
+                    Intent intent = new Intent(Registration.this, Login.class);
+                    startActivity(intent);
+                    finish();
+                    Toast.makeText(getApplicationContext(), "Please Login...", Toast.LENGTH_SHORT).show();
+
+
+
+                } else {
+                    Toast.makeText(getApplicationContext(), ""+json.optString("message"), Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
+    }
+
+
+    private JSONObject uploadImageFile(Context context, String value, String filepath1, String fileName1) {
+
+        // sourceFile2= new File("");
+
+        File sourceFile1 = new File(filepath1);
+
+        String result = null;
+        Log.e("FindPlayerPageAsync", "File...::::" + sourceFile1 + " : " + sourceFile1.exists());
+        Log.e("file name", ": " + fileName1);
+        JSONObject jsonObject = null;
+
+        try {
+
+            ////for image
+            final MediaType MEDIA_TYPE_PNG = filepath1.endsWith("png") ? MediaType.parse("image/png") : MediaType.parse("image");
+
+            Log.e("file name", ": " + fileName1);
+
+            //   Log.d("fgdgdfgdfgdf1",getIntent().getStringExtra("areatypenum"));
+
+            //Log.d("dfsdfsdgfsdgd",id.toString());
+            RequestBody requestBody = new MultipartBuilder()
+                    .type(MultipartBuilder.FORM)
+
+                    .addFormDataPart("name", editTextname.getText().toString())
+                    .addFormDataPart("email", editEmail.getText().toString())
+                    .addFormDataPart("mobile", editmobile.getText().toString())
+                    .addFormDataPart("password", editPassword.getText().toString())
+                    .addFormDataPart("address",editAddress.getText().toString())
+                    .addFormDataPart("city", editCity.getText().toString())
+                    .addFormDataPart("state", editState.getText().toString())
+                    .addFormDataPart("pincode", editPincode.getText().toString())
+
+                    .addFormDataPart("aadhar_no", aadharNo.getText().toString())
+                    .addFormDataPart("pan_no", editpanNo.getText().toString())
+                    .addFormDataPart("agent_id", "No")
+                    .addFormDataPart("aadhar_image", fileName1, RequestBody.create(MEDIA_TYPE_PNG, sourceFile1))
+                    .build();
+
+
+
+//            Log.d("fvfgdgdfhgghfhgdfh", amounts.getText().toString().replace("₹ ", ""));
+//            Log.d("fvfgdgdfhgdfhqwdfs",amounts.getText().toString().replace("₹ ", ""));
+
+            com.squareup.okhttp.Request request = new com.squareup.okhttp.Request.Builder()
+//                     .url("http://divpreetsingh.info/app/ManiUploadsImageHere")
+                    .header("Authorization", "Client-ID " + "...")
+//                    .url("http://bizzcityinfo.com/AndroidApi.php?function=insertGalleryPhoto")
+                    .url(Api.signup)
+//                    .url("http://templatestheme.com/demo/tradeone/ws/post_offer.php")
+                    // .addHeader("enctype", "multipart/form-data")
+                    .post(requestBody)
+                    .build();
+
+
+            OkHttpClient client = new OkHttpClient();
+            client.setConnectTimeout(15, TimeUnit.SECONDS);
+            client.setWriteTimeout(15, TimeUnit.SECONDS);
+            client.setReadTimeout(15, TimeUnit.SECONDS);
+
+
+            Log.e("request1", ":url:  " + request.urlString() + ", header: " + request.headers() + ", body " + request.body());
+            com.squareup.okhttp.Response response = client.newCall(request).execute();
+            result = response.body().string();
+            Log.e("responseMultipart", ": " + result);
+            jsonObject = new JSONObject(result);
+            Log.e("result", ": " + result);
+            return jsonObject;
+        } catch (UnknownHostException | UnsupportedEncodingException e) {
+            Log.e("FindPlayerPageAsync", "Error: " + e.getLocalizedMessage());
+        } catch (Exception e) {
+            Log.e("FindPlayerPageAsync", "Other Error: " + e.getLocalizedMessage());
+            Toast.makeText(getApplicationContext(), "Please try again.", Toast.LENGTH_SHORT).show();
+        }
+        return jsonObject;
+    }
 
 
 

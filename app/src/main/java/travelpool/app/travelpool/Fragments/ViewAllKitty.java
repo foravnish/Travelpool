@@ -254,6 +254,13 @@ public class ViewAllKitty extends Fragment {
 
             viewholder.desreption.setText(AllProducts.get(position).get("description"));
             viewholder.NoOfMember.setText("Total Members "+AllProducts.get(position).get("no_of_max_members"));
+
+            int totalMember= Integer.parseInt(AllProducts.get(position).get("no_of_max_members"));
+            int joined= Integer.parseInt(AllProducts.get(position).get("purchased_kitty"));
+
+            int remain=totalMember-joined;
+            viewholder.remain.setText(""+remain);
+
             viewholder.remain.setText("25");
 
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();

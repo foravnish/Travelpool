@@ -142,6 +142,73 @@
 
             </LinearLayout>
 
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/redius"
+                android:elevation="3dp"
+                android:scaleType="centerCrop"
+                android:orientation="vertical">
+
+
+                <RadioGroup
+                    android:id="@+id/radiogroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/online"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pay Online"
+                        android:padding="10dp"
+                        android:drawablePadding="20dp"
+                        android:buttonTint="@color/orange"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#111"></View>
+                    <RadioButton
+                        android:id="@+id/cash"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pay By Cash"
+                        android:padding="10dp"
+                        android:buttonTint="@color/orange"
+                        android:drawablePadding="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#111"></View>
+                    <RadioButton
+                        android:id="@+id/check"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pay By Cheque"
+                        android:buttonTint="@color/orange"
+                        android:padding="10dp"
+                        android:drawablePadding="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"/>
+
+
+                </RadioGroup>
+
+
+
+
+            </LinearLayout>
+
             <Button
                 android:id="@+id/payNow"
                 android:layout_width="match_parent"

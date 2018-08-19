@@ -36,6 +36,8 @@ dependencies {
     compile 'com.payumoney.sdkui:plug-n-play:1.4.0'
 
     compile 'com.eftimoff:android-viewpager-transformers:1.0.1@aar'
-
+    compile 'com.theartofdev.edmodo:android-image-cropper:1.2.1'
+    compile 'com.squareup.okhttp:okhttp:2.7.2'
+    compile 'de.hdodenhof:circleimageview:2.2.0'
 
 }

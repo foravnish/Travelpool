@@ -542,7 +542,12 @@ public class HomeFragment extends Fragment {
             viewholder.purchased2.setText("Lucky Draw Date "+AllProducts.get(position).get("lucky_draw_date"));
             viewholder.desreption.setText(AllProducts.get(position).get("description"));
             viewholder.NoOfMember.setText("Total Members "+AllProducts.get(position).get("no_of_max_members"));
-            viewholder.remain.setText("25");
+
+            int totalMember= Integer.parseInt(AllProducts.get(position).get("no_of_max_members"));
+            int joined= Integer.parseInt(AllProducts.get(position).get("purchased_kitty"));
+
+            int remain=totalMember-joined;
+            viewholder.remain.setText(""+remain);
 
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
             viewholder.banerImg.setImageUrl(AllProducts.get(position).get("banner").toString().replace(" ","%20"),imageLoader);

@@ -148,10 +148,13 @@ public class HomeAct extends AppCompatActivity
 
         } else if (id == R.id.nav_view_add_user) {
 
-            Fragment fragment = new AddUser();
-            FragmentManager manager = getSupportFragmentManager();
-            FragmentTransaction ft = manager.beginTransaction();
-            ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+
+
+            startActivity(new Intent(HomeAct.this,AddUserAct.class));
+//            Fragment fragment = new AddUser();
+//            FragmentManager manager = getSupportFragmentManager();
+//            FragmentTransaction ft = manager.beginTransaction();
+//            ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 
 
         } else if (id == R.id.nav_view_show_user) {

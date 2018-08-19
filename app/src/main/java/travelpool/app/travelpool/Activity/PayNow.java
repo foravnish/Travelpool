@@ -7,12 +7,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +54,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import travelpool.app.travelpool.Fragments.MyKitty;
 import travelpool.app.travelpool.PayUMoney.AppEnvironment;
 import travelpool.app.travelpool.PayUMoney.AppPreference;
 import travelpool.app.travelpool.R;
@@ -69,7 +75,7 @@ public class PayNow extends AppCompatActivity {
     private AppPreference mAppPreference;
     String merKey,merId,salt;
     NetworkImageView imageView;
-
+    String paymentMode="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +99,26 @@ public class PayNow extends AppCompatActivity {
         merId=AppEnvironment.SANDBOX.merchant_ID();
         salt=AppEnvironment.SANDBOX.salt();
 
+
+        final RadioGroup gr =(RadioGroup)findViewById(R.id.radiogroup) ;
+        final int selectedId = gr.getCheckedRadioButtonId();
+
+        gr.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // checkedId is the RadioButton selected
+                RadioButton rb=(RadioButton)findViewById(checkedId);
+//                textViewChoice.setText("You Selected "+rb.getText());
+                // Toast.makeText(getActivity(),rb.getText()+"", Toast.LENGTH_SHORT).show();
+                paymentMode=rb.getText().toString();
+               // Toast.makeText(getApplicationContext(), ""+rb.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
         try {
             jsonObject1=new JSONObject(getIntent().getStringExtra("data"));
 
@@ -103,9 +129,9 @@ public class PayNow extends AppCompatActivity {
             packageName.setText(jsonObject2.optString("name"));
 
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
-            imageView.setImageUrl(jsonObject1.optString("banner").toString().replace(" ","%20"),imageLoader);
+            imageView.setImageUrl(jsonObject2.optString("banner").toString().replace(" ","%20"),imageLoader);
 
-            instal.setText("Per Month ₹ : "+jsonObject1.optString("per_month_installment"));
+            instal.setText("Per Month ₹ : "+getIntent().getStringExtra("pay_amount"));
 
 
         } catch (JSONException e) {
@@ -117,8 +143,9 @@ public class PayNow extends AppCompatActivity {
             public void onClick(View view) {
 
 
-//                submitData(jsonObject.optString("id"));
-                checkJoinOrNot(jsonObject1.optString("id"),jsonObject1.optString("per_month_installment"));
+
+
+                checkJoinOrNot(jsonObject1.optString("id"),getIntent().getStringExtra("pay_amount"));
 
 //                launchPayUMoneyFlow("", jsonObject.optString("per_month_installment"));
 
@@ -145,8 +172,28 @@ public class PayNow extends AppCompatActivity {
 
 
 
-                        //submitData(jsonObject1.optString("id"),jsonObject1.optString("name"),jsonObject2.optString("id"),jsonObject2.optString("name"),jsonObject1.optString("per_month_installment"));
-                            launchPayUMoneyFlow("", price);
+                        if (paymentMode.equals("")){
+                            Util.errorDialog(PayNow.this,"Please Select Payment Mode.");
+                        }
+                        else {
+                            if (paymentMode.equals("Pay Online")) {
+//                                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
+                                launchPayUMoneyFlow("", price);
+                            } else if (paymentMode.equals("Pay By Cash")) {
+                                submitData(jsonObject1.optString("id"),jsonObject1.optString("name"),jsonObject2.optString("id"),jsonObject2.optString("name"),jsonObject1.optString("per_month_installment"),"cash");
+
+//                                Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
+                            } else if (paymentMode.equals("Pay By Cheque")) {
+                                submitData(jsonObject1.optString("id"),jsonObject1.optString("name"),jsonObject2.optString("id"),jsonObject2.optString("name"),jsonObject1.optString("per_month_installment"),"cheque");
+
+                                Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+
+
+
+
 //                            Util.errorDialog(PayNow.this,"You have Already Joined this Kitty, Please Select another Kitty!");
                             Log.d("sdfsfsdfsdfsds","no");
 
@@ -204,7 +251,7 @@ public class PayNow extends AppCompatActivity {
     }
 
 
-    private void submitData(final String id,final String K_name,final String P_id,final String P_name,final String amount) {
+    private void submitData(final String id,final String K_name,final String P_id,final String P_name,final String amount, final String P_mode) {
         Util.showPgDialog(dialog);
 
         RequestQueue queue = Volley.newRequestQueue(PayNow.this);
@@ -221,8 +268,13 @@ public class PayNow extends AppCompatActivity {
                     JSONObject jsonObject=new JSONObject(response);
                     if (jsonObject.getString("status").equalsIgnoreCase("success")){
 
-                        Util.errorDialog(PayNow.this,jsonObject.getString("message"));
-//                        Toast.makeText(getApplicationContext(), ""+jsonObject.optString("message") ,Toast.LENGTH_SHORT).show();
+//                        Util.errorDialog(PayNow.this,jsonObject.getString("message"));
+                        Toast.makeText(getApplicationContext(), ""+jsonObject.optString("message") ,Toast.LENGTH_SHORT).show();
+
+                        Fragment fragment = new MyKitty();
+                        FragmentManager manager = getSupportFragmentManager();
+                        FragmentTransaction ft = manager.beginTransaction();
+                        ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
                     }
                     else{
                         Util.errorDialog(PayNow.this,jsonObject.getString("message"));
@@ -257,9 +309,24 @@ public class PayNow extends AppCompatActivity {
                 params.put("package_id",  P_id.toString());
                 params.put("package_name",  P_name.toString());
 
-                params.put("payment_id",  "aa");
-                params.put("transaction_id",  "aa");
-                params.put("response", "aa");
+                 if (P_mode.equals("cash")){
+                     params.put("payment_id",  "cash");
+                     params.put("transaction_id",  "cash");
+                     params.put("response", "cash");
+
+                 }
+                 else if (P_mode.equals("cheque")){
+                     params.put("payment_id",  "cheque");
+                     params.put("transaction_id",  "cheque");
+                     params.put("response", "cheque");
+
+                 }
+                 else if (P_mode.equals("online")){
+                     params.put("payment_id",  "aa");
+                     params.put("transaction_id",  "aa");
+                     params.put("response", "aa");
+
+                 }
                 params.put("pay_amount",  amount.toString());
                 params.put("payment_status", "success");
 
@@ -575,7 +642,7 @@ public class PayNow extends AppCompatActivity {
 
                   //  placeOrder();
 
-                    submitData(jsonObject1.optString("id"),jsonObject1.optString("name"),jsonObject2.optString("id"),jsonObject2.optString("name"),jsonObject1.optString("per_month_installment"));
+                    submitData(jsonObject1.optString("id"),jsonObject1.optString("name"),jsonObject2.optString("id"),jsonObject2.optString("name"),jsonObject1.optString("per_month_installment"),"online");
 
 
                 } else {

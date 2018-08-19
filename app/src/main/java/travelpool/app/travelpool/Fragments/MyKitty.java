@@ -3,9 +3,7 @@ package travelpool.app.travelpool.Fragments;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,19 +23,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,16 +38,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import travelpool.app.travelpool.Activity.PayNow;
 import travelpool.app.travelpool.R;
 import travelpool.app.travelpool.Utils.Api;
 import travelpool.app.travelpool.Utils.AppController;
 import travelpool.app.travelpool.Utils.MyPrefrences;
 import travelpool.app.travelpool.Utils.Util;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -93,21 +81,14 @@ public class MyKitty extends Fragment {
 
         ReceiveData();
 
-
-
         return view;
 
     }
 
 
-
-
     private void ReceiveData() {
 
         Util.showPgDialog(dialog);
-
-
-
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 Api.myKitty+"/"+MyPrefrences.getUserID(getActivity()), null, new Response.Listener<JSONObject>() {
@@ -125,40 +106,33 @@ public class MyKitty extends Fragment {
 
                         jsonArray=jsonObject.getJSONArray("message");
 
-                        map=new HashMap();
 
                         for (int i=0;i<jsonArray.length();i++){
+                            map=new HashMap();
                             JSONObject jsonObject1=jsonArray.getJSONObject(i);
 
                             JSONArray jsonArrayKitty=jsonObject1.getJSONArray("kitty_details");
 
-                            JSONObject jsonObjectKitty=jsonArrayKitty.getJSONObject(0);
+                                JSONObject jsonObjectKitty = jsonArrayKitty.getJSONObject(0);
 
-                            map.put("name",jsonObjectKitty.optString("name"));
-                            map.put("tc",jsonObjectKitty.optString("term_and_cond"));
-
-                            map.put("p_m_i",jsonObjectKitty.optString("per_month_installment"));
-                            map.put("payment_due_date",jsonObjectKitty.optString("payment_due_date"));
-                            map.put("lucky_d_d",jsonObjectKitty.optString("lucky_draw_date"));
-                            map.put("no_of_max_members",jsonObjectKitty.optString("no_of_max_members"));
-
-
+                                map.put("name", jsonObjectKitty.optString("name"));
+                                map.put("tc", jsonObjectKitty.optString("term_and_cond"));
+                                map.put("p_m_i", jsonObjectKitty.optString("per_month_installment"));
+                                map.put("payment_due_date", jsonObjectKitty.optString("payment_due_date"));
+                                map.put("lucky_d_d", jsonObjectKitty.optString("lucky_draw_date"));
+                                map.put("no_of_max_members", jsonObjectKitty.optString("no_of_max_members"));
 
                             map.put("id",jsonObject1.optString("id"));
                             map.put("kitty_id",jsonObject1.optString("kitty_id"));
                             map.put("this_month_renual",jsonObject1.optString("this_month_renual"));
 
                             JSONArray jsonArrayPack=jsonObject1.getJSONArray("package_details");
-
                             JSONObject jsonObjectPack=jsonArrayPack.getJSONObject(0);
 
                             map.put("package_name",jsonObjectPack.optString("name"));
                             map.put("tc",jsonObjectPack.optString("term_and_cond"));
                             map.put("banner",jsonObjectPack.optString("banner"));
                             map.put("image",jsonObjectPack.optString("image"));
-
-
-
 
 
 
@@ -199,7 +173,7 @@ public class MyKitty extends Fragment {
         expListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Fragment fragment = new MyKittyListing();
+                Fragment fragment = new MyKittyDetial();
                 Bundle bundle=new Bundle();
                 try {
                     bundle.putString("data", String.valueOf(jsonArray.get(i)));

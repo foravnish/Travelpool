@@ -32,14 +32,15 @@ import java.util.List;
 import travelpool.app.travelpool.Activity.PayNow;
 import travelpool.app.travelpool.R;
 import travelpool.app.travelpool.Utils.AppController;
+import travelpool.app.travelpool.Utils.Util;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyKittyListing extends Fragment {
+public class MyKittyDetial extends Fragment {
 
 
-    public MyKittyListing() {
+    public MyKittyDetial() {
         // Required empty public constructor
     }
 
@@ -85,7 +86,7 @@ public class MyKittyListing extends Fragment {
     boolean flag2=true;
     boolean flag3=true;
     boolean flag4=true;
-
+    JSONObject jsonObject;
 
 
     @Override
@@ -127,7 +128,7 @@ public class MyKittyListing extends Fragment {
         tnc=view.findViewById(R.id.tnc);
 
         try {
-            JSONObject jsonObject=new JSONObject(getArguments().getString("data"));
+            jsonObject=new JSONObject(getArguments().getString("data"));
 
             getActivity().setTitle(jsonObject.optString("kitty_name"));
 
@@ -182,9 +183,27 @@ public class MyKittyListing extends Fragment {
         joinNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getActivity(), PayNow.class);
-                intent.putExtra("data",getArguments().getString("data"));
-                startActivity(intent);
+
+
+                if (jsonObject.optString("this_month_renual").equals("Yes")){
+                    Util.errorDialog(getActivity(),"You have Renewed of current month this Kitty.");
+                }
+                else{
+
+                    Intent intent=new Intent(getActivity(), PayNow.class);
+                    intent.putExtra("data",getArguments().getString("data"));
+                    intent.putExtra("pay_amount",jsonObject.optString("pay_amount"));
+
+                    startActivity(intent);
+                }
+
+
+//                Intent intent=new Intent(getActivity(), PayNow.class);
+//                intent.putExtra("data",getArguments().getString("data"));
+//                intent.putExtra("pay_amount",jsonObject.optString("pay_amount"));
+//
+//                startActivity(intent);
+
             }
         });
 
