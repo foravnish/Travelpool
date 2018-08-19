@@ -162,6 +162,7 @@ public class ListingDetails extends Fragment {
             penality_after.setText("After Due Date: "+jsonObject.optString("penality_after_due_date"));
             purchased.setText("Joined Entries "+jsonObject.optString("purchased_kitty"));
 
+
             int totalMember= Integer.parseInt(jsonObject.optString("no_of_max_members"));
             int joined= Integer.parseInt(jsonObject.optString("purchased_kitty"));
 
