@@ -30,6 +30,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.gelitenight.waveview.library.WaveView;
@@ -61,267 +63,20 @@ public class Profile extends Fragment {
         // Required empty public constructor
     }
 
-    TextView tve_name,tve_mobile,tve_user_id,tve_email,tve_addres,tve_city,tve_state,tve_pincode,tve_aadharNo,tve_panNo;
-    Button changeProfile;
-    Dialog dialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_profile, container, false);
 
-        changeProfile=view.findViewById(R.id.changeProfile);
-
-        tve_name=view.findViewById(R.id.tve_name);
-        tve_mobile=view.findViewById(R.id.tve_mobile);
-        tve_user_id=view.findViewById(R.id.tve_user_id);
-        tve_email=view.findViewById(R.id.tve_email);
-        tve_addres=view.findViewById(R.id.tve_addres);
-        tve_city=view.findViewById(R.id.tve_city);
-        tve_state=view.findViewById(R.id.tve_state);
-        tve_pincode=view.findViewById(R.id.tve_pincode);
-        tve_aadharNo=view.findViewById(R.id.tve_aadharNo);
-        tve_panNo=view.findViewById(R.id.tve_panNo);
-
-        dialog=new Dialog(getActivity());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.setCancelable(false);
-
-        getActivity().setTitle("My Profile");
-
-        final WaveView waveView = (WaveView)view. findViewById(R.id.wave);
-        waveView.setRotation(180);
-        waveView.setShapeType(WaveView.ShapeType.SQUARE);
-        waveView.setWaveColor(
-                Color.parseColor("#FFF49B59"),
-                Color.parseColor("#FFF49B59"));
-        WaveHelper mWaveHelper;
-        mWaveHelper = new WaveHelper(waveView);
-        mWaveHelper.start();
-
-
-        getProfile();
-        changeProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = new ProfileEdit();
-                FragmentManager manager = getActivity().getSupportFragmentManager();
-                FragmentTransaction ft = manager.beginTransaction();
-                ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
-            }
-        });
         return  view;
     }
 
-    private void getProfile() {
-
-        Util.showPgDialog(dialog);
-//
-//        StringRequest postRequest = new StringRequest(Request.Method.POST, Api.profile,
-//                new Response.Listener<String>()
-//                {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        // response
-//                        Log.d("Responseprofile", response);
-//                        Util.cancelPgDialog(dialog);
-//                        try {
-//                            JSONObject jsonObject=new JSONObject(response);
-//                            if (jsonObject.getString("status").equalsIgnoreCase("success")){
-//
-//                                JSONArray jsonArray=jsonObject.getJSONArray("login");
-//                                for (int i=0;i<jsonArray.length();i++) {
-//                                    JSONObject jsonObject1 = jsonArray.optJSONObject(i);
-//
-//
-//                                    tve_name.setText(jsonObject1.optString("name").toUpperCase());
-//                                    tve_mobile.setText(jsonObject1.optString("mobile").toString());
-//                                    tve_user_id.setText(jsonObject1.optString("id").toString());
-//                                    tve_email.setText(jsonObject1.optString("email").toString());
-//                                    tve_addres.setText(jsonObject1.optString("address").toString());
-//                                    tve_city.setText(jsonObject1.optString("city").toString());
-//                                    tve_state.setText(jsonObject1.optString("state").toString());
-//                                    tve_pincode.setText(jsonObject1.optString("pincode").toString());
-//                                   // tve_aadharNo.setText(jsonObject1.optString("pincode").toString());
-//                                    //tve_panNo.setText(jsonObject1.optString("pincode").toString());
-//
-//
-//                                }
-//
-//                            }
-//                            else{
-//                                Toast.makeText(getActivity(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
-//                            }
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//
-//                    }
-//                },
-//                new Response.ErrorListener()
-//                {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        // error
-//                        Toast.makeText(getActivity(), "Error! Please connect to the Internet.", Toast.LENGTH_SHORT).show();
-//                        Util.cancelPgDialog(dialog);
-//                    }
-//                }
-//        ) {
-//            @Override
-//            protected Map<String, String> getParams()
-//            {
-//                Map<String, String>  params = new HashMap<String, String>();
-//                params.put("id", MyPrefrences.getUserID(getActivity()));
-//
-//
-//                Log.d("sfsdfsdfsdfs",MyPrefrences.getUserID(getActivity()));
-//
-//                return params;
-//            }
-//        };
-//        postRequest.setRetryPolicy(new DefaultRetryPolicy(27000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-//        postRequest.setShouldCache(false);
-//
-//        AppController.getInstance().addToRequestQueue(postRequest);
-//
-
-        Log.d("sdfsdfsdfsdfs",MyPrefrences.getUserType(getActivity()));
-
-
-        RequestQueue queue = Volley.newRequestQueue(getActivity());
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                Api.userbyid+"/"+MyPrefrences.getUserID(getActivity())+"/"+MyPrefrences.getUserType(getActivity()), new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Util.cancelPgDialog(dialog);
-                Log.e("Responseprofile", "" + response);
-
-
-                try {
-                    JSONObject jsonObject=new JSONObject(response);
-                    if (jsonObject.getString("status").equalsIgnoreCase("success")){
-
-                        JSONArray jsonArray=jsonObject.getJSONArray("message");
-                      //  for (int i=0;i<jsonArray.length();i++) {
-                            JSONObject jsonObject1 = jsonArray.optJSONObject(0);
-
-
-                            tve_name.setText(jsonObject1.optString("name").toUpperCase());
-                            tve_mobile.setText(jsonObject1.optString("mobile").toString());
-                            tve_user_id.setText(jsonObject1.optString("id").toString()+" ("+MyPrefrences.getUserType(getActivity()).toUpperCase()+")");
-                            tve_email.setText(jsonObject1.optString("email").toString());
-                            tve_addres.setText(jsonObject1.optString("address").toString());
-                            tve_city.setText(jsonObject1.optString("city").toString());
-                            tve_state.setText(jsonObject1.optString("state").toString());
-                            tve_pincode.setText(jsonObject1.optString("pincode").toString());
-                            tve_aadharNo.setText(jsonObject1.optString("aadhar_no").toString());
-                            tve_panNo.setText(jsonObject1.optString("pan_no").toString());
-
-
-                       // }
-
-                    }
-                    else{
-                        Toast.makeText(getActivity(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
 
 
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Util.cancelPgDialog(dialog);
-                Log.e("fdgdfgdfgd", "Login Error: " + error.getMessage());
-                Toast.makeText(getActivity(),"Please Connect to the Internet or Wrong Password", Toast.LENGTH_LONG).show();
-            }
-        }){
 
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Log.e("fgdfgdfgdf","Inside getParams");
-
-                // Posting parameters to login url
-                Map<String, String> params = new HashMap<>();
-                params.put("id", MyPrefrences.getUserID(getActivity()));
-                params.put("user_type", MyPrefrences.getUserType(getActivity()).toLowerCase());
-
-
-                Log.d("sfsdfsdfsdfs",MyPrefrences.getUserID(getActivity()));
-                return params;
-            }
-
-
-        };
-        queue.add(strReq);
-
-    }
-
-    public class WaveHelper {
-        private WaveView mWaveView;
-
-        private AnimatorSet mAnimatorSet;
-
-        public WaveHelper(WaveView waveView) {
-            mWaveView = waveView;
-            initAnimation();
-        }
-
-        public void start() {
-            mWaveView.setShowWave(true);
-            if (mAnimatorSet != null) {
-                mAnimatorSet.start();
-            }
-        }
-
-        private void initAnimation() {
-            List<Animator> animators = new ArrayList<>();
-
-            // horizontal animation.
-            // wave waves infinitely.
-            ObjectAnimator waveShiftAnim = ObjectAnimator.ofFloat(
-                    mWaveView, "waveShiftRatio", 0f, 1f);
-            waveShiftAnim.setRepeatCount(ValueAnimator.INFINITE);
-            waveShiftAnim.setDuration(1000);
-            waveShiftAnim.setInterpolator(new LinearInterpolator());
-            animators.add(waveShiftAnim);
-
-            // vertical animation.
-            // water level increases from 0 to center of WaveView
-            ObjectAnimator waterLevelAnim = ObjectAnimator.ofFloat(
-                    mWaveView, "waterLevelRatio", 0.8f, 0.9f);
-            waterLevelAnim.setDuration(10000);
-            waterLevelAnim.setInterpolator(new DecelerateInterpolator());
-            animators.add(waterLevelAnim);
-
-            // amplitude animation.
-            // wave grows big then grows small, repeatedly
-            ObjectAnimator amplitudeAnim = ObjectAnimator.ofFloat(
-                    mWaveView, "amplitudeRatio", 0.01f, 0.05f);
-            amplitudeAnim.setRepeatCount(ValueAnimator.INFINITE);
-            amplitudeAnim.setRepeatMode(ValueAnimator.REVERSE);
-            amplitudeAnim.setDuration(5000);
-            amplitudeAnim.setInterpolator(new LinearInterpolator());
-            animators.add(amplitudeAnim);
-
-            mAnimatorSet = new AnimatorSet();
-            mAnimatorSet.playTogether(animators);
-        }
-
-        public void cancel() {
-            if (mAnimatorSet != null) {
-//            mAnimatorSet.cancel();
-                mAnimatorSet.end();
-            }
-        }
-    }
 
 }

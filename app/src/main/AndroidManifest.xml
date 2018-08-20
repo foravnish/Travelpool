@@ -74,7 +74,8 @@
             android:label="Pick Image"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar2" />
-        <activity android:name=".Activity.AddUserAct"></activity>
+        <activity android:name=".Activity.AddUserAct" />
+        <activity android:name=".Activity.ProfileAct"></activity>
     </application>
 
 </manifest>

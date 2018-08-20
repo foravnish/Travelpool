@@ -30,14 +30,14 @@
 
 
                 <!--<de.hdodenhof.circleimageview.CircleImageView-->
-                    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-                    <!--android:id="@+id/imageView"-->
-                    <!--android:layout_width="120dp"-->
-                    <!--android:layout_height="120dp"-->
-                    <!--android:layout_marginTop="35dp"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--app:civ_border_color="@color/white"-->
-                    <!--app:civ_border_width="2dp" />-->
+                <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+                <!--android:id="@+id/imageView"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="120dp"-->
+                <!--android:layout_marginTop="35dp"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--app:civ_border_color="@color/white"-->
+                <!--app:civ_border_width="2dp" />-->
 
                 <TextView
                     android:id="@+id/tve_name"
@@ -64,21 +64,21 @@
 
 
                 <!--<TextView-->
-                    <!--android:id="@+id/editPic"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:layout_marginTop="2dp"-->
-                    <!--android:drawableLeft="@drawable/edit"-->
-                    <!--android:drawablePadding="5dp"-->
-                    <!--android:padding="8dp"-->
-                    <!--android:drawableTint="@color/white"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:fontFamily="@font/muli_semibold"-->
-                    <!--android:text="Change Photo"-->
-                    <!--android:textColor="#fff"-->
-                    <!--android:layout_marginRight="2dp"-->
-                    <!--android:textSize="13sp" />-->
+                <!--android:id="@+id/editPic"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:layout_marginTop="2dp"-->
+                <!--android:drawableLeft="@drawable/edit"-->
+                <!--android:drawablePadding="5dp"-->
+                <!--android:padding="8dp"-->
+                <!--android:drawableTint="@color/white"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:fontFamily="@font/muli_semibold"-->
+                <!--android:text="Change Photo"-->
+                <!--android:textColor="#fff"-->
+                <!--android:layout_marginRight="2dp"-->
+                <!--android:textSize="13sp" />-->
             </RelativeLayout>
 
 
@@ -431,7 +431,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:layout_alignParentRight="true"
-                  />
+                    />
 
             </RelativeLayout>
 
@@ -475,7 +475,7 @@
                     android:textColor="@color/md_grey_700"
                     android:textSize="16sp" />
 
-                <com.android.volley.toolbox.NetworkImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/panImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
