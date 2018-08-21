@@ -477,9 +477,10 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/panImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_gravity="right"
+                    android:layout_below="@+id/pan2"
                     android:layout_alignParentRight="true"
                     />
 
@@ -525,9 +526,10 @@
                     android:textSize="16sp" />
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/passportImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_gravity="right"
+                    android:layout_below="@+id/pass2"
                     android:layout_alignParentRight="true"
                     />
 
@@ -542,7 +544,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
-                android:text="Change Profile"
+                android:text="Upload Image"
                 android:textColor="#fff"
                 android:layout_marginBottom="10dp"/>
 

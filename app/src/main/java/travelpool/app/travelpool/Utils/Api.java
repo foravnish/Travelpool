@@ -28,6 +28,7 @@ public class Api {
     public static String bannerList=BASEURL+"bannerList";
     public static String usersByAgentId=BASEURL+"usersByAgentId";
     public static String myTranscations=BASEURL+"myTranscations";
+    public static String updateProfile=BASEURL+"updateProfile";
 
 
 }

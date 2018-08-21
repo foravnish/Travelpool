@@ -16,6 +16,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -82,10 +83,11 @@ public class ProfileAct extends AppCompatActivity {
     CircleImageView panImage;
     CircleImageView passportImage;
 
-    private static final int REQUEST_PICK_IMAGE = 1002;
+    //private static final int REQUEST_PICK_IMAGE = 1002;
     Bitmap imageBitmap;
     File f=null;
     File f2=null;
+    boolean isImage1 = false, isImage2 = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,14 +148,16 @@ public class ProfileAct extends AppCompatActivity {
 
                 try {
                     path = f.toString();
-                    path2 = f2.toString();
                     filename = path.substring(path.lastIndexOf("/") + 1);
+                    path2 = f2.toString();
                     filename2 = path2.substring(path2.lastIndexOf("/") + 1);
                     Log.d("dsfdfsdfsfs", filename);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                PostData(path, filename);
+
+
+                PostData(path, filename,path2, filename2);
 
 
 
@@ -170,14 +174,29 @@ public class ProfileAct extends AppCompatActivity {
         pan2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pickImage();
+                if(isPermissionGranted()){
+                    Log.d("fsdfsdfdfdfsdf","true");
+                    pickImage(1);
+                }else{
+                    Log.d("fsdfsdfdfdfsdf","false");
+                    ActivityCompat.requestPermissions(ProfileAct.this, new String[]{Manifest.permission.CAMERA}, 1);
+                }
+
             }
         });
 
         pass2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pickImage();
+
+                if(isPermissionGranted()){
+                    Log.d("fsdfsdfdfdfsdf","true");
+                    pickImage(2);
+                }else{
+                    Log.d("fsdfsdfdfdfsdf","false");
+                    ActivityCompat.requestPermissions(ProfileAct.this, new String[]{Manifest.permission.CAMERA}, 1);
+                }
+
             }
         });
     }
@@ -293,7 +312,7 @@ public class ProfileAct extends AppCompatActivity {
                             pan2.setVisibility(View.VISIBLE);
                         }
                         else  if (!jsonObject1.optString("pan_image").toString().equals("")){
-                            pan2.setVisibility(View.GONE);
+                           // pan2.setVisibility(View.GONE);
 
                             Picasso.with(getApplicationContext())
                                     .load(jsonObject1.optString("pan_image").replace(" ","%20"))
@@ -308,7 +327,7 @@ public class ProfileAct extends AppCompatActivity {
                             pass2.setVisibility(View.VISIBLE);
                         }
                         else  if (!jsonObject1.optString("passport_image").toString().equals("")){
-                            pass2.setVisibility(View.GONE);
+                           // pass2.setVisibility(View.GONE);
 
                             Picasso.with(getApplicationContext())
                                     .load(jsonObject1.optString("passport_image").replace(" ","%20"))
@@ -371,14 +390,14 @@ public class ProfileAct extends AppCompatActivity {
 
     }
 
-    public void pickImage() {
-        startActivityForResult(new Intent(this, ImagePickerActivity.class), REQUEST_PICK_IMAGE);
+    public void pickImage(int imageFor) {
+        startActivityForResult(new Intent(this, ImagePickerActivity.class), imageFor);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (permissions[0].equals(Manifest.permission.CAMERA) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            pickImage();
+            pickImage(1);
         }
     }
 
@@ -386,10 +405,15 @@ public class ProfileAct extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-                case REQUEST_PICK_IMAGE:
-                    String imagePath = data.getStringExtra("image_path");
-
-                    setImage(imagePath);
+                case 1:
+                    String imagePath1 = data.getStringExtra("image_path");
+                    setImage(imagePath1);
+                    isImage1 = true;
+                    break;
+                case 2:
+                    String imagePath2 = data.getStringExtra("image_path");
+                    setImage2(imagePath2);
+                    isImage2 = true;
                     break;
             }
         } else {
@@ -400,6 +424,11 @@ public class ProfileAct extends AppCompatActivity {
     private void setImage(String imagePath) {
 
         panImage.setImageBitmap(getImageFromStorage(imagePath));
+    }
+
+    private void setImage2(String imagePath2) {
+
+        passportImage.setImageBitmap(getImageFromStorage2(imagePath2));
     }
 
     private Bitmap getImageFromStorage(String path) {
@@ -429,6 +458,33 @@ public class ProfileAct extends AppCompatActivity {
     }
 
 
+    private Bitmap getImageFromStorage2(String path2) {
+        try {
+            f2 = new File(path2);
+
+            String filename2 = null;
+            filename2 = path2.substring(path2.lastIndexOf("/") + 1);
+            // First decode with inJustDecodeBounds=true to check dimensions
+            final BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = false;
+            // Calculate inSampleSize
+            options.inSampleSize = calculateInSampleSize(options, 512, 512);
+
+            Log.d("sdfasafsdfsdfsdfsdf",f2.toString());
+            Bitmap b2= BitmapFactory.decodeStream(new FileInputStream(f2), null, options);
+
+
+
+
+
+            return b2;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     private int calculateInSampleSize(
             BitmapFactory.Options options, int reqWidth, int reqHeight) {
         // Raw height and width of image
@@ -451,17 +507,20 @@ public class ProfileAct extends AppCompatActivity {
 
         return inSampleSize;
     }
-    private void PostData(String filePath,String fileName) {
+    private void PostData(String filePath,String fileName,String filePath2,String fileName2) {
 
         try {
             Log.d("sdfsdfasdfsdfsdf1",filePath);
             Log.d("sdfsdfasdfsdfsdf2",fileName);
+
+            Log.d("sdfsdfasdfsdfsdf1",filePath2);
+            Log.d("sdfsdfasdfsdfsdf2",fileName2);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-        new AddProductData(filePath,fileName).execute();
+        new AddProductData(filePath,fileName,filePath2,fileName2).execute();
 
     }
 
@@ -472,14 +531,16 @@ public class ProfileAct extends AppCompatActivity {
         private static final String TAG_STATUS = "status";
         private static final String TAG_MESSAGE = "msg";
 
-        String val, path, fName, min, kmsDone, mobile, emailID, brand;
+        String val, path, fName,path2, fName2, min, kmsDone, mobile, emailID, brand;
         HashMap<String, String> params = new HashMap<>();
 
         //EditText descreption,ageOfProd,headline,min,kmsDone,mobile,emailID;
-        AddProductData(String path,String fName) {
+        AddProductData(String path,String fName,String path2,String fName2) {
             this.val = val;
             this.path = path;
             this.fName = fName;
+            this.path2 = path2;
+            this.fName2 = fName2;
 
         }
 
@@ -493,7 +554,13 @@ public class ProfileAct extends AppCompatActivity {
             JSONObject jsonObject = null;
             try {
 
-                jsonObject = uploadImageFile(ProfileAct.this, val,path, fName);
+                if (isImage1==true) {
+                    jsonObject = uploadImageFile(ProfileAct.this, val, path, fName);
+                }
+
+                if (isImage2==true){
+                    jsonObject = uploadImageFile2(ProfileAct.this, val, path, fName, path2, fName2);
+                }
 
                 if (jsonObject != null) {
 
@@ -519,12 +586,9 @@ public class ProfileAct extends AppCompatActivity {
 
                 if (json.optString("status").equalsIgnoreCase("success")) {
 
-                   // smsAPI();
 
-                    Intent intent = new Intent(ProfileAct.this, Login.class);
-                    startActivity(intent);
-                    finish();
-                    Toast.makeText(getApplicationContext(), "Please Login...", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(getApplicationContext(), "Upload Image Successfully...", Toast.LENGTH_SHORT).show();
 
 
 
@@ -543,6 +607,7 @@ public class ProfileAct extends AppCompatActivity {
 
         File sourceFile1 = new File(filepath1);
 
+
         String result = null;
         Log.e("FindPlayerPageAsync", "File...::::" + sourceFile1 + " : " + sourceFile1.exists());
         Log.e("file name", ": " + fileName1);
@@ -555,14 +620,97 @@ public class ProfileAct extends AppCompatActivity {
 
             Log.e("file name", ": " + fileName1);
 
+
             //   Log.d("fgdgdfgdfgdf1",getIntent().getStringExtra("areatypenum"));
 
             //Log.d("dfsdfsdgfsdgd",id.toString());
             RequestBody requestBody = new MultipartBuilder()
                     .type(MultipartBuilder.FORM)
 
-
+                    .addFormDataPart("user_id", MyPrefrences.getUserID(getApplicationContext()))
+                    .addFormDataPart("type",MyPrefrences.getUserType(getApplicationContext()) )
                     .addFormDataPart("pan_image", fileName1, RequestBody.create(MEDIA_TYPE_PNG, sourceFile1))
+                    //.addFormDataPart("passport_image", "")
+
+                    //.addFormDataPart("old_pan_image", "")
+                    .addFormDataPart("old_passport_image", "no")
+                    .build();
+
+
+
+            Log.d("fvfgdgdfhgghfhgdfh", MyPrefrences.getUserID(getApplicationContext()));
+            Log.d("fvfgdgdfhgdfhqwdfs",MyPrefrences.getUserType(getApplicationContext()));
+
+            com.squareup.okhttp.Request request = new com.squareup.okhttp.Request.Builder()
+//                     .url("http://divpreetsingh.info/app/ManiUploadsImageHere")
+                    .header("Authorization", "Client-ID " + "...")
+//                    .url("http://bizzcityinfo.com/AndroidApi.php?function=insertGalleryPhoto")
+                    .url(Api.updateProfile)
+//                    .url("http://templatestheme.com/demo/tradeone/ws/post_offer.php")
+                    // .addHeader("enctype", "multipart/form-data")
+                    .post(requestBody)
+                    .build();
+
+
+            OkHttpClient client = new OkHttpClient();
+            client.setConnectTimeout(15, TimeUnit.SECONDS);
+            client.setWriteTimeout(15, TimeUnit.SECONDS);
+            client.setReadTimeout(15, TimeUnit.SECONDS);
+
+
+            Log.e("request1", ":url:  " + request.urlString() + ", header: " + request.headers() + ", body " + request.body());
+            com.squareup.okhttp.Response response = client.newCall(request).execute();
+            result = response.body().string();
+            Log.e("responseMultipart", ": " + result);
+            jsonObject = new JSONObject(result);
+            Log.e("result", ": " + result);
+            return jsonObject;
+        } catch (UnknownHostException | UnsupportedEncodingException e) {
+            Log.e("FindPlayerPageAsync", "Error: " + e.getLocalizedMessage());
+        } catch (Exception e) {
+            Log.e("FindPlayerPageAsync", "Other Error: " + e.getLocalizedMessage());
+            Toast.makeText(getApplicationContext(), "Please try again.", Toast.LENGTH_SHORT).show();
+        }
+        return jsonObject;
+    }
+
+
+    private JSONObject uploadImageFile2(Context context, String value, String filepath1, String fileName1,String filepath2, String fileName2) {
+
+        // sourceFile2= new File("");
+
+        File sourceFile1 = new File(filepath1);
+        File sourceFile2 = new File(filepath2);
+
+        String result = null;
+        Log.e("FindPlayerPageAsync", "File...::::" + sourceFile1 + " : " + sourceFile1.exists());
+        Log.e("file name", ": " + fileName1);
+        JSONObject jsonObject = null;
+
+        try {
+
+            ////for image
+            final MediaType MEDIA_TYPE_PNG = filepath1.endsWith("png") ? MediaType.parse("image/png") : MediaType.parse("image");
+            final MediaType MEDIA_TYPE_PNG2 = filepath2.endsWith("png") ? MediaType.parse("image/png") : MediaType.parse("image");
+
+            Log.e("file name", ": " + fileName1);
+            Log.e("file name", ": " + fileName2);
+
+            //   Log.d("fgdgdfgdfgdf1",getIntent().getStringExtra("areatypenum"));
+
+            //Log.d("dfsdfsdgfsdgd",id.toString());
+            RequestBody requestBody = new MultipartBuilder()
+                    .type(MultipartBuilder.FORM)
+
+                    .addFormDataPart("user_id", MyPrefrences.getUserID(getApplicationContext()))
+                    .addFormDataPart("type",MyPrefrences.getUserType(getApplicationContext()) )
+                    .addFormDataPart("pan_image", fileName1, RequestBody.create(MEDIA_TYPE_PNG, sourceFile1))
+                    .addFormDataPart("passport_image", fileName2, RequestBody.create(MEDIA_TYPE_PNG2, sourceFile2))
+
+                    .addFormDataPart("old_pan_image", "no")
+                    .addFormDataPart("old_passport_image", "no")
+
+
                     .build();
 
 
@@ -574,7 +722,7 @@ public class ProfileAct extends AppCompatActivity {
 //                     .url("http://divpreetsingh.info/app/ManiUploadsImageHere")
                     .header("Authorization", "Client-ID " + "...")
 //                    .url("http://bizzcityinfo.com/AndroidApi.php?function=insertGalleryPhoto")
-                    .url(Api.signup)
+                    .url(Api.updateProfile)
 //                    .url("http://templatestheme.com/demo/tradeone/ws/post_offer.php")
                     // .addHeader("enctype", "multipart/form-data")
                     .post(requestBody)
