@@ -134,10 +134,14 @@ public class HomeAct extends AppCompatActivity
             ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 
         } else if (id == R.id.nav_profile) {
-            Fragment fragment = new Profile();
-            FragmentManager manager = getSupportFragmentManager();
-            FragmentTransaction ft = manager.beginTransaction();
-            ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+
+            startActivity(new Intent(HomeAct.this,ProfileAct.class));
+
+
+//            Fragment fragment = new Profile();
+//            FragmentManager manager = getSupportFragmentManager();
+//            FragmentTransaction ft = manager.beginTransaction();
+//            ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 
         } else if (id == R.id.nav_my_kitty) {
 
