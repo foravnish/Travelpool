@@ -44,6 +44,7 @@ import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.MultipartBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.RequestBody;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -77,13 +78,14 @@ public class ProfileAct extends AppCompatActivity {
     TextView pan2,pass2;
     Button changeProfile;
     Dialog dialog;
-    NetworkImageView aadharImage;
+    CircleImageView aadharImage;
     CircleImageView panImage;
-    NetworkImageView passportImage;
+    CircleImageView passportImage;
 
     private static final int REQUEST_PICK_IMAGE = 1002;
     Bitmap imageBitmap;
     File f=null;
+    File f2=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,13 +104,14 @@ public class ProfileAct extends AppCompatActivity {
         tve_pincode=findViewById(R.id.tve_pincode);
         tve_aadharNo=findViewById(R.id.tve_aadharNo);
         tve_panNo=findViewById(R.id.tve_panNo);
-        aadharImage=findViewById(R.id.aadharImage);
+
 
         pan2=findViewById(R.id.pan2);
         pass2=findViewById(R.id.pass2);
 
         passportImage=findViewById(R.id.passportImage);
         panImage=findViewById(R.id.panImage);
+        aadharImage=findViewById(R.id.aadharImage);
 
         dialog=new Dialog(ProfileAct.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -129,13 +132,37 @@ public class ProfileAct extends AppCompatActivity {
 
 
         getProfile();
+
         changeProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new ProfileEdit();
-                FragmentManager manager = getSupportFragmentManager();
-                FragmentTransaction ft = manager.beginTransaction();
-                ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+
+
+                String path = null;
+                String filename = null;
+
+                String path2 = null;
+                String filename2 = null;
+
+                try {
+                    path = f.toString();
+                    path2 = f2.toString();
+                    filename = path.substring(path.lastIndexOf("/") + 1);
+                    filename2 = path2.substring(path2.lastIndexOf("/") + 1);
+                    Log.d("dsfdfsdfsfs", filename);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                PostData(path, filename);
+
+
+
+
+
+//                Fragment fragment = new ProfileEdit();
+//                FragmentManager manager = getSupportFragmentManager();
+//                FragmentTransaction ft = manager.beginTransaction();
+//                ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
             }
         });
 
@@ -251,11 +278,44 @@ public class ProfileAct extends AppCompatActivity {
                         tve_aadharNo.setText(jsonObject1.optString("aadhar_no").toString());
                         tve_panNo.setText(jsonObject1.optString("pan_no").toString());
 
-                        ImageLoader imageLoader= AppController.getInstance().getImageLoader();
-                        aadharImage.setImageUrl(jsonObject1.optString("aadhar_image").replace(" ","%20"),imageLoader);
+//                        ImageLoader imageLoader= AppController.getInstance().getImageLoader();
+//                        aadharImage.setImageUrl(jsonObject1.optString("aadhar_image").replace(" ","%20"),imageLoader);
 
 
-                        // }
+                        Picasso.with(getApplicationContext())
+                                .load(jsonObject1.optString("aadhar_image").replace(" ","%20"))
+                                .fit()
+                                // .transform(transformation)
+                                .into(aadharImage);
+
+
+                        if (jsonObject1.optString("pan_image").toString().equals("")){
+                            pan2.setVisibility(View.VISIBLE);
+                        }
+                        else  if (!jsonObject1.optString("pan_image").toString().equals("")){
+                            pan2.setVisibility(View.GONE);
+
+                            Picasso.with(getApplicationContext())
+                                    .load(jsonObject1.optString("pan_image").replace(" ","%20"))
+                                    .fit()
+                                    // .transform(transformation)
+                                    .into(panImage);
+                        }
+
+
+
+                        if (jsonObject1.optString("passport_image").toString().equals("")){
+                            pass2.setVisibility(View.VISIBLE);
+                        }
+                        else  if (!jsonObject1.optString("passport_image").toString().equals("")){
+                            pass2.setVisibility(View.GONE);
+
+                            Picasso.with(getApplicationContext())
+                                    .load(jsonObject1.optString("passport_image").replace(" ","%20"))
+                                    .fit()
+                                    // .transform(transformation)
+                                    .into(passportImage);
+                        }
 
                     }
                     else{
@@ -345,6 +405,7 @@ public class ProfileAct extends AppCompatActivity {
     private Bitmap getImageFromStorage(String path) {
         try {
             f = new File(path);
+
             String filename = null;
             filename = path.substring(path.lastIndexOf("/") + 1);
             // First decode with inJustDecodeBounds=true to check dimensions
@@ -356,8 +417,8 @@ public class ProfileAct extends AppCompatActivity {
             Log.d("sdfasafsdfsdfsdfsdf",f.toString());
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f), null, options);
 
-            pan2.setVisibility(View.GONE);
-            PostData(path, filename);
+
+
 
 
             return b;
