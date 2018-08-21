@@ -78,6 +78,7 @@ public class HomeFragment extends Fragment {
     int currentPage = 0;
 
 
+    int timeStamp=5000;
     List<HashMap<String,String>> AllProducts ;
     GridView expListView;
     HashMap<String,String> map;
@@ -97,7 +98,7 @@ public class HomeFragment extends Fragment {
             if(position>=NUM_PAGES ) position=0;
             else position++;
             // Move to the next page after 10s
-            handler.postDelayed(runnale, 3000);
+            handler.postDelayed(runnale, timeStamp);
         }
     };
 
@@ -555,29 +556,6 @@ public class HomeFragment extends Fragment {
 
 
 
-//            viewholder.months.setText(AllProducts.get(position).get("no_of_month")+" Months");
-//            viewholder.member.setText(AllProducts.get(position).get("no_of_max_members")+" Members");
-//            viewholder.instal.setText("₹ "+AllProducts.get(position).get("per_month_installment")+" Per Month");
-//            viewholder.term_and_cond.setText(AllProducts.get(position).get("term_and_cond"));
-//            viewholder.lucky_draw_date.setText("Lucky Draw Date: "+AllProducts.get(position).get("lucky_draw_date"));
-//            viewholder.payment_due_date.setText("Payment Due Date : "+AllProducts.get(position).get("payment_due_date"));
-//            viewholder.penality_after.setText("After due Date : "+AllProducts.get(position).get("penality_after_due_date"));
-
-
-
-
-
-//            Typeface face=Typeface.createFromAsset(getActivity().getAssets(), "muli_semibold.ttf");
-//            Typeface face2=Typeface.createFromAsset(getActivity().getAssets(), "muli.ttf");
-//            viewholder.name.setTypeface(face);
-//            viewholder.address.setTypeface(face2);
-//            viewholder.totlareview.setTypeface(face2);
-//            viewholder.area.setTypeface(face2);
-//            viewholder.subcatListing.setTypeface(face2);
-//            viewholder.distance.setTypeface(face2);
-
-
-
             return convertView;
         }
     }
@@ -591,7 +569,7 @@ public class HomeFragment extends Fragment {
     public void onResume(){
         super.onResume();
         // Start auto screen slideshow after 1s
-        handler.postDelayed(runnale, 3000);
+        handler.postDelayed(runnale, timeStamp);
     }
 
 

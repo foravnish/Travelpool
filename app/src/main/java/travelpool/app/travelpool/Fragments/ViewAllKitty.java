@@ -261,8 +261,6 @@ public class ViewAllKitty extends Fragment {
             int remain=totalMember-joined;
             viewholder.remain.setText(""+remain);
 
-            viewholder.remain.setText("25");
-
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
             viewholder.banerImg.setImageUrl(AllProducts.get(position).get("banner").toString().replace(" ","%20"),imageLoader);
             viewholder.banerImg2.setImageUrl(AllProducts.get(position).get("image").toString().replace(" ","%20"),imageLoader);

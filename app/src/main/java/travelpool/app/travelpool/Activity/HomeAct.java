@@ -22,6 +22,7 @@ import travelpool.app.travelpool.Fragments.AddUser;
 import travelpool.app.travelpool.Fragments.AgentUserList;
 import travelpool.app.travelpool.Fragments.HomeFragment;
 import travelpool.app.travelpool.Fragments.MyKitty;
+import travelpool.app.travelpool.Fragments.MyReward;
 import travelpool.app.travelpool.Fragments.Profile;
 import travelpool.app.travelpool.Fragments.ShowUser;
 import travelpool.app.travelpool.Fragments.TermsCondition;
@@ -189,6 +190,13 @@ public class HomeAct extends AppCompatActivity
                     FragmentManager manager = getSupportFragmentManager();
                     FragmentTransaction ft = manager.beginTransaction();
                     ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+
+            } else if (id == R.id.nav_reward) {
+
+                                Fragment fragment = new MyReward();
+                                FragmentManager manager = getSupportFragmentManager();
+                                FragmentTransaction ft = manager.beginTransaction();
+                                ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 
 
         } else if (id == R.id.nav_logout) {

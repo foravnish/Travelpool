@@ -268,7 +268,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/muli_bold"
                     android:layout_gravity="center"
-                    android:text="25"
+                    android:text=""
                     android:layout_marginLeft="14dp"
                     android:textStyle="bold"
                     android:textColor="@color/orange"

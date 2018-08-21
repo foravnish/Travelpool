@@ -135,40 +135,40 @@ public class ProfileAct extends AppCompatActivity {
 
         getProfile();
 
-        changeProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                String path = null;
-                String filename = null;
-
-                String path2 = null;
-                String filename2 = null;
-
-                try {
-                    path = f.toString();
-                    filename = path.substring(path.lastIndexOf("/") + 1);
-                    path2 = f2.toString();
-                    filename2 = path2.substring(path2.lastIndexOf("/") + 1);
-                    Log.d("dsfdfsdfsfs", filename);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
-                PostData(path, filename,path2, filename2);
-
-
-
-
-
-//                Fragment fragment = new ProfileEdit();
-//                FragmentManager manager = getSupportFragmentManager();
-//                FragmentTransaction ft = manager.beginTransaction();
-//                ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
-            }
-        });
+//        changeProfile.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//                String path = null;
+//                String filename = null;
+//
+//                String path2 = null;
+//                String filename2 = null;
+//
+//                try {
+//                    path = f.toString();
+//                    filename = path.substring(path.lastIndexOf("/") + 1);
+//                    path2 = f2.toString();
+//                    filename2 = path2.substring(path2.lastIndexOf("/") + 1);
+//                    Log.d("dsfdfsdfsfs", filename);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//
+//
+//                PostData(path, filename,path2, filename2);
+//
+//
+//
+//
+//
+////                Fragment fragment = new ProfileEdit();
+////                FragmentManager manager = getSupportFragmentManager();
+////                FragmentTransaction ft = manager.beginTransaction();
+////                ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+//            }
+//        });
 
 
         pan2.setOnClickListener(new View.OnClickListener() {
@@ -408,13 +408,13 @@ public class ProfileAct extends AppCompatActivity {
                 case 1:
                     String imagePath1 = data.getStringExtra("image_path");
                     setImage(imagePath1);
-                    isImage1 = true;
+                    //isImage1 = true;
                     break;
-                case 2:
-                    String imagePath2 = data.getStringExtra("image_path");
-                    setImage2(imagePath2);
-                    isImage2 = true;
-                    break;
+//                case 2:
+//                    String imagePath2 = data.getStringExtra("image_path");
+//                    setImage2(imagePath2);
+//                    isImage2 = true;
+//                    break;
             }
         } else {
             System.out.println("Failed to load image");
@@ -426,17 +426,16 @@ public class ProfileAct extends AppCompatActivity {
         panImage.setImageBitmap(getImageFromStorage(imagePath));
     }
 
-    private void setImage2(String imagePath2) {
-
-        passportImage.setImageBitmap(getImageFromStorage2(imagePath2));
-    }
+//    private void setImage2(String imagePath2) {
+//
+//        passportImage.setImageBitmap(getImageFromStorage2(imagePath2));
+//    }
 
     private Bitmap getImageFromStorage(String path) {
         try {
             f = new File(path);
 
-            String filename = null;
-            filename = path.substring(path.lastIndexOf("/") + 1);
+
             // First decode with inJustDecodeBounds=true to check dimensions
             final BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = false;
@@ -446,6 +445,21 @@ public class ProfileAct extends AppCompatActivity {
             Log.d("sdfasafsdfsdfsdfsdf",f.toString());
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f), null, options);
 
+
+            String path2 = null;
+            String filename = null;
+
+            try {
+                path2 = f.toString();
+                filename = path2.substring(path.lastIndexOf("/") + 1);
+                Log.d("dsfdfsdfsfs", filename);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+                //Toast.makeText(AddProduct.this, "yes", Toast.LENGTH_SHORT).show();
+                PostData( path, filename);
 
 
 
@@ -507,20 +521,20 @@ public class ProfileAct extends AppCompatActivity {
 
         return inSampleSize;
     }
-    private void PostData(String filePath,String fileName,String filePath2,String fileName2) {
+    private void PostData(String filePath,String fileName) {
 
         try {
             Log.d("sdfsdfasdfsdfsdf1",filePath);
             Log.d("sdfsdfasdfsdfsdf2",fileName);
 
-            Log.d("sdfsdfasdfsdfsdf1",filePath2);
-            Log.d("sdfsdfasdfsdfsdf2",fileName2);
+//            Log.d("sdfsdfasdfsdfsdf1",filePath2);
+//            Log.d("sdfsdfasdfsdfsdf2",fileName2);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-        new AddProductData(filePath,fileName,filePath2,fileName2).execute();
+        new AddProductData(filePath,fileName).execute();
 
     }
 
@@ -535,12 +549,12 @@ public class ProfileAct extends AppCompatActivity {
         HashMap<String, String> params = new HashMap<>();
 
         //EditText descreption,ageOfProd,headline,min,kmsDone,mobile,emailID;
-        AddProductData(String path,String fName,String path2,String fName2) {
+        AddProductData(String path,String fName) {
             this.val = val;
             this.path = path;
             this.fName = fName;
-            this.path2 = path2;
-            this.fName2 = fName2;
+//            this.path2 = path2;
+//            this.fName2 = fName2;
 
         }
 
@@ -554,13 +568,15 @@ public class ProfileAct extends AppCompatActivity {
             JSONObject jsonObject = null;
             try {
 
-                if (isImage1==true) {
-                    jsonObject = uploadImageFile(ProfileAct.this, val, path, fName);
-                }
+                jsonObject = uploadImageFile(ProfileAct.this, val, path, fName);
 
-                if (isImage2==true){
-                    jsonObject = uploadImageFile2(ProfileAct.this, val, path, fName, path2, fName2);
-                }
+//                if (isImage1==true) {
+//                    jsonObject = uploadImageFile(ProfileAct.this, val, path, fName);
+//                }
+//
+//                if (isImage2==true){
+//                    jsonObject = uploadImageFile2(ProfileAct.this, val, path, fName, path2, fName2);
+//                }
 
                 if (jsonObject != null) {
 
@@ -738,7 +754,7 @@ public class ProfileAct extends AppCompatActivity {
             Log.e("request1", ":url:  " + request.urlString() + ", header: " + request.headers() + ", body " + request.body());
             com.squareup.okhttp.Response response = client.newCall(request).execute();
             result = response.body().string();
-            Log.e("responseMultipart", ": " + result);
+            Log.e("responseMultipart2", ": " + result);
             jsonObject = new JSONObject(result);
             Log.e("result", ": " + result);
             return jsonObject;
