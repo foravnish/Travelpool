@@ -41,7 +41,7 @@ public class MyPrefrences {
 
         setUserLogin(context, false);
         setUserID(context, "");
-        setCatID(context, "");
+        setRefer(context, "");
         setSCatID(context, "");
         setUSENAME(context, "");
         setEMAILID(context, "");
@@ -110,14 +110,14 @@ public class MyPrefrences {
         return userIdPrefences.getString(USER_ID,"");
     }
 
-    public static void setCatID(Context context, String is) {
+    public static void setRefer(Context context, String is) {
         cataPrefences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = cataPrefences.edit();
         editor.putString(CATA_ID, is);
         editor.commit();
     }
 
-    public static String getCatID(Context context) {
+    public static String setRefer(Context context) {
         cataPrefences = PreferenceManager.getDefaultSharedPreferences(context);
         return cataPrefences.getString(CATA_ID,"");
     }
