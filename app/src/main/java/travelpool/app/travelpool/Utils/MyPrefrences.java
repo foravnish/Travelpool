@@ -42,7 +42,7 @@ public class MyPrefrences {
         setUserLogin(context, false);
         setUserID(context, "");
         setRefer(context, "");
-        setSCatID(context, "");
+        setMyRefrel(context, "");
         setUSENAME(context, "");
         setEMAILID(context, "");
         setMobile(context, "");
@@ -117,20 +117,20 @@ public class MyPrefrences {
         editor.commit();
     }
 
-    public static String setRefer(Context context) {
+    public static String getRefer(Context context) {
         cataPrefences = PreferenceManager.getDefaultSharedPreferences(context);
         return cataPrefences.getString(CATA_ID,"");
     }
 
 
-    public static void setSCatID(Context context, String is) {
+    public static void setMyRefrel(Context context, String is) {
         subCataPrefences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = subCataPrefences.edit();
         editor.putString(SCATA_ID, is);
         editor.commit();
     }
 
-    public static String getSCatID(Context context) {
+    public static String getMyRefrel(Context context) {
         subCataPrefences = PreferenceManager.getDefaultSharedPreferences(context);
         return subCataPrefences.getString(SCATA_ID,"");
     }

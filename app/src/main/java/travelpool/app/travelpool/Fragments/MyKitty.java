@@ -289,7 +289,7 @@ public class MyKitty extends Fragment {
 
     public class Viewholder{
         ImageView imgFav,stars;
-        TextView packageName,name,term_and_cond,lucky_draw_date,instal,dueDate,totalMember,joinNow;
+        TextView packageName,name,luckyWinner,lucky_draw_date,instal,dueDate,totalMember,joinNow;
         LinearLayout liner,linerLayoutOffer;
 
         NetworkImageView imgaeView;
@@ -350,6 +350,7 @@ public class MyKitty extends Fragment {
             viewholder.banerImg2=convertView.findViewById(R.id.banerImg2);
             viewholder.totalMember=convertView.findViewById(R.id.totalMember);
             viewholder.joinNow=convertView.findViewById(R.id.joinNow);
+            viewholder.luckyWinner=convertView.findViewById(R.id.luckyWinner);
 
 
 
@@ -373,6 +374,14 @@ public class MyKitty extends Fragment {
                 viewholder.joinNow.setText("Renew Kitty");
             }
 
+            viewholder.luckyWinner.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                   // Toast.makeText(getActivity(), ""+AllProducts.get(position).get("id"), Toast.LENGTH_SHORT).show();
+
+                    showLuckyWinner(AllProducts.get(position).get("id"));
+                }
+            });
 //            viewholder.joinNow.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View view) {
@@ -393,6 +402,60 @@ public class MyKitty extends Fragment {
 
             return convertView;
         }
+    }
+
+    private void showLuckyWinner(String id) {
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                Api.kittyWinner+"/"+id , null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("ResposeTranscation", response.toString());
+
+                Util.cancelPgDialog(dialog);
+                try {
+
+                    if (response.getString("status").equalsIgnoreCase("success")){
+
+
+                        jsonArray=response.getJSONArray("message");
+                        JSONObject jsonObject1 = jsonArray.optJSONObject(0);
+
+                        Util.errorDialog(getActivity(),jsonObject1.optString("user_name"));
+
+                    }
+                    else{
+
+                        Toast.makeText(getActivity(),response.getString("message") , Toast.LENGTH_SHORT).show();
+                    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(),
+                            "Error: " + e.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                    Util.cancelPgDialog(dialog);
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("Respose", "Error: " + error.getMessage());
+                Toast.makeText(getActivity(),
+                        "Error! Please Connect to the internet", Toast.LENGTH_SHORT).show();
+                Util.cancelPgDialog(dialog);
+
+            }
+        });
+
+
+        jsonObjReq.setShouldCache(false);
+        AppController.getInstance().addToRequestQueue(jsonObjReq);
+
     }
 
 

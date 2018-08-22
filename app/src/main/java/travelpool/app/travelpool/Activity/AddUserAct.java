@@ -81,6 +81,7 @@ public class AddUserAct extends AppCompatActivity {
     File f=null;
     CheckBox checkBox;
 
+    String refVal;
 
 
     @Override
@@ -118,6 +119,13 @@ public class AddUserAct extends AppCompatActivity {
         dialog.setCancelable(false);
         DataLoc = new ArrayList<>();
 
+        if (MyPrefrences.getRefer(getApplicationContext()).equals("")){
+            refVal="No";
+        }
+        else {
+            refVal=MyPrefrences.getRefer(getApplicationContext());
+
+        }
 
         regiImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -519,6 +527,7 @@ public class AddUserAct extends AppCompatActivity {
                     .addFormDataPart("aadhar_no", aadharNo.getText().toString())
                     .addFormDataPart("pan_no", editpanNo.getText().toString())
                     .addFormDataPart("agent_id", MyPrefrences.getUserID(getApplicationContext()))
+                    .addFormDataPart("referer_by", refVal)
                     .addFormDataPart("aadhar_image", fileName1, RequestBody.create(MEDIA_TYPE_PNG, sourceFile1))
                     .build();
 

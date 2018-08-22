@@ -90,15 +90,28 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         >
                         <TextView
                             android:id="@+id/packageName"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/muli_bold"
                             android:singleLine="true"
                             android:text="Loading..."
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/grayText"
+                            android:textSize="14sp" />
+
+
+                        <TextView
+                            android:id="@+id/luckyWinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/muli_bold"
+                            android:singleLine="true"
+                            android:text="Show"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
                             android:layout_marginLeft="5dp"
                             android:textColor="@color/grayText"
                             android:textSize="14sp" />

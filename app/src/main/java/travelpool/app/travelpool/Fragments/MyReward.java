@@ -69,12 +69,11 @@ public class MyReward extends Fragment {
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                Api.userbyid+"/"+MyPrefrences.getUserID(getActivity())+"/"+MyPrefrences.getUserType(getActivity()), new Response.Listener<String>() {
+                Api.myRewards+"/"+MyPrefrences.getMyRefrel(getActivity()), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Util.cancelPgDialog(dialog);
                 Log.e("Responseprofile", "" + response);
-
 
                 try {
                     JSONObject jsonObject=new JSONObject(response);
@@ -84,9 +83,8 @@ public class MyReward extends Fragment {
                         //  for (int i=0;i<jsonArray.length();i++) {
                         JSONObject jsonObject1 = jsonArray.optJSONObject(0);
 
-
-
-
+                        myReward.setText(jsonObject1.optString("rewards_amounts"));
+                        myUser.setText(jsonObject1.optString("users"));
                     }
                     else{
                         Toast.makeText(getActivity(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
