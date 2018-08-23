@@ -110,6 +110,7 @@
                             android:fontFamily="@font/muli_bold"
                             android:singleLine="true"
                             android:text="Show"
+                            android:visibility="gone"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="10dp"
                             android:layout_marginLeft="5dp"
