@@ -49,6 +49,11 @@
             android:id="@+id/nav_reward"
             android:icon="@drawable/mukitty"
             android:title="My Reward" />
+
+        <item
+            android:id="@+id/nav_refer"
+            android:icon="@drawable/tnc"
+            android:title="Refer a Friend" />
         <item
             android:id="@+id/nav_tremCondition"
             android:icon="@drawable/tnc"

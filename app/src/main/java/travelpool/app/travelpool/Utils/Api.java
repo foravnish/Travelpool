@@ -29,6 +29,8 @@ public class Api {
     public static String usersByAgentId=BASEURL+"usersByAgentId";
     public static String myTranscations=BASEURL+"myTranscations";
     public static String updateProfile=BASEURL+"updateProfile";
+    public static String myRewards=BASEURL+"myRewards";
+    public static String kittyWinner=BASEURL+"kittyWinner";
 
 
 }

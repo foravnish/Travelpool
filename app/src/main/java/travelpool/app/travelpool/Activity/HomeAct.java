@@ -24,6 +24,7 @@ import travelpool.app.travelpool.Fragments.HomeFragment;
 import travelpool.app.travelpool.Fragments.MyKitty;
 import travelpool.app.travelpool.Fragments.MyReward;
 import travelpool.app.travelpool.Fragments.Profile;
+import travelpool.app.travelpool.Fragments.ReferAFriend;
 import travelpool.app.travelpool.Fragments.ShowUser;
 import travelpool.app.travelpool.Fragments.TermsCondition;
 import travelpool.app.travelpool.Fragments.Transcation;
@@ -187,6 +188,13 @@ public class HomeAct extends AppCompatActivity
           } else if (id == R.id.nav_tremCondition) {
 
                     Fragment fragment = new TermsCondition();
+                    FragmentManager manager = getSupportFragmentManager();
+                    FragmentTransaction ft = manager.beginTransaction();
+                    ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+
+          } else if (id == R.id.nav_refer) {
+
+                    Fragment fragment = new ReferAFriend();
                     FragmentManager manager = getSupportFragmentManager();
                     FragmentTransaction ft = manager.beginTransaction();
                     ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();

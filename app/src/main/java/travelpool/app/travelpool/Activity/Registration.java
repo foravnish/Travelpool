@@ -90,7 +90,7 @@ public class Registration extends AppCompatActivity {
     Bitmap imageBitmap;
     File f=null;
     CheckBox checkBox;
-
+    String refVal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,6 +126,13 @@ public class Registration extends AppCompatActivity {
         DataLoc=new ArrayList<>();
 
 
+        if (MyPrefrences.getRefer(getApplicationContext()).equals("")){
+            refVal="No";
+        }
+        else {
+            refVal=MyPrefrences.getRefer(getApplicationContext());
+
+        }
 
         regiImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -855,6 +862,7 @@ public class Registration extends AppCompatActivity {
                     .addFormDataPart("aadhar_no", aadharNo.getText().toString())
                     .addFormDataPart("pan_no", editpanNo.getText().toString())
                     .addFormDataPart("agent_id", "No")
+                    .addFormDataPart("referer_by", refVal)
                     .addFormDataPart("aadhar_image", fileName1, RequestBody.create(MEDIA_TYPE_PNG, sourceFile1))
                     .build();
 
