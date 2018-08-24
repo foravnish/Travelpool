@@ -150,7 +150,6 @@ public class Registration extends AppCompatActivity {
         });
 
 
-
         loginNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
