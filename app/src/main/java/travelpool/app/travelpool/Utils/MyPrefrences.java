@@ -22,6 +22,8 @@ public class MyPrefrences {
     static SharedPreferences CityName;
     static SharedPreferences CityDialog;
     static SharedPreferences Image;
+    public static SharedPreferences mySharedPreferencesToken;
+
 
     public static String USER_LOGIN = "userlogin";
     public static String USER_ID = "user_id";
@@ -218,7 +220,16 @@ public class MyPrefrences {
         return CityName.getString(CITYNAME,"");
     }
 
-
+    public static String getgcm_token(Context context) {
+        mySharedPreferencesToken = PreferenceManager.getDefaultSharedPreferences(context);
+        return mySharedPreferencesToken.getString("gcm_token", "");
+    }
+    public static void setgcm_token(Context context, String Value) {
+        mySharedPreferencesToken = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor sharedpreferenceeditor = mySharedPreferencesToken.edit();
+        sharedpreferenceeditor.putString("gcm_token", Value);
+        sharedpreferenceeditor.commit();
+    }
 
 
 }

@@ -420,82 +420,72 @@ public class MyKitty extends Fragment {
           //  separated = currentString.split(":");
 
 
-            try {
-                StringTokenizer tokens = new StringTokenizer(currentString, ":");
-                first = tokens.nextToken();// this will contain "Fruit"
-                second = tokens.nextToken();// this will contain " they taste good"
-                Log.d("dsfgsdgsdgsdgsdgsdsdg",first);
-                Log.d("dfdgdgdsgdgdgd",second);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//            try {
+//                StringTokenizer tokens = new StringTokenizer(currentString, ":");
+//                first = tokens.nextToken();// this will contain "Fruit"
+//                second = tokens.nextToken();// this will contain " they taste good"
+//                Log.d("dsfgsdgsdgsdgsdgsdsdg",first);
+//                Log.d("dfdgdgdsgdgdgd",second);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//
+//            if (AllProducts.get(position).get("lucky_d_d").equals(dd)){
+//                viewholder.luckyWinner.setVisibility(View.VISIBLE);
+//                Log.d("hfhjghjgjh","true");
+//            }
+//            else{
+//                viewholder.luckyWinner.setVisibility(View.GONE);
+//                Log.d("hfhjghjgjh","false");
+//            }
 
 
-            if (AllProducts.get(position).get("lucky_d_d").equals(dd)){
-                viewholder.luckyWinner.setVisibility(View.VISIBLE);
-                Log.d("hfhjghjgjh","true");
-            }
-            else{
-                viewholder.luckyWinner.setVisibility(View.GONE);
-                Log.d("hfhjghjgjh","false");
-            }
+//            Timer updateTimer = new Timer();
+//            updateTimer.schedule(new TimerTask()
+//            {
+//                public void run()
+//                {
+//                    try
+//                    {
+//
+//                        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+//                        Date date1 = format.parse(first+":"+second+":"+"00");///// Time of api
+//                        Date date2 = format.parse(hr+":"+min+":"+"00");  //// Time of Local
+//                        long mills = date1.getTime() - date2.getTime();
+//                        Log.v("Data1", ""+date1.getTime());
+//                        Log.v("Data2", ""+date2.getTime());
+//                        int hours = (int) (mills/(1000 * 60 * 60));
+//                        int mins = (int) (mills/(1000*60)) % 60;
+//
+//                        seconds=(hours*60+mins)*60;
+//                        String diff = hours + ":" + mins; // updated value every1 second
+//                       // viewholder.luckyWinner.setText((hours*60+mins)*60+"");
+////                        viewholder.luckyWinner.setText(diff);
+//
+//
+//                        Log.d("hfhjgfhjgjkgjkgk",second);
+//                    }
+//                    catch (Exception e)
+//                    {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//            }, 0, 1000);
 
-
-
-
-
-
-
-
-
-
-
-
-
-            Timer updateTimer = new Timer();
-            updateTimer.schedule(new TimerTask()
-            {
-                public void run()
-                {
-                    try
-                    {
-
-                        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
-                        Date date1 = format.parse(first+":"+second+":"+"00");///// Time of api
-                        Date date2 = format.parse(hr+":"+min+":"+"00");  //// Time of Local
-                        long mills = date1.getTime() - date2.getTime();
-                        Log.v("Data1", ""+date1.getTime());
-                        Log.v("Data2", ""+date2.getTime());
-                        int hours = (int) (mills/(1000 * 60 * 60));
-                        int mins = (int) (mills/(1000*60)) % 60;
-
-                        seconds=(hours*60+mins)*60;
-                        String diff = hours + ":" + mins; // updated value every1 second
-                       // viewholder.luckyWinner.setText((hours*60+mins)*60+"");
-//                        viewholder.luckyWinner.setText(diff);
-
-                        new CountDownTimer(seconds*1000, 1000) {
-
-                            public void onTick(long millisUntilFinished) {
-                                viewholder.luckyWinner.setText("seconds remaining: " + millisUntilFinished / 1000);
-                                //here you can have your logic to set text to edittext
-                            }
-
-                            public void onFinish() {
-                                viewholder.luckyWinner.setText("Show Winner");
-                            }
-
-                        }.start();
-
-                    }
-                    catch (Exception e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
-
-            }, 0, 1000);
-
+//            new CountDownTimer(seconds*1000, 1000) {
+//
+//                public void onTick(long millisUntilFinished) {
+//                    viewholder.luckyWinner.setText("seconds remaining: " + millisUntilFinished / 1000);
+//                    //here you can have your logic to set text to edittext
+//                }
+//
+//                public void onFinish() {
+//                    viewholder.luckyWinner.setText("Show Winner");
+//                }
+//
+//            }.start();
 
 
 

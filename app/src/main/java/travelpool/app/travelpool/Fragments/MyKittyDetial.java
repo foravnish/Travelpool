@@ -4,6 +4,7 @@ package travelpool.app.travelpool.Fragments;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
@@ -17,20 +18,33 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.StringTokenizer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import travelpool.app.travelpool.Activity.PayNow;
 import travelpool.app.travelpool.R;
+import travelpool.app.travelpool.Utils.Api;
 import travelpool.app.travelpool.Utils.AppController;
 import travelpool.app.travelpool.Utils.Util;
 
@@ -76,7 +90,7 @@ public class MyKittyDetial extends Fragment {
     LinearLayout closingDay,modePaymnt,minOrder,linerMode;
     TextView reviewShow;
     LinearLayout linerlay;
-    TextView timeTv1,timing2;
+    TextView luckyWinner,timing2;
     ImageView shareDetail;
     NetworkImageView flagIcon;
     String[] values;
@@ -87,8 +101,12 @@ public class MyKittyDetial extends Fragment {
     boolean flag3=true;
     boolean flag4=true;
     JSONObject jsonObject;
-
-
+    String yy,mm,dd;
+    public static long seconds;
+    String hr,min;
+    String first,second;
+    String luckyDrawWinner="Show Lucky Winner";
+    JSONObject jsonObjectKitty;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -126,6 +144,7 @@ public class MyKittyDetial extends Fragment {
         hotelDetails=view.findViewById(R.id.hotelDetails);
         desc=view.findViewById(R.id.desc);
         tnc=view.findViewById(R.id.tnc);
+        luckyWinner=view.findViewById(R.id.luckyWinner);
 
         try {
             jsonObject=new JSONObject(getArguments().getString("data"));
@@ -138,7 +157,7 @@ public class MyKittyDetial extends Fragment {
 
             JSONArray jsonArrayKitty=jsonObject.getJSONArray("kitty_details");
 
-            JSONObject jsonObjectKitty=jsonArrayKitty.getJSONObject(0);
+            jsonObjectKitty=jsonArrayKitty.getJSONObject(0);
 
 
             months.setText("Total Months: "+jsonObjectKitty.optString("no_of_month"));
@@ -162,6 +181,32 @@ public class MyKittyDetial extends Fragment {
             desc.setText(jsonObject2.optString("description"));
             tnc.setText(jsonObject2.optString("term_and_cond"));
 
+            final Calendar c = Calendar.getInstance();
+            yy = String.valueOf(c.get(Calendar.YEAR));
+            mm = String.valueOf(c.get(Calendar.MONTH));
+            dd = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
+
+            Log.d("fgdfgdfgdfgdf",dd);
+
+
+            if (c.get(Calendar.HOUR_OF_DAY)<=9){
+                hr= String.valueOf(c.get(Calendar.HOUR_OF_DAY));
+                hr="0"+hr;
+            }
+            else{
+                hr= String.valueOf(c.get(Calendar.HOUR_OF_DAY));
+            }
+            if (c.get(Calendar.MINUTE)<=9){
+                min= String.valueOf(c.get(Calendar.MINUTE));
+                min="0"+min;
+            }
+            else{
+                min= String.valueOf(c.get(Calendar.MINUTE));
+            }
+            Log.d("hrhrrhrhrhrhrhrhrh",hr);
+            Log.d("hrhrrhrhrhrhrhrhrh",min);
+
+
 
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
             imageView.setImageUrl(jsonObject2.optString("banner").toString().replace(" ","%20"),imageLoader);
@@ -173,6 +218,94 @@ public class MyKittyDetial extends Fragment {
             else{
                 joinNow.setText("Renew Kitty");
             }
+
+
+            String currentString = jsonObjectKitty.optString("lucky_draw_time");
+
+            try {
+                StringTokenizer tokens = new StringTokenizer(currentString, ":");
+                first = tokens.nextToken();// this will contain "Fruit"
+                second = tokens.nextToken();// this will contain " they taste good"
+                Log.d("dfsdfsdfsdfsdfsdfsd",first);
+                Log.d("dfsdfsdfsdfsdfsdfsd",second);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            if (jsonObjectKitty.optString("lucky_draw_date").equals(dd)){
+                luckyWinner.setVisibility(View.VISIBLE);
+                Log.d("fdgdfgdfgdfgdf","true");
+            }
+            else{
+                luckyWinner.setVisibility(View.GONE);
+                Log.d("fdgdfgdfgdfgdf","false");
+            }
+
+            Timer updateTimer = new Timer();
+            updateTimer.schedule(new TimerTask()
+            {
+                public void run()
+                {
+                    try
+                    {
+
+                        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+                        Date date1 = format.parse(first+":"+second+":"+"00");///// Time of api
+                        Date date2 = format.parse(hr+":"+min+":"+"00");  //// Time of Local
+                        long mills = date1.getTime() - date2.getTime();
+                        Log.v("Data1", ""+date1.getTime());
+                        Log.v("Data2", ""+date2.getTime());
+                        int hours = (int) (mills/(1000 * 60 * 60));
+                        int mins = (int) (mills/(1000*60)) % 60;
+
+                        seconds=(hours*60+mins)*60;
+
+                        String diff = hours + ":" + mins; // updated value every1 second
+                        // viewholder.luckyWinner.setText((hours*60+mins)*60+"");
+//                        luckyWinner.setText(diff);
+
+
+
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+
+            }, 0, 1000);
+
+            Log.d("fdgdfgsdgdfgdfgdfgdfgd", String.valueOf(seconds));
+
+            new CountDownTimer(seconds*1000, 1000) {
+                public void onTick(long millisUntilFinished) {
+                    luckyWinner.setText("Lucky Draw Remaining Time: " + millisUntilFinished / 1000);
+                    //here you can have your logic to set text to edittext
+                }
+
+                public void onFinish() {
+                    luckyWinner.setText(luckyDrawWinner);
+                }
+
+            }.start();
+
+
+
+
+
+            luckyWinner.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if (luckyWinner.equals(luckyDrawWinner)){
+                        showLuckyWinner(jsonObjectKitty.optString("id"));
+                        Log.d("sdfsdfsdgdfgdf","true");
+                    }
+                    else{
+                        Log.d("sdfsdfsdgdfgdf","false");
+                    }
+                }
+            });
 
 
         } catch (JSONException e) {
@@ -315,5 +448,62 @@ public class MyKittyDetial extends Fragment {
 
         return view;
     }
+
+    private void showLuckyWinner(String id) {
+
+        Util.showPgDialog(dialog);
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                Api.kittyWinner+"/"+id , null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("ResposeTranscation", response.toString());
+
+                Util.cancelPgDialog(dialog);
+                try {
+
+                    if (response.getString("status").equalsIgnoreCase("success")){
+
+
+                        JSONArray jsonArray=response.getJSONArray("message");
+                        JSONObject jsonObject1 = jsonArray.optJSONObject(0);
+
+                        Util.errorDialog(getActivity(),jsonObject1.optString("user_name"));
+
+                    }
+                    else{
+
+                        Toast.makeText(getActivity(),response.getString("message") , Toast.LENGTH_SHORT).show();
+                    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(),
+                            "Error: " + e.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                    Util.cancelPgDialog(dialog);
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("Respose", "Error: " + error.getMessage());
+                Toast.makeText(getActivity(),
+                        "Error! Please Connect to the internet", Toast.LENGTH_SHORT).show();
+                Util.cancelPgDialog(dialog);
+
+            }
+        });
+
+
+        jsonObjReq.setShouldCache(false);
+        AppController.getInstance().addToRequestQueue(jsonObjReq);
+
+    }
+
+
 
 }

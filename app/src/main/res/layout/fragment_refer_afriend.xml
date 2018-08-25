@@ -6,13 +6,81 @@
     android:orientation="vertical"
     tools:context=".Fragments.ReferAFriend">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo_image"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:textColor="#333"
+        android:text="Invite your friends to Travelpool"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="7dp"
+        android:textColor="@color/grayText"
+        android:text="You'll get ₹ 500 your friends their first join kitty"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="0dp"
+
+        android:text="From our Team"/>
 
 
     <Button
         android:id="@+id/share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:textSize="16dp"
+
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/strock_orange"
         android:layout_gravity="center"
-        android:text="Share"/>
+        android:text="Invite Friends"/>
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:textSize="16dp"
+        android:text=""/>
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

@@ -31,6 +31,7 @@ public class Api {
     public static String updateProfile=BASEURL+"updateProfile";
     public static String myRewards=BASEURL+"myRewards";
     public static String kittyWinner=BASEURL+"kittyWinner";
+    public static String updateFcm=BASEURL+"updateFcm";
 //    public static String travelpoolInfo=BASEURL+"travelpoolInfo";
 
     public static String travelpoolInfo="http://pinerria.com/api/pinerriaInfo";

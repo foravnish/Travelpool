@@ -37,7 +37,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="335dp"
+                        android:layout_height="345dp"
                         >
 
 
@@ -60,7 +60,7 @@
                         <LinearLayout
                             android:id="@+id/postImageView"
                             android:layout_width="match_parent"
-                            android:layout_height="225dp"
+                            android:layout_height="235dp"
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="15dp"
                             android:layout_marginTop="100dp"
@@ -240,6 +240,21 @@
                                 android:textStyle="bold"
                                 android:layout_marginLeft="5dp"
                                 android:textColor="@color/red"
+                                android:textSize="14sp" />
+
+
+                            <TextView
+                                android:id="@+id/luckyWinner"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/muli_bold"
+                                android:singleLine="true"
+                                android:text="Show"
+                                android:visibility="visible"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginLeft="5dp"
+                                android:textColor="@color/grayText"
                                 android:textSize="14sp" />
 
                         </LinearLayout>

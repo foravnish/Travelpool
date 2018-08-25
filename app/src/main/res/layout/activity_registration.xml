@@ -47,7 +47,8 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="45dp"
                     android:layout_marginRight="45dp"
-                    android:src="@drawable/news_banner" />
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/logo_image" />
 
 
                 <LinearLayout
