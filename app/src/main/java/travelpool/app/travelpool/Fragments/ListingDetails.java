@@ -95,7 +95,7 @@ public class ListingDetails extends Fragment {
     LinearLayout closingDay,modePaymnt,minOrder,linerMode;
     TextView reviewShow;
     LinearLayout linerlay;
-    TextView timeTv1,timing2;
+    TextView EmiPrice,timing2;
     ImageView shareDetail;
     NetworkImageView flagIcon;
     String[] values;
@@ -123,22 +123,24 @@ public class ListingDetails extends Fragment {
         months=view.findViewById(R.id.months);
 
         member=view.findViewById(R.id.member);
-        instal=view.findViewById(R.id.instal);
+       // instal=view.findViewById(R.id.instal);
         instal2=view.findViewById(R.id.instal2);
-        term_and_cond=view.findViewById(R.id.term_and_cond);
+       // term_and_cond=view.findViewById(R.id.term_and_cond);
         desreption=view.findViewById(R.id.desreption);
-        lucky_draw_date=view.findViewById(R.id.lucky_draw_date);
-        payment_due_date=view.findViewById(R.id.payment_due_date);
-        penality_after=view.findViewById(R.id.penality_after);
+
+        //lucky_draw_date=view.findViewById(R.id.lucky_draw_date);
+        //payment_due_date=view.findViewById(R.id.payment_due_date);
+        //penality_after=view.findViewById(R.id.penality_after);
         joinNow=view.findViewById(R.id.joinNow);
         imageView=view.findViewById(R.id.imageView);
         kittyName=view.findViewById(R.id.kittyName);
-        purchased=view.findViewById(R.id.purchased);
+        //purchased=view.findViewById(R.id.purchased);
         remain=view.findViewById(R.id.remain);
         linearLay1=view.findViewById(R.id.linearLay1);
         linearLay2=view.findViewById(R.id.linearLay2);
         linearLay3=view.findViewById(R.id.linearLay3);
         linearLay4=view.findViewById(R.id.linearLay4);
+        EmiPrice=view.findViewById(R.id.EmiPrice);
 
         flightDetails=view.findViewById(R.id.flightDetails);
         hotelDetails=view.findViewById(R.id.hotelDetails);
@@ -154,13 +156,16 @@ public class ListingDetails extends Fragment {
 
             months.setText("Total Months: "+jsonObject.optString("no_of_month"));
             member.setText("Total Members: "+jsonObject.optString("no_of_max_members"));
-            instal.setText("₹ "+jsonObject.optString("per_month_installment"));
+            //instal.setText("₹ "+jsonObject.optString("per_month_installment"));
+            EmiPrice.setText("₹ "+jsonObject.optString("per_month_installment"));
             instal2.setText("Per Month ₹ "+jsonObject.optString("per_month_installment"));
-            term_and_cond.setText(jsonObject.optString("term_and_cond"));
-            lucky_draw_date.setText("Lucky Draw Date: "+jsonObject.optString("lucky_draw_date"));
-            payment_due_date.setText("Payment Due Date: "+jsonObject.optString("payment_due_date"));
-            penality_after.setText("After Due Date: "+jsonObject.optString("penality_after_due_date"));
-            purchased.setText("Joined Entries "+jsonObject.optString("purchased_kitty"));
+           // term_and_cond.setText(jsonObject.optString("term_and_cond"));
+
+
+           /// lucky_draw_date.setText("Lucky Draw Date: "+jsonObject.optString("lucky_draw_date"));
+            //payment_due_date.setText("Payment Due Date: "+jsonObject.optString("payment_due_date"));
+            //penality_after.setText("After Due Date: "+jsonObject.optString("penality_after_due_date"));
+            //purchased.setText("Joined Entries "+jsonObject.optString("purchased_kitty"));
 
 
             int totalMember= Integer.parseInt(jsonObject.optString("no_of_max_members"));

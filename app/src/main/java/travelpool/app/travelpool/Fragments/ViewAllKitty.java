@@ -249,10 +249,10 @@ public class ViewAllKitty extends Fragment {
             viewholder.EmiPrice.setText("₹ "+AllProducts.get(position).get("per_month_installment"));
             viewholder.totalMember.setText("Months of Kitty "+AllProducts.get(position).get("no_of_month"));
             viewholder.termCondition.setText(AllProducts.get(position).get("term_and_cond"));
-            viewholder.purchased.setText("Joined Entries "+AllProducts.get(position).get("purchased_kitty"));
+            viewholder.purchased.setText("Joined Entries: "+AllProducts.get(position).get("purchased_kitty"));
             viewholder.purchased2.setText("Lucky Draw Date "+AllProducts.get(position).get("lucky_draw_date"));
 
-            viewholder.desreption.setText(AllProducts.get(position).get("description"));
+            viewholder.desreption.setText("INCLUDES: "+AllProducts.get(position).get("description"));
             viewholder.NoOfMember.setText("Total Members "+AllProducts.get(position).get("no_of_max_members"));
 
             int totalMember= Integer.parseInt(AllProducts.get(position).get("no_of_max_members"));
