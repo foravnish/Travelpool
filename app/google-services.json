@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "817881733697",
+    "firebase_url": "https://travelpool-91a32.firebaseio.com",
+    "project_id": "travelpool-91a32",
+    "storage_bucket": "travelpool-91a32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817881733697:android:87526a3598afb9f7",
+        "android_client_info": {
+          "package_name": "travelpool.app.travelpool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "817881733697-v53pdiktqj0v05ur2mhhcjjlp5lr3q97.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBv3WzJsQnp7HiOsE4y3OUbf-ikpi1_MjU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

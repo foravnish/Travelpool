@@ -473,6 +473,7 @@ public class Login extends AppCompatActivity {
         String token = null;
         try {
             token= MyPrefrences.getgcm_token(this);
+            Log.d("fgsdgsdfgdfgsd",MyPrefrences.getgcm_token(getApplicationContext()));
             //token = instanceID.getToken(getString(R.string.gcm_defaultSenderId), GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
             //Log.w("GCMRegIntentService", "token:" + token);
 
