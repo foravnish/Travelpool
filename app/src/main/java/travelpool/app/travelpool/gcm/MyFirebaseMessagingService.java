@@ -61,20 +61,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         //Todo notification
 
 
-
-
             NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
             inboxStyle.addLine(remoteMessage.getNotification().getBody());
             Notification notification;
             final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                     getApplicationContext());
             Intent notificationIntent = new Intent(getApplicationContext(), HomeAct.class);
-            notificationIntent.putExtra("userType","");
             PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, notificationIntent, 0);
-            notification = mBuilder.setSmallIcon(R.drawable.app_icon).setTicker("Pinerria").setWhen(0)
+            notification = mBuilder.setSmallIcon(R.drawable.app_icon).setTicker("Travel Blaster").setWhen(0)
                     .setAutoCancel(true)
-                    .setContentTitle("Pinerria")
-                    .setTicker("Pineria")
+                    .setContentTitle("Travel Blaster")
+                    .setTicker("Travel Blaster")
 //                .setContentIntent(resultPendingIntent)
                     .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                     .setStyle(inboxStyle)

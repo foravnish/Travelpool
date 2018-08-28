@@ -43,7 +43,7 @@
         <item
             android:id="@+id/nav_transcation"
             android:icon="@drawable/transaction"
-            android:title="Transaction History" />
+            android:title="Transaction" />
 
         <item
             android:id="@+id/nav_reward"
@@ -57,6 +57,7 @@
         <item
             android:id="@+id/nav_tremCondition"
             android:icon="@drawable/tnc"
+            android:visible="false"
             android:title="Term &amp; Condition" />
 
         <item
