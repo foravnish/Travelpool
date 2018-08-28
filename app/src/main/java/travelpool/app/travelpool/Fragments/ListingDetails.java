@@ -64,7 +64,7 @@ public class ListingDetails extends Fragment {
     public ListingDetails() {
         // Required empty public constructor
     }
-    TextView penality_after,payment_due_date,lucky_draw_date,term_and_cond,desreption,instal,instal2,member,months,packageName,kittyName;
+    TextView penality_after_due_date,payment_due_date,lucky_draw_date,term_and_cond,desreption,instal,instal2,member,months,packageName,kittyName;
 
     TextView purchased,remain,hotelDetails,flightDetails,desc,tnc;
     TextView joinNow;
@@ -106,6 +106,10 @@ public class ListingDetails extends Fragment {
     boolean flag3=true;
     boolean flag4=true;
     JSONObject jsonObject;
+    TextView viewFull;
+    LinearLayout linerLayout;
+    boolean flagView=true;
+    TextView txtEnd,txtFrom2;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -121,6 +125,7 @@ public class ListingDetails extends Fragment {
        // name=view.findViewById(R.id.name);
         packageName=view.findViewById(R.id.packageName);
         months=view.findViewById(R.id.months);
+        viewFull=view.findViewById(R.id.viewFull);
 
         member=view.findViewById(R.id.member);
        // instal=view.findViewById(R.id.instal);
@@ -134,25 +139,48 @@ public class ListingDetails extends Fragment {
         joinNow=view.findViewById(R.id.joinNow);
         imageView=view.findViewById(R.id.imageView);
         kittyName=view.findViewById(R.id.kittyName);
-        //purchased=view.findViewById(R.id.purchased);
+        purchased=view.findViewById(R.id.purchased);
         remain=view.findViewById(R.id.remain);
         linearLay1=view.findViewById(R.id.linearLay1);
         linearLay2=view.findViewById(R.id.linearLay2);
         linearLay3=view.findViewById(R.id.linearLay3);
         linearLay4=view.findViewById(R.id.linearLay4);
         EmiPrice=view.findViewById(R.id.EmiPrice);
+        txtEnd=view.findViewById(R.id.txtEnd);
+        txtFrom2=view.findViewById(R.id.txtFrom2);
 
         flightDetails=view.findViewById(R.id.flightDetails);
         hotelDetails=view.findViewById(R.id.hotelDetails);
         desc=view.findViewById(R.id.desc);
         tnc=view.findViewById(R.id.tnc);
+        linerLayout=view.findViewById(R.id.linerLayout);
 
+        penality_after_due_date=view.findViewById(R.id.penality_after_due_date);
+        payment_due_date=view.findViewById(R.id.payment_due_date);
+        lucky_draw_date=view.findViewById(R.id.lucky_draw_date);
 
+        viewFull.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (flagView==true) {
+                    linerLayout.setVisibility(View.VISIBLE);
+                    flagView=false;
+                    viewFull.setText("HIDE ITINERARY");
+                }
+                else if (flagView==false){
+                    linerLayout.setVisibility(View.GONE);
+                    flagView=true;
+                    viewFull.setText("VIEW FULL ITINERARY");
+                }
+            }
+        });
         try {
             jsonObject=new JSONObject(getArguments().getString("data"));
 
            // name.setText(jsonObject.optString("name"));
             kittyName.setText(jsonObject.optString("name"));
+            txtEnd.setText(jsonObject.optString("name"));
+            txtFrom2.setText(jsonObject.optString("name"));
 
             months.setText("Total Months: "+jsonObject.optString("no_of_month"));
             member.setText("Total Members: "+jsonObject.optString("no_of_max_members"));
@@ -161,11 +189,14 @@ public class ListingDetails extends Fragment {
             instal2.setText("Per Month ₹ "+jsonObject.optString("per_month_installment"));
            // term_and_cond.setText(jsonObject.optString("term_and_cond"));
 
+            lucky_draw_date.setText("Lucky Draw Date : "+jsonObject.optString("lucky_draw_date"));
+            payment_due_date.setText("Payment Due Date: "+jsonObject.optString("payment_due_date"));
+            penality_after_due_date.setText("Payment After Date: ₹  "+jsonObject.optString("penality_after_due_date"));
 
            /// lucky_draw_date.setText("Lucky Draw Date: "+jsonObject.optString("lucky_draw_date"));
             //payment_due_date.setText("Payment Due Date: "+jsonObject.optString("payment_due_date"));
             //penality_after.setText("After Due Date: "+jsonObject.optString("penality_after_due_date"));
-            //purchased.setText("Joined Entries "+jsonObject.optString("purchased_kitty"));
+            purchased.setText("Joined Entries "+jsonObject.optString("purchased_kitty"));
 
 
             int totalMember= Integer.parseInt(jsonObject.optString("no_of_max_members"));
