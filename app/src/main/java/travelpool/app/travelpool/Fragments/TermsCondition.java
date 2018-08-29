@@ -62,7 +62,7 @@ public class TermsCondition extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                Api.travelpoolInfo, null, new Response.Listener<JSONObject>() {
+                Api.travelInfo, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
