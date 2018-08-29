@@ -107,6 +107,8 @@ public class MyKittyDetial extends Fragment {
     String first,second;
     String luckyDrawWinner="Show Lucky Winner";
     JSONObject jsonObjectKitty;
+    TextView txtEnd,txtFrom2;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -145,6 +147,8 @@ public class MyKittyDetial extends Fragment {
         desc=view.findViewById(R.id.desc);
         tnc=view.findViewById(R.id.tnc);
         luckyWinner=view.findViewById(R.id.luckyWinner);
+        txtEnd=view.findViewById(R.id.txtEnd);
+        txtFrom2=view.findViewById(R.id.txtFrom2);
 
         try {
             jsonObject=new JSONObject(getArguments().getString("data"));
@@ -153,6 +157,8 @@ public class MyKittyDetial extends Fragment {
 
             // name.setText(jsonObject.optString("name"));
             kittyName.setText(jsonObject.optString("kitty_name"));
+            txtEnd.setText(jsonObject.optString("kitty_name"));
+            txtFrom2.setText(jsonObject.optString("kitty_name"));
 
 
             JSONArray jsonArrayKitty=jsonObject.getJSONArray("kitty_details");

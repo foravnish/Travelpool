@@ -554,7 +554,7 @@ public class Registration extends AppCompatActivity {
 
 
 //        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, "http://103.27.87.89/send.php?usr=4866&pwd=trpool@travel&ph="+editmobile.getText().toString()+"&sndr=TRPOOL&text=TEST%20MSG", null, new Response.Listener<JSONObject>() {
-            JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, "http://103.27.87.89/send.php?usr=4866&pwd=trpool@travel&ph="+editmobile.getText().toString()+"&sndr=TRPOOL&text=Congratulation!%20You%20have%20Successfully%20Registered%20with%20TRAVEL%20POOL,%20Please%20Login%20to%20access", null, new Response.Listener<JSONObject>() {
+            JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, "http://103.27.87.89/send.php?usr=4866&pwd=trpool@travel&ph="+editmobile.getText().toString()+"&sndr=TRPOOL&text=Congratulation!%20You%20have%20Successfully%20Registered%20with%20TRAVEL%20BLASTER%20HOLIDAY,%20Please%20Login%20to%20access", null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
@@ -807,7 +807,7 @@ public class Registration extends AppCompatActivity {
 
                 if (json.optString("status").equalsIgnoreCase("success")) {
 
-                    //smsAPI();
+                    smsAPI();
 
                     Intent intent = new Intent(Registration.this, Login.class);
                     startActivity(intent);
