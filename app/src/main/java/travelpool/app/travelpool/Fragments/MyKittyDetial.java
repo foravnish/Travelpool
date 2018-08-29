@@ -267,6 +267,11 @@ public class MyKittyDetial extends Fragment {
                         seconds=(hours*60+mins)*60;
 
                         String diff = hours + ":" + mins; // updated value every1 second
+
+                        Log.d("dfdsgfsdgfsdgdgfdgds", String.valueOf(seconds));
+                        Log.d("trertyeryety", String.valueOf(diff));
+
+
                         // viewholder.luckyWinner.setText((hours*60+mins)*60+"");
 //                        luckyWinner.setText(diff);
 
