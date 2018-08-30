@@ -26,7 +26,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="310dp">
+                android:layout_height="wrap_content">
 
 
                 <LinearLayout
@@ -56,10 +56,11 @@
                 <LinearLayout
                     android:id="@+id/postImageView"
                     android:layout_width="match_parent"
-                    android:layout_height="190dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="100dp"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/redius"
                     android:elevation="3dp"
                     android:scaleType="centerCrop"
@@ -153,12 +154,24 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/showPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/muli_bold"
+                        android:singleLine="true"
+                        android:text="Loading..."
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/grayText"
+                        android:textSize="14sp" />
+
+                    <TextView
                         android:id="@+id/dueDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/muli_bold"
                         android:singleLine="true"
                         android:text="Loading..."
+                        android:layout_marginBottom="20dp"
                         android:layout_marginLeft="5dp"
                         android:textColor="@color/gray4"
                         android:textSize="14sp" />
@@ -170,6 +183,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="5dp"
+                        android:visibility="gone"
                         android:layout_marginRight="5dp"
                         android:orientation="horizontal"
                         android:weightSum="10">

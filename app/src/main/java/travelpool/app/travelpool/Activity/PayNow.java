@@ -28,6 +28,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -275,6 +276,9 @@ public class PayNow extends AppCompatActivity {
                         FragmentManager manager = getSupportFragmentManager();
                         FragmentTransaction ft = manager.beginTransaction();
                         ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+
+                        smsAPI();
+
                     }
                     else{
                         Util.errorDialog(PayNow.this,jsonObject.getString("message"));
@@ -699,5 +703,29 @@ public class PayNow extends AppCompatActivity {
         }
         return hexString.toString();
     }
+
+    private void smsAPI() {
+
+
+//        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, "http://103.27.87.89/send.php?usr=4866&pwd=trpool@travel&ph="+editmobile.getText().toString()+"&sndr=TRPOOL&text=TEST%20MSG", null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, "http://103.27.87.89/send.php?usr=4866&pwd=trpool@travel&ph="+MyPrefrences.getMobile(getApplicationContext())+"&sndr=TRPOOL&text=You%20have%20Successfully%Purchased%20Kitty%20TRAVEL%20BLASTER,%20HOLIDAY", null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                Log.d("asdfsafsdfsdf",response.toString());
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        AppController.getInstance().addToRequestQueue(request);
+
+
+    }
+
 
 }

@@ -2,7 +2,6 @@ package travelpool.app.travelpool.Fragments;
 
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,33 +27,31 @@ import org.json.JSONObject;
 import travelpool.app.travelpool.R;
 import travelpool.app.travelpool.Utils.Api;
 import travelpool.app.travelpool.Utils.AppController;
-import travelpool.app.travelpool.Utils.MyPrefrences;
 import travelpool.app.travelpool.Utils.Util;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ReferAFriend extends Fragment {
+public class AboutUs extends Fragment {
 
 
-    public ReferAFriend() {
+    public AboutUs() {
         // Required empty public constructor
     }
-
     Dialog dialog;
     TextView content;
 
-    Button share;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_refer_afriend, container, false);
-        share=view.findViewById(R.id.share);
+        View view= inflater.inflate(R.layout.fragment_about_us, container, false);
+
         content=view.findViewById(R.id.content);
+//        getActivity().setTitle("About Us");
 
-
-        getActivity().setTitle("Refer A Friend");
+        getActivity().setTitle("Terms & Conditions");
 
         dialog=new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -80,7 +76,7 @@ public class ReferAFriend extends Fragment {
 
                         JSONArray jsonArray=response.getJSONArray("message");
                         for (int i=0;i<jsonArray.length();i++){
-                            JSONObject jsonObject=jsonArray.getJSONObject(3);
+                            JSONObject jsonObject=jsonArray.getJSONObject(1);
 
                             content.setText(Html.fromHtml(jsonObject.optString("content")));
 
@@ -115,23 +111,7 @@ public class ReferAFriend extends Fragment {
 
 
 
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-                sharingIntent.setType("text/plain");
-//                String shareBody =comName.getText().toString()+ " "+phone.getText().toString();
-                String shareBody ="Hi, \n" +
-                        "Please Install Travel Blaster Holiday app. Click on the link below. https://play.google.com/store/apps/details?id=travelpool.app.travelpool&referrer="+ MyPrefrences.getMyRefrel(getActivity());
-
-                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Details");
-                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT,shareBody);
-                startActivity(Intent.createChooser(sharingIntent, "Share via"));
-
-
-            }
-        });
-        return  view;
+        return view;
     }
 
 }

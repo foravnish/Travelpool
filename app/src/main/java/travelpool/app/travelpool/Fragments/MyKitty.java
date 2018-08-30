@@ -333,7 +333,7 @@ public class MyKitty extends Fragment {
 
     public class Viewholder{
         ImageView imgFav,stars;
-        TextView packageName,name,luckyWinner,lucky_draw_date,instal,dueDate,totalMember,joinNow;
+        TextView packageName,name,luckyWinner,lucky_draw_date,instal,dueDate,totalMember,joinNow,showPrice;
         LinearLayout liner,linerLayoutOffer;
 
         NetworkImageView imgaeView;
@@ -395,6 +395,7 @@ public class MyKitty extends Fragment {
             viewholder.totalMember=convertView.findViewById(R.id.totalMember);
             viewholder.joinNow=convertView.findViewById(R.id.joinNow);
             viewholder.luckyWinner=convertView.findViewById(R.id.luckyWinner);
+            viewholder.showPrice=convertView.findViewById(R.id.showPrice);
 
 
 
@@ -404,7 +405,8 @@ public class MyKitty extends Fragment {
             viewholder.dueDate.setText("Due Date :"+AllProducts.get(position).get("payment_due_date"));
             viewholder.totalMember.setText("Total Members "+AllProducts.get(position).get("no_of_max_members"));
             viewholder.lucky_draw_date.setText("Lucky Draw Date: "+AllProducts.get(position).get("lucky_d_d"));
-            viewholder.instal.setText(" Per Month ₹ : "+AllProducts.get(position).get("p_m_i"));
+            viewholder.instal.setText(" Per Month : ₹ "+AllProducts.get(position).get("p_m_i"));
+            viewholder.showPrice.setText("Per Month : ₹ "+AllProducts.get(position).get("p_m_i"));
 
 
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();

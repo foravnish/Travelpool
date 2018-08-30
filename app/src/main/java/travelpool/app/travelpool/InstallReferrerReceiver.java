@@ -14,7 +14,6 @@ public class InstallReferrerReceiver extends BroadcastReceiver {
         Log.d("ghfghfgfytyfgv","true");
         String referrer = intent.getStringExtra("referrer");
 
-
         Log.d("dfsdfsdfsdfsdfs",referrer);
 
         MyPrefrences.setRefer(context,referrer);

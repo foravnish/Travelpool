@@ -228,7 +228,7 @@
                                 android:singleLine="true"
                                 android:text="Loading..."
                                 android:layout_marginLeft="5dp"
-                                android:textColor="#f3b37a"
+                                android:textColor="@color/gray4"
                                 android:textSize="14sp" />
                             <TextView
                                 android:id="@+id/term_and_cond"
@@ -237,6 +237,7 @@
                                 android:fontFamily="@font/muli_bold"
                                 android:text="Loading..."
                                 android:maxLines="2"
+                                android:visibility="gone"
                                 android:textStyle="bold"
                                 android:layout_marginLeft="5dp"
                                 android:textColor="@color/red"
@@ -250,11 +251,16 @@
                                 android:fontFamily="@font/muli_bold"
                                 android:singleLine="true"
                                 android:text="Show"
+                                android:layout_gravity="center"
+                                android:background="@drawable/redius3"
                                 android:visibility="visible"
                                 android:layout_alignParentRight="true"
                                 android:layout_marginRight="10dp"
                                 android:layout_marginLeft="5dp"
-                                android:textColor="@color/grayText"
+                                android:textColor="@color/white"
+                                android:layout_marginTop="10dp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
                                 android:textSize="14sp" />
 
                         </LinearLayout>
@@ -328,10 +334,106 @@
 
 
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp"
+                        android:background="#f7c6a0">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Recommended Flights"
+                            android:textColor="@color/orange"
+                            android:textSize="14dp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/strock_simple"
+                            android:padding="12dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp">
+
+                            <TextView
+                                android:id="@+id/txtFrom"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="DEL"/>
+
+
+                            <View
+                                android:layout_width="wrap_content"
+                                android:layout_height="1dp"
+                                android:background="#222"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_centerInParent="true"
+                                android:layout_toLeftOf="@+id/txtEnd"
+                                android:layout_toRightOf="@+id/txtFrom">
+
+                            </View>
+                            <TextView
+                                android:id="@+id/txtEnd"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="10dp"
+                                android:text="DEL"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/strock_simple"
+                            android:padding="12dp"
+                            android:layout_marginBottom="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp">
+
+                            <TextView
+                                android:id="@+id/txtFrom2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="DEL"/>
+
+                            <View
+                                android:layout_width="wrap_content"
+                                android:layout_height="1dp"
+                                android:background="#222"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_centerInParent="true"
+                                android:layout_toLeftOf="@+id/txtEnd2"
+                                android:layout_toRightOf="@+id/txtFrom2"></View>
+                            <TextView
+                                android:id="@+id/txtEnd2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="10dp"
+                                android:text="DEL"/>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
                         android:id="@+id/linearLay1"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="15dp"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:orientation="vertical"

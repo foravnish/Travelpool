@@ -59,7 +59,7 @@ public class MyReward extends Fragment {
 
         getActivity().setTitle("My Rewards");
 //
-        Log.d("sdfsdfsdfsdfs", MyPrefrences.getUserType(getActivity()));
+        Log.d("sdfsdfsdfsdfs", MyPrefrences.getMyRefrel(getActivity()));
 
         dialog=new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

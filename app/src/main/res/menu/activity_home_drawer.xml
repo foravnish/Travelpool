@@ -52,13 +52,17 @@
 
         <item
             android:id="@+id/nav_refer"
-            android:icon="@drawable/tnc"
+            android:icon="@drawable/sharing"
             android:title="Refer a Friend" />
         <item
             android:id="@+id/nav_tremCondition"
             android:icon="@drawable/tnc"
-            android:visible="false"
             android:title="Term &amp; Condition" />
+
+        <item
+            android:id="@+id/nav_aboutus"
+            android:icon="@drawable/about"
+            android:title="About Us" />
 
         <item
             android:id="@+id/nav_logout"

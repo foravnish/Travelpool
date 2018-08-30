@@ -131,7 +131,7 @@ public class HomeFragment extends Fragment {
 
         position=0;
 
-          getActivity().setTitle("Travel Pool");
+          getActivity().setTitle("Travelblasters Holidays");
         // Set listener for rotation event
         wheelView.setOnRotationListener(new SpinningWheelView.OnRotationListener<String>() {
             // Call once when start rotation
@@ -443,7 +443,7 @@ public class HomeFragment extends Fragment {
                         //  Toast.makeText(getActivity(), "blank", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        Toast.makeText(getActivity(), AllBaner.get(position).getOrgby().toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), AllBaner.get(position).getOrgby().toString(), Toast.LENGTH_SHORT).show();
 
 
                         Intent intent=new Intent(getActivity(), WebViewOpen.class);

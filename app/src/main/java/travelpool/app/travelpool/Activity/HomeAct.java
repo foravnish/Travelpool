@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import travelpool.app.travelpool.Fragments.AboutUs;
 import travelpool.app.travelpool.Fragments.AddUser;
 import travelpool.app.travelpool.Fragments.AgentUserList;
 import travelpool.app.travelpool.Fragments.HomeFragment;
@@ -191,6 +192,12 @@ public class HomeAct extends AppCompatActivity
                     FragmentManager manager = getSupportFragmentManager();
                     FragmentTransaction ft = manager.beginTransaction();
                     ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+          } else if (id == R.id.nav_aboutus) {
+
+                            Fragment fragment = new AboutUs();
+                            FragmentManager manager = getSupportFragmentManager();
+                            FragmentTransaction ft = manager.beginTransaction();
+                            ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 
           } else if (id == R.id.nav_refer) {
 
