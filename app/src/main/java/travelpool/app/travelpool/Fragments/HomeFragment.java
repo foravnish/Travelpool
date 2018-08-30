@@ -131,7 +131,7 @@ public class HomeFragment extends Fragment {
 
         position=0;
 
-          getActivity().setTitle("Travelblasters Holiday");
+          getActivity().setTitle("Travelblasters Holidays");
         // Set listener for rotation event
         wheelView.setOnRotationListener(new SpinningWheelView.OnRotationListener<String>() {
             // Call once when start rotation
