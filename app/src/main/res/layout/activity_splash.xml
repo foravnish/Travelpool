@@ -7,6 +7,7 @@
     android:background="@color/white"
     android:layout_gravity="center"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".Activity.SplashAct">
 
 
@@ -15,5 +16,17 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:src="@drawable/logo2"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="#495C86"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp"
+        android:text="HOLIDAYS"/>
 
 </LinearLayout>

@@ -13,11 +13,12 @@
     <color name="red">#ff0004</color>
     <color name="yellow">#fada14</color>
     <!--<color name="orange">#F58029</color>-->
-    <color name="orange">#f58f43</color>
+    <color name="orange">#f99e5c</color>
     <color name="pink">#f44580</color>
     <color name="pink2">#b068e7</color>
 
-    <color name="blue">#0073b5</color>
+    <!--<color name="blue">#0073b5</color>-->
+    <color name="blue">#495C86</color>
     <color name="blue2">#3434f7</color>
     <color name="black">#111111</color>
     <color name="titleColor">#fdfdfd</color>
