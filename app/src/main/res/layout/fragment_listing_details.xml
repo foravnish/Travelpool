@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:layout_marginTop="100dp"
+                    android:layout_marginTop="150dp"
                     android:layout_marginBottom="15dp"
                     android:background="@drawable/redius"
                     android:elevation="3dp"
@@ -273,7 +273,7 @@
                     android:layout_height="25dp"
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="15dp"
-                    android:layout_marginTop="85dp"
+                    android:layout_marginTop="135dp"
                     android:background="@drawable/redius2"
                     android:elevation="3dp"
                     android:gravity="center_vertical"
@@ -305,7 +305,7 @@
                     android:layout_height="45dp"
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="30dp"
-                    android:layout_marginTop="75dp"
+                    android:layout_marginTop="125dp"
                     android:background="@drawable/strock_circle"
                     android:elevation="5dp"
                     android:layout_alignParentRight="true"
@@ -341,10 +341,23 @@
                 android:layout_marginBottom="10dp"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
-                android:layout_marginTop="5dp"
                 android:textColor="@color/blue"
-                android:text="VIEW FULL ITINERARY"/>
+                android:text="VIEW ITINERARY"/>
 
+
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:textStyle="bold"
+                    android:background="@drawable/strock_simple"
+                    android:text="INCLUDES 4 STAR HOTEL"/>
 
 
             <LinearLayout
@@ -352,10 +365,170 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:paddingTop="5dp"
                 android:layout_marginTop="0dp"
                 android:orientation="vertical">
 
-            <LinearLayout
+                <LinearLayout
+                    android:id="@+id/linearLay3"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+
+                    android:orientation="vertical"
+                    android:elevation="3dp"
+                    android:background="@drawable/redius_exp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Description"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        android:drawableTint="@color/orange"
+                        android:drawableRight="@drawable/bellow_arrow"
+                        android:textColor="#555"/>
+
+                    <TextView
+                        android:id="@+id/desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:text="Hello"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLay2"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="vertical"
+                    android:elevation="3dp"
+                    android:background="@drawable/redius_exp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Flight Details"
+                        android:textStyle="bold"
+                        android:drawableTint="@color/orange"
+                        android:drawableRight="@drawable/bellow_arrow"
+                        android:textSize="16dp"
+                        android:textColor="#555"/>
+
+                    <TextView
+                        android:id="@+id/flightDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:text="Hello"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp"
+                        android:background="#f7c6a0">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Recommended Flights"
+                            android:textColor="@color/orange"
+                            android:textSize="14dp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/strock_simple"
+                            android:padding="12dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp">
+
+                            <TextView
+                                android:id="@+id/txtFrom"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="DEL"/>
+
+
+                            <View
+                                android:layout_width="wrap_content"
+                                android:layout_height="1dp"
+                                android:background="#222"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_centerInParent="true"
+                                android:layout_toLeftOf="@+id/txtEnd"
+                                android:layout_toRightOf="@+id/txtFrom">
+
+                            </View>
+                            <TextView
+                                android:id="@+id/txtEnd"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="10dp"
+                                android:text="DEL"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/strock_simple"
+                            android:padding="12dp"
+                            android:layout_marginBottom="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp">
+
+                            <TextView
+                                android:id="@+id/txtFrom2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="DEL"/>
+
+                            <View
+                                android:layout_width="wrap_content"
+                                android:layout_height="1dp"
+                                android:background="#222"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_centerInParent="true"
+                                android:layout_toLeftOf="@+id/txtEnd2"
+                                android:layout_toRightOf="@+id/txtFrom2"></View>
+                            <TextView
+                                android:id="@+id/txtEnd2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="10dp"
+                                android:text="DEL"/>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
                 android:id="@+id/linearLay1"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -364,6 +537,7 @@
                 android:layout_marginRight="15dp"
                 android:orientation="vertical"
                 android:elevation="3dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/redius_exp">
 
                 <TextView
@@ -388,101 +562,10 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                android:id="@+id/linearLay2"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:orientation="vertical"
-                android:elevation="3dp"
-                android:background="@drawable/redius_exp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Flight Details"
-                    android:textStyle="bold"
-                    android:drawableTint="@color/orange"
-                    android:drawableRight="@drawable/bellow_arrow"
-                    android:textSize="16dp"
-                    android:textColor="#555"/>
-
-                <TextView
-                    android:id="@+id/flightDetails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:text="Hello"/>
 
 
-            </LinearLayout>
 
 
-            <LinearLayout
-                android:id="@+id/linearLay3"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:orientation="vertical"
-                android:elevation="3dp"
-                android:background="@drawable/redius_exp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Description"
-                    android:textStyle="bold"
-                    android:textSize="16dp"
-                    android:drawableTint="@color/orange"
-                    android:drawableRight="@drawable/bellow_arrow"
-                    android:textColor="#555"/>
-
-                <TextView
-                    android:id="@+id/desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:text="Hello"/>
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/linearLay4"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="vertical"
-                android:elevation="3dp"
-                android:background="@drawable/redius_exp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Terms And Conditions"
-                    android:textStyle="bold"
-                    android:textSize="16dp"
-                    android:drawableTint="@color/orange"
-                    android:drawableRight="@drawable/bellow_arrow"
-                    android:textColor="#555"/>
-
-                <TextView
-                    android:id="@+id/tnc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:text="Hello"/>
-
-
-            </LinearLayout>
 
             </LinearLayout>
 
@@ -496,13 +579,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         android:background="#f7c6a0">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Recommended Flights"
-            android:textColor="@color/orange"
+            android:text="Book Your Deals Now"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="@color/grayText"
             android:textSize="14dp"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
@@ -519,7 +605,6 @@
             android:layout_marginRight="20dp">
 
             <TextView
-                android:id="@+id/txtFrom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -533,12 +618,11 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_centerInParent="true"
-                android:layout_toLeftOf="@+id/txtEnd"
-                android:layout_toRightOf="@+id/txtFrom">
+               >
 
             </View>
             <TextView
-                android:id="@+id/txtEnd"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -558,7 +642,7 @@
             android:layout_marginRight="20dp">
 
             <TextView
-                android:id="@+id/txtFrom2"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -570,11 +654,9 @@
                 android:background="#222"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_centerInParent="true"
-                android:layout_toLeftOf="@+id/txtEnd2"
-                android:layout_toRightOf="@+id/txtFrom2"></View>
+                android:layout_centerInParent="true"></View>
             <TextView
-                android:id="@+id/txtEnd2"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -585,7 +667,39 @@
 
     </LinearLayout>
 
-    <LinearLayout
+        <LinearLayout
+            android:id="@+id/linearLay4"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
+            android:elevation="3dp"
+            android:background="@drawable/redius_exp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Terms And Conditions"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:drawableTint="@color/orange"
+                android:drawableRight="@drawable/bellow_arrow"
+                android:textColor="#555"/>
+
+            <TextView
+                android:id="@+id/tnc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:text="Hello"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"

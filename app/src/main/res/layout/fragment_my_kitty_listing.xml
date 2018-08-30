@@ -251,11 +251,16 @@
                                 android:fontFamily="@font/muli_bold"
                                 android:singleLine="true"
                                 android:text="Show"
+                                android:layout_gravity="center"
+                                android:background="@drawable/redius3"
                                 android:visibility="visible"
                                 android:layout_alignParentRight="true"
                                 android:layout_marginRight="10dp"
                                 android:layout_marginLeft="5dp"
-                                android:textColor="@color/grayText"
+                                android:textColor="@color/white"
+                                android:layout_marginTop="10dp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
                                 android:textSize="14sp" />
 
                         </LinearLayout>

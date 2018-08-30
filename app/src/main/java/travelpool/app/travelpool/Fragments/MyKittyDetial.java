@@ -3,6 +3,8 @@ package travelpool.app.travelpool.Fragments;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -150,6 +153,10 @@ public class MyKittyDetial extends Fragment {
         txtEnd=view.findViewById(R.id.txtEnd);
         txtFrom2=view.findViewById(R.id.txtFrom2);
 
+        dialog=new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setCancelable(false);
         try {
             jsonObject=new JSONObject(getArguments().getString("data"));
 
@@ -308,7 +315,7 @@ public class MyKittyDetial extends Fragment {
                 @Override
                 public void onClick(View view) {
 
-                    if (luckyWinner.equals(luckyDrawWinner)){
+                    if (luckyWinner.getText().toString().equals(luckyDrawWinner)){
                         showLuckyWinner(jsonObjectKitty.optString("id"));
                         Log.d("sdfsdfsdgdfgdf","true");
                     }
@@ -478,7 +485,7 @@ public class MyKittyDetial extends Fragment {
                         JSONArray jsonArray=response.getJSONArray("message");
                         JSONObject jsonObject1 = jsonArray.optJSONObject(0);
 
-                        Util.errorDialog(getActivity(),jsonObject1.optString("user_name"));
+                        Util.errorDialog(getActivity(),"This Month Lucky Winner : "+jsonObject1.optString("user_name").toUpperCase());
 
                     }
                     else{
