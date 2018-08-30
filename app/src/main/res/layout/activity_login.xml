@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/loginback"
+    android:background="@drawable/app_login"
     android:orientation="vertical">
 
     <ScrollView
@@ -34,7 +34,7 @@
                     android:gravity="center_horizontal|center"
                     android:text="SKIP"
                     android:visibility="gone"
-                    android:textColor="@color/white"
+                    android:textColor="@color/orange"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
@@ -45,8 +45,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="80dp"
-                    android:layout_marginTop="40dp"
-                    android:src="@drawable/logo_image" />
+                    android:layout_marginTop="60dp"
+                    android:src="@drawable/logo_image2" />
 
 
                 <EditText
@@ -56,16 +56,17 @@
                     android:layout_below="@+id/imageView4"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:layout_marginTop="35dp"
-                    android:backgroundTint="@color/white"
+                    android:layout_marginTop="25dp"
+                    android:backgroundTint="@color/orange"
                     android:drawableLeft="@drawable/mobile"
+                    android:drawableTint="@color/orange"
                     android:drawablePadding="20dp"
                     android:fontFamily="@font/muli_semibold"
                     android:hint="Mobile No."
                     android:inputType="phone"
                     android:paddingBottom="20dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/orange"
+                    android:textColorHint="@color/orange"
                     android:textSize="18sp" />
 
                 <EditText
@@ -76,15 +77,16 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="15dp"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/orange"
                     android:drawableLeft="@drawable/lock"
                     android:drawablePadding="20dp"
+                    android:drawableTint="@color/orange"
                     android:fontFamily="@font/muli_semibold"
                     android:hint="Password"
                     android:inputType="textPassword"
                     android:paddingBottom="20dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/orange"
+                    android:textColorHint="@color/orange"
                     android:textSize="18sp" />
 
                 <LinearLayout
@@ -115,7 +117,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:checked="true"
-                            android:textColor="#fff"
+                            android:textColor="@color/orange"
                             android:buttonTint="@color/orange"
                             android:text="User Login"/>
 
@@ -124,7 +126,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textColor="#fff"
+                            android:textColor="@color/orange"
                             android:buttonTint="@color/orange"
                             android:text="Agent Login"/>
                     </RadioGroup>
@@ -174,7 +176,7 @@
             android:fontFamily="@font/muli_semibold"
             android:gravity="left"
             android:text="Forgot Password?"
-            android:textColor="@color/md_grey_400"
+            android:textColor="@color/orange"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/btnReg1"
@@ -189,7 +191,7 @@
             android:gravity="right"
             android:text="New User? "
 
-            android:textColor="@color/md_grey_400"
+            android:textColor="@color/orange"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/btnReg" />
 
@@ -202,7 +204,7 @@
             android:gravity="right"
             android:text="Sign Up"
 
-            android:textColor="@color/yellow"
+            android:textColor="@color/blue"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent" />
     </android.support.constraint.ConstraintLayout>
@@ -235,7 +237,7 @@
             android:fontFamily="@font/muli_semibold"
             android:gravity="center_horizontal|center"
             android:text="* T&amp;C Apply"
-            android:textColor="@color/white"
+            android:textColor="@color/orange"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textView5"
@@ -251,7 +253,7 @@
 
         <!--android:gravity="center_horizontal|center"-->
         <!--android:text="  |  "-->
-        <!--android:textColor="@color/white"-->
+        <!--android:textColor="@color/orange"-->
         <!--android:textStyle="bold" />-->
 
 

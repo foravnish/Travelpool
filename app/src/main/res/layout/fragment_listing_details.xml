@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f1f1f1"
     android:orientation="vertical">
 
 
@@ -331,6 +332,40 @@
             </RelativeLayout>
 
 
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:background="@drawable/redius2"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="50dp"
+                    android:src="@drawable/hotel"
+                    android:tint="@color/white"
+                    android:gravity="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:text="INCLUDES 4 STAR HOTEL"/>
+
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/viewFull"
                 android:layout_width="wrap_content"
@@ -338,27 +373,11 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:background="@drawable/strock_simpl_view"
-                android:layout_marginBottom="10dp"
                 android:paddingLeft="40dp"
+                android:layout_marginTop="15dp"
                 android:paddingRight="40dp"
                 android:textColor="@color/blue"
                 android:text="VIEW ITINERARY"/>
-
-
-
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:gravity="center"
-                    android:padding="15dp"
-                    android:textStyle="bold"
-                    android:background="@drawable/strock_simple"
-                    android:text="INCLUDES 4 STAR HOTEL"/>
-
 
             <LinearLayout
                 android:id="@+id/linerLayout"
@@ -393,8 +412,10 @@
 
                     <TextView
                         android:id="@+id/desc"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/strock_simple_light"
                         android:textSize="16dp"
                         android:text="Hello"/>
 
@@ -424,9 +445,11 @@
 
                     <TextView
                         android:id="@+id/flightDetails"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/strock_simple_light"
                         android:text="Hello"/>
 
                     <LinearLayout
@@ -434,27 +457,58 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginTop="10dp"
-                        android:background="#f7c6a0">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        android:background="@drawable/redius2">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Recommended Flights"
+                           >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Flights"
                             android:textColor="@color/orange"
                             android:textSize="14dp"
                             android:textStyle="bold"
                             android:layout_marginTop="10dp"
                             android:layout_marginLeft="10dp"/>
 
-                        <RelativeLayout
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="20dp"
+                                android:layout_marginTop="10dp"
+                                android:src="@drawable/aeroplane"
+                                android:tint="@color/white"
+                                android:gravity="center"/>
+
+
+                        </RelativeLayout>
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/strock_simple"
-                            android:padding="12dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginTop="10dp"
                             android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp">
+                            android:layout_marginRight="20dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:orientation="vertical">
+
+                            <!--<LinearLayout-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:orientation="horizontal">-->
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="5dp"
+                                    android:layout_marginTop="5dp">
 
                             <TextView
                                 android:id="@+id/txtFrom"
@@ -488,12 +542,7 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/strock_simple"
-                            android:padding="12dp"
-                            android:layout_marginBottom="15dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp">
+                            >
 
                             <TextView
                                 android:id="@+id/txtFrom2"
@@ -521,6 +570,10 @@
 
                         </RelativeLayout>
 
+                            <!--</LinearLayout>-->
+
+                        </LinearLayout>
+
                     </LinearLayout>
 
 
@@ -529,16 +582,16 @@
 
 
                 <LinearLayout
-                android:id="@+id/linearLay1"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:orientation="vertical"
-                android:elevation="3dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/redius_exp">
+                    android:id="@+id/linearLay1"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="vertical"
+                    android:elevation="3dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/redius_exp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -553,9 +606,11 @@
 
                 <TextView
                     android:id="@+id/hotelDetails"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/strock_simple_light"
                     android:text="Hello"/>
 
 
@@ -667,6 +722,14 @@
 
     </LinearLayout>
 
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/footer"/>
         <LinearLayout
             android:id="@+id/linearLay4"
             android:layout_width="match_parent"
@@ -691,9 +754,11 @@
 
             <TextView
                 android:id="@+id/tnc"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/strock_simple_light"
                 android:text="Hello"/>
 
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/loginback"
+        android:background="@drawable/app_login"
     android:orientation="vertical">
 
     <ScrollView
@@ -36,7 +36,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_gravity="right"
-                    android:textColor="@color/white"
+                    android:textColor="@color/orange"
                     android:textStyle="bold" />
 
                 <ImageView
@@ -47,8 +47,8 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="45dp"
                     android:layout_marginRight="45dp"
-                    android:layout_marginTop="20dp"
-                    android:src="@drawable/logo_image" />
+                    android:layout_marginTop="50dp"
+                    android:src="@drawable/logo_image2" />
 
 
                 <LinearLayout
@@ -56,7 +56,6 @@
                     android:layout_height="wrap_content"
                     android:focusable="true"
                     android:focusableInTouchMode="true"></LinearLayout>
-
 
 
                 <EditText
@@ -67,15 +66,16 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
 
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/orange"
                     android:drawableLeft="@drawable/user1"
                     android:drawablePadding="20dp"
                     android:fontFamily="@font/muli_semibold"
                     android:hint="Full Name *"
                     android:inputType="textPersonName"
+                    android:drawableTint="@color/orange"
                     android:paddingBottom="20dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/orange"
+                    android:textColorHint="@color/orange"
                     android:textSize="18sp" />
 
                 <EditText
@@ -84,18 +84,19 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/editTextname"
                     android:layout_marginLeft="15dp"
+                    android:drawableTint="@color/orange"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="5dp"
                     android:maxLength="10"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/orange"
                     android:drawableLeft="@drawable/mobile"
                     android:drawablePadding="20dp"
                     android:fontFamily="@font/muli_semibold"
                     android:hint="Mobile No. *"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:paddingBottom="20dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/orange"
+                    android:textColorHint="@color/orange"
                     android:textSize="18sp" />
 
                 <TextView
@@ -105,8 +106,9 @@
                     android:layout_below="@+id/editmobile"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
+                    android:drawableTint="@color/orange"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/orange"
                     android:drawableLeft="@drawable/calen_r"
                     android:drawablePadding="20dp"
                     android:visibility="gone"
@@ -114,8 +116,8 @@
                     android:hint="Date Of Birth"
                     android:editable="false"
                     android:paddingBottom="10dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/orange"
+                    android:textColorHint="@color/orange"
                     android:textSize="18sp" />
 
                 <View
@@ -124,7 +126,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:visibility="gone"
-                    android:background="@color/white">
+                    android:background="@color/orange">
 
                 </View>
 
@@ -135,16 +137,17 @@
                     android:layout_below="@+id/editTextname"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
+                    android:drawableTint="@color/orange"
                     android:layout_marginTop="5dp"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/orange"
                     android:drawableLeft="@drawable/emaiid"
                     android:drawablePadding="20dp"
                     android:fontFamily="@font/muli_semibold"
                     android:hint="Email Id *"
                     android:inputType="textEmailAddress"
                     android:paddingBottom="20dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/orange"
+                    android:textColorHint="@color/orange"
                     android:textSize="18sp" />
 
 
@@ -154,7 +157,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:visibility="gone"
-                    android:background="@color/white">
+                    android:background="@color/orange">
 
                 </View>
 
@@ -166,15 +169,16 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/orange"
                     android:drawableLeft="@drawable/lock"
+                    android:drawableTint="@color/orange"
                     android:drawablePadding="20dp"
                     android:fontFamily="@font/muli_semibold"
                     android:hint="Password *"
                     android:inputType="textPassword"
                     android:paddingBottom="20dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/orange"
+                    android:textColorHint="@color/orange"
                     android:textSize="18sp" />
 
                 <EditText
@@ -185,15 +189,16 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/orange"
                     android:drawableLeft="@drawable/lock"
                     android:drawablePadding="20dp"
                     android:fontFamily="@font/muli_semibold"
                     android:hint="Confirm Password *"
                     android:inputType="textPassword"
+                    android:drawableTint="@color/orange"
                     android:paddingBottom="20dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/orange"
+                    android:textColorHint="@color/orange"
                     android:textSize="18sp" />
 
                 <EditText
@@ -204,15 +209,17 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/orange"
                     android:drawableLeft="@drawable/aadhar"
                     android:drawablePadding="20dp"
+                    android:maxLength="12"
+                    android:drawableTint="@color/orange"
                     android:fontFamily="@font/muli_semibold"
                     android:hint="Aadhar No *"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     android:paddingBottom="20dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/orange"
+                    android:textColorHint="@color/orange"
                     android:textSize="18sp" />
 
                 <EditText
@@ -221,17 +228,19 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/editPassword"
                     android:layout_marginLeft="15dp"
+                    android:drawableTint="@color/orange"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/orange"
                     android:drawableLeft="@drawable/pan"
                     android:drawablePadding="20dp"
+                    android:maxLength="10"
                     android:fontFamily="@font/muli_semibold"
                     android:hint="Pan Car No *"
                     android:inputType="textPersonName"
                     android:paddingBottom="20dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/orange"
+                    android:textColorHint="@color/orange"
                     android:textSize="18sp" />
                 <EditText
                     android:id="@+id/editapasport"
@@ -241,15 +250,16 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/white"
+                    android:drawableTint="@color/orange"
+                    android:backgroundTint="@color/orange"
                     android:drawableLeft="@drawable/passport"
                     android:drawablePadding="20dp"
                     android:fontFamily="@font/muli_semibold"
                     android:hint="Passport No (Optional)"
                     android:inputType="textPersonName"
                     android:paddingBottom="20dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/orange"
+                    android:textColorHint="@color/orange"
                     android:textSize="18sp" />
 
 
@@ -262,16 +272,17 @@
                     android:layout_below="@+id/editPassword"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
+                    android:drawableTint="@color/orange"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/orange"
                     android:drawableLeft="@drawable/address"
                     android:drawablePadding="20dp"
                     android:fontFamily="@font/muli_semibold"
                     android:hint="Address *"
                     android:inputType="textPersonName"
                     android:paddingBottom="20dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/orange"
+                    android:textColorHint="@color/orange"
                     android:textSize="18sp" />
 
                 <EditText
@@ -279,18 +290,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/editPassword"
+                    android:drawableTint="@color/orange"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/orange"
                     android:drawableLeft="@drawable/city"
                     android:drawablePadding="20dp"
                     android:fontFamily="@font/muli_semibold"
                     android:hint="City *"
                     android:inputType="textPersonName"
                     android:paddingBottom="20dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/orange"
+                    android:textColorHint="@color/orange"
                     android:textSize="18sp" />
 
                 <EditText
@@ -301,15 +313,16 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/orange"
                     android:drawableLeft="@drawable/city"
+                    android:drawableTint="@color/orange"
                     android:drawablePadding="20dp"
                     android:fontFamily="@font/muli_semibold"
                     android:hint="State *"
                     android:inputType="textPersonName"
                     android:paddingBottom="20dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/orange"
+                    android:textColorHint="@color/orange"
                     android:textSize="18sp" />
 
                 <EditText
@@ -320,15 +333,16 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/orange"
                     android:drawableLeft="@drawable/pin"
                     android:drawablePadding="20dp"
+                    android:drawableTint="@color/orange"
                     android:fontFamily="@font/muli_semibold"
                     android:hint="Pincode *"
                     android:inputType="number"
                     android:paddingBottom="20dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
+                    android:textColor="@color/orange"
+                    android:textColorHint="@color/orange"
                     android:textSize="18sp" />
 
                 <TextView
@@ -337,7 +351,7 @@
                     android:text="Upload Aadhar Card Image*"
                     android:layout_marginLeft="20dp"
                     android:textSize="16dp"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/orange"/>
 
 
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -364,7 +378,7 @@
                     android:textSize="16dp"
                     android:layout_marginLeft="10dp"
                     android:buttonTint="@color/orange"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/orange"/>
 
                 <Button
                     android:id="@+id/btnSubReg"
@@ -408,7 +422,7 @@
                         android:fontFamily="@font/muli_semibold"
                         android:gravity="right"
                         android:text="Login Now"
-                        android:textColor="@color/yellow"
+                        android:textColor="@color/blue"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent" />
                 </LinearLayout>
@@ -432,7 +446,7 @@
                     android:fontFamily="@font/muli_semibold"
                     android:gravity="center_horizontal|center"
                     android:text="* T&amp;C Apply"
-                    android:textColor="@color/white"
+                    android:textColor="@color/orange"
                     android:textStyle="bold"
                     />
 

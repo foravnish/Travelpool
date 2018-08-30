@@ -68,7 +68,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     getApplicationContext());
             Intent notificationIntent = new Intent(getApplicationContext(), HomeAct.class);
             PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, notificationIntent, 0);
-            notification = mBuilder.setSmallIcon(R.drawable.app_icon).setTicker("Travel Blaster").setWhen(0)
+            notification = mBuilder.setSmallIcon(R.drawable.logo_image).setTicker("Travel Blaster").setWhen(0)
                     .setAutoCancel(true)
                     .setContentTitle("Travel Blaster")
                     .setTicker("Travel Blaster")
@@ -76,7 +76,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                     .setStyle(inboxStyle)
 //                .setWhen(getTimeMilliSec(timeStamp))
-                    .setSmallIcon(R.drawable.app_icon)
+                    .setSmallIcon(R.drawable.logo_image)
                     .setContentIntent(contentIntent)
                    // .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(image))
 //                .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), icon))

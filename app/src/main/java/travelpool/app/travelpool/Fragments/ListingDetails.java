@@ -170,7 +170,7 @@ public class ListingDetails extends Fragment {
                 else if (flagView==false){
                     linerLayout.setVisibility(View.GONE);
                     flagView=true;
-                    viewFull.setText("VIEW FULL ITINERARY");
+                    viewFull.setText("VIEW ITINERARY");
                 }
             }
         });
