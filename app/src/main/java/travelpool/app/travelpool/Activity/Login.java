@@ -242,7 +242,7 @@ public class Login extends AppCompatActivity {
                     if (jsonObject.optString("status").equals("success")) {
 
 
-                        dialog.dismiss();
+                      //  dialog.dismiss();
 
 
                     }
