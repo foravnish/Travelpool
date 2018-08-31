@@ -212,7 +212,7 @@ public class ListingDetails extends Fragment {
             desreption.setText(jsonObject2.optString("description"));
 
             hotelDetails.setText(Html.fromHtml(jsonObject2.optString("hotel_details")));
-            flightDetails.setText(Html.fromHtml(jsonObject2.optString("flight_details")));
+            flightDetails.setText(jsonObject2.optString("flight_details"));
             desc.setText(jsonObject2.optString("description"));
             tnc.setText(jsonObject2.optString("term_and_cond"));
 

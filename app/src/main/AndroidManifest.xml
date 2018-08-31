@@ -3,7 +3,9 @@
     package="travelpool.app.travelpool">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -73,7 +75,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar2" />
         <activity android:name=".Activity.AddUserAct" />
-        <activity android:name=".Activity.ProfileAct"></activity>
+        <activity android:name=".Activity.ProfileAct" />
 
         <receiver
             android:name=".InstallReferrerReceiver"
@@ -84,22 +86,22 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".gcm.MyFirebaseMessagingService"
+        <service
+            android:name=".gcm.MyFirebaseMessagingService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service android:name=".gcm.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
-
-
+        <activity android:name=".Activity.TermandConditions"
+            android:label="Ten"></activity>
     </application>
 
 </manifest>

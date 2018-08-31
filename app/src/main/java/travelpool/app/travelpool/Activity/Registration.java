@@ -91,12 +91,14 @@ public class Registration extends AppCompatActivity {
     File f=null;
     CheckBox checkBox;
     String refVal;
+    TextView tncBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
         btnSubReg=findViewById(R.id.btnSubReg);
+        tncBtn=findViewById(R.id.tncBtn);
 
        // editLocation=findViewById(R.id.editLocation);
         editPassword=findViewById(R.id.editPassword);
@@ -125,6 +127,13 @@ public class Registration extends AppCompatActivity {
         dialog.setCancelable(false);
         DataLoc=new ArrayList<>();
 
+
+        tncBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Registration.this,TermandConditions.class));
+            }
+        });
 
         if (MyPrefrences.getRefer(getApplicationContext()).equals("")){
             refVal="No";
@@ -624,13 +633,13 @@ public class Registration extends AppCompatActivity {
 //            editAddress.requestFocus();
 //            return false;
 //        }
-//
-//        else if (TextUtils.isEmpty(editCity.getText().toString()))
-//        {
-//            editCity.setError("Oops! City blank");
-//            editCity.requestFocus();
-//            return false;
-//        }
+
+        else if (TextUtils.isEmpty(editCity.getText().toString()))
+        {
+            editCity.setError("Oops! City blank");
+            editCity.requestFocus();
+            return false;
+        }
 //        else if (TextUtils.isEmpty(editState.getText().toString()))
 //        {
 //            editState.setError("Oops! State blank");
@@ -880,7 +889,7 @@ public class Registration extends AppCompatActivity {
                     .addFormDataPart("mobile", editmobile.getText().toString())
                     .addFormDataPart("password", editPassword.getText().toString())
                     .addFormDataPart("address","NA")
-                    .addFormDataPart("city", "NA")
+                    .addFormDataPart("city", editCity.getText().toString())
                     .addFormDataPart("state", "NA")
                     .addFormDataPart("pincode", "NA")
                     .addFormDataPart("aadhar_no", "NA")

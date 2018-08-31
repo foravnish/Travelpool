@@ -297,14 +297,14 @@
                     android:drawableTint="@color/orange"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_marginTop="10dp"
                     android:backgroundTint="@color/orange"
                     android:drawableLeft="@drawable/city"
                     android:drawablePadding="20dp"
                     android:fontFamily="@font/muli_semibold"
                     android:hint="City *"
-                    android:inputType="textPersonName"
+                    android:inputType="textCapSentences"
                     android:paddingBottom="20dp"
                     android:textColor="@color/orange"
                     android:textColorHint="@color/orange"
@@ -379,15 +379,30 @@
                     android:background="#00ffffff"
                     app:civ_border_width="3dp" />
 
-                <CheckBox
-                    android:id="@+id/checkBox"
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="I Have read to Terms &amp; Condition"
+                    android:orientation="horizontal">
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
                     android:textSize="16dp"
                     android:layout_marginLeft="10dp"
                     android:buttonTint="@color/orange"
                     android:textColor="@color/orange"/>
+
+
+                    <TextView
+                        android:id="@+id/tncBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/orange"
+                        android:layout_marginLeft="10dp"
+                        android:text="I Have read to Terms &amp; Condition"/>
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/btnSubReg"
