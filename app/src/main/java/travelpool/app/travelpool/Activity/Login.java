@@ -96,7 +96,13 @@ public class Login extends AppCompatActivity {
         });
 
 
+        forgt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                popForgotpwd();
+            }
+        });
 
         loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions(Arrays.asList(EMAIL));
@@ -175,6 +181,113 @@ public class Login extends AppCompatActivity {
 
             }
         });
+
+
+    }
+
+    private void popForgotpwd() {
+
+
+        final Dialog dialog2 = new Dialog(Login.this);
+//                dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog2.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog2.setContentView(R.layout.get_mobile_no);
+        //  dialog2.setCancelable(false);
+
+        final EditText mobile_edit= (EditText) dialog2.findViewById(R.id.mobile_edit);
+        mobile_edit.setText(mobile.getText().toString());
+        //TextView recieve= (TextView) dialog2.findViewById(R.id.recieve);
+        //recieve.setText("Sent OTP on "+mob);
+        Button submit2=(Button)dialog2.findViewById(R.id.submit2);
+        submit2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (TextUtils.isEmpty(mobile_edit.getText().toString())){
+
+                    Toast.makeText(Login.this, "Please Enter Mobile No.", Toast.LENGTH_SHORT).show();
+                }
+
+                else {
+
+                    mobileVerify_API(mobile_edit.getText().toString(),dialog2);
+
+                }
+            }
+        });
+
+        dialog2.show();
+
+
+
+    }
+
+    private void mobileVerify_API(final String mobileNo, final Dialog dialog) {
+
+        Util.showPgDialog(dialog);
+
+        RequestQueue queue = Volley.newRequestQueue(Login.this);
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                Api.forgetPassword, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Util.cancelPgDialog(dialog);
+                Log.e("fdsfsdfsdgsdfgdsf", "forgetPassword Response: " + response);
+
+
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+                    // if (jsonObject.getString("status").equalsIgnoreCase("success")){
+
+                    if (jsonObject.optString("status").equals("success")) {
+
+
+                        dialog.dismiss();
+
+
+                    }
+                    else{
+//                        Toast.makeText(getApplicationContext(),jsonObject.getString("message") , Toast.LENGTH_SHORT).show();
+                        Util.errorDialog(Login.this,jsonObject.getString("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Util.cancelPgDialog(dialog);
+                Log.e("fdgdfgdfgd", "Login Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),"Please Connect to the Internet", Toast.LENGTH_LONG).show();
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Log.e("fgdfgdfgdf","Inside getParams");
+
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<>();
+                params.put("mobile", mobileNo);
+
+
+                return params;
+            }
+
+//                        @Override
+//                        public Map<String, String> getHeaders() throws AuthFailureError {
+//                            Log.e("fdgdfgdfgdfg","Inside getHeaders()");
+//                            Map<String,String> headers=new HashMap<>();
+//                            headers.put("Content-Type","application/x-www-form-urlencoded");
+//                            return headers;
+//                        }
+        };
+        // Adding request to request queue
+        queue.add(strReq);
 
 
     }
