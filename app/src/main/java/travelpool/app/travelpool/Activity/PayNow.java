@@ -270,14 +270,24 @@ public class PayNow extends AppCompatActivity {
                     if (jsonObject.getString("status").equalsIgnoreCase("success")){
 
 //                        Util.errorDialog(PayNow.this,jsonObject.getString("message"));
-                        Toast.makeText(getApplicationContext(), ""+jsonObject.optString("message") ,Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), ""+jsonObject.optString("message") ,Toast.LENGTH_SHORT).show();
+                          Util.errorDialog(PayNow.this,jsonObject.optString("message"));
+//                        Fragment fragment = new MyKitty();
+//                        FragmentManager manager = getSupportFragmentManager();
+//                        FragmentTransaction ft = manager.beginTransaction();
+//                        ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 
-                        Fragment fragment = new MyKitty();
-                        FragmentManager manager = getSupportFragmentManager();
-                        FragmentTransaction ft = manager.beginTransaction();
-                        ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 
-                        smsAPI();
+                        if (P_mode.equals("cash")){
+                            smsAPI_Cash(K_name,amount);
+                        }
+                        else if (P_mode.equals("cheque")){
+                            smsAPI_Chek(K_name,amount);
+                        }
+                        else if (P_mode.equals("online")){
+                            smsAPI_Online(K_name,amount);
+                        }
+
 
                     }
                     else{
@@ -704,11 +714,11 @@ public class PayNow extends AppCompatActivity {
         return hexString.toString();
     }
 
-    private void smsAPI() {
+    private void smsAPI_Cash(String kitty_name,String amount) {
 
 
 //        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, "http://103.27.87.89/send.php?usr=4866&pwd=trpool@travel&ph="+editmobile.getText().toString()+"&sndr=TRPOOL&text=TEST%20MSG", null, new Response.Listener<JSONObject>() {
-        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, "http://103.27.87.89/send.php?usr=4866&pwd=trpool@travel&ph="+MyPrefrences.getMobile(getApplicationContext())+"&sndr=TRPOOL&text=You%20have%20Successfully%Purchased%20Kitty%20TRAVEL%20BLASTER,%20HOLIDAY", null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, "http://103.27.87.89/send.php?usr=4866&pwd=trpool@travel&ph="+MyPrefrences.getMobile(getApplicationContext())+"&sndr=TRPOOL&text=Thanks%20for%20the%20payment%20%20Rs."+amount+"Amount%20made%20of%20kitty%20"+kitty_name+"%20through%20cash%20payments.%20The%20same%20has%20been%20updated%20in%20your%20account.Contact%20Helpline%20no.%20for%20cash%20Payments.", null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
@@ -726,6 +736,54 @@ public class PayNow extends AppCompatActivity {
 
 
     }
+
+
+    private void smsAPI_Chek(String kitty_name,String amount) {
+
+
+//        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, "http://103.27.87.89/send.php?usr=4866&pwd=trpool@travel&ph="+editmobile.getText().toString()+"&sndr=TRPOOL&text=TEST%20MSG", null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, "http://103.27.87.89/send.php?usr=4866&pwd=trpool@travel&ph="+MyPrefrences.getMobile(getApplicationContext())+"&sndr=TRPOOL&text=Thanks%20for%20the%20payment%20%20Rs."+amount+"Amount%20made%20of%20"+kitty_name+"%20kitty%20through%20cheque%20no.chequeno.filed%20.%20The%20same%20has%20been%20updated%20in%20your%20account.Contact%20Helpline%20no.%20for%20cash%20Payments.", null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                Log.d("asdfsafsdfsdf",response.toString());
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        AppController.getInstance().addToRequestQueue(request);
+
+
+    }
+
+    private void smsAPI_Online(String kitty_name,String amount) {
+
+
+//        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, "http://103.27.87.89/send.php?usr=4866&pwd=trpool@travel&ph="+editmobile.getText().toString()+"&sndr=TRPOOL&text=TEST%20MSG", null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, "http://103.27.87.89/send.php?usr=4866&pwd=trpool@travel&ph="+MyPrefrences.getMobile(getApplicationContext())+"&sndr=TRPOOL&text=Thanks%20for%20the%20payment%20Rs."+amount+"%20Amount%20made%20of%"+kitty_name+"%20kitty%20through%20online%20payments.%20The%20same%20has%20been%20updated%20in%20your%20account.", null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                Log.d("asdfsafsdfsdf",response.toString());
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        AppController.getInstance().addToRequestQueue(request);
+
+
+    }
+
 
 
 }
