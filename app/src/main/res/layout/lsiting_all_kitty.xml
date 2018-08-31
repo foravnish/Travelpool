@@ -255,17 +255,17 @@
                 android:orientation="vertical">
 
 
-
                 <TextView
                     android:id="@+id/purchased"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/muli_bold"
-                    android:singleLine="true"
+
                     android:layout_gravity="center"
-                    android:text="Loading..."
+                    android:text="Loading.."
                     android:textStyle="bold"
-                    android:layout_marginLeft="5dp"
+                    android:paddingLeft="5dp"
+                    android:layout_marginLeft="0dp"
                     android:gravity="center_vertical"
                     android:textColor="@color/white"
                     android:textSize="10sp" />

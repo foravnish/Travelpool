@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -210,8 +211,8 @@ public class ListingDetails extends Fragment {
             packageName.setText(jsonObject2.optString("name"));
             desreption.setText(jsonObject2.optString("description"));
 
-            hotelDetails.setText(jsonObject2.optString("hotel_details"));
-            flightDetails.setText(jsonObject2.optString("flight_details"));
+            hotelDetails.setText(Html.fromHtml(jsonObject2.optString("hotel_details")));
+            flightDetails.setText(Html.fromHtml(jsonObject2.optString("flight_details")));
             desc.setText(jsonObject2.optString("description"));
             tnc.setText(jsonObject2.optString("term_and_cond"));
 

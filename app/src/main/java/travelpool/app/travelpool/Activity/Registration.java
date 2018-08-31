@@ -189,34 +189,45 @@ public class Registration extends AppCompatActivity {
 
                 if (checkBox.isChecked()) {
                     if (validate()) {
-
-//                    otpAPi(editmobile.getText().toString());
-
-//                    submitRegistration();
-
-                        String path = null;
-                        String filename = null;
-
-                        try {
-                            path = f.toString();
-                            filename = path.substring(path.lastIndexOf("/") + 1);
-                            Log.d("dsfdfsdfsfs", filename);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        if (filename == null) {
-                            Util.errorDialog(Registration.this, "Please Select Image");
-                        } else {
-                            //Toast.makeText(AddProduct.this, "yes", Toast.LENGTH_SHORT).show();
-                            PostData(path, filename);
-
-                        }
-
+                        PostData("", "");
                     }
                 }
                 else{
                     Util.errorDialog(Registration.this, "Please check to read to all Terms & Conditions");
                 }
+
+//                if (checkBox.isChecked()) {
+//                    if (validate()) {
+//
+////                    otpAPi(editmobile.getText().toString());
+//
+////                    submitRegistration();
+//
+//                        String path = null;
+//                        String filename = null;
+//
+//                        try {
+//                            path = f.toString();
+//                            filename = path.substring(path.lastIndexOf("/") + 1);
+//                            Log.d("dsfdfsdfsfs", filename);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                        if (filename == null) {
+//                            Util.errorDialog(Registration.this, "Please Select Image");
+//                        } else {
+//                            //Toast.makeText(AddProduct.this, "yes", Toast.LENGTH_SHORT).show();
+//                            PostData(path, filename);
+//
+//                        }
+//
+//                    }
+//                }
+//                else{
+//                    Util.errorDialog(Registration.this, "Please check to read to all Terms & Conditions");
+//                }
+
+
             }
         });
 
@@ -576,10 +587,9 @@ public class Registration extends AppCompatActivity {
     private boolean validate(){
 
 
-
         if (TextUtils.isEmpty(editTextname.getText().toString()))
         {
-            editTextname.setError("Oops! Buyer Name blank");
+            editTextname.setError("Oops! Name blank");
             editTextname.requestFocus();
             return false;
         }
@@ -608,44 +618,44 @@ public class Registration extends AppCompatActivity {
             return false;
         }
 
-        else if (TextUtils.isEmpty(editAddress.getText().toString()))
-        {
-            editAddress.setError("Oops! Address blank");
-            editAddress.requestFocus();
-            return false;
-        }
-
-        else if (TextUtils.isEmpty(editCity.getText().toString()))
-        {
-            editCity.setError("Oops! City blank");
-            editCity.requestFocus();
-            return false;
-        }
-        else if (TextUtils.isEmpty(editState.getText().toString()))
-        {
-            editState.setError("Oops! State blank");
-            editState.requestFocus();
-            return false;
-        }
-        else if (TextUtils.isEmpty(editPincode.getText().toString()))
-        {
-            editPincode.setError("Oops! Pincode blank");
-            editPincode.requestFocus();
-            return false;
-        }
-
-        else if (TextUtils.isEmpty(aadharNo.getText().toString()))
-        {
-            aadharNo.setError("Oops! Aadhar Card blank");
-            aadharNo.requestFocus();
-            return false;
-        }
-        else if (TextUtils.isEmpty(editpanNo.getText().toString()))
-        {
-            editpanNo.setError("Oops!Pan Card blank");
-            editpanNo.requestFocus();
-            return false;
-        }
+//        else if (TextUtils.isEmpty(editAddress.getText().toString()))
+//        {
+//            editAddress.setError("Oops! Address blank");
+//            editAddress.requestFocus();
+//            return false;
+//        }
+//
+//        else if (TextUtils.isEmpty(editCity.getText().toString()))
+//        {
+//            editCity.setError("Oops! City blank");
+//            editCity.requestFocus();
+//            return false;
+//        }
+//        else if (TextUtils.isEmpty(editState.getText().toString()))
+//        {
+//            editState.setError("Oops! State blank");
+//            editState.requestFocus();
+//            return false;
+//        }
+//        else if (TextUtils.isEmpty(editPincode.getText().toString()))
+//        {
+//            editPincode.setError("Oops! Pincode blank");
+//            editPincode.requestFocus();
+//            return false;
+//        }
+//
+//        else if (TextUtils.isEmpty(aadharNo.getText().toString()))
+//        {
+//            aadharNo.setError("Oops! Aadhar Card blank");
+//            aadharNo.requestFocus();
+//            return false;
+//        }
+//        else if (TextUtils.isEmpty(editpanNo.getText().toString()))
+//        {
+//            editpanNo.setError("Oops!Pan Card blank");
+//            editpanNo.requestFocus();
+//            return false;
+//        }
 
         return true;
 
@@ -849,20 +859,36 @@ public class Registration extends AppCompatActivity {
             RequestBody requestBody = new MultipartBuilder()
                     .type(MultipartBuilder.FORM)
 
+//                    .addFormDataPart("name", editTextname.getText().toString())
+//                    .addFormDataPart("email", editEmail.getText().toString())
+//                    .addFormDataPart("mobile", editmobile.getText().toString())
+//                    .addFormDataPart("password", editPassword.getText().toString())
+//                    .addFormDataPart("address",editAddress.getText().toString())
+//                    .addFormDataPart("city", editCity.getText().toString())
+//                    .addFormDataPart("state", editState.getText().toString())
+//                    .addFormDataPart("pincode", editPincode.getText().toString())
+//
+//                    .addFormDataPart("aadhar_no", aadharNo.getText().toString())
+//                    .addFormDataPart("pan_no", editpanNo.getText().toString())
+//                    .addFormDataPart("agent_id", "No")
+//                    .addFormDataPart("referer_by", refVal)
+//                    .addFormDataPart("aadhar_image", fileName1, RequestBody.create(MEDIA_TYPE_PNG, sourceFile1))
+
+
                     .addFormDataPart("name", editTextname.getText().toString())
                     .addFormDataPart("email", editEmail.getText().toString())
                     .addFormDataPart("mobile", editmobile.getText().toString())
                     .addFormDataPart("password", editPassword.getText().toString())
-                    .addFormDataPart("address",editAddress.getText().toString())
-                    .addFormDataPart("city", editCity.getText().toString())
-                    .addFormDataPart("state", editState.getText().toString())
-                    .addFormDataPart("pincode", editPincode.getText().toString())
-
-                    .addFormDataPart("aadhar_no", aadharNo.getText().toString())
-                    .addFormDataPart("pan_no", editpanNo.getText().toString())
+                    .addFormDataPart("address","NA")
+                    .addFormDataPart("city", "NA")
+                    .addFormDataPart("state", "NA")
+                    .addFormDataPart("pincode", "NA")
+                    .addFormDataPart("aadhar_no", "NA")
+                    .addFormDataPart("pan_no", "NA")
                     .addFormDataPart("agent_id", "No")
-                    .addFormDataPart("referer_by", refVal)
-                    .addFormDataPart("aadhar_image", fileName1, RequestBody.create(MEDIA_TYPE_PNG, sourceFile1))
+                    .addFormDataPart("referer_by", "NA")
+                    //.addFormDataPart("aadhar_image", fileName1, RequestBody.create(MEDIA_TYPE_PNG, sourceFile1))
+
                     .build();
 
 
