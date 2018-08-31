@@ -310,6 +310,7 @@
                     android:layout_marginTop="125dp"
                     android:background="@drawable/strock_circle"
                     android:elevation="5dp"
+                    android:gravity="center"
                     android:layout_alignParentRight="true"
                     android:layout_centerHorizontal="true">
 
@@ -321,12 +322,14 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/muli_bold"
                         android:layout_gravity="center"
-                        android:text="25"
+                        android:text=""
+
                         android:gravity="center"
-                        android:layout_marginLeft="14dp"
                         android:textStyle="bold"
                         android:textColor="@color/orange"
                         android:textSize="14sp" />
+
+
 
                 </LinearLayout>
 

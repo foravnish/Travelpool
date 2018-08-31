@@ -284,6 +284,7 @@
                 android:layout_marginTop="75dp"
                 android:background="@drawable/strock_circle"
                 android:elevation="5dp"
+                android:gravity="center"
                 android:layout_alignParentRight="true"
                 android:layout_centerHorizontal="true">
 
@@ -296,8 +297,8 @@
                     android:fontFamily="@font/muli_bold"
                     android:layout_gravity="center"
                     android:text=""
+
                     android:gravity="center"
-                    android:layout_marginLeft="14dp"
                     android:textStyle="bold"
                     android:textColor="@color/orange"
                     android:textSize="14sp" />
