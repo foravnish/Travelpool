@@ -278,15 +278,15 @@ public class PayNow extends AppCompatActivity {
 //                        ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 
 
-                        if (P_mode.equals("cash")){
-                            smsAPI_Cash(K_name,amount);
-                        }
-                        else if (P_mode.equals("cheque")){
-                            smsAPI_Chek(K_name,amount);
-                        }
-                        else if (P_mode.equals("online")){
-                            smsAPI_Online(K_name,amount);
-                        }
+//                        if (P_mode.equals("cash")){
+//                            smsAPI_Cash(K_name,amount);
+//                        }
+//                        else if (P_mode.equals("cheque")){
+//                            smsAPI_Chek(K_name,amount);
+//                        }
+//                        else if (P_mode.equals("online")){
+//                            smsAPI_Online(K_name,amount);
+//                        }
 
 
                     }

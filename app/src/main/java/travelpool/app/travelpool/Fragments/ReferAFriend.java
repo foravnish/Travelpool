@@ -57,61 +57,61 @@ public class ReferAFriend extends Fragment {
 
         getActivity().setTitle("Refer A Friend");
 
-        dialog=new Dialog(getActivity());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.setCancelable(false);
-        Util.showPgDialog(dialog);
+//        dialog=new Dialog(getActivity());
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//        dialog.setCancelable(false);
+//        Util.showPgDialog(dialog);
 
 
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                Api.travelInfo, null, new Response.Listener<JSONObject>() {
-
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d("Respose", response.toString());
-                Util.cancelPgDialog(dialog);
-                try {
-                    // Parsing json object response
-                    // response will be a json object
-//                    String name = response.getString("name");
-
-                    if (response.getString("status").equalsIgnoreCase("success")){
-
-                        JSONArray jsonArray=response.getJSONArray("message");
-                        for (int i=0;i<jsonArray.length();i++){
-                            JSONObject jsonObject=jsonArray.getJSONObject(3);
-
-                            content.setText(Html.fromHtml(jsonObject.optString("content")));
-
-                        }
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getActivity(),
-                            "Error: " + e.getMessage(),
-                            Toast.LENGTH_LONG).show();
-                    Util.cancelPgDialog(dialog);
-                }
-
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("Respose", "Error: " + error.getMessage());
-                Toast.makeText(getActivity(),
-                        "Error! Please Connect to the internet", Toast.LENGTH_SHORT).show();
-                // hide the progress dialog
-                Util.cancelPgDialog(dialog);
-
-            }
-        });
-
-        // Adding request to request queue
-        jsonObjReq.setShouldCache(false);
-        AppController.getInstance().addToRequestQueue(jsonObjReq);
+//        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+//                Api.travelInfo, null, new Response.Listener<JSONObject>() {
+//
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                Log.d("Respose", response.toString());
+//                Util.cancelPgDialog(dialog);
+//                try {
+//                    // Parsing json object response
+//                    // response will be a json object
+////                    String name = response.getString("name");
+//
+//                    if (response.getString("status").equalsIgnoreCase("success")){
+//
+//                        JSONArray jsonArray=response.getJSONArray("message");
+//                        for (int i=0;i<jsonArray.length();i++){
+//                            JSONObject jsonObject=jsonArray.getJSONObject(3);
+//
+//                            content.setText(Html.fromHtml(jsonObject.optString("content")));
+//
+//                        }
+//                    }
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                    Toast.makeText(getActivity(),
+//                            "Error: " + e.getMessage(),
+//                            Toast.LENGTH_LONG).show();
+//                    Util.cancelPgDialog(dialog);
+//                }
+//
+//            }
+//        }, new Response.ErrorListener() {
+//
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                VolleyLog.d("Respose", "Error: " + error.getMessage());
+//                Toast.makeText(getActivity(),
+//                        "Error! Please Connect to the internet", Toast.LENGTH_SHORT).show();
+//                // hide the progress dialog
+//                Util.cancelPgDialog(dialog);
+//
+//            }
+//        });
+//
+//        // Adding request to request queue
+//        jsonObjReq.setShouldCache(false);
+//        AppController.getInstance().addToRequestQueue(jsonObjReq);
 
 
 

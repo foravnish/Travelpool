@@ -51,7 +51,7 @@ public class AboutUs extends Fragment {
         content=view.findViewById(R.id.content);
 //        getActivity().setTitle("About Us");
 
-        getActivity().setTitle("Terms & Conditions");
+        getActivity().setTitle("About Us");
 
         dialog=new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

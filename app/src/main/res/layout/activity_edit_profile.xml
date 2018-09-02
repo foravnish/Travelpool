@@ -17,10 +17,33 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
+            <RelativeLayout
+                android:id="@+id/relat"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/orange"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/textBack"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/back"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="21dp"
+                    android:textColor="#fff"
+                    android:text="Edit Profile"/>
+            </RelativeLayout>
+
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                >
+                android:visibility="gone">
 
                 <com.gelitenight.waveview.library.WaveView
                     android:id="@+id/wave"
@@ -80,17 +103,6 @@
                 <!--android:layout_marginRight="2dp"-->
                 <!--android:textSize="13sp" />-->
             </RelativeLayout>
-
-
-            <ImageView
-                android:id="@+id/editProfile"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="right"
-                android:tint="@color/orange"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/edit"/>
-
 
 
             <LinearLayout
@@ -198,7 +210,7 @@
                     android:textColor="@color/md_grey_700"
                     android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tve_addres"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -237,7 +249,7 @@
                     android:textColor="@color/md_grey_700"
                     android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tve_city"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -276,7 +288,7 @@
                     android:textColor="@color/md_grey_700"
                     android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tve_state"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -315,7 +327,7 @@
                     android:textColor="@color/md_grey_700"
                     android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tve_pincode"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -355,7 +367,7 @@
                     android:textColor="@color/md_grey_700"
                     android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tve_aadharNo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -394,7 +406,7 @@
                     android:textColor="@color/md_grey_700"
                     android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tve_panNo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -432,6 +444,22 @@
                     android:text="Aadhar Image"
                     android:textColor="@color/md_grey_700"
                     android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/aadhar2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/muli_semibold"
+                    android:gravity="right"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="Upload Aadhar Image"
+                    android:textColor="@color/md_grey_700"
+                    android:textSize="16sp" />
+
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/aadharImage"
@@ -547,15 +575,15 @@
 
 
             <Button
-                android:id="@+id/changeProfile"
+                android:id="@+id/UpdateProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/strock_btn_org"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_marginRight="10dp"
-                android:text="Upload Image"
+                android:text="Update Profile"
                 android:textColor="#fff"
                 android:layout_marginBottom="10dp"/>
 
