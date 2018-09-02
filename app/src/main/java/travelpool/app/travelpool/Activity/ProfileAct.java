@@ -180,34 +180,34 @@ public class ProfileAct extends AppCompatActivity {
 //        });
 
 
-        pan2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(isPermissionGranted()){
-                    Log.d("fsdfsdfdfdfsdf","true");
-                    pickImage(1);
-                }else{
-                    Log.d("fsdfsdfdfdfsdf","false");
-                    ActivityCompat.requestPermissions(ProfileAct.this, new String[]{Manifest.permission.CAMERA}, 1);
-                }
+//        pan2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(isPermissionGranted()){
+//                    Log.d("fsdfsdfdfdfsdf","true");
+//                    pickImage(1);
+//                }else{
+//                    Log.d("fsdfsdfdfdfsdf","false");
+//                    ActivityCompat.requestPermissions(ProfileAct.this, new String[]{Manifest.permission.CAMERA}, 1);
+//                }
+//
+//            }
+//        });
 
-            }
-        });
-
-        pass2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if(isPermissionGranted()){
-                    Log.d("fsdfsdfdfdfsdf","true");
-                    pickImage(2);
-                }else{
-                    Log.d("fsdfsdfdfdfsdf","false");
-                    ActivityCompat.requestPermissions(ProfileAct.this, new String[]{Manifest.permission.CAMERA}, 1);
-                }
-
-            }
-        });
+//        pass2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                if(isPermissionGranted()){
+//                    Log.d("fsdfsdfdfdfsdf","true");
+//                    pickImage(2);
+//                }else{
+//                    Log.d("fsdfsdfdfdfsdf","false");
+//                    ActivityCompat.requestPermissions(ProfileAct.this, new String[]{Manifest.permission.CAMERA}, 1);
+//                }
+//
+//            }
+//        });
     }
 
     public class WaveHelper {

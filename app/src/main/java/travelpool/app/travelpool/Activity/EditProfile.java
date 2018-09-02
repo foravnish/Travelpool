@@ -4,9 +4,13 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -39,6 +43,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.net.UnknownHostException;
 import java.util.HashMap;
@@ -46,6 +52,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import travelpool.app.travelpool.CameraAct.ImagePickerActivity;
 import travelpool.app.travelpool.R;
 import travelpool.app.travelpool.Utils.Api;
 import travelpool.app.travelpool.Utils.JSONParser;
@@ -115,38 +122,53 @@ public class EditProfile extends AppCompatActivity {
         UpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String path = null;
+                String filename = null;
+                try {
+                    path = f.toString();
+                    filename = path.substring(path.lastIndexOf("/") + 1);
+                    Log.d("dsfdfsdfsfs", filename);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-                PostData("", "");
+
+                //Toast.makeText(AddProduct.this, "yes", Toast.LENGTH_SHORT).show();
+                PostData( path, filename);
+
+
+
+               // PostData("", "");
 
             }
         });
-//        pan2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(isPermissionGranted()){
-//                    Log.d("fsdfsdfdfdfsdf","true");
-//                    pickImage(1);
-//                }else{
-//                    Log.d("fsdfsdfdfdfsdf","false");
-//                    ActivityCompat.requestPermissions(EditProfile.this, new String[]{Manifest.permission.CAMERA}, 1);
-//                }
-//
-//            }
-//        });
+        pan2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isPermissionGranted()){
+                    Log.d("fsdfsdfdfdfsdf","true");
+                    pickImage();
+                }else{
+                    Log.d("fsdfsdfdfdfsdf","false");
+                    ActivityCompat.requestPermissions(EditProfile.this, new String[]{Manifest.permission.CAMERA}, 1);
+                }
 
-//        aadhar2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(isPermissionGranted()){
-//                    Log.d("fsdfsdfdfdfsdf","true");
-//                    pickImage(1);
-//                }else{
-//                    Log.d("fsdfsdfdfdfsdf","false");
-//                    ActivityCompat.requestPermissions(EditProfile.this, new String[]{Manifest.permission.CAMERA}, 1);
-//                }
-//
-//            }
-//        });
+            }
+        });
+
+        aadhar2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isPermissionGranted()){
+                    Log.d("fsdfsdfdfdfsdf","true");
+                    pickImage();
+                }else{
+                    Log.d("fsdfsdfdfdfsdf","false");
+                    ActivityCompat.requestPermissions(EditProfile.this, new String[]{Manifest.permission.CAMERA}, 1);
+                }
+
+            }
+        });
 
 
         getProfile();
@@ -339,10 +361,10 @@ public class EditProfile extends AppCompatActivity {
 
                 if (json.optString("status").equalsIgnoreCase("success")) {
 
-                    Intent intent = new Intent(EditProfile.this, Login.class);
+                    Intent intent = new Intent(EditProfile.this, ProfileAct.class);
                     startActivity(intent);
                     finish();
-                    Toast.makeText(getApplicationContext(), "Please Login...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Profile Successfully Updated.", Toast.LENGTH_SHORT).show();
 
 
 
@@ -378,6 +400,8 @@ public class EditProfile extends AppCompatActivity {
             RequestBody requestBody = new MultipartBuilder()
                     .type(MultipartBuilder.FORM)
 
+                    .addFormDataPart("user_id", MyPrefrences.getUserID(getApplicationContext()))
+                    .addFormDataPart("type",MyPrefrences.getUserType(getApplicationContext()) )
                     .addFormDataPart("name", tve_user_id.getText().toString())
                     .addFormDataPart("email", tve_email.getText().toString())
                     .addFormDataPart("mobile", MyPrefrences.getMobile(getApplicationContext()))
@@ -391,7 +415,7 @@ public class EditProfile extends AppCompatActivity {
                     .addFormDataPart("pan_no", tve_panNo.getText().toString())
                     .addFormDataPart("agent_id", "No")
                     //.addFormDataPart("referer_by", refVal)
-                    //.addFormDataPart("aadhar_image", fileName1, RequestBody.create(MEDIA_TYPE_PNG, sourceFile1))
+                    .addFormDataPart("pan_image", fileName1, RequestBody.create(MEDIA_TYPE_PNG, sourceFile1))
 
 
                     //.addFormDataPart("aadhar_image", fileName1, RequestBody.create(MEDIA_TYPE_PNG, sourceFile1))
@@ -435,6 +459,113 @@ public class EditProfile extends AppCompatActivity {
         }
         return jsonObject;
     }
+
+    public boolean isPermissionGranted() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+
+    }
+
+    public void pickImage() {
+        startActivityForResult(new Intent(this, ImagePickerActivity.class),1);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (permissions[0].equals(Manifest.permission.CAMERA) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            pickImage();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case 1:
+                    String imagePath1 = data.getStringExtra("image_path");
+                    setImage(imagePath1);
+                    //isImage1 = true;
+                    break;
+//                case 2:
+//                    String imagePath2 = data.getStringExtra("image_path");
+//                    setImage2(imagePath2);
+//                    isImage2 = true;
+//                    break;
+            }
+        } else {
+            System.out.println("Failed to load image");
+        }
+    }
+
+    private void setImage(String imagePath) {
+
+        panImage.setImageBitmap(getImageFromStorage(imagePath));
+    }
+
+//    private void setImage2(String imagePath2) {
+//
+//        passportImage.setImageBitmap(getImageFromStorage2(imagePath2));
+//    }
+
+    private Bitmap getImageFromStorage(String path) {
+        try {
+            f = new File(path);
+
+
+            // First decode with inJustDecodeBounds=true to check dimensions
+            final BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = false;
+            // Calculate inSampleSize
+            options.inSampleSize = calculateInSampleSize(options, 512, 512);
+
+            Log.d("sdfasafsdfsdfsdfsdf",f.toString());
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f), null, options);
+
+
+            String path2 = null;
+            String filename = null;
+
+
+
+
+
+            return b;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private int calculateInSampleSize(
+            BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) > reqHeight
+                    && (halfWidth / inSampleSize) > reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
+    }
+
 
 
 
