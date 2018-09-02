@@ -143,9 +143,6 @@ public class PayNow extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-
-
                 checkJoinOrNot(jsonObject1.optString("id"),getIntent().getStringExtra("pay_amount"));
 
 //                launchPayUMoneyFlow("", jsonObject.optString("per_month_installment"));
@@ -218,7 +215,7 @@ public class PayNow extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Util.cancelPgDialog(dialog);
-                Log.e("fdgdfgdfgd", "Login Error: " + error.getMessage());
+                Log.e("fgdfgfrrgertgerytry", "Login Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),"Please Connect to the Internet or Wrong Password", Toast.LENGTH_LONG).show();
             }
         }){
@@ -278,15 +275,15 @@ public class PayNow extends AppCompatActivity {
 //                        ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 
 
-//                        if (P_mode.equals("cash")){
-//                            smsAPI_Cash(K_name,amount);
-//                        }
-//                        else if (P_mode.equals("cheque")){
-//                            smsAPI_Chek(K_name,amount);
-//                        }
-//                        else if (P_mode.equals("online")){
-//                            smsAPI_Online(K_name,amount);
-//                        }
+                        if (P_mode.equals("cash")){
+                            smsAPI_Cash(K_name,amount);
+                        }
+                        else if (P_mode.equals("cheque")){
+                            smsAPI_Chek(K_name,amount);
+                        }
+                        else if (P_mode.equals("online")){
+                            smsAPI_Online(K_name,amount);
+                        }
 
 
                     }
