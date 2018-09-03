@@ -183,32 +183,43 @@ public class AddUserAct extends AppCompatActivity {
                 if (checkBox.isChecked()) {
                     if (validate()) {
 
-//                    otpAPi(editmobile.getText().toString());
-
-//                    submitRegistration();
-
-                        String path = null;
-                        String filename = null;
-
-                        try {
-                            path = f.toString();
-                            filename = path.substring(path.lastIndexOf("/") + 1);
-                            Log.d("dsfdfsdfsfs", filename);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        if (filename == null) {
-                            Util.errorDialog(AddUserAct.this, "Please Select Image");
-                        } else {
-                            //Toast.makeText(AddProduct.this, "yes", Toast.LENGTH_SHORT).show();
-                            PostData(path, filename);
-
-                        }
+                        PostData("", "");
 
                     }
                 } else {
                     Util.errorDialog(AddUserAct.this, "Please check to read to all Terms & Conditions");
                 }
+
+
+//                if (checkBox.isChecked()) {
+//                    if (validate()) {
+//
+////                    otpAPi(editmobile.getText().toString());
+//
+////                    submitRegistration();
+//
+//                        String path = null;
+//                        String filename = null;
+//
+//                        try {
+//                            path = f.toString();
+//                            filename = path.substring(path.lastIndexOf("/") + 1);
+//                            Log.d("dsfdfsdfsfs", filename);
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                        if (filename == null) {
+//                            Util.errorDialog(AddUserAct.this, "Please Select Image");
+//                        } else {
+//                            //Toast.makeText(AddProduct.this, "yes", Toast.LENGTH_SHORT).show();
+//                            PostData(path, filename);
+//
+//                        }
+//
+//                    }
+//                } else {
+//                    Util.errorDialog(AddUserAct.this, "Please check to read to all Terms & Conditions");
+//                }
             }
         });
 
@@ -245,7 +256,7 @@ public class AddUserAct extends AppCompatActivity {
 
         if (TextUtils.isEmpty(editTextname.getText().toString()))
         {
-            editTextname.setError("Oops! Buyer Name blank");
+            editTextname.setError("Oops! Name blank");
             editTextname.requestFocus();
             return false;
         }
@@ -253,6 +264,12 @@ public class AddUserAct extends AppCompatActivity {
         {
             editmobile.setError("Oops! Mobile blank");
             editmobile.requestFocus();
+            return false;
+        }
+        else if (TextUtils.isEmpty(editEmail.getText().toString()))
+        {
+            editEmail.setError("Oops! Email Id blank");
+            editEmail.requestFocus();
             return false;
         }
 
@@ -274,12 +291,12 @@ public class AddUserAct extends AppCompatActivity {
 //            return false;
 //        }
 
-        else if (TextUtils.isEmpty(editAddress.getText().toString()))
-        {
-            editAddress.setError("Oops! Address blank");
-            editAddress.requestFocus();
-            return false;
-        }
+//        else if (TextUtils.isEmpty(editAddress.getText().toString()))
+//        {
+//            editAddress.setError("Oops! Address blank");
+//            editAddress.requestFocus();
+//            return false;
+//        }
 
         else if (TextUtils.isEmpty(editCity.getText().toString()))
         {
@@ -287,31 +304,31 @@ public class AddUserAct extends AppCompatActivity {
             editCity.requestFocus();
             return false;
         }
-        else if (TextUtils.isEmpty(editState.getText().toString()))
-        {
-            editState.setError("Oops! State blank");
-            editState.requestFocus();
-            return false;
-        }
-        else if (TextUtils.isEmpty(editPincode.getText().toString()))
-        {
-            editPincode.setError("Oops! Pincode blank");
-            editPincode.requestFocus();
-            return false;
-        }
+//        else if (TextUtils.isEmpty(editState.getText().toString()))
+//        {
+//            editState.setError("Oops! State blank");
+//            editState.requestFocus();
+//            return false;
+//        }
+//        else if (TextUtils.isEmpty(editPincode.getText().toString()))
+//        {
+//            editPincode.setError("Oops! Pincode blank");
+//            editPincode.requestFocus();
+//            return false;
+//        }
 
-        else if (TextUtils.isEmpty(aadharNo.getText().toString()))
-        {
-            aadharNo.setError("Oops! Aadhar Card blank");
-            aadharNo.requestFocus();
-            return false;
-        }
-        else if (TextUtils.isEmpty(editpanNo.getText().toString()))
-        {
-            editpanNo.setError("Oops!Pan Card blank");
-            editpanNo.requestFocus();
-            return false;
-        }
+//        else if (TextUtils.isEmpty(aadharNo.getText().toString()))
+//        {
+//            aadharNo.setError("Oops! Aadhar Card blank");
+//            aadharNo.requestFocus();
+//            return false;
+//        }
+//        else if (TextUtils.isEmpty(editpanNo.getText().toString()))
+//        {
+//            editpanNo.setError("Oops!Pan Card blank");
+//            editpanNo.requestFocus();
+//            return false;
+//        }
 
         return true;
 
@@ -473,12 +490,13 @@ public class AddUserAct extends AppCompatActivity {
 
                 if (json.optString("status").equalsIgnoreCase("success")) {
 
-                    smsAPI();
+                   // smsAPI();
+                    Toast.makeText(getApplicationContext(), "User Create Successfully! ", Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(AddUserAct.this, Login.class);
+                    Intent intent = new Intent(AddUserAct.this, HomeAct.class);
                     startActivity(intent);
                     finish();
-                    Toast.makeText(getApplicationContext(), "Please Login...", Toast.LENGTH_SHORT).show();
+//                    Util.errorDialog(AddUserAct.this,"User Create Successfully! ");
 
 
 
@@ -526,7 +544,7 @@ public class AddUserAct extends AppCompatActivity {
 
                     .addFormDataPart("aadhar_no","NA")
                     .addFormDataPart("pan_no","NA")
-                    .addFormDataPart("agent_id","NA")
+                    .addFormDataPart("agent_id",MyPrefrences.getUserID(getApplicationContext()))
                     .addFormDataPart("referer_by", refVal)
                   //  .addFormDataPart("aadhar_image", fileName1, RequestBody.create(MEDIA_TYPE_PNG, sourceFile1))
                     .build();
