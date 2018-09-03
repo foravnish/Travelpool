@@ -128,7 +128,7 @@
                             android:layout_weight="1"
                             android:textColor="@color/orange"
                             android:buttonTint="@color/orange"
-                            android:text="Agent Login"/>
+                            android:text="Partner Login"/>
                     </RadioGroup>
                 </LinearLayout>
 

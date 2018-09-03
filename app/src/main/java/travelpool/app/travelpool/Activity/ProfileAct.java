@@ -28,6 +28,7 @@ import android.view.Window;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -82,6 +83,7 @@ public class ProfileAct extends AppCompatActivity {
     CircleImageView aadharImage;
     CircleImageView panImage;
     CircleImageView passportImage;
+    ImageView editProfile;
 
     //private static final int REQUEST_PICK_IMAGE = 1002;
     Bitmap imageBitmap;
@@ -106,6 +108,7 @@ public class ProfileAct extends AppCompatActivity {
         tve_pincode=findViewById(R.id.tve_pincode);
         tve_aadharNo=findViewById(R.id.tve_aadharNo);
         tve_panNo=findViewById(R.id.tve_panNo);
+        editProfile=findViewById(R.id.editProfile);
 
 
         pan2=findViewById(R.id.pan2);
@@ -133,6 +136,12 @@ public class ProfileAct extends AppCompatActivity {
         mWaveHelper.start();
 
 
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProfileAct.this,EditProfile.class));
+            }
+        });
         getProfile();
 
 //        changeProfile.setOnClickListener(new View.OnClickListener() {
@@ -171,34 +180,34 @@ public class ProfileAct extends AppCompatActivity {
 //        });
 
 
-        pan2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(isPermissionGranted()){
-                    Log.d("fsdfsdfdfdfsdf","true");
-                    pickImage(1);
-                }else{
-                    Log.d("fsdfsdfdfdfsdf","false");
-                    ActivityCompat.requestPermissions(ProfileAct.this, new String[]{Manifest.permission.CAMERA}, 1);
-                }
+//        pan2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(isPermissionGranted()){
+//                    Log.d("fsdfsdfdfdfsdf","true");
+//                    pickImage(1);
+//                }else{
+//                    Log.d("fsdfsdfdfdfsdf","false");
+//                    ActivityCompat.requestPermissions(ProfileAct.this, new String[]{Manifest.permission.CAMERA}, 1);
+//                }
+//
+//            }
+//        });
 
-            }
-        });
-
-        pass2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if(isPermissionGranted()){
-                    Log.d("fsdfsdfdfdfsdf","true");
-                    pickImage(2);
-                }else{
-                    Log.d("fsdfsdfdfdfsdf","false");
-                    ActivityCompat.requestPermissions(ProfileAct.this, new String[]{Manifest.permission.CAMERA}, 1);
-                }
-
-            }
-        });
+//        pass2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                if(isPermissionGranted()){
+//                    Log.d("fsdfsdfdfdfsdf","true");
+//                    pickImage(2);
+//                }else{
+//                    Log.d("fsdfsdfdfdfsdf","false");
+//                    ActivityCompat.requestPermissions(ProfileAct.this, new String[]{Manifest.permission.CAMERA}, 1);
+//                }
+//
+//            }
+//        });
     }
 
     public class WaveHelper {

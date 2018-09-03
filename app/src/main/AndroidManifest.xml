@@ -100,8 +100,10 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Activity.TermandConditions"
-            android:label="Ten"></activity>
+        <activity
+            android:name=".Activity.TermandConditions"
+            android:label="Ten" />
+        <activity android:name=".Activity.EditProfile"></activity>
     </application>
 
 </manifest>
