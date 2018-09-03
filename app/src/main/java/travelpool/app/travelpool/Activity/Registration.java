@@ -832,7 +832,7 @@ public class Registration extends AppCompatActivity {
 
                 if (json.optString("status").equalsIgnoreCase("success")) {
 
-                  //  smsAPI();
+                    smsAPI();
 
                     Intent intent = new Intent(Registration.this, Login.class);
                     startActivity(intent);
