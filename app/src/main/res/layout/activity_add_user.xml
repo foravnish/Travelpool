@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/loginback"
+    android:background="@drawable/app_login"
     android:orientation="vertical">
 
     <ScrollView
@@ -39,6 +39,16 @@
                     android:textColor="@color/white"
                     android:textStyle="bold" />
 
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginRight="45dp"
+                    android:layout_marginTop="50dp"
+                    android:src="@drawable/logo_image2" />
 
 
                 <LinearLayout
@@ -200,6 +210,7 @@
                     android:backgroundTint="@color/white"
                     android:drawableLeft="@drawable/aadhar"
                     android:drawablePadding="20dp"
+                    android:visibility="gone"
                     android:fontFamily="@font/muli_semibold"
                     android:hint="Aadhar No *"
                     android:inputType="textPersonName"
@@ -216,6 +227,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
+                    android:visibility="gone"
                     android:backgroundTint="@color/white"
                     android:drawableLeft="@drawable/pan"
                     android:drawablePadding="20dp"
@@ -231,6 +243,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/editPassword"
+                    android:visibility="gone"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
@@ -257,6 +270,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
                     android:backgroundTint="@color/white"
+                    android:visibility="gone"
                     android:drawableLeft="@drawable/address"
                     android:drawablePadding="20dp"
                     android:fontFamily="@font/muli_semibold"
@@ -294,6 +308,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
+                    android:visibility="gone"
                     android:backgroundTint="@color/white"
                     android:drawableLeft="@drawable/city"
                     android:drawablePadding="20dp"
@@ -311,6 +326,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/editPassword"
                     android:layout_marginLeft="15dp"
+                    android:visibility="gone"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
                     android:backgroundTint="@color/white"
@@ -330,6 +346,8 @@
                     android:text="Upload Aadhar Card Image*"
                     android:layout_marginLeft="20dp"
                     android:textSize="16dp"
+                    android:visibility="gone"
+
                     android:textColor="@color/white"/>
 
 
@@ -343,6 +361,8 @@
                     android:src="@drawable/image_text"
                     app:civ_border_color="@color/pink"
                     android:layout_marginTop="10dp"
+                    android:visibility="gone"
+
                     android:layout_gravity="center"
                     android:gravity="center"
                     app:civ_circle_background_color="@color/pink"

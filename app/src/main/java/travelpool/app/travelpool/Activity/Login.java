@@ -170,7 +170,7 @@ public class Login extends AppCompatActivity {
                         loginDataUser("user");
                         Log.d("dfsdfsdfsdfs","user");
                     }
-                    else if (radioButton.getText().toString().equals("Agent Login")){
+                    else if (radioButton.getText().toString().equals("Partner Login")){
                         loginDataUser("agent");
                         Log.d("dfsdfsdfsdfs","agent");
 

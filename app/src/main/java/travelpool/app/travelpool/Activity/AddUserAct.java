@@ -519,16 +519,16 @@ public class AddUserAct extends AppCompatActivity {
                     .addFormDataPart("email", editEmail.getText().toString())
                     .addFormDataPart("mobile", editmobile.getText().toString())
                     .addFormDataPart("password", "123456")
-                    .addFormDataPart("address",editAddress.getText().toString())
+                    .addFormDataPart("address","NA")
                     .addFormDataPart("city", editCity.getText().toString())
-                    .addFormDataPart("state", editState.getText().toString())
-                    .addFormDataPart("pincode", editPincode.getText().toString())
+                    .addFormDataPart("state", "NA")
+                    .addFormDataPart("pincode", "NA")
 
-                    .addFormDataPart("aadhar_no", aadharNo.getText().toString())
-                    .addFormDataPart("pan_no", editpanNo.getText().toString())
-                    .addFormDataPart("agent_id", MyPrefrences.getUserID(getApplicationContext()))
+                    .addFormDataPart("aadhar_no","NA")
+                    .addFormDataPart("pan_no","NA")
+                    .addFormDataPart("agent_id","NA")
                     .addFormDataPart("referer_by", refVal)
-                    .addFormDataPart("aadhar_image", fileName1, RequestBody.create(MEDIA_TYPE_PNG, sourceFile1))
+                  //  .addFormDataPart("aadhar_image", fileName1, RequestBody.create(MEDIA_TYPE_PNG, sourceFile1))
                     .build();
 
 

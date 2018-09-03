@@ -895,7 +895,7 @@ public class Registration extends AppCompatActivity {
                     .addFormDataPart("aadhar_no", "NA")
                     .addFormDataPart("pan_no", "NA")
                     .addFormDataPart("agent_id", "No")
-                    .addFormDataPart("referer_by", "NA")
+                    .addFormDataPart("referer_by", refVal)
                     //.addFormDataPart("aadhar_image", fileName1, RequestBody.create(MEDIA_TYPE_PNG, sourceFile1))
 
                     .build();
