@@ -250,7 +250,7 @@ public class ListingDetails extends Fragment {
                 else if (flag1==false){
 
                     ViewGroup.LayoutParams params = linearLay1.getLayoutParams();
-                    params.height = 80;
+                    params.height =  (int) getResources().getDimension(R.dimen.imageview_height);
                     linearLay1.setLayoutParams(params);
 
                     flag1=true;
@@ -275,7 +275,7 @@ public class ListingDetails extends Fragment {
                 else if (flag2==false){
 
                     ViewGroup.LayoutParams params = linearLay2.getLayoutParams();
-                    params.height = 80;
+                    params.height =  (int) getResources().getDimension(R.dimen.imageview_height);
                     linearLay2.setLayoutParams(params);
 
                     flag2=true;
@@ -301,7 +301,7 @@ public class ListingDetails extends Fragment {
                 else if (flag3==false){
 
                     ViewGroup.LayoutParams params = linearLay3.getLayoutParams();
-                    params.height = 80;
+                    params.height =  (int) getResources().getDimension(R.dimen.imageview_height);
                     linearLay3.setLayoutParams(params);
 
                     flag3=true;
@@ -327,7 +327,8 @@ public class ListingDetails extends Fragment {
                 else if (flag4==false){
 
                     ViewGroup.LayoutParams params = linearLay4.getLayoutParams();
-                    params.height = 80;
+//                    params.height = 80;
+                    params.height =  (int) getResources().getDimension(R.dimen.imageview_height);
                     linearLay4.setLayoutParams(params);
 
                     flag4=true;
