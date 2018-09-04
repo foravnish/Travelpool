@@ -614,6 +614,12 @@ public class Registration extends AppCompatActivity {
             editmobile.requestFocus();
             return false;
         }
+        else if (TextUtils.isEmpty(editEmail.getText().toString()))
+        {
+            editEmail.setError("Oops! Email Id blank");
+            editEmail.requestFocus();
+            return false;
+        }
 
         else if (TextUtils.isEmpty(editPassword.getText().toString()))
         {
@@ -826,7 +832,7 @@ public class Registration extends AppCompatActivity {
 
                 if (json.optString("status").equalsIgnoreCase("success")) {
 
-                  //  smsAPI();
+                    smsAPI();
 
                     Intent intent = new Intent(Registration.this, Login.class);
                     startActivity(intent);

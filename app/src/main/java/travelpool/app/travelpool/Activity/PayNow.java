@@ -175,8 +175,11 @@ public class PayNow extends AppCompatActivity {
                         }
                         else {
                             if (paymentMode.equals("Pay Online")) {
-//                                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
-                                launchPayUMoneyFlow("", price);
+
+//                                launchPayUMoneyFlow("", price);
+
+                                submitData(jsonObject1.optString("id"),jsonObject1.optString("name"),jsonObject2.optString("id"),jsonObject2.optString("name"),jsonObject1.optString("per_month_installment"),"online");
+
                             } else if (paymentMode.equals("Pay By Cash")) {
                                 submitData(jsonObject1.optString("id"),jsonObject1.optString("name"),jsonObject2.optString("id"),jsonObject2.optString("name"),jsonObject1.optString("per_month_installment"),"cash");
 
@@ -275,15 +278,15 @@ public class PayNow extends AppCompatActivity {
 //                        ft.replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 
 
-//                        if (P_mode.equals("cash")){
-//                            smsAPI_Cash(K_name,amount);
-//                        }
-//                        else if (P_mode.equals("cheque")){
-//                            smsAPI_Chek(K_name,amount);
-//                        }
-//                        else if (P_mode.equals("online")){
-//                            smsAPI_Online(K_name,amount);
-//                        }
+                        if (P_mode.equals("cash")){
+                            smsAPI_Cash(K_name,amount);
+                        }
+                        else if (P_mode.equals("cheque")){
+                            smsAPI_Chek(K_name,amount);
+                        }
+                        else if (P_mode.equals("online")){
+                            smsAPI_Online(K_name,amount);
+                        }
 
 
                     }
@@ -333,9 +336,9 @@ public class PayNow extends AppCompatActivity {
 
                  }
                  else if (P_mode.equals("online")){
-                     params.put("payment_id",  "aa");
-                     params.put("transaction_id",  "aa");
-                     params.put("response", "aa");
+                     params.put("payment_id",  "online");
+                     params.put("transaction_id",  "online");
+                     params.put("response", "online");
 
                  }
                 params.put("pay_amount",  amount.toString());
