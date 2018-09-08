@@ -49,45 +49,67 @@
                     android:src="@drawable/logo_image2" />
 
 
-                <EditText
-                    android:id="@+id/mobile"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tabMobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/imageView4"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="25dp"
-                    android:backgroundTint="@color/orange"
-                    android:drawableLeft="@drawable/mobile"
-                    android:drawableTint="@color/orange"
-                    android:drawablePadding="20dp"
-                    android:fontFamily="@font/muli_semibold"
-                    android:hint="Mobile No."
-                    android:inputType="phone"
-                    android:paddingBottom="20dp"
-                    android:textColor="@color/orange"
-                    android:textColorHint="@color/orange"
-                    android:textSize="18sp" />
+                    android:theme="@style/TextLabel">
 
-                <EditText
-                    android:id="@+id/password"
+                    <EditText
+                        android:id="@+id/mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="25dp"
+                        android:backgroundTint="@color/orange"
+                        android:drawableTint="@color/orange"
+                        android:drawablePadding="20dp"
+                        android:fontFamily="@font/muli_semibold"
+                        android:hint="Mobile No."
+                        android:inputType="phone"
+                        android:paddingBottom="20dp"
+                        android:textColor="@color/orange"
+                        android:textColorHint="@color/orange"
+                        android:textSize="18sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <!--android:drawableLeft="@drawable/mobile"-->
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tavPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/mobile"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="15dp"
-                    android:backgroundTint="@color/orange"
-                    android:drawableLeft="@drawable/lock"
-                    android:drawablePadding="20dp"
-                    android:drawableTint="@color/orange"
-                    android:fontFamily="@font/muli_semibold"
-                    android:hint="Password"
-                    android:inputType="textPassword"
-                    android:paddingBottom="20dp"
-                    android:textColor="@color/orange"
-                    android:textColorHint="@color/orange"
-                    android:textSize="18sp" />
+                    app:passwordToggleEnabled="true"
+                    android:layout_below="@+id/tabMobile"
+
+                    app:passwordToggleTint="@color/orange"
+                    android:theme="@style/TextLabel">
+
+                    <EditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="15dp"
+                        android:backgroundTint="@color/orange"
+                        android:drawablePadding="20dp"
+                        android:drawableTint="@color/orange"
+                        android:fontFamily="@font/muli_semibold"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:paddingBottom="20dp"
+                        android:textColor="@color/orange"
+                        android:textColorHint="@color/orange"
+                        android:textSize="18sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
 
                 <LinearLayout
                     android:id="@+id/layRadio"
@@ -98,7 +120,7 @@
                     android:layout_marginRight="15dp"
                     android:visibility="visible"
                     android:layout_marginTop="5dp"
-                    android:layout_below="@+id/password"
+                    android:layout_below="@+id/tavPassword"
                     android:gravity="center">
 
                     <RadioGroup
