@@ -25,7 +25,7 @@ public class TranscationDetails extends Fragment {
 
 
 
-    TextView name,kittyName,packName,orderNo,date,PackId,txnNo,amount;
+    TextView name,kittyName,packName,orderNo,date,PackId,txnNo,amount,mobileNo;
 
     public TranscationDetails() {
         // Required empty public constructor
@@ -46,6 +46,7 @@ public class TranscationDetails extends Fragment {
         PackId=view.findViewById(R.id.PackId);
         amount=view.findViewById(R.id.amount);
         date=view.findViewById(R.id.date);
+        mobileNo=view.findViewById(R.id.mobileNo);
         Log.d("fdbgdfdfhdfhdf",getArguments().getString("jsonArray"));
 
 
@@ -54,6 +55,7 @@ public class TranscationDetails extends Fragment {
             JSONObject jsonObject=new JSONObject(getArguments().getString("jsonArray"));
 
             name.setText(jsonObject.optString("user_name").toUpperCase());
+            mobileNo.setText(MyPrefrences.getMobile(getActivity()));
             kittyName.setText(jsonObject.optString("kitty_name"));
             packName.setText(jsonObject.optString("package_name"));
             orderNo.setText(jsonObject.optString("package_id"));

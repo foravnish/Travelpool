@@ -109,11 +109,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="2"
+                android:weightSum="3"
                 android:padding="12dp"
                 android:background="#ecd6c7"
-                android:layout_marginTop="10dp"
-                >
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/tv_user_id"
@@ -121,7 +120,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_mobile"
                     android:layout_marginBottom="10dp"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/muli_semibold"
@@ -137,7 +136,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/tv_user_id"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:fontFamily="@font/muli_bold"
                     android:text="#"
                     android:textColor="@color/black"
@@ -150,7 +149,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="2"
+                android:weightSum="3"
                 android:padding="12dp"
                 android:background="#fff"
                 >
@@ -164,7 +163,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:fontFamily="@font/muli_semibold"
                     android:text="Email ID"
                     android:textColor="@color/md_grey_700"
@@ -178,7 +177,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/tv_city"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:fontFamily="@font/muli_bold"
                     android:text=""
                     android:textColor="@color/black"
@@ -191,7 +190,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="2"
+                android:weightSum="3"
                 android:padding="12dp"
                 android:background="#ecd6c7">
 
@@ -205,7 +204,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/muli_semibold"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:text="Address"
                     android:textColor="@color/md_grey_700"
                     android:textSize="16sp" />
@@ -218,7 +217,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/tv_dob"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:fontFamily="@font/muli_bold"
                     android:text=" "
                     android:textColor="@color/black"
@@ -230,7 +229,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="2"
+                android:weightSum="3"
                 android:padding="12dp"
                 android:background="#fff">
 
@@ -244,7 +243,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/muli_semibold"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:text="City"
                     android:textColor="@color/md_grey_700"
                     android:textSize="16sp" />
@@ -257,7 +256,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/tv_city"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:fontFamily="@font/muli_bold"
                     android:text=" "
                     android:textColor="@color/black"
@@ -269,7 +268,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="2"
+                android:weightSum="3"
                 android:padding="12dp"
                 android:background="#ecd6c7">
 
@@ -283,7 +282,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/muli_semibold"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:text="State"
                     android:textColor="@color/md_grey_700"
                     android:textSize="16sp" />
@@ -296,7 +295,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/tv_state"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:fontFamily="@font/muli_bold"
                     android:text=" "
                     android:textColor="@color/black"
@@ -308,7 +307,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="2"
+                android:weightSum="3"
                 android:padding="12dp"
                 android:background="#fff">
 
@@ -322,7 +321,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/muli_semibold"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:text="Pincode"
                     android:textColor="@color/md_grey_700"
                     android:textSize="16sp" />
@@ -335,7 +334,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/tv_pincode"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:fontFamily="@font/muli_bold"
                     android:text=" "
                     android:textColor="@color/black"
@@ -348,7 +347,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="2"
+                android:weightSum="3"
                 android:padding="12dp"
                 android:background="#ecd6c7">
 
@@ -362,7 +361,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/muli_semibold"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:text="Aadhar No"
                     android:textColor="@color/md_grey_700"
                     android:textSize="16sp" />
@@ -375,7 +374,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/tv_state"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:fontFamily="@font/muli_bold"
                     android:text=" "
                     android:textColor="@color/black"
@@ -387,7 +386,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="2"
+                android:weightSum="3"
                 android:padding="12dp"
                 android:background="#fff">
 
@@ -401,7 +400,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/muli_semibold"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:text="Pan Card No"
                     android:textColor="@color/md_grey_700"
                     android:textSize="16sp" />
@@ -414,7 +413,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/tv_pincode"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:fontFamily="@font/muli_bold"
                     android:text=" "
                     android:textColor="@color/black"
@@ -427,7 +426,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="2"
+                android:weightSum="3"
                 android:padding="12dp"
                 android:background="#ecd6c7">
 
@@ -439,7 +438,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/muli_semibold"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:layout_marginLeft="10dp"
                     android:text="Aadhar Image"
                     android:textColor="@color/md_grey_700"
@@ -451,7 +450,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginRight="15dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:fontFamily="@font/muli_semibold"
                     android:gravity="right"
                     android:layout_alignParentRight="true"
@@ -476,7 +475,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="2"
+                android:weightSum="3"
                 android:padding="12dp"
                 android:background="#fff">
 
@@ -489,7 +488,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/muli_semibold"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:layout_marginLeft="10dp"
                     android:text="Pan Image"
                     android:textColor="@color/md_grey_700"
@@ -502,7 +501,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginRight="15dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:fontFamily="@font/muli_semibold"
                     android:gravity="right"
                     android:layout_alignParentRight="true"
@@ -528,7 +527,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="2"
+                android:weightSum="3"
                 android:visibility="gone"
                 android:padding="12dp"
                 android:background="#ecd6c7">
@@ -542,7 +541,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/muli_semibold"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:layout_marginLeft="10dp"
                     android:text="Passport Image"
                     android:textColor="@color/md_grey_700"
@@ -554,7 +553,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginRight="15dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:fontFamily="@font/muli_semibold"
                     android:gravity="right"
                     android:layout_alignParentRight="true"
