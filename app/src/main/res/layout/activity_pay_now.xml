@@ -167,6 +167,7 @@
                         android:layout_height="wrap_content"
                         android:text="Pay Online"
                         android:padding="10dp"
+                        android:visibility="gone"
                         android:drawablePadding="20dp"
                         android:buttonTint="@color/orange"
                         android:layout_marginRight="10dp"
@@ -174,6 +175,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
+                        android:visibility="gone"
                         android:background="#111"></View>
                     <RadioButton
                         android:id="@+id/cash"

@@ -149,6 +149,7 @@
                         android:fontFamily="@font/muli_bold"
                         android:singleLine="true"
                         android:text="Loading..."
+                        android:visibility="gone"
                         android:layout_marginLeft="5dp"
                         android:textColor="@color/grayText"
                         android:textSize="14sp" />

@@ -18,7 +18,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo_image"
+        android:src="@drawable/app_logo"
         android:layout_marginTop="20dp"/>
 
     <TextView
@@ -30,7 +30,7 @@
         android:gravity="center"
         android:layout_marginTop="15dp"
         android:textColor="#333"
-        android:text="Invite your friends to Travelblasters Holidays"/>
+        android:text="Invite your friends to TB Holidays"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -62,7 +62,6 @@
         android:textStyle="bold"
         android:textAllCaps="false"
         android:textSize="16dp"
-
         android:textColor="@color/white"
         android:layout_marginTop="20dp"
         android:background="@drawable/strock_orange"
