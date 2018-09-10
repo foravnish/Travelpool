@@ -10,7 +10,7 @@ android {
     }
     compileSdkVersion 26
     defaultConfig {
-        applicationId "travelpool.app.travelpool"
+        applicationId "tbholidays.app.holidays"
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
