@@ -58,46 +58,65 @@
                     android:focusableInTouchMode="true"></LinearLayout>
 
 
-                <EditText
-                    android:id="@+id/editTextname"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/imageView4"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
+                    android:theme="@style/TextLabel">
 
-                    android:backgroundTint="@color/orange"
-                    android:drawableLeft="@drawable/user1"
-                    android:drawablePadding="20dp"
-                    android:fontFamily="@font/muli_semibold"
-                    android:hint="Full Name *"
-                    android:inputType="textCapSentences"
-                    android:drawableTint="@color/orange"
-                    android:paddingBottom="20dp"
-                    android:textColor="@color/orange"
-                    android:textColorHint="@color/orange"
-                    android:textSize="18sp" />
+                    <EditText
+                        android:id="@+id/editTextname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imageView4"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:backgroundTint="@color/orange"
 
-                <EditText
-                    android:id="@+id/editmobile"
+                        android:drawablePadding="20dp"
+                        android:fontFamily="@font/muli_semibold"
+                        android:hint="Full Name *"
+                        android:inputType="textCapSentences"
+                        android:drawableTint="@color/orange"
+                        android:paddingBottom="20dp"
+                        android:textColor="@color/orange"
+                        android:textColorHint="@color/orange"
+                        android:textSize="18sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <!--android:drawableLeft="@drawable/user1"-->
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/editTextname"
-                    android:layout_marginLeft="15dp"
-                    android:drawableTint="@color/orange"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="5dp"
-                    android:maxLength="10"
-                    android:backgroundTint="@color/orange"
-                    android:drawableLeft="@drawable/mobile"
-                    android:drawablePadding="20dp"
-                    android:fontFamily="@font/muli_semibold"
-                    android:hint="Mobile No. *"
-                    android:inputType="phone"
-                    android:paddingBottom="20dp"
-                    android:textColor="@color/orange"
-                    android:textColorHint="@color/orange"
-                    android:textSize="18sp" />
+                    android:layout_below="@+id/imageView4"
+                    android:theme="@style/TextLabel">
+
+                    <EditText
+                        android:id="@+id/editmobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/editTextname"
+                        android:layout_marginLeft="15dp"
+                        android:drawableTint="@color/orange"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="5dp"
+                        android:maxLength="10"
+                        android:backgroundTint="@color/orange"
+
+                        android:drawablePadding="20dp"
+                        android:fontFamily="@font/muli_semibold"
+                        android:hint="Mobile No. *"
+                        android:inputType="phone"
+                        android:paddingBottom="20dp"
+                        android:textColor="@color/orange"
+                        android:textColorHint="@color/orange"
+                        android:textSize="18sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <!--android:drawableLeft="@drawable/mobile"-->
 
                 <TextView
                     android:id="@+id/editTextdob"
@@ -130,26 +149,35 @@
 
                 </View>
 
-                <EditText
-                    android:id="@+id/editEmail"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/editTextname"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:drawableTint="@color/orange"
-                    android:layout_marginTop="5dp"
-                    android:backgroundTint="@color/orange"
-                    android:drawableLeft="@drawable/emaiid"
-                    android:drawablePadding="20dp"
-                    android:fontFamily="@font/muli_semibold"
-                    android:hint="Email Id *"
-                    android:inputType="textEmailAddress"
-                    android:paddingBottom="20dp"
-                    android:textColor="@color/orange"
-                    android:textColorHint="@color/orange"
-                    android:textSize="18sp" />
+                    android:layout_below="@+id/imageView4"
+                    android:theme="@style/TextLabel">
 
+                    <EditText
+                        android:id="@+id/editEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/editTextname"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:drawableTint="@color/orange"
+                        android:layout_marginTop="5dp"
+                        android:backgroundTint="@color/orange"
+
+                        android:drawablePadding="20dp"
+                        android:fontFamily="@font/muli_semibold"
+                        android:hint="Email Id *"
+                        android:inputType="textEmailAddress"
+                        android:paddingBottom="20dp"
+                        android:textColor="@color/orange"
+                        android:textColorHint="@color/orange"
+                        android:textSize="18sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <!--android:drawableLeft="@drawable/emaiid"-->
 
                 <View
                     android:layout_width="match_parent"
@@ -161,51 +189,76 @@
 
                 </View>
 
-                <EditText
-                    android:id="@+id/editPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/editTextdob"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/orange"
-                    android:drawableLeft="@drawable/lock"
-                    android:drawableTint="@color/orange"
-                    android:drawablePadding="20dp"
-                    android:fontFamily="@font/muli_semibold"
-                    android:hint="Password *"
-                    android:inputType="textPassword"
-                    android:paddingBottom="20dp"
-                    android:textColor="@color/orange"
-                    android:textColorHint="@color/orange"
-                    android:textSize="18sp" />
 
-                <EditText
-                    android:id="@+id/editPasswordCon"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tavPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/editPassword"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/orange"
-                    android:drawableLeft="@drawable/lock"
-                    android:drawablePadding="20dp"
-                    android:fontFamily="@font/muli_semibold"
-                    android:hint="Confirm Password *"
-                    android:inputType="textPassword"
-                    android:drawableTint="@color/orange"
-                    android:paddingBottom="20dp"
-                    android:textColor="@color/orange"
-                    android:textColorHint="@color/orange"
-                    android:textSize="18sp" />
+                    app:passwordToggleEnabled="true"
+                    android:layout_below="@+id/editEmail"
+                    app:passwordToggleTint="@color/orange"
+                    android:theme="@style/TextLabel">
+
+                    <EditText
+                        android:id="@+id/editPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/editTextdob"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="@color/orange"
+                        android:drawableLeft="@drawable/lock"
+                        android:drawableTint="@color/orange"
+                        android:drawablePadding="20dp"
+                        android:fontFamily="@font/muli_semibold"
+                        android:hint="Password *"
+                        android:inputType="textPassword"
+                        android:paddingBottom="20dp"
+                        android:textColor="@color/orange"
+                        android:textColorHint="@color/orange"
+                        android:textSize="18sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tavPasswordCon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true"
+                    android:layout_below="@+id/tavPassword"
+                    app:passwordToggleTint="@color/orange"
+                    android:theme="@style/TextLabel">
+
+                    <EditText
+                        android:id="@+id/editPasswordCon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/editPassword"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="@color/orange"
+                        android:drawableLeft="@drawable/lock"
+                        android:drawablePadding="20dp"
+                        android:fontFamily="@font/muli_semibold"
+                        android:hint="Confirm Password *"
+                        android:inputType="textPassword"
+                        android:drawableTint="@color/orange"
+                        android:paddingBottom="20dp"
+                        android:textColor="@color/orange"
+                        android:textColorHint="@color/orange"
+                        android:textSize="18sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
 
                 <EditText
                     android:id="@+id/aadharNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/editPassword"
+                    android:layout_below="@+id/tavPasswordCon"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="10dp"
@@ -289,26 +342,37 @@
                     android:textColorHint="@color/orange"
                     android:textSize="18sp" />
 
-                <EditText
-                    android:id="@+id/editCity"
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/editPassword"
-                    android:drawableTint="@color/orange"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:visibility="visible"
-                    android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/orange"
-                    android:drawableLeft="@drawable/city"
-                    android:drawablePadding="20dp"
-                    android:fontFamily="@font/muli_semibold"
-                    android:hint="City *"
-                    android:inputType="textCapSentences"
-                    android:paddingBottom="20dp"
-                    android:textColor="@color/orange"
-                    android:textColorHint="@color/orange"
-                    android:textSize="18sp" />
+                    android:layout_below="@+id/imageView4"
+                    android:theme="@style/TextLabel">
+
+                    <EditText
+                        android:id="@+id/editCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/editPassword"
+                        android:drawableTint="@color/orange"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:visibility="visible"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="@color/orange"
+                        android:drawablePadding="20dp"
+                        android:fontFamily="@font/muli_semibold"
+                        android:hint="City *"
+                        android:inputType="textCapSentences"
+                        android:paddingBottom="20dp"
+                        android:textColor="@color/orange"
+                        android:textColorHint="@color/orange"
+                        android:textSize="18sp" />
+
+                    <!--android:drawableLeft="@drawable/city"-->
+
+                </android.support.design.widget.TextInputLayout>
+
 
                 <EditText
                     android:id="@+id/editState"
