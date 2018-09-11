@@ -7,10 +7,11 @@ package tbholidays.app.holidays.Utils;
 public class Api {
 
 
-//    public static String BASEURL="http://transportfare.in/mobile-api/";
-//    public static String BASEURL="http://travelpool.spinof.in/mobile-api/";
-    public static String BASEURL="http://travelpool.spinof.in/travelpool/api/";
-    public static String gethashCode="http://travelpool.spinof.in/getHashCode.php";
+//    public static String BASEURL="http://travelpool.spinof.in/travelpool/api/";
+//    public static String gethashCode="http://travelpool.spinof.in/getHashCode.php";
+
+    public static String BASEURL="http://travelpool.tbholidays.com/api/";
+    public static String gethashCode="http://travelpool.tbholidays.com/getHashCode.php";
 //    public static String BASEURL="http://www.transportfare.in/api/";
 
 
