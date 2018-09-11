@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "817881733697",
-    "firebase_url": "https://travelpool-91a32.firebaseio.com",
-    "project_id": "travelpool-91a32",
-    "storage_bucket": "travelpool-91a32.appspot.com"
+    "project_number": "980081380440",
+    "firebase_url": "https://tb-holidays.firebaseio.com",
+    "project_id": "tb-holidays",
+    "storage_bucket": "tb-holidays.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:817881733697:android:87526a3598afb9f7",
+        "mobilesdk_app_id": "1:980081380440:android:5232599bd5f747f2",
         "android_client_info": {
-          "package_name": "travelpool.app.travelpool"
+          "package_name": "tbholidays.app.holidays"
         }
       },
       "oauth_client": [
         {
-          "client_id": "817881733697-v53pdiktqj0v05ur2mhhcjjlp5lr3q97.apps.googleusercontent.com",
+          "client_id": "980081380440-3kqjoh5so3dkhl2htdeva6tl1ga8ni0u.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBv3WzJsQnp7HiOsE4y3OUbf-ikpi1_MjU"
+          "current_key": "AIzaSyDqAIueY8AY2kBN9mHxQr6xBwc0K6aX5KE"
         }
       ],
       "services": {
