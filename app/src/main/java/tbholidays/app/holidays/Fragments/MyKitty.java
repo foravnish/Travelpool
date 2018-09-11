@@ -76,7 +76,7 @@ public class MyKitty extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_my_kitty, container, false);
-        getActivity().setTitle("My Kitty");
+        getActivity().setTitle("My Travel Plans");
         AllProducts = new ArrayList<>();
         expListView = (GridView) view.findViewById(R.id.lvExp);
         imageNoListing = (ImageView) view.findViewById(R.id.imageNoListing);
@@ -166,9 +166,11 @@ public class MyKitty extends Fragment {
                                 map.put("lucky_draw_time", jsonObjectKitty.optString("lucky_draw_time"));
                                 map.put("no_of_max_members", jsonObjectKitty.optString("no_of_max_members"));
 
+
                             map.put("id",jsonObject1.optString("id"));
                             map.put("kitty_id",jsonObject1.optString("kitty_id"));
                             map.put("this_month_renual",jsonObject1.optString("this_month_renual"));
+                            map.put("purchased_kitty", jsonObject1.optString("purchased_kitty"));
 
                             JSONArray jsonArrayPack=jsonObject1.getJSONArray("package_details");
                             JSONObject jsonObjectPack=jsonArrayPack.getJSONObject(0);
@@ -177,6 +179,7 @@ public class MyKitty extends Fragment {
                             map.put("tc",jsonObjectPack.optString("term_and_cond"));
                             map.put("banner",jsonObjectPack.optString("banner"));
                             map.put("image",jsonObjectPack.optString("image"));
+                            map.put("description",jsonObjectPack.optString("description"));
 
 
 
@@ -333,7 +336,7 @@ public class MyKitty extends Fragment {
 
     public class Viewholder{
         ImageView imgFav,stars;
-        TextView packageName,name,luckyWinner,lucky_draw_date,instal,dueDate,totalMember,joinNow,showPrice;
+        TextView packageName,name,luckyWinner,lucky_draw_date,instal,dueDate,totalMember,joinNow,showPrice,purchased,remain,NoOfMember,desreption;
         LinearLayout liner,linerLayoutOffer;
 
         NetworkImageView imgaeView;
@@ -387,26 +390,38 @@ public class MyKitty extends Fragment {
             viewholder.name=convertView.findViewById(R.id.name);
             viewholder.packageName=convertView.findViewById(R.id.packageName);
 //            viewholder.term_and_cond=convertView.findViewById(R.id.term_and_cond);
-            viewholder.dueDate=convertView.findViewById(R.id.dueDate);
-            viewholder.lucky_draw_date=convertView.findViewById(R.id.lucky_draw_date);
+        //    viewholder.dueDate=convertView.findViewById(R.id.dueDate);
+            //viewholder.lucky_draw_date=convertView.findViewById(R.id.lucky_draw_date);
             viewholder.instal=convertView.findViewById(R.id.instal);
             viewholder.banerImg=convertView.findViewById(R.id.banerImg);
             viewholder.banerImg2=convertView.findViewById(R.id.banerImg2);
             viewholder.totalMember=convertView.findViewById(R.id.totalMember);
-            viewholder.joinNow=convertView.findViewById(R.id.joinNow);
-            viewholder.luckyWinner=convertView.findViewById(R.id.luckyWinner);
-            viewholder.showPrice=convertView.findViewById(R.id.showPrice);
-
+         //   viewholder.joinNow=convertView.findViewById(R.id.joinNow);
+           // viewholder.luckyWinner=convertView.findViewById(R.id.luckyWinner);
+           // viewholder.showPrice=convertView.findViewById(R.id.showPrice);
+            viewholder.purchased=convertView.findViewById(R.id.purchased);
+            viewholder.remain=convertView.findViewById(R.id.remain);
+            viewholder.NoOfMember=convertView.findViewById(R.id.NoOfMember);
+            viewholder.desreption=convertView.findViewById(R.id.desreption);
 
 
             viewholder.name.setText(AllProducts.get(position).get("name"));
             viewholder.packageName.setText(AllProducts.get(position).get("package_name"));
 //            viewholder.term_and_cond.setText(AllProducts.get(position).get("tc"));
-            viewholder.dueDate.setText("Due Date :"+AllProducts.get(position).get("payment_due_date"));
+           // viewholder.dueDate.setText("Due Date :"+AllProducts.get(position).get("payment_due_date"));
             viewholder.totalMember.setText("Total Members "+AllProducts.get(position).get("no_of_max_members"));
-            viewholder.lucky_draw_date.setText("Lucky Draw Date: "+AllProducts.get(position).get("lucky_d_d"));
-            viewholder.instal.setText(" Per Month : ₹ "+AllProducts.get(position).get("p_m_i"));
-            viewholder.showPrice.setText("Per Month : ₹ "+AllProducts.get(position).get("p_m_i"));
+           // viewholder.lucky_draw_date.setText("Lucky Draw Date: "+AllProducts.get(position).get("lucky_d_d"));
+            viewholder.instal.setText(""+AllProducts.get(position).get("p_m_i"));
+           // viewholder.showPrice.setText("Per Month : ₹ "+AllProducts.get(position).get("p_m_i"));
+
+            viewholder.purchased.setText("Joined Entries: "+AllProducts.get(position).get("purchased_kitty"));
+            viewholder.NoOfMember.setText("Total Members "+AllProducts.get(position).get("no_of_max_members"));
+            viewholder.desreption.setText("INCLUDES: "+AllProducts.get(position).get("description"));
+
+            int totalMember= Integer.parseInt(AllProducts.get(position).get("no_of_max_members"));
+            int joined= Integer.parseInt(AllProducts.get(position).get("purchased_kitty"));
+            int remain=totalMember-joined;
+            viewholder.remain.setText(""+remain);
 
 
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
@@ -499,21 +514,21 @@ public class MyKitty extends Fragment {
 
 
 
-            if (AllProducts.get(position).get("this_month_renual").equals("Yes")){
-                viewholder.joinNow.setText("Renewed");
-            }
-            else{
-                viewholder.joinNow.setText("Renew Kitty");
-            }
+//            if (AllProducts.get(position).get("this_month_renual").equals("Yes")){
+//                viewholder.joinNow.setText("Renewed");
+//            }
+//            else{
+//                viewholder.joinNow.setText("Renew Kitty");
+//            }
 
-            viewholder.luckyWinner.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                   // Toast.makeText(getActivity(), ""+AllProducts.get(position).get("id"), Toast.LENGTH_SHORT).show();
-
-                    showLuckyWinner(AllProducts.get(position).get("id"));
-                }
-            });
+//            viewholder.luckyWinner.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                   // Toast.makeText(getActivity(), ""+AllProducts.get(position).get("id"), Toast.LENGTH_SHORT).show();
+//
+//                    showLuckyWinner(AllProducts.get(position).get("id"));
+//                }
+//            });
 
 
 

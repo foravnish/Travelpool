@@ -67,7 +67,7 @@ public class ViewAllKitty extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_view_all_kitty, container, false);
-        getActivity().setTitle("All Kitty");
+        getActivity().setTitle("Travel Lounge");
 
         AllProducts = new ArrayList<>();
         expListView = (GridView) view.findViewById(R.id.lvExp);
