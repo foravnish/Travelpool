@@ -133,8 +133,16 @@ public class EditProfile extends AppCompatActivity {
                 }
 
 
-                //Toast.makeText(AddProduct.this, "yes", Toast.LENGTH_SHORT).show();
-                PostData( path, filename);
+                if (filename==null){
+                    Util.errorDialog(EditProfile.this,"Please Select Aadhar Image");
+                }
+                else{
+                    //Toast.makeText(AddProduct.this, "yes", Toast.LENGTH_SHORT).show();
+                    PostData( path, filename);
+                }
+
+
+               // PostData( path, filename);
 
 
 
@@ -415,10 +423,10 @@ public class EditProfile extends AppCompatActivity {
                     .addFormDataPart("pan_no", tve_panNo.getText().toString())
                     .addFormDataPart("agent_id", "No")
                     //.addFormDataPart("referer_by", refVal)
-                    .addFormDataPart("pan_image", fileName1, RequestBody.create(MEDIA_TYPE_PNG, sourceFile1))
+                    .addFormDataPart("aadhar_image", fileName1, RequestBody.create(MEDIA_TYPE_PNG, sourceFile1))
 
 
-                    //.addFormDataPart("aadhar_image", fileName1, RequestBody.create(MEDIA_TYPE_PNG, sourceFile1))
+                    //.addFormDataPart("pan_image", fileName1, RequestBody.create(MEDIA_TYPE_PNG, sourceFile1))
 
                     .build();
 

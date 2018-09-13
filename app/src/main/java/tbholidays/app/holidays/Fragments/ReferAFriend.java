@@ -122,7 +122,7 @@ public class ReferAFriend extends Fragment {
                 sharingIntent.setType("text/plain");
 //                String shareBody =comName.getText().toString()+ " "+phone.getText().toString();
                 String shareBody ="Hi, \n" +
-                        "Please Install Travel Blaster Holiday app. Click on the link below. https://play.google.com/store/apps/details?id=travelpool.app.travelpool&referrer="+ MyPrefrences.getMyRefrel(getActivity());
+                        "Please Install TB Holiday app. Click on the link below. https://play.google.com/store/apps/details?id=tbholidays.app.holidays&referrer="+ MyPrefrences.getMyRefrel(getActivity());
 
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Details");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT,shareBody);

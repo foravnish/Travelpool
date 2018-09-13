@@ -179,7 +179,7 @@ public class MyKittyDetial extends Fragment {
             instal.setText("₹ "+jsonObjectKitty.optString("per_month_installment"));
             instal2.setText("Per Month ₹ "+jsonObjectKitty.optString("per_month_installment"));
             term_and_cond.setText(jsonObjectKitty.optString("term_and_cond"));
-            lucky_draw_date.setText("Lucky Draw Date: "+jsonObjectKitty.optString("lucky_draw_date"));
+            lucky_draw_date.setText("Wheel of Fortune Date: "+jsonObjectKitty.optString("lucky_draw_date"));
             payment_due_date.setText("Payment Due Date: "+jsonObjectKitty.optString("payment_due_date"));
             penality_after.setText("After Due Date: "+jsonObjectKitty.optString("penality_after_due_date"));
             purchased.setText("Joined Entries "+jsonObject.optString("purchased_kitty"));
