@@ -135,6 +135,8 @@ public class Registration extends AppCompatActivity {
             }
         });
 
+        Log.d("fwefwefsesdfsdfs",MyPrefrences.getRefer(getApplicationContext()));
+
         if (MyPrefrences.getRefer(getApplicationContext()).equals("")){
             refVal="No";
         }
@@ -142,6 +144,8 @@ public class Registration extends AppCompatActivity {
             refVal=MyPrefrences.getRefer(getApplicationContext());
 
         }
+
+        Log.d("sdfdfsdfsdfsfsdfs",refVal);
 
         regiImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,6 +199,8 @@ public class Registration extends AppCompatActivity {
             public void onClick(View view) {
 
 //                smsAPI();
+
+                Log.d("sdfgsdgsdgxdfgdfg",refVal);
 
                 if (checkBox.isChecked()) {
                     if (validate()) {
@@ -906,6 +912,8 @@ public class Registration extends AppCompatActivity {
 
                     .build();
 
+
+            Log.d("referalBy",refVal);
 
 
 //            Log.d("fvfgdgdfhgghfhgdfh", amounts.getText().toString().replace("₹ ", ""));
