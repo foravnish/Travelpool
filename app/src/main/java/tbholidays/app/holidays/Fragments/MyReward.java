@@ -83,8 +83,8 @@ public class MyReward extends Fragment {
                         //  for (int i=0;i<jsonArray.length();i++) {
                         JSONObject jsonObject1 = jsonArray.optJSONObject(0);
 
-                        myReward.setText(jsonObject1.optString("rewards_amounts"));
-                        myUser.setText(jsonObject1.optString("users"));
+                        myReward.setText("₹ "+jsonObject1.optString("rewards_amounts"));
+                        myUser.setText(jsonObject1.optString("users")+" User");
                     }
                     else{
                         Toast.makeText(getActivity(),jsonObject.getString("msg") , Toast.LENGTH_SHORT).show();
