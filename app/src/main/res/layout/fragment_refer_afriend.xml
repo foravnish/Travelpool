@@ -40,7 +40,7 @@
         android:gravity="center"
         android:layout_marginTop="7dp"
         android:textColor="@color/grayText"
-        android:text="You'll get ₹ 500 your friends their first join kitty"/>
+        android:text="If your friend join with your reference then you get 500.00 INR reduction from EMI"/>
 
     <TextView
         android:layout_width="match_parent"

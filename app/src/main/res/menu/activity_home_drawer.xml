@@ -15,11 +15,11 @@
         <item
             android:id="@+id/nav_my_kitty"
             android:icon="@drawable/mukitty"
-            android:title="My Kitty" />
+            android:title="My Travel Plans" />
         <item
             android:id="@+id/nav_view_kitty"
             android:icon="@drawable/viewkitty"
-            android:title="All Kitty" />
+            android:title="Travel Lounge" />
 
         <item
             android:id="@+id/nav_view_add_user"

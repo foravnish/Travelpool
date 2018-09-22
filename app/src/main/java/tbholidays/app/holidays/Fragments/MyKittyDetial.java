@@ -10,6 +10,7 @@ import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -178,7 +179,7 @@ public class MyKittyDetial extends Fragment {
             instal.setText("₹ "+jsonObjectKitty.optString("per_month_installment"));
             instal2.setText("Per Month ₹ "+jsonObjectKitty.optString("per_month_installment"));
             term_and_cond.setText(jsonObjectKitty.optString("term_and_cond"));
-            lucky_draw_date.setText("Lucky Draw Date: "+jsonObjectKitty.optString("lucky_draw_date"));
+            lucky_draw_date.setText("Wheel of Fortune Date: "+jsonObjectKitty.optString("lucky_draw_date"));
             payment_due_date.setText("Payment Due Date: "+jsonObjectKitty.optString("payment_due_date"));
             penality_after.setText("After Due Date: "+jsonObjectKitty.optString("penality_after_due_date"));
             purchased.setText("Joined Entries "+jsonObject.optString("purchased_kitty"));
@@ -189,8 +190,8 @@ public class MyKittyDetial extends Fragment {
             desreption.setText(jsonObject2.optString("description"));
             packageName.setText(jsonObject.optString("package_name"));
 
-            hotelDetails.setText(jsonObject2.optString("hotel_details"));
-            flightDetails.setText(jsonObject2.optString("flight_details"));
+            hotelDetails.setText(Html.fromHtml(jsonObject2.optString("hotel_details")));
+            flightDetails.setText(Html.fromHtml(jsonObject2.optString("flight_details")));
             desc.setText(jsonObject2.optString("description"));
             tnc.setText(jsonObject2.optString("term_and_cond"));
 
