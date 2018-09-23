@@ -35,6 +35,8 @@ public class Api {
     public static String updateFcm=BASEURL+"updateFcm";
     public static String travelInfo=BASEURL+"travelInfo";
     public static String forgetPassword=BASEURL+"forgetPassword";
+    public static String registrationWithOtp=BASEURL+"registrationWithOtp";
+    public static String verifyRegistrationOtp=BASEURL+"verifyRegistrationOtp";
 //    public static String travelpoolInfo="http://pinerria.com/api/pinerriaInfo";
 
 

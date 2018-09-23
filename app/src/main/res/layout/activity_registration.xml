@@ -101,6 +101,7 @@
                         android:layout_marginLeft="15dp"
                         android:drawableTint="@color/orange"
                         android:layout_marginRight="15dp"
+                        android:enabled="false"
                         android:layout_marginTop="5dp"
                         android:maxLength="10"
                         android:backgroundTint="@color/orange"

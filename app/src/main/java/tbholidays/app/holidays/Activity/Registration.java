@@ -121,6 +121,8 @@ public class Registration extends AppCompatActivity {
         checkBox=findViewById(R.id.checkBox);
 
 
+        Log.d("sdfvsdgvdfgdf",getIntent().getStringExtra("mobile"));
+        editmobile.setText(getIntent().getStringExtra("mobile"));
         dialog=new Dialog(Registration.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));

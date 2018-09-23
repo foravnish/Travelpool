@@ -1,12 +1,19 @@
 package tbholidays.app.holidays.Activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,7 +29,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -45,8 +51,10 @@ import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import tbholidays.app.holidays.R;
@@ -68,6 +76,10 @@ public class Login extends AppCompatActivity {
     ProfileTracker profileTracker;
     RadioGroup radioGroup;
 
+    String otpString;
+    EditText otp_edit;
+    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,10 +100,26 @@ public class Login extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setCancelable(false);
 
+        if (checkAndRequestPermissions()) {
+            // carry on the normal flow, as the case of  permissions  granted.
+        }
+
+//        SmsReceiver.bindListener(new SmsListener() {
+//            @Override
+//            public void messageReceived(String messageText) {
+//                Log.d("TextMessage",messageText);
+//
+//                Toast.makeText(Login.this,"Message: "+messageText,Toast.LENGTH_LONG).show();
+//            }
+//        });
+
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Login.this,Registration.class));
+
+                popRegistration();
+
+                //startActivity(new Intent(Login.this,Registration.class));
             }
         });
 
@@ -185,6 +213,43 @@ public class Login extends AppCompatActivity {
 
     }
 
+    private void popRegistration() {
+
+
+        final Dialog dialog2 = new Dialog(Login.this);
+//                dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog2.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog2.setContentView(R.layout.get_mobile_no);
+        //  dialog2.setCancelable(false);
+
+        final EditText mobile_edit= (EditText) dialog2.findViewById(R.id.mobile_edit);
+        mobile_edit.setText(mobile.getText().toString());
+//        TextView recieve= (TextView) dialog2.findViewById(R.id.recieve);
+//        recieve.setText("Sent OTP on "+mob);
+        Button submit2=(Button)dialog2.findViewById(R.id.submit2);
+        submit2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (TextUtils.isEmpty(mobile_edit.getText().toString())){
+
+                    Toast.makeText(Login.this, "Please Enter Mobile No.", Toast.LENGTH_SHORT).show();
+                }
+
+                else {
+
+                    sedMessageForRegistration(mobile_edit.getText().toString(),dialog2);
+
+                }
+            }
+        });
+
+        dialog2.show();
+
+
+
+    }
+
     private void popForgotpwd() {
 
 
@@ -222,6 +287,188 @@ public class Login extends AppCompatActivity {
 
     }
 
+    private void sedMessageForRegistration(final String mobileNo, final Dialog dialog) {
+
+        Util.showPgDialog(dialog);
+
+        RequestQueue queue = Volley.newRequestQueue(Login.this);
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                Api.registrationWithOtp, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Util.cancelPgDialog(dialog);
+                Log.e("fdsfsdfsdgsdfgdsf", "forgetPassword Response: " + response);
+
+
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+                    // if (jsonObject.getString("status").equalsIgnoreCase("success")){
+
+                    if (jsonObject.optString("status").equals("success")) {
+
+
+                        popForOTP(mobileNo);
+                        //  dialog.dismiss();
+
+
+                    }
+                    else{
+//                        Toast.makeText(getApplicationContext(),jsonObject.getString("message") , Toast.LENGTH_SHORT).show();
+                        Util.errorDialog(Login.this,jsonObject.getString("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Util.cancelPgDialog(dialog);
+                Log.e("fdgdfgdfgd", "Login Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),"Please Connect to the Internet", Toast.LENGTH_LONG).show();
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Log.e("fgdfgdfgdf","Inside getParams");
+
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<>();
+                params.put("mobile_number", mobileNo);
+
+
+                return params;
+            }
+
+//                        @Override
+//                        public Map<String, String> getHeaders() throws AuthFailureError {
+//                            Log.e("fdgdfgdfgdfg","Inside getHeaders()");
+//                            Map<String,String> headers=new HashMap<>();
+//                            headers.put("Content-Type","application/x-www-form-urlencoded");
+//                            return headers;
+//                        }
+        };
+        // Adding request to request queue
+        queue.add(strReq);
+
+
+    }
+
+    private void popForOTP(final String mob) {
+
+        final Dialog dialog2 = new Dialog(Login.this);
+//                dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog2.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog2.setContentView(R.layout.setotp);
+        //  dialog2.setCancelable(false);
+
+        otp_edit= (EditText) dialog2.findViewById(R.id.otp_edit);
+       // mobile_edit.setText(mobile.getText().toString());
+        TextView recieve= (TextView) dialog2.findViewById(R.id.recieve);
+        recieve.setText("Sent OTP on "+mob);
+        Button submit2=(Button)dialog2.findViewById(R.id.submit2);
+        submit2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (TextUtils.isEmpty(otp_edit.getText().toString())){
+
+                    Toast.makeText(Login.this, "Please Enter OTP.", Toast.LENGTH_SHORT).show();
+                }
+
+                else {
+
+                    verfifationOTP(otp_edit.getText().toString(),dialog2,mob);
+
+                }
+            }
+        });
+
+        dialog2.show();
+    }
+
+    private void verfifationOTP(final String otp, Dialog dialog2, final String mobileNo) {
+
+
+        Util.showPgDialog(dialog);
+
+        RequestQueue queue = Volley.newRequestQueue(Login.this);
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                Api.verifyRegistrationOtp, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Util.cancelPgDialog(dialog);
+                Log.e("fdsfsdfsdgsdfgdsf", "forgetPassword Response: " + response);
+
+
+                try {
+                    JSONObject jsonObject=new JSONObject(response);
+                    // if (jsonObject.getString("status").equalsIgnoreCase("success")){
+
+                    if (jsonObject.optString("status").equals("success")) {
+
+                        Intent intent=new Intent(Login.this,Registration.class);
+                        intent.putExtra("mobile",mobileNo);
+                        startActivity(intent);
+//                        startActivity(new Intent(Login.this,Registration.class));
+
+
+                      //  popForOTP(mobileNo);
+                        //  dialog.dismiss();
+
+
+                    }
+                    else{
+//                        Toast.makeText(getApplicationContext(),jsonObject.getString("message") , Toast.LENGTH_SHORT).show();
+                        Util.errorDialog(Login.this,jsonObject.getString("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Util.cancelPgDialog(dialog);
+                Log.e("fdgdfgdfgd", "Login Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),"Please Connect to the Internet", Toast.LENGTH_LONG).show();
+            }
+        }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Log.e("fgdfgdfgdf","Inside getParams");
+
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<>();
+                params.put("mobile_number", mobileNo);
+                params.put("otp", otp.replace(" ",""));
+
+
+                return params;
+            }
+
+//                        @Override
+//                        public Map<String, String> getHeaders() throws AuthFailureError {
+//                            Log.e("fdgdfgdfgdfg","Inside getHeaders()");
+//                            Map<String,String> headers=new HashMap<>();
+//                            headers.put("Content-Type","application/x-www-form-urlencoded");
+//                            return headers;
+//                        }
+        };
+        // Adding request to request queue
+        queue.add(strReq);
+
+
+    }
+
     private void mobileVerify_API(final String mobileNo, final Dialog dialog) {
 
         Util.showPgDialog(dialog);
@@ -242,6 +489,7 @@ public class Login extends AppCompatActivity {
                     if (jsonObject.optString("status").equals("success")) {
 
 
+                        Util.errorDialog(Login.this,"Password Sent on your mobile.");
                       //  dialog.dismiss();
 
 
@@ -651,6 +899,64 @@ public class Login extends AppCompatActivity {
     }
 
 
+    private  boolean checkAndRequestPermissions() {
+        int permissionSendMessage = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.SEND_SMS);
+
+        int receiveSMS = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.RECEIVE_SMS);
+
+        int readSMS = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_SMS);
+        List<String> listPermissionsNeeded = new ArrayList<>();
+
+        if (receiveSMS != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.RECEIVE_MMS);
+        }
+        if (readSMS != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.READ_SMS);
+        }
+        if (permissionSendMessage != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.SEND_SMS);
+        }
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(this,
+                    listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
+                    REQUEST_ID_MULTIPLE_PERMISSIONS);
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void onResume() {
+        LocalBroadcastManager.getInstance(this).
+                registerReceiver(receiver, new IntentFilter("otp"));
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+    }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equalsIgnoreCase("otp")) {
+                final String message = intent.getStringExtra("message");
+
+//                TextView tv = (TextView) findViewById(R.id.txtview);
+//                tv.setText(message);
+
+                Log.d("sgdfgdfgdfgdfd",message);
+                Log.d("gsdfgsdfdgvd",message.substring(message.length()-8));
+                otpString=message.substring(message.length()-8).replaceAll("\\s+","");
+                otp_edit.setText(otpString);
+            }
+        }
+    };
 
 
 }
